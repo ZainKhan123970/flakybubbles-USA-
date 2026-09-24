@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flaky Bubbles | Organic Pet Spa</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{brand:{cream:'#FAF7F2',warm:'#F5F0E8',sage:'#5F856F',dark:'#456553',light:'#EBF3EE',border:'#D3E2D8',ink:'#212B26',muted:'#627068'}},fontFamily:{serif:['"Playfair Display"','serif'],sans:['"Plus Jakarta Sans"','sans-serif']}}}}
+</script>
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.floaty{animation:floaty 4s ease-in-out infinite}
+dialog::backdrop{background:rgba(20,28,24,.75)}
+@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
+a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.7,.2,1),transform .8s cubic-bezier(.22,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.fade-x{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+@keyframes slideRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.marquee-track{animation:slideRight 50s linear infinite}
+.marquee:hover .marquee-track,.marquee:focus-within .marquee-track,.marquee.paused .marquee-track{animation-play-state:paused}
+.rv.active{background:#456553;border-color:#456553;transform:translateY(-8px) scale(1.03)}
+.rv.active blockquote,.rv.active figcaption{color:#fff}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee-track{animation:none}.marquee{overflow-x:auto}}
+.svc-track{--pad:max(1rem,calc((100vw - 80rem)/2 + 1.5rem));padding-inline:var(--pad);scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.svc-track::-webkit-scrollbar{display:none}
+.svc-track.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.svc{opacity:0;transform:translateX(80px);transition:opacity .9s cubic-bezier(.22,.7,.2,1),transform .9s cubic-bezier(.22,.7,.2,1),box-shadow .3s;transition-delay:calc(var(--i)*120ms),calc(var(--i)*120ms),0s}
+.svc-track.in .svc{opacity:1;transform:none}
+.svc video{transform:scale(1.12);will-change:transform}
+#svcBar{transition:transform .25s ease-out}
+html.lock{overflow:hidden}
+#intro{perspective:1600px}
+#introVideo{transform:scale(1.15);transition:transform 2.6s cubic-bezier(.22,.7,.2,1)}
+#intro.open #introVideo{transform:scale(1)}
+#intro .gate{position:absolute;top:0;bottom:0;width:50.3%;z-index:10;backface-visibility:hidden;transition:transform 1.9s cubic-bezier(.76,0,.24,1);
+ background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 48px),linear-gradient(180deg,#4d7360,#35503f);box-shadow:inset 0 0 0 10px rgba(255,255,255,.05),inset 0 0 80px rgba(0,0,0,.25)}
+#intro .gate::after{content:"";position:absolute;top:50%;width:6px;height:96px;margin-top:-48px;background:#C8A265;border-radius:3px}
+.gate-l{left:0;transform-origin:0 50%}.gate-l::after{right:18px}
+.gate-r{right:0;transform-origin:100% 50%}.gate-r::after{left:18px}
+#intro.open .gate-l{transform:rotateY(-105deg)}
+#intro.open .gate-r{transform:rotateY(105deg)}
+.gate-logo{transition:opacity .6s ease,transform .8s ease}
+#intro.open .gate-logo{opacity:0;transform:scale(.9)}
+#intro.leaving{opacity:0;transform:scale(1.04);pointer-events:none;transition:opacity .8s ease,transform .8s ease}
+@media (prefers-reduced-motion:reduce){.svc{opacity:1;transform:none;transition:none}.svc video{transform:none}}
+</style>
+<noscript><style>#intro{display:none}.svc{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body class="bg-brand-cream text-brand-ink font-sans antialiased">
+<!-- INTRO: gates open, then fullscreen video -->
+<div id="intro" class="fixed inset-0 z-[100] bg-black overflow-hidden" role="dialog" aria-label="Welcome video">
+  <video id="introVideo" class="absolute inset-0 w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted playsinline preload="auto"></video>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/25 pointer-events-none"></div>
+  <div class="gate gate-l"></div><div class="gate gate-r"></div>
+  <div class="gate-logo absolute inset-0 z-20 flex flex-col items-center justify-center text-white pointer-events-none">
+    <div class="bg-white/95 rounded-[28px] px-8 py-5 sm:px-10 sm:py-6 shadow-2xl">
+      <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-48 sm:w-64 h-auto object-contain">
+    </div>
+  </div>
+  <div class="absolute bottom-0 inset-x-0 z-30 p-4 sm:p-6 flex items-center justify-between" style="padding-bottom:max(1rem,env(safe-area-inset-bottom))">
+    <button id="introSound" class="bg-white/90 hover:bg-white text-brand-dark text-sm font-semibold px-4 py-2 rounded-full shadow">Sound on</button>
+    <button id="introSkip" class="bg-black/50 hover:bg-black/70 backdrop-blur text-white text-sm font-semibold px-4 py-2 rounded-full border border-white/30">Skip intro</button>
+  </div>
+</div>
+
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+    <a href="#home" class="flex items-center shrink-0">
+      <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain">
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
+      <a href="#home" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Home</a>
+      <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
+      <a href="#shop" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
+      <div class="relative group">
+        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
+          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+            <a href="#pet-grooming" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
+            <a href="#pet-daycare" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
+            <a href="#pet-hotel" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
+            <a href="#pet-transport" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
+          </div>
+        </div>
+      </div>
+      <a href="#gallery" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
+      <a href="#book" class="px-3 py-2 rounded-md hover:bg-brand-light">Book an Appointment</a>
+      <a href="#contact" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
+      <a href="#career" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="#book" class="hidden sm:inline-block bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors">Book now</a>
+      <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
+    <a href="#home" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Home</a>
+    <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
+    <a href="#shop" class="block py-3 border-b border-brand-border/60">Shop</a>
+    <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
+      <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+    <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
+      <a href="#pet-grooming" class="block py-2.5">Pet Grooming</a>
+      <a href="#pet-daycare" class="block py-2.5">Pet DayCare</a>
+      <a href="#pet-hotel" class="block py-2.5">Pet Hotel</a>
+      <a href="#pet-transport" class="block py-2.5">Pet Transport</a>
+    </div>
+    <a href="#gallery" class="block py-3 border-b border-brand-border/60">Gallery</a>
+    <a href="#book" class="block py-3 border-b border-brand-border/60">Book an Appointment</a>
+    <a href="#contact" class="block py-3 border-b border-brand-border/60">Contact</a>
+    <a href="#career" class="block py-3">Career</a>
+    <a href="#book" class="mt-2 block text-center bg-brand-sage text-white font-semibold py-3 rounded-full">Book now</a>
+  </nav>
+</header>
+
+<main>
+<!-- HERO -->
+<section id="home" class="bg-gradient-to-b from-brand-cream to-brand-warm/60">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-12 sm:pb-20">
+    <div class="text-center">
+      <h1 class="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.12] tracking-tight">Your Pet's Comfort<br><span class="italic font-normal text-brand-sage">Within Every Corner.</span></h1>
+      <p class="mt-4 text-brand-muted text-base sm:text-lg">Premium Grooming, Spa &amp; Play in a Green Oasis.</p>
+    </div>
+    <div class="relative mt-8 sm:mt-10 rounded-2xl overflow-hidden shadow-xl border-2 border-white bg-black aspect-video">
+      <video id="heroVideo" class="w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted loop playsinline preload="metadata"></video>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none"></div>
+      <div class="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 flex items-center gap-1.5 bg-black/60 backdrop-blur text-white text-[10px] sm:text-xs px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/20"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>HD Virtual Facility Walkthrough • Loop Active</div>
+      <div class="hidden sm:block absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-dark text-xs font-semibold px-3 py-2 rounded-lg">🌿 100% Organic Eucalyptus Products</div>
+      <button class="demo-btn absolute inset-0 m-auto w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/85 hover:bg-white text-brand-dark flex items-center justify-center shadow-lg transition-transform hover:scale-110" data-video="hero.mp4" data-title="Facility walkthrough" aria-label="Play walkthrough with sound"><svg class="w-6 h-6 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+      <div class="hidden sm:block absolute bottom-4 left-4 bg-white/90 backdrop-blur rounded-xl px-4 py-2.5 text-xs leading-tight"><b class="block text-sm text-brand-ink">Hydrotherapy Pools</b><span class="text-brand-muted">Warm mineral bubbling jets</span></div>
+      <div class="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 bg-brand-ink/90 text-white rounded-xl px-4 py-3 text-xs leading-tight"><b class="block text-sm text-emerald-300">Virtual Walkthrough</b><span class="text-white/70">Explore our facilities in immersive 3D!</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES: horizontal slider -->
+<section id="services" class="pt-14 sm:pt-20 pb-16 sm:pb-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-end justify-between gap-4">
+    <div class="reveal">
+      <h2 class="font-serif font-bold text-3xl sm:text-4xl">Our services</h2>
+      <p class="mt-2 text-brand-muted">Swipe through and watch a demo before you book.</p>
+    </div>
+    <div class="flex gap-2 shrink-0">
+      <button id="svcPrev" class="w-11 h-11 rounded-full border border-brand-sage/50 text-brand-dark bg-white hover:bg-brand-light disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center transition-colors" aria-label="Previous service"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <button id="svcNext" class="w-11 h-11 rounded-full bg-brand-sage text-white hover:bg-brand-dark disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center transition-colors" aria-label="Next service"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div id="svcTrack" class="svc-track mt-8 flex gap-5 sm:gap-6 overflow-x-auto snap-x snap-mandatory md:cursor-grab pb-2">
+    <article id="pet-grooming" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:0">
+      <div class="relative aspect-video overflow-hidden bg-black">
+        <video class="w-full h-full object-cover" src="grooming.mp4" poster="grooming.jpg" muted loop playsinline preload="none" aria-label="Pet Grooming Suite preview"></video>
+        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Signature Organic Grooming</span>
+      </div>
+      <div class="p-5 flex-1 flex flex-col">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="font-serif font-bold text-xl">Pet Grooming Suite</h3>
+          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base">$65+</span>
+        </div>
+        <p class="mt-2 text-sm text-brand-muted flex-1">Gentle hypoallergenic oat bubble bath, dead sea mineral coat massage, blueberry facial and a paw pad balm.</p>
+        <div class="mt-5 flex gap-3">
+          <a href="#book" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book Grooming Now</a>
+          <button class="demo-btn border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors" data-video="grooming.mp4" data-title="Pet Grooming Suite demo">View Details</button>
+        </div>
+      </div>
+    </article>
+    <article id="pet-daycare" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:1">
+      <div class="relative aspect-video overflow-hidden bg-black">
+        <video class="w-full h-full object-cover" src="daycare.mp4" poster="daycare.jpg" muted loop playsinline preload="none" aria-label="Pet DayCare &amp; Play Area preview"></video>
+        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Supervised Play &amp; Rest</span>
+      </div>
+      <div class="p-5 flex-1 flex flex-col">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="font-serif font-bold text-xl">Pet DayCare &amp; Play Area</h3>
+          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base">Get a quote</span>
+        </div>
+        <p class="mt-2 text-sm text-brand-muted flex-1">Full-day or half-day care with supervised play, quiet rest time and fresh water, so your pet comes home happy and tired.</p>
+        <div class="mt-5 flex gap-3">
+          <a href="#book" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book Daycare Now</a>
+          <button class="demo-btn border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors" data-video="daycare.mp4" data-title="Pet DayCare &amp; Play Area demo">View Details</button>
+        </div>
+      </div>
+    </article>
+    <article id="pet-hotel" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:2">
+      <div class="relative aspect-video overflow-hidden bg-black">
+        <video class="w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted loop playsinline preload="none" aria-label="Pet Hotel preview"></video>
+        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Overnight Comfort Suites</span>
+      </div>
+      <div class="p-5 flex-1 flex flex-col">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="font-serif font-bold text-xl">Pet Hotel</h3>
+          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base">Get a quote</span>
+        </div>
+        <p class="mt-2 text-sm text-brand-muted flex-1">Comfortable overnight stays in sound-dampened suites, with daily walks, a steady routine and updates for you.</p>
+        <div class="mt-5 flex gap-3">
+          <a href="#book" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book a Stay</a>
+          <button class="demo-btn border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors" data-video="hero.mp4" data-title="Pet Hotel demo">View Details</button>
+        </div>
+      </div>
+    </article>
+    <article id="pet-transport" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:3">
+      <div class="relative aspect-video overflow-hidden bg-black">
+        <video class="w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted loop playsinline preload="none" aria-label="Pet Transport preview"></video>
+        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Safe Door-to-Door Ride</span>
+      </div>
+      <div class="p-5 flex-1 flex flex-col">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="font-serif font-bold text-xl">Pet Transport</h3>
+          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base">Get a quote</span>
+        </div>
+        <p class="mt-2 text-sm text-brand-muted flex-1">Clean, climate-controlled pick-up and drop-off for spa visits, vet appointments and travel.</p>
+        <div class="mt-5 flex gap-3">
+          <a href="#book" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book a Ride</a>
+          <button class="demo-btn border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors" data-video="hero.mp4" data-title="Pet Transport demo">View Details</button>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-4"><div class="h-1 rounded-full bg-brand-border overflow-hidden"><div id="svcBar" class="h-full w-full bg-brand-sage rounded-full origin-left" style="transform:scaleX(.2)"></div></div></div>
+</section>
+
+<!-- REVIEWS: sliding marquee -->
+<section id="reviews" class="bg-brand-warm/60 border-y border-brand-border overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-14 sm:pt-20 pb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+    <h2 class="font-serif font-bold text-3xl sm:text-4xl">What pet parents say</h2>
+    <p class="text-amber-600 font-semibold">★★★★★ <span class="text-brand-muted font-medium">4.9/5 from 420+ pets</span></p>
+  </div>
+  <div id="marquee" class="marquee fade-x pt-4 pb-14 sm:pb-20">
+    <div id="track" class="marquee-track flex w-max">
+      <figure class="rv w-[280px] sm:w-[340px] shrink-0 mr-5 bg-white rounded-2xl border border-brand-border p-6 cursor-pointer select-none transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage" tabindex="0">
+        <div class="text-amber-500 text-sm">★★★★★</div>
+        <blockquote class="mt-3 text-brand-ink/90 transition-colors">"Milo never looked or smelled this heavenly. The warm hydro pool cured his joint stiffness!"</blockquote>
+        <figcaption class="mt-4 text-sm font-semibold transition-colors">Milo's owner</figcaption>
+      </figure>
+      <figure class="rv w-[280px] sm:w-[340px] shrink-0 mr-5 bg-white rounded-2xl border border-brand-border p-6 cursor-pointer select-none transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage" tabindex="0">
+        <div class="text-amber-500 text-sm">★★★★★</div>
+        <blockquote class="mt-3 text-brand-ink/90 transition-colors">"The calmest pet spa experience in the city. You can feel the organic luxury from the moment you step in."</blockquote>
+        <figcaption class="mt-4 text-sm font-semibold transition-colors">Dr. Elena Ramos, DVM</figcaption>
+      </figure>
+      <figure class="rv w-[280px] sm:w-[340px] shrink-0 mr-5 bg-white rounded-2xl border border-brand-border p-6 cursor-pointer select-none transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage" tabindex="0">
+        <div class="text-amber-500 text-sm">★★★★★</div>
+        <blockquote class="mt-3 text-brand-ink/90 transition-colors">"Bailey came home relaxed and smelling like fresh eucalyptus. We book every month now."</blockquote>
+        <figcaption class="mt-4 text-sm font-semibold transition-colors">Bailey's owner</figcaption>
+      </figure>
+      <figure class="rv w-[280px] sm:w-[340px] shrink-0 mr-5 bg-white rounded-2xl border border-brand-border p-6 cursor-pointer select-none transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage" tabindex="0">
+        <div class="text-amber-500 text-sm">★★★★★</div>
+        <blockquote class="mt-3 text-brand-ink/90 transition-colors">"Daycare sent photos all day. My beagle slept for hours after pick-up."</blockquote>
+        <figcaption class="mt-4 text-sm font-semibold transition-colors">Nadia, beagle mom</figcaption>
+      </figure>
+      <figure class="rv w-[280px] sm:w-[340px] shrink-0 mr-5 bg-white rounded-2xl border border-brand-border p-6 cursor-pointer select-none transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage" tabindex="0">
+        <div class="text-amber-500 text-sm">★★★★★</div>
+        <blockquote class="mt-3 text-brand-ink/90 transition-colors">"The groomers were patient with my anxious rescue. No stress, and his coat has never been softer."</blockquote>
+        <figcaption class="mt-4 text-sm font-semibold transition-colors">Omar K.</figcaption>
+      </figure>
+      <figure class="rv w-[280px] sm:w-[340px] shrink-0 mr-5 bg-white rounded-2xl border border-brand-border p-6 cursor-pointer select-none transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage" tabindex="0">
+        <div class="text-amber-500 text-sm">★★★★★</div>
+        <blockquote class="mt-3 text-brand-ink/90 transition-colors">"Boarding felt like a small hotel. Quiet, clean, and she was happy to see the staff again."</blockquote>
+        <figcaption class="mt-4 text-sm font-semibold transition-colors">Sara, cat owner</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="sr-only">Reviews slide automatically. Hover or tap a review to pause.</p>
+</section>
+
+<!-- BOOKING CTA -->
+<section id="book" class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+  <div class="bg-brand-dark text-white rounded-3xl px-6 py-10 sm:px-12 sm:py-14 text-center">
+    <h2 class="font-serif font-bold text-3xl sm:text-4xl">Ready for a spa day?</h2>
+    <p class="mt-3 text-white/80 max-w-xl mx-auto">Pick a service, choose a time and we'll take care of the rest.</p>
+    <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#services" class="bg-white text-brand-dark font-semibold px-6 py-3 rounded-full hover:bg-brand-light transition-colors">Book grooming</a>
+      <a href="#services" class="border border-white/60 font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors">Book daycare</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER: stacked circular -->
+<footer id="contact" class="bg-brand-dark text-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex flex-col items-center text-center">
+    <div class="floaty mb-8 bg-white/95 rounded-2xl shadow-xl px-6 py-4">
+      <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-40 sm:w-48 h-auto object-contain">
+    </div>
+    <nav class="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm" aria-label="Footer">
+      <a href="#home" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Home</a>
+      <a href="about.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">About Us</a>
+      <a href="#shop" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Shop</a>
+      <a href="#services" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Services</a>
+      <a href="#gallery" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Gallery</a>
+      <a href="#book" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Book an Appointment</a>
+      <a href="#contact" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Contact</a>
+      <a href="#career" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Career</a>
+    </nav>
+    <div class="mb-8 flex gap-3">
+      <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+      <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+      <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+    <form class="mb-8 w-full max-w-md flex gap-2" onsubmit="event.preventDefault()">
+      <label for="fEmail" class="sr-only">Email</label>
+      <input id="fEmail" type="email" required placeholder="Enter your email" class="flex-1 min-w-0 rounded-full bg-white/10 border border-white/25 placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-white">
+      <button type="submit" class="rounded-full bg-white text-brand-dark font-semibold text-sm px-5 py-2.5 hover:bg-brand-light transition-colors">Subscribe</button>
+    </form>
+    <div class="mb-6 flex flex-wrap justify-center gap-2">
+      <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40">Get it on <b class="block text-sm">Google Play</b></a>
+      <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40">Download on the <b class="block text-sm">App Store</b></a>
+    </div>
+    <p class="text-xs text-white/60">© 2026 Flaky Bubbles. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Floating VR tour bubble -->
+<a href="#" class="fixed bottom-4 right-4 z-40 flex items-center gap-2" aria-label="Virtual walkthrough">
+  <span class="hidden sm:block bg-brand-ink/95 text-white text-xs px-3 py-2 rounded-xl">Virtual walkthrough</span>
+  <span class="floaty w-12 h-12 rounded-full bg-gradient-to-tr from-white via-emerald-100 to-brand-sage border-2 border-white shadow-xl flex items-center justify-center">
+    <svg class="w-6 h-6 text-brand-dark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+  </span>
+</a>
+
+<!-- Demo video modal -->
+<dialog id="demoDialog" class="w-[92vw] max-w-3xl rounded-2xl p-0 bg-black overflow-hidden">
+  <div class="flex items-center justify-between bg-brand-ink text-white px-4 py-2.5">
+    <span id="demoTitle" class="font-semibold text-sm">Demo</span>
+    <button id="demoClose" class="w-8 h-8 rounded-full hover:bg-white/15 text-xl leading-none" aria-label="Close video">×</button>
+  </div>
+  <video id="demoVideo" class="w-full aspect-video bg-black" controls playsinline></video>
+</dialog>
+
+<script>
+const $=s=>document.querySelector(s);
+// Mobile menu
+const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
+menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
+mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
+$('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+// Demo modal
+const dlg=$('#demoDialog'),dv=$('#demoVideo');
+document.querySelectorAll('.demo-btn').forEach(b=>b.onclick=()=>{dv.src=b.dataset.video;$('#demoTitle').textContent=b.dataset.title;dlg.showModal();dv.play().catch(()=>{})});
+const closeDemo=()=>{dv.pause();dv.removeAttribute('src');dv.load();dlg.close()};
+$('#demoClose').onclick=closeDemo;
+dlg.addEventListener('click',e=>{if(e.target===dlg)closeDemo()});
+dlg.addEventListener('cancel',()=>{dv.pause()});
+
+// Services slider, reveals, video autoplay, intro gates
+(()=>{
+const track=$('#svcTrack'),cards=[...track.querySelectorAll('.svc')],bar=$('#svcBar'),prev=$('#svcPrev'),next=$('#svcNext');
+const rm=matchMedia('(prefers-reduced-motion:reduce)');let q=false;
+function upd(){q=false;const max=track.scrollWidth-track.clientWidth,sl=track.scrollLeft;
+ bar.style.transform=`scaleX(${.2+.8*(max>0?Math.min(1,sl/max):1)})`;prev.disabled=sl<4;next.disabled=sl>max-4;
+ if(rm.matches)return;const c=track.getBoundingClientRect(),cx=c.left+c.width/2;
+ cards.forEach(el=>{const r=el.getBoundingClientRect(),d=(r.left+r.width/2-cx)/c.width;
+  el.querySelector('video').style.transform=`translate3d(${d*-36}px,0,0) scale(1.12)`})}
+const req=()=>{if(!q){q=true;requestAnimationFrame(upd)}};
+track.addEventListener('scroll',req,{passive:true});addEventListener('resize',req);upd();
+const step=()=>cards[0].offsetWidth+parseFloat(getComputedStyle(track).columnGap||24);
+next.onclick=()=>track.scrollBy({left:step(),behavior:'smooth'});prev.onclick=()=>track.scrollBy({left:-step(),behavior:'smooth'});
+let down=false,sx=0,s0=0;
+track.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.target.closest('button,a'))return;down=true;sx=e.clientX;s0=track.scrollLeft;track.classList.add('drag')});
+addEventListener('pointermove',e=>{if(down)track.scrollLeft=s0-(e.clientX-sx)});
+addEventListener('pointerup',()=>{if(down){down=false;track.classList.remove('drag')}});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));io.observe(track);
+const vio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.play().catch(()=>{});else e.target.pause()}),{threshold:.3});
+cards.forEach(el=>vio.observe(el.querySelector('video')));
+})();
+(()=>{
+const intro=$('#intro'),iv=$('#introVideo'),hv=$('#heroVideo'),root=document.documentElement;let done=false;
+const heroPlay=()=>hv.play().catch(()=>{});
+if(matchMedia('(prefers-reduced-motion:reduce)').matches){intro.remove();heroPlay();return}
+function finish(){if(done)return;done=true;intro.classList.add('leaving');root.classList.remove('lock');heroPlay();setTimeout(()=>{iv.pause();intro.remove()},900)}
+root.classList.add('lock');
+setTimeout(()=>{intro.classList.add('open');iv.play().catch(()=>setTimeout(finish,1800))},900);
+iv.addEventListener('ended',finish);iv.addEventListener('error',()=>setTimeout(finish,1800));
+$('#introSkip').onclick=finish;addEventListener('keydown',e=>{if(e.key==='Escape')finish()});
+const sb=$('#introSound');sb.onclick=()=>{iv.muted=!iv.muted;sb.textContent=iv.muted?'Sound on':'Sound off'};
+setTimeout(finish,16000);
+})();
+// Reviews: duplicate for seamless loop, click to highlight + pause
+(()=>{
+const track=document.getElementById('track'),mar=document.getElementById('marquee');
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)
+ [...track.children].forEach(c=>{const n=c.cloneNode(true);n.setAttribute('aria-hidden','true');n.tabIndex=-1;track.appendChild(n)});
+const toggle=c=>{const on=!c.classList.contains('active');track.querySelectorAll('.rv.active').forEach(x=>x.classList.remove('active'));
+ if(on)c.classList.add('active');mar.classList.toggle('paused',on)};
+track.addEventListener('click',e=>{const c=e.target.closest('.rv');if(c)toggle(c)});
+track.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const c=e.target.closest('.rv');if(c){e.preventDefault();toggle(c)}}});
+})();
+</script>
+</body>
+</html>

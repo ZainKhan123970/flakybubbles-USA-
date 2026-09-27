@@ -83,27 +83,28 @@ html.lock{overflow:hidden}
     <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
       <a href="#home" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Home</a>
       <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
-      <a href="#shop" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
+      <a href="membership.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Membership</a>
       <div class="relative group">
         <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
         <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
-            <a href="#pet-grooming" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
-            <a href="#pet-daycare" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
-            <a href="#pet-hotel" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
-            <a href="#pet-transport" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
+            <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
+            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
+            <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
+            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
           </div>
         </div>
       </div>
       <a href="#gallery" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
-      <a href="#book" class="px-3 py-2 rounded-md hover:bg-brand-light">Book an Appointment</a>
       <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
       <a href="#career" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+      <a href="book-appointment.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Book an Appointment</a>
     </nav>
 
     <div class="flex items-center gap-2">
-      <a href="#book" class="hidden sm:inline-block bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors">Book now</a>
+      <a href="book-appointment.html#login" class="hidden sm:inline-block border border-brand-sage text-brand-dark text-sm font-semibold px-4 py-2 rounded-full hover:bg-brand-light transition-colors">Login</a>
+      <a href="book-appointment.html" class="hidden sm:inline-block bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors">Book now</a>
       <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -114,20 +115,21 @@ html.lock{overflow:hidden}
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
     <a href="#home" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <a href="#shop" class="block py-3 border-b border-brand-border/60">Shop</a>
+    <a href="membership.html" class="block py-3 border-b border-brand-border/60">Membership</a>
     <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
       <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
     <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
-      <a href="#pet-grooming" class="block py-2.5">Pet Grooming</a>
-      <a href="#pet-daycare" class="block py-2.5">Pet DayCare</a>
-      <a href="#pet-hotel" class="block py-2.5">Pet Hotel</a>
-      <a href="#pet-transport" class="block py-2.5">Pet Transport</a>
+      <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
+      <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
+      <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
+      <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
     </div>
     <a href="#gallery" class="block py-3 border-b border-brand-border/60">Gallery</a>
-    <a href="#book" class="block py-3 border-b border-brand-border/60">Book an Appointment</a>
     <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
-    <a href="#career" class="block py-3">Career</a>
-    <a href="#book" class="mt-2 block text-center bg-brand-sage text-white font-semibold py-3 rounded-full">Book now</a>
+    <a href="#career" class="block py-3 border-b border-brand-border/60">Career</a>
+    <a href="book-appointment.html#login" class="block py-3 border-b border-brand-border/60">Login</a>
+    <a href="book-appointment.html" class="block py-3">Book an Appointment</a>
+    <a href="book-appointment.html" class="mt-2 block text-center bg-brand-sage text-white font-semibold py-3 rounded-full">Book now</a>
   </nav>
 </header>
 
@@ -176,8 +178,8 @@ html.lock{overflow:hidden}
         </div>
         <p class="mt-2 text-sm text-brand-muted flex-1">Gentle hypoallergenic oat bubble bath, dead sea mineral coat massage, blueberry facial and a paw pad balm.</p>
         <div class="mt-5 flex gap-3">
-          <a href="#book" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book Grooming Now</a>
-          <button class="demo-btn border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors" data-video="grooming.mp4" data-title="Pet Grooming Suite demo">View Details</button>
+          <a href="book-appointment.html" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book Grooming Now</a>
+          <a href="service-grooming.html" class="border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors inline-flex items-center justify-center">View Details</a>
         </div>
       </div>
     </article>
@@ -193,14 +195,14 @@ html.lock{overflow:hidden}
         </div>
         <p class="mt-2 text-sm text-brand-muted flex-1">Full-day or half-day care with supervised play, quiet rest time and fresh water, so your pet comes home happy and tired.</p>
         <div class="mt-5 flex gap-3">
-          <a href="#book" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book Daycare Now</a>
-          <button class="demo-btn border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors" data-video="daycare.mp4" data-title="Pet DayCare &amp; Play Area demo">View Details</button>
+          <a href="book-appointment.html" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book Daycare Now</a>
+          <a href="service-daycare.html" class="border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors inline-flex items-center justify-center">View Details</a>
         </div>
       </div>
     </article>
     <article id="pet-hotel" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:2">
       <div class="relative aspect-video overflow-hidden bg-black">
-        <video class="w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted loop playsinline preload="none" aria-label="Pet Hotel preview"></video>
+        <video class="w-full h-full object-cover" src="hotel.mp4" poster="hotel.jpg" muted loop playsinline preload="none" aria-label="Pet Hotel preview"></video>
         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Overnight Comfort Suites</span>
       </div>
       <div class="p-5 flex-1 flex flex-col">
@@ -210,14 +212,14 @@ html.lock{overflow:hidden}
         </div>
         <p class="mt-2 text-sm text-brand-muted flex-1">Comfortable overnight stays in sound-dampened suites, with daily walks, a steady routine and updates for you.</p>
         <div class="mt-5 flex gap-3">
-          <a href="#book" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book a Stay</a>
-          <button class="demo-btn border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors" data-video="hero.mp4" data-title="Pet Hotel demo">View Details</button>
+          <a href="book-appointment.html" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book a Stay</a>
+          <a href="service-hotel.html" class="border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors inline-flex items-center justify-center">View Details</a>
         </div>
       </div>
     </article>
     <article id="pet-transport" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:3">
       <div class="relative aspect-video overflow-hidden bg-black">
-        <video class="w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted loop playsinline preload="none" aria-label="Pet Transport preview"></video>
+        <video class="w-full h-full object-cover" src="transport.mp4" poster="transport.jpg" muted loop playsinline preload="none" aria-label="Pet Transport preview"></video>
         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Safe Door-to-Door Ride</span>
       </div>
       <div class="p-5 flex-1 flex flex-col">
@@ -227,8 +229,8 @@ html.lock{overflow:hidden}
         </div>
         <p class="mt-2 text-sm text-brand-muted flex-1">Clean, climate-controlled pick-up and drop-off for spa visits, vet appointments and travel.</p>
         <div class="mt-5 flex gap-3">
-          <a href="#book" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book a Ride</a>
-          <button class="demo-btn border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors" data-video="hero.mp4" data-title="Pet Transport demo">View Details</button>
+          <a href="book-appointment.html" class="flex-1 text-center bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">Book a Ride</a>
+          <a href="service-transport.html" class="border border-brand-sage/50 hover:bg-brand-light text-brand-dark text-sm font-medium py-2.5 px-4 rounded-xl transition-colors inline-flex items-center justify-center">View Details</a>
         </div>
       </div>
     </article>
@@ -280,6 +282,44 @@ html.lock{overflow:hidden}
 </section>
 
 <!-- BOOKING CTA -->
+<section id="membership" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+  <div class="text-center max-w-2xl mx-auto mb-12 reveal"><span class="text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Bubble Club</span><h2 class="font-serif font-semibold text-3xl sm:text-4xl leading-tight">Our Bubble Club Memberships</h2><p class="mt-4 text-brand-muted">Pick a tier and we'll apply its discount to the service you book next. Month-to-month — cancel anytime.</p><a href="membership.html" class="inline-block mt-4 text-sm font-semibold text-brand-dark underline underline-offset-4 decoration-brand-sage/50 hover:decoration-brand-sage">See full plan details &amp; FAQs →</a></div>
+  <div class="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch"><div class="reveal relative bg-white rounded-2xl p-8 flex flex-col justify-between shadow-sm border border-brand-border">
+      <div>
+        <div class="flex items-center justify-between mb-4"><span class="text-3xl leading-none">🥈</span><span class="px-3 py-1 rounded-full bg-brand-light text-brand-dark text-[10px] font-bold uppercase tracking-wider">Occasional Guests</span></div>
+        <h3 class="font-serif font-semibold text-2xl mb-1.5">Silver Bubble</h3>
+        <p class="text-[13px] text-brand-muted mb-5">Perfect for occasional guests who still want benefits.</p>
+        <div class="space-y-2.5 mb-6"><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>5% OFF all packages &amp; services</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>1 Free Bubble Night / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>1 Free Bubble Day Pass / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>1 Free VIP Wash / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Early access to exclusive events</span></div></div>
+      </div>
+      <div>
+        <p class="mb-4"><span class="font-serif font-bold text-3xl">$125</span><span class="text-brand-muted text-sm"> / month</span></p>
+        <a href="book-appointment.html" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-light hover:bg-brand-border text-brand-dark">Choose Silver Bubble</a>
+      </div>
+    </div><div class="reveal relative bg-white rounded-2xl p-8 flex flex-col justify-between shadow-lg md:-translate-y-2 ring-1 ring-brand-sage/20"><div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-amber text-brand-ink text-[10px] font-bold uppercase px-4 py-1 rounded-full tracking-widest shadow">Most Popular</div>
+      <div>
+        <div class="flex items-center justify-between mb-4"><span class="text-3xl leading-none">🥇</span><span class="px-3 py-1 rounded-full bg-brand-peach text-brand-gold text-[10px] font-bold uppercase tracking-wider">Most Popular</span></div>
+        <h3 class="font-serif font-semibold text-2xl mb-1.5">Gold Bubble</h3>
+        <p class="text-[13px] text-brand-muted mb-5">For regulars who enjoy more pampering.</p>
+        <div class="space-y-2.5 mb-6"><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>10% OFF all packages &amp; services</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>2 Free Bubble Nights / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>2 Free Bubble Day Passes / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>1 Free VIP Wash / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>1 After Bubble Stay / month (7–11 PM)</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Birthday celebration for up to 10 furry guests</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Priority holiday booking guarantee</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Early access to exclusive pup &amp; parent events</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Late Bubble check-out (up to 5pm)</span></div></div>
+      </div>
+      <div>
+        <p class="mb-4"><span class="font-serif font-bold text-3xl">$165</span><span class="text-brand-muted text-sm"> / month</span></p>
+        <a href="book-appointment.html" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-sage hover:bg-brand-dark text-white">Choose Gold Bubble</a>
+      </div>
+    </div><div class="reveal relative bg-white rounded-2xl p-8 flex flex-col justify-between shadow-sm border border-brand-border">
+      <div>
+        <div class="flex items-center justify-between mb-4"><span class="text-3xl leading-none">🏆</span><span class="px-3 py-1 rounded-full bg-brand-light text-brand-dark text-[10px] font-bold uppercase tracking-wider">Ultimate Luxury</span></div>
+        <h3 class="font-serif font-semibold text-2xl mb-1.5">Platinum Bubble</h3>
+        <p class="text-[13px] text-brand-muted mb-5">Our most luxurious tier with all the bells &amp; whistles.</p>
+        <div class="space-y-2.5 mb-6"><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>15% OFF all packages &amp; services</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>2 Free Bubble Nights / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>4 Free Bubble Day Passes / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>1 Free VIP Wash / month</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>2 After Bubble Stays / month (7–11 PM)</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Birthday celebration for up to 10 furry guests</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Guaranteed booking priority (even during peak times)</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Early access to VIP events</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>Late Bubble check-out (up to 5pm)</span></div><div class="flex items-start gap-2.5 text-[13px] text-brand-muted"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-sage" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>VIP Concierge via WhatsApp</span></div></div>
+      </div>
+      <div>
+        <p class="mb-4"><span class="font-serif font-bold text-3xl">$225</span><span class="text-brand-muted text-sm"> / month</span></p>
+        <a href="book-appointment.html" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-light hover:bg-brand-border text-brand-dark">Choose Platinum Bubble</a>
+      </div>
+    </div></div>
+</section>
+
 <section id="book" class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
   <div class="bg-brand-dark text-white rounded-3xl px-6 py-10 sm:px-12 sm:py-14 text-center">
     <h2 class="font-serif font-bold text-3xl sm:text-4xl">Ready for a spa day?</h2>
@@ -301,10 +341,9 @@ html.lock{overflow:hidden}
     <nav class="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm" aria-label="Footer">
       <a href="#home" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Home</a>
       <a href="about.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">About Us</a>
-      <a href="#shop" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Shop</a>
+      <a href="membership.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Membership</a>
       <a href="#services" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Services</a>
       <a href="#gallery" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Gallery</a>
-      <a href="#book" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Book an Appointment</a>
       <a href="contact.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Contact</a>
       <a href="#career" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Career</a>
     </nav>

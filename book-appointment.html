@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Appointment | Flaky Bubbles</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Supabase client (CDN, no build step needed). The booking wizard below auto-detects it
+     and switches from demo/localStorage mode to real backend calls once SUPABASE_URL and
+     SUPABASE_ANON_KEY are filled in near the top of the wizard's <script> further down. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{brand:{cream:'#FAF7F2',warm:'#F5F0E8',sage:'#5F856F',dark:'#456553',light:'#EBF3EE',border:'#D3E2D8',ink:'#212B26',muted:'#627068'}},fontFamily:{serif:['"Playfair Display"','serif'],sans:['"Plus Jakarta Sans"','sans-serif']}}}}
+</script>
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.floaty{animation:floaty 4s ease-in-out infinite}
+a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
+</style>
+
+<style>
+:root{
+  --white:#ffffff;
+  --sage-50:#f4f9f5;
+  --sage-100:#e6f2e8;
+  --sage-200:#d2e8d6;
+  --sage-300:#aed6b5;
+  --sage-500:#6fae7c;
+  --sage-600:#4f9260;
+  --sage-700:#3a7249;
+  --gold:#cf9f3f;
+  --gold-light:#f2e2b8;
+  --ink:#20301f;
+  --muted:#6b7d6c;
+  --danger:#d9534f;
+  --radius:18px;
+  --shadow:0 10px 30px rgba(60,100,70,.12);
+  --shadow-lg:0 20px 50px rgba(60,100,70,.18);
+  box-sizing:border-box;
+}
+#login *{box-sizing:inherit;margin:0;}
+
+#login{
+  font-family:'Quicksand',sans-serif;
+  background:linear-gradient(180deg,var(--sage-50) 0%,var(--white) 40%);
+  color:var(--ink);
+  border-radius:28px;
+  overflow:hidden;
+}
+#login h1,#login h2,#login h3,#login .brand{font-family:'Baloo 2',cursive;}
+#login img{max-width:100%;display:block;}
+#login button{font-family:inherit;cursor:pointer;border:none;}
+#login input,#login select,#login textarea{font-family:inherit;}
+
+/* ---------- gentle floating effect on the whole card (replaces old stray bg bubbles) ---------- */
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+.floaty{animation:floaty 5s ease-in-out infinite;}
+@media(prefers-reduced-motion:reduce){.floaty{animation:none;}}
+
+/* ---------- header ---------- */
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--sage-100);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px clamp(16px,4vw,40px);
+}
+.brand-wrap{display:flex;align-items:center;gap:10px;}
+.brand-wrap img{height:38px;width:auto;}
+.brand-wrap span{font-size:1.05rem;color:var(--sage-700);font-weight:600;}
+.user-chip{
+  display:none;align-items:center;gap:8px;background:var(--sage-50);
+  border:1px solid var(--sage-200);padding:6px 14px 6px 6px;border-radius:999px;font-size:.85rem;font-weight:600;color:var(--sage-700);
+}
+.user-chip .avatar{width:28px;height:28px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2';font-size:.8rem;}
+
+/* ---------- containers ---------- */
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 80px;position:relative;z-index:2;}
+.card{
+  background:var(--white);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:clamp(20px,4vw,40px);
+  border:1px solid var(--sage-100);
+}
+.center{text-align:center;}
+
+/* ---------- auth screen ---------- */
+.auth-tabs{display:flex;background:var(--sage-50);border-radius:999px;padding:5px;margin-bottom:24px;}
+.auth-tab{flex:1;text-align:center;padding:10px 0;border-radius:999px;font-weight:700;color:var(--muted);transition:.25s;background:transparent;}
+.auth-tab.active{background:var(--sage-600);color:#fff;box-shadow:var(--shadow);}
+.field{margin-bottom:16px;text-align:left;}
+.field label{display:block;font-size:.82rem;font-weight:700;color:var(--sage-700);margin-bottom:6px;}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px 14px;border:1.5px solid var(--sage-200);border-radius:12px;
+  background:var(--sage-50);font-size:.95rem;color:var(--ink);transition:.2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--sage-500);background:#fff;}
+.field.error input,.field.error select{border-color:var(--danger);}
+.field .err-msg{display:none;color:var(--danger);font-size:.75rem;margin-top:4px;font-weight:600;}
+.field.error .err-msg{display:block;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:520px){.row2{grid-template-columns:1fr;}}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 30px;border-radius:999px;font-weight:700;font-size:.95rem;
+  transition:.2s;white-space:nowrap;
+}
+.btn-primary{background:linear-gradient(135deg,var(--sage-600),var(--sage-700));color:#fff;box-shadow:0 8px 20px rgba(79,146,96,.35);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(79,146,96,.45);}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#b9862a);color:#fff;box-shadow:0 8px 20px rgba(207,159,63,.4);}
+.btn-gold:hover{transform:translateY(-2px);}
+.btn-ghost{background:var(--sage-50);color:var(--sage-700);border:1.5px solid var(--sage-200);}
+.btn-ghost:hover{background:var(--sage-100);}
+.btn-block{width:100%;}
+.link-btn{background:none;color:var(--sage-700);font-weight:700;text-decoration:underline;padding:4px;}
+
+/* ---------- wizard shell ---------- */
+.wizard{display:none;}
+.wizard.active{display:block;}
+/* ---- wizard layout: vertical stepper (left/top) + card (right/bottom) ---- */
+.wizard-shell{display:flex;gap:26px;align-items:flex-start;}
+.wheel-col{flex:0 0 240px;position:sticky;top:20px;}
+.wizard-card-col{flex:1;min-width:0;}
+@media(max-width:900px){
+  .wizard-shell{flex-direction:column;gap:18px;}
+  .wheel-col{position:static;width:100%;flex:0 0 auto;}
+}
+
+/* ---- vertical stepper: simple, reliable, connecting line + dots ---- */
+.wheel-stepper{
+  background:var(--sage-50);border:1px solid var(--sage-100);border-radius:22px;box-shadow:var(--shadow);
+  padding:14px;
+}
+.wheel-list{display:flex;flex-direction:column;gap:5px;}
+.wheel-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:14px;
+  font-weight:700;color:var(--muted);font-size:.82rem;line-height:1.2;
+  background:transparent;transition:.25s ease;
+}
+.wheel-item .num{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+  background:#fff;color:var(--sage-700);border:1.5px solid var(--sage-200);
+  display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;transition:.25s;
+}
+.wheel-item.done{color:var(--sage-700);}
+.wheel-item.done .num{background:var(--sage-600);border-color:var(--sage-600);color:#fff;}
+.wheel-item.current{background:#fff;color:var(--ink);font-weight:800;box-shadow:var(--shadow);}
+.wheel-item.current .num{background:var(--ink);border-color:var(--ink);color:var(--gold);}
+.wheel-progress-label{
+  margin-top:10px;text-align:center;font-size:.75rem;font-weight:700;color:var(--muted);
+}
+.bar-outer{height:6px;background:var(--sage-100);border-radius:10px;overflow:hidden;margin-bottom:26px;}
+.bar-inner{height:100%;background:linear-gradient(90deg,var(--sage-500),var(--gold));border-radius:10px;transition:width .35s ease;}
+
+.step-panel{display:none;animation:fadeIn .35s ease;}
+.step-panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.step-title{font-size:1.4rem;color:var(--sage-700);margin-bottom:6px;}
+.step-sub{color:var(--muted);font-size:.9rem;margin-bottom:22px;}
+
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:480px){.choice-grid{grid-template-columns:1fr;}}
+.choice-card{
+  border:2px solid var(--sage-100);border-radius:16px;padding:18px;text-align:left;background:var(--sage-50);
+  transition:.2s;position:relative;
+}
+.choice-card:hover{border-color:var(--sage-300);transform:translateY(-2px);}
+.choice-card.selected{border-color:var(--sage-600);background:var(--sage-100);box-shadow:var(--shadow);}
+.choice-card .icon{font-size:1.6rem;margin-bottom:8px;}
+.choice-card .title{font-weight:700;color:var(--ink);margin-bottom:2px;}
+.choice-card .desc{font-size:.8rem;color:var(--muted);}
+.choice-card .price{margin-top:8px;font-weight:700;color:var(--gold);}
+.choice-card.selected::after{
+  content:'✓';position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;
+  background:var(--sage-600);color:#fff;font-size:.75rem;display:flex;align-items:center;justify-content:center;
+}
+
+.addon-list{display:flex;flex-direction:column;gap:10px;}
+.addon-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border:1.5px solid var(--sage-100);border-radius:12px;padding:12px 16px;background:var(--sage-50);cursor:pointer;
+}
+.addon-row.selected{border-color:var(--sage-600);background:var(--sage-100);}
+.addon-row .left{display:flex;align-items:center;gap:12px;}
+.addon-row .chk{width:20px;height:20px;border-radius:6px;border:2px solid var(--sage-300);flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:#fff;}
+.addon-row.selected .chk{background:var(--sage-600);border-color:var(--sage-600);color:#fff;font-size:.7rem;}
+.addon-row .price{font-weight:700;color:var(--sage-700);font-size:.85rem;}
+
+.groomer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;}
+.groomer-card{border:2px solid var(--sage-100);border-radius:16px;padding:16px 10px;text-align:center;background:var(--sage-50);}
+.groomer-card.selected{border-color:var(--sage-600);background:var(--sage-100);}
+.groomer-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--sage-300),var(--sage-600));margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Baloo 2';font-weight:700;}
+.groomer-card .name{font-weight:700;font-size:.88rem;}
+.groomer-card .role{font-size:.72rem;color:var(--muted);}
+
+.upload-box{
+  border:2px dashed var(--sage-300);border-radius:14px;padding:20px;text-align:center;background:var(--sage-50);cursor:pointer;
+}
+.upload-box:hover{background:var(--sage-100);}
+.upload-box .fname{font-size:.78rem;color:var(--sage-700);font-weight:700;margin-top:6px;}
+
+.time-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+
+.consent-box{
+  display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--sage-200);background:var(--sage-50);
+  border-radius:14px;padding:16px;cursor:pointer;
+}
+.consent-box input{width:20px;height:20px;margin-top:2px;accent-color:var(--sage-600);}
+.consent-box p{font-size:.85rem;color:var(--ink);line-height:1.5;}
+.consent-box a{color:var(--sage-700);font-weight:700;}
+
+.summary-box{background:var(--sage-50);border:1.5px solid var(--sage-100);border-radius:14px;padding:16px 18px;margin-bottom:18px;}
+.summary-row{display:flex;justify-content:space-between;font-size:.85rem;padding:5px 0;color:var(--muted);}
+.summary-row.total{border-top:1.5px dashed var(--sage-300);margin-top:8px;padding-top:10px;font-weight:800;color:var(--sage-700);font-size:1.05rem;}
+
+.card-fields{display:flex;flex-direction:column;gap:14px;}
+
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px;}
+
+.badge{display:inline-block;background:var(--gold-light);color:#8a6a1f;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:999px;margin-bottom:10px;}
+
+/* success */
+.success-wrap{text-align:center;padding:20px 0;}
+.success-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--sage-500),var(--sage-700));display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:#fff;margin:0 auto 20px;box-shadow:var(--shadow-lg);}
+
+/* video modal (bubble easter egg) */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,35,20,.55);backdrop-filter:blur(4px);z-index:50;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.show{display:flex;}
+.video-modal{background:var(--ink);border-radius:20px;padding:6px;width:100%;max-width:360px;box-shadow:var(--shadow-lg);position:relative;}
+.video-modal .screen{
+  aspect-ratio:9/13;border-radius:16px;background:linear-gradient(160deg,var(--sage-700),var(--ink));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;position:relative;overflow:hidden;
+}
+.video-modal .pulse{width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;animation:pulse 1.6s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.35);}70%{box-shadow:0 0 0 20px rgba(255,255,255,0);}100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}}
+.video-modal .paw{font-size:2rem;}
+.video-modal .cap{margin-top:16px;font-family:'Baloo 2';font-size:1.1rem;}
+.video-modal .sub{font-size:.78rem;opacity:.75;margin-top:4px;}
+.modal-close{position:absolute;top:-14px;right:-14px;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ink);font-weight:800;box-shadow:var(--shadow);}
+
+@media(max-width:480px){
+  .wrap{padding:18px 12px 60px;}
+  .card{padding:18px;border-radius:14px;}
+}
+
+</style>
+</head>
+<body class="bg-brand-cream text-brand-ink font-sans antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain">
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
+      <a href="index.html#home" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
+      <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
+      <a href="membership.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Membership</a>
+      <div class="relative group">
+        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
+          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+            <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
+            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
+            <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
+            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
+          </div>
+        </div>
+      </div>
+      <a href="index.html#gallery" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
+      <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
+      <a href="index.html#career" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+      <a href="book-appointment.html" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Book an Appointment</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="book-appointment.html#login" class="hidden sm:inline-block border border-brand-sage text-brand-dark text-sm font-semibold px-4 py-2 rounded-full hover:bg-brand-light transition-colors">Login</a>
+      <a href="book-appointment.html" class="hidden sm:inline-block bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-full">Book now</a>
+      <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
+    <a href="index.html#home" class="block py-3 border-b border-brand-border/60">Home</a>
+    <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
+    <a href="membership.html" class="block py-3 border-b border-brand-border/60">Membership</a>
+    <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
+      <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+    <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
+      <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
+      <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
+      <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
+      <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
+    </div>
+    <a href="index.html#gallery" class="block py-3 border-b border-brand-border/60">Gallery</a>
+    <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
+    <a href="index.html#career" class="block py-3 border-b border-brand-border/60">Career</a>
+    <a href="book-appointment.html#login" class="block py-3 border-b border-brand-border/60">Login</a>
+    <a href="book-appointment.html" class="block py-3 text-brand-dark font-semibold">Book an Appointment</a>
+    <a href="book-appointment.html" class="mt-2 block text-center bg-brand-sage text-white font-semibold py-3 rounded-full">Book now</a>
+  </nav>
+</header>
+
+<!-- BOOK AN APPOINTMENT: login/signup gate + 10-step booking wizard -->
+<main>
+<section id="book-appointment" class="px-4 sm:px-6 py-10 sm:py-16">
+<div class="wrap" id="login">
+
+  <!-- ============ AUTH GATE ============ -->
+  <div class="card floaty" id="authScreen">
+    <div class="center" style="margin-bottom:22px;">
+      <div style="font-size:2rem;">🐾</div>
+      <h1 class="step-title" style="margin-top:6px;">Welcome to FlakyBubbles</h1>
+      <p class="step-sub">Please log in or create an account to book your pet's appointment</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLoginBtn" onclick="switchAuthTab('login')">Log In</button>
+      <button class="auth-tab" id="tabSignupBtn" onclick="switchAuthTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- Login form -->
+    <div id="loginForm">
+      <div class="field" id="f_loginEmail">
+        <label>Email Address *</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com">
+        <div class="err-msg">Please enter a valid email</div>
+      </div>
+      <div class="field" id="f_loginPassword">
+        <label>Password *</label>
+        <input type="password" id="loginPassword" placeholder="••••••••">
+        <div class="err-msg">Password is required</div>
+      </div>
+      <button class="btn btn-primary btn-block" id="loginBtn" onclick="handleLogin()">Log In →</button>
+      <p class="center" style="margin-top:14px;font-size:.82rem;color:var(--muted);">No account? <button class="link-btn" onclick="switchAuthTab('signup')">Sign up here</button></p>
+    </div>
+
+    <!-- Signup form -->
+    <div id="signupForm" style="display:none;">
+      <div class="row2">
+        <div class="field" id="f_suFirst">
+          <label>First Name *</label>
+          <input type="text" id="suFirst" placeholder="Zain">
+          <div class="err-msg">Required</div>
+        </div>
+        <div class="field" id="f_suLast">
+          <label>Last Name *</label>
+          <input type="text" id="suLast" placeholder="Khan">
+          <div class="err-msg">Required</div>
+        </div>
+      </div>
+      <div class="field" id="f_suEmail">
+        <label>Email Address *</label>
+        <input type="email" id="suEmail" placeholder="you@example.com">
+        <div class="err-msg">Please enter a valid email</div>
+      </div>
+      <div class="field" id="f_suPhone">
+        <label>Cell Phone *</label>
+        <input type="tel" id="suPhone" placeholder="0321 8633268">
+        <div class="err-msg">Required</div>
+      </div>
+      <div class="field" id="f_suPassword">
+        <label>Create Password *</label>
+        <input type="password" id="suPassword" placeholder="At least 6 characters">
+        <div class="err-msg">Password must be 6+ characters</div>
+      </div>
+      <button class="btn btn-primary btn-block" id="signupBtn" onclick="handleSignup()">Create Account →</button>
+      <p class="center" style="margin-top:12px;font-size:.72rem;color:var(--muted);">🔒 We'll email you a 6-digit code to verify your account</p>
+    </div>
+
+    <!-- Verify Code form (shared by signup + login) -->
+    <div id="verifyForm" style="display:none;">
+      <div class="center" style="margin-bottom:18px;">
+        <div style="font-size:1.8rem;">📧</div>
+        <h2 class="step-title" style="margin-top:6px;">Check your email</h2>
+        <p class="step-sub">We sent a 6-digit code to <strong id="verifyEmailLabel"></strong>. Enter it below.</p>
+      </div>
+      <div class="field" id="f_verifyCode">
+        <label>Verification Code *</label>
+        <input type="text" id="verifyCode" placeholder="123456" maxlength="10" inputmode="numeric" style="letter-spacing:6px;font-weight:700;text-align:center;font-size:1.2rem;">
+        <div class="err-msg">Please enter the 6-digit code</div>
+      </div>
+      <button class="btn btn-primary btn-block" id="verifyBtn" onclick="handleVerifyCode()">Verify →</button>
+      <p class="center" style="margin-top:14px;font-size:.82rem;color:var(--muted);">
+        Didn't get it? <button class="link-btn" id="resendBtn" onclick="handleResendCode()">Resend code</button>
+      </p>
+      <p class="center" style="margin-top:6px;">
+        <button class="link-btn" style="font-size:.8rem;" onclick="cancelVerify()">← Back</button>
+      </p>
+    </div>
+  </div>
+
+  <!-- ============ WIZARD ============ -->
+  <div class="wizard" id="wizard">
+    <div class="wizard-shell">
+      <div class="wheel-col">
+        <div class="wheel-stepper">
+          <div class="wheel-list" id="wheelTrack"></div>
+        </div>
+        <div class="wheel-progress-label" id="wheelProgressLabel">Step 1 of 10</div>
+      </div>
+      <div class="wizard-card-col">
+    <div class="bar-outer"><div class="bar-inner" id="barInner" style="width:10%;"></div></div>
+
+    <div class="card floaty">
+
+      <!-- Step 1: Welcome -->
+      <div class="step-panel active" data-step="1">
+        <span class="badge">STEP 1 / 10</span>
+        <h2 class="step-title">Welcome, <span id="welcomeName">Friend</span> 🐾</h2>
+        <p class="step-sub">Let's get your pet booked in for some FlakyBubbles pampering. This takes about 3 minutes.</p>
+        <div class="choice-grid" style="grid-template-columns:1fr;">
+          <div class="choice-card selected" style="cursor:default;">
+            <div class="icon">✨</div>
+            <div class="title">Experience Pet Hospitality Like Never Before</div>
+            <div class="desc">Tap "Get Started" below and we'll walk you through each step — service, pet details, date/time and payment.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Experience -->
+      <div class="step-panel" data-step="2">
+        <span class="badge">STEP 2 / 10</span>
+        <h2 class="step-title">Choose Your Experience</h2>
+        <p class="step-sub">What are we booking today?</p>
+        <div class="choice-grid" id="experienceGrid"></div>
+      </div>
+
+      <!-- Step 3: Category -->
+      <div class="step-panel" data-step="3">
+        <span class="badge">STEP 3 / 10</span>
+        <h2 class="step-title">Select a Category</h2>
+        <p class="step-sub" id="categorySub">Pick the tier that suits your pet best</p>
+        <div class="choice-grid" id="categoryGrid"></div>
+      </div>
+
+      <!-- Step 4: Service / Add-ons -->
+      <div class="step-panel" data-step="4">
+        <span class="badge">STEP 4 / 10</span>
+        <h2 class="step-title">Spa Add-Ons</h2>
+        <p class="step-sub">Optional — select any extras your pet would enjoy</p>
+        <div class="addon-list" id="addonList"></div>
+      </div>
+
+      <!-- Step 5: Groomer -->
+      <div class="step-panel" data-step="5">
+        <span class="badge">STEP 5 / 10</span>
+        <h2 class="step-title">Choose a Groomer</h2>
+        <p class="step-sub">Have a favorite? Pick them below, or let us assign the best match.</p>
+        <div class="groomer-grid" id="groomerGrid"></div>
+      </div>
+
+      <!-- Step 6: Your Account -->
+      <div class="step-panel" data-step="6">
+        <span class="badge">STEP 6 / 10</span>
+        <h2 class="step-title">Your Details</h2>
+        <p class="step-sub">Customer information</p>
+        <div class="row2">
+          <div class="field" id="f_accFirst"><label>First Name *</label><input id="accFirst"><div class="err-msg">Required</div></div>
+          <div class="field" id="f_accLast"><label>Last Name *</label><input id="accLast"><div class="err-msg">Required</div></div>
+        </div>
+        <div class="row2">
+          <div class="field" id="f_accPhone"><label>Cell Phone *</label><input id="accPhone"><div class="err-msg">Required</div></div>
+          <div class="field" id="f_accEmail"><label>Email *</label><input type="email" id="accEmail"><div class="err-msg">Valid email required</div></div>
+        </div>
+        <p style="font-weight:700;color:var(--sage-700);margin:16px 0 8px;">Emergency Contact</p>
+        <div class="row2">
+          <div class="field" id="f_emName"><label>Name *</label><input id="emName"><div class="err-msg">Required</div></div>
+          <div class="field" id="f_emPhone"><label>Phone Number *</label><input id="emPhone"><div class="err-msg">Required</div></div>
+        </div>
+      </div>
+
+      <!-- Step 7: Pet -->
+      <div class="step-panel" data-step="7">
+        <span class="badge">STEP 7 / 10</span>
+        <h2 class="step-title">Pet Profile</h2>
+        <div class="row2">
+          <div class="field" id="f_petName"><label>Pet Name *</label><input id="petName"><div class="err-msg">Required</div></div>
+          <div class="field" id="f_petType"><label>Pet Type *</label>
+            <select id="petType" onchange="renderBreeds()">
+              <option value="">Select</option><option value="Dog">Dog</option><option value="Cat">Cat</option>
+            </select><div class="err-msg">Required</div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field" id="f_petBreed"><label>Breed *</label><select id="petBreed"><option value="">Select pet type first</option></select><div class="err-msg">Required</div></div>
+          <div class="field" id="f_petWeight"><label>Weight (lbs) *</label><input type="number" id="petWeight"><div class="err-msg">Required</div></div>
+        </div>
+        <div class="row2">
+          <div class="field" id="f_petAge"><label>Age *</label><input type="number" id="petAge" placeholder="years"><div class="err-msg">Required</div></div>
+          <div class="field" id="f_petGender"><label>Gender *</label>
+            <select id="petGender"><option value="">Select</option><option>Male</option><option>Female</option></select>
+            <div class="err-msg">Required</div>
+          </div>
+        </div>
+        <div class="field"><label>Special Needs / Notes</label><textarea id="petNotes" rows="2" placeholder="Optional"></textarea></div>
+        <div class="row2">
+          <div class="field">
+            <label>Pet Picture</label>
+            <div class="upload-box" onclick="document.getElementById('petPic').click()">
+              <div>📷 Click to upload photo</div>
+              <div class="fname" id="petPicName"></div>
+            </div>
+            <input type="file" id="petPic" accept="image/*" style="display:none" onchange="fileChosen('petPic','petPicName')">
+          </div>
+          <div class="field" id="f_vaccine">
+            <label>Vaccine Records *</label>
+            <div class="upload-box" onclick="document.getElementById('vaccineDoc').click()">
+              <div>📄 Click to upload (PDF/Image)</div>
+              <div class="fname" id="vaccineDocName"></div>
+            </div>
+            <input type="file" id="vaccineDoc" accept="image/*,.pdf" style="display:none" onchange="fileChosen('vaccineDoc','vaccineDocName')">
+            <div class="err-msg">Vaccine record required for boarding/daycare</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 8: Date and Time -->
+      <div class="step-panel" data-step="8">
+        <span class="badge">STEP 8 / 10</span>
+        <h2 class="step-title">Date & Time</h2>
+        <p class="step-sub">If your desired slot isn't available, contact us for the waitlist.</p>
+        <div class="field" id="f_bookDate"><label>Date *</label><input type="date" id="bookDate"><div class="err-msg">Please pick a date</div></div>
+        <label style="display:block;font-size:.82rem;font-weight:700;color:var(--sage-700);margin-bottom:6px;">Time *</label>
+        <div class="time-row" id="f_bookTime">
+          <select id="bookHour"><option value="">Hour</option></select>
+          <select id="bookMin"><option value="">Min</option></select>
+          <select id="bookAmpm"><option value="">AM/PM</option><option>AM</option><option>PM</option></select>
+        </div>
+        <div class="err-msg" id="timeErr" style="display:none;">Please select full time</div>
+      </div>
+
+      <!-- Step 9: Waivers -->
+      <div class="step-panel" data-step="9">
+        <span class="badge">STEP 9 / 10</span>
+        <h2 class="step-title">Waivers & Consent</h2>
+        <p class="step-sub">Please review and accept before proceeding to payment</p>
+        <label class="consent-box">
+          <input type="checkbox" id="consentBox" onchange="clearErr('f_consent')">
+          <p>Yes, I agree with the <a href="#">privacy policy</a> and <a href="#">terms and conditions</a>, and confirm my pet's vaccination records are current.</p>
+        </label>
+        <div class="err-msg" id="consentErr" style="display:none;margin-top:8px;">You must accept the terms to continue</div>
+      </div>
+
+      <!-- Step 10: Payment -->
+      <div class="step-panel" data-step="10">
+        <span class="badge">STEP 10 / 10</span>
+        <h2 class="step-title">Payment Info</h2>
+        <div class="summary-box" id="summaryBox"></div>
+        <div class="card-fields">
+          <div class="field" id="f_cardName"><label>Name on Card *</label><input id="cardName"><div class="err-msg">Required</div></div>
+          <div class="field" id="f_cardNum"><label>Card Number *</label><input id="cardNum" placeholder="4242 4242 4242 4242" maxlength="19"><div class="err-msg">Enter a valid 16-digit card number</div></div>
+          <div class="row2">
+            <div class="field" id="f_cardExp"><label>Expiry *</label><input id="cardExp" placeholder="MM/YY" maxlength="5"><div class="err-msg">Required</div></div>
+            <div class="field" id="f_cardCvc"><label>CVC *</label><input id="cardCvc" placeholder="123" maxlength="4"><div class="err-msg">Required</div></div>
+          </div>
+        </div>
+        <p style="font-size:.72rem;color:var(--muted);margin-top:8px;">🔒 Demo payment form — real version integrates Stripe Elements, card data never touches our server directly.</p>
+      </div>
+
+      <!-- Success -->
+      <div class="step-panel" data-step="success">
+        <div class="success-wrap">
+          <div class="success-icon">✓</div>
+          <h2 class="step-title">Payment Successful!</h2>
+          <p class="step-sub">Your booking is confirmed. Taking you to your Client Portal…</p>
+          <button class="btn btn-primary" onclick="window.location.href='client-portal.html'">Go to Client Portal →</button>
+        </div>
+      </div>
+
+      <div class="nav-row" id="navRow">
+        <button class="btn btn-ghost" id="backBtn" onclick="prevStep()">← Back</button>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">Get Started →</button>
+      </div>
+
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+</main>
+
+<!-- FOOTER: stacked circular -->
+<footer id="contact" class="bg-brand-dark text-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex flex-col items-center text-center">
+    <div class="floaty mb-8 bg-white/95 rounded-2xl shadow-xl px-6 py-4">
+      <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-40 sm:w-48 h-auto object-contain">
+    </div>
+    <nav class="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm" aria-label="Footer">
+      <a href="index.html#home" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Home</a>
+      <a href="about.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">About Us</a>
+      <a href="membership.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Membership</a>
+      <a href="index.html#services" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Services</a>
+      <a href="index.html#gallery" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Gallery</a>
+      <a href="contact.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Contact</a>
+      <a href="index.html#career" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Career</a>
+    </nav>
+    <div class="mb-8 flex gap-3">
+      <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+      <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+      <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+    <p class="text-xs text-white/60">© 2026 Flaky Bubbles. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ===================== DATA ===================== */
+const dogBreeds=["Chihuahua","Pomeranian","Yorkshire Terrier","Shih Tzu","Maltese","Pug","French Bulldog","Dachshund","Miniature Schnauzer","Boston Terrier","Beagle","Cocker Spaniel","Border Collie","Bulldog","Australian Shepherd","Basset Hound","Whippet","Siberian Husky","Golden Retriever","Labrador Retriever","German Shepherd","Rottweiler","Boxer","Great Dane","Saint Bernard","Bernese Mountain Dog","Akita","Belgian Malinois","Alaskan Malamute","Samoyed","Dalmatian","Chow Chow","Shiba Inu"];
+const catBreeds=["Persian cat","Maine Coon","Siamese cat","Ragdoll","British Shorthair","Bengal cat","Sphynx cat","Scottish Fold","Russian Blue","Abyssinian cat","Birman","American Shorthair","Norwegian Forest cat","Himalayan cat","Turkish Angora","Manx cat","Burmese cat"];
+
+const experiences=[
+  {id:"grooming",icon:"✂️",title:"Grooming & Spa",desc:"Bath, styling, spa treatments"},
+  {id:"daycare",icon:"☀️",title:"Daycare",desc:"Supervised daytime play & care"},
+  {id:"boarding",icon:"🏨",title:"Boarding & Hotel",desc:"Overnight luxury stays"},
+  {id:"transport",icon:"🚐",title:"Pet Transport",desc:"Rides to/from appointments"},
+];
+
+const categories={
+  grooming:[{id:"basic",title:"Basic Groom",desc:"Hypoallergenic shampoo, brush out",price:45},
+            {id:"full",title:"Full Groom",desc:"Bath, cut, teeth brushing",price:70},
+            {id:"luxury",title:"Luxury Spa",desc:"Full groom + aromatherapy spa",price:95}],
+  daycare:[{id:"half",title:"Half Day",desc:"Up to 5 hours",price:20},
+           {id:"full",title:"Full Day",desc:"Full supervised day",price:35},
+           {id:"individual",title:"Individual",desc:"1-on-1 attention",price:50}],
+  boarding:[{id:"standard",title:"Standard",desc:"Cozy shared-style suite",price:85},
+            {id:"vip",title:"VIP Suite",desc:"Private suite + camera access",price:140}],
+  transport:[{id:"oneway",title:"One-Way Ride",desc:"Single trip",price:30},
+             {id:"roundtrip",title:"Round Trip",desc:"Pickup + drop-off",price:55}]
+};
+
+const addons=[
+  {id:"bath",name:"Organic Bath & Blow Dry",price:15},
+  {id:"teeth",name:"Teeth Brushing",price:10},
+  {id:"massage",name:"Relaxation Massage",price:20},
+  {id:"pawdicure",name:"Pawdicure & Moisturize",price:12},
+  {id:"nail",name:"Nail Trim & Filing",price:8},
+  {id:"ear",name:"Ear Cleaning",price:8},
+  {id:"facial",name:"Blueberry Facial",price:14},
+  {id:"dematting",name:"De-matting Treatment",price:18},
+];
+
+const groomers=[
+  {id:"any",name:"No Preference",role:"We'll assign the best match"},
+  {id:"sarah",name:"Sarah M.",role:"Senior Groomer"},
+  {id:"ali",name:"Ali R.",role:"Spa Specialist"},
+  {id:"emma",name:"Emma K.",role:"Boarding Lead"},
+];
+
+const stepLabels=["Welcome","Experience","Category","Service","Groomer","Your Account","Pet","Date & Time","Waivers","Payment"];
+
+/* ===================== STATE ===================== */
+let currentUser=null;
+let currentStep=1;
+const totalSteps=10;
+let booking={experience:null,category:null,addons:[],groomer:null,date:null,hour:'',min:'',ampm:'',consent:false};
+
+/* =====================================================================
+   BACKEND / DATABASE CONFIG — connect this to Supabase (no Node needed)
+   =====================================================================
+   1. In <head>, add the Supabase CDN <script> tag (already included in this file)
+   2. Fill your project URL + anon key below (from Supabase dashboard → Settings → API)
+   3. Once SUPABASE_URL is set, every function below automatically switches
+      from "demo mode" (localStorage) to real Supabase calls — no other
+      code changes needed.
+   ===================================================================== */
+const SUPABASE_URL='https://rxytlhnngdcvdqfgydzn.supabase.co';        // e.g. 'https://xxxxx.supabase.co'
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4eXRsaG5uZ2RjdmRxZmd5ZHpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0ODg4MTIsImV4cCI6MjEwNjA2NDgxMn0.7WmnUYjXLeA8F15-s1el52qLsm-dY3_S5gg1FFwkYaI';   // e.g. 'eyJhbGciOi...'
+const sb=(SUPABASE_URL && window.supabase) ? window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY) : null;
+const DEMO_MODE = !sb; // true until you fill the keys above
+
+/* ===================== AUTH ===================== */
+let pendingAuth=null; // {mode:'login'|'signup', email, first, last, phone}
+
+function switchAuthTab(tab){
+  document.getElementById('tabLoginBtn').classList.toggle('active',tab==='login');
+  document.getElementById('tabSignupBtn').classList.toggle('active',tab==='signup');
+  document.getElementById('loginForm').style.display=tab==='login'?'block':'none';
+  document.getElementById('signupForm').style.display=tab==='signup'?'block':'none';
+  document.getElementById('verifyForm').style.display='none';
+  document.querySelector('.auth-tabs').style.display='flex';
+}
+function setErr(fieldId,show){
+  const el=document.getElementById(fieldId);
+  if(el) el.classList.toggle('error',show);
+}
+function clearErr(fieldId){setErr(fieldId,false);}
+
+function showVerifyScreen(email){
+  document.querySelector('.auth-tabs').style.display='none';
+  document.getElementById('loginForm').style.display='none';
+  document.getElementById('signupForm').style.display='none';
+  document.getElementById('verifyForm').style.display='block';
+  document.getElementById('verifyEmailLabel').textContent=email;
+  document.getElementById('verifyCode').value='';
+  clearErr('f_verifyCode');
+  document.getElementById('verifyCode').focus();
+}
+function cancelVerify(){
+  pendingAuth=null;
+  switchAuthTab('login');
+}
+
+async function handleLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPassword').value;
+  let ok=true;
+  if(!/^\S+@\S+\.\S+$/.test(email)){setErr('f_loginEmail',true);ok=false;}else setErr('f_loginEmail',false);
+  if(!pass){setErr('f_loginPassword',true);ok=false;}else setErr('f_loginPassword',false);
+  if(!ok)return;
+  const btn=document.getElementById('loginBtn'); btn.disabled=true; const oldTxt=btn.textContent; btn.textContent='Checking...';
+  try{
+    if(DEMO_MODE){
+      // ---- DEMO: no backend connected yet, skip straight to a simulated code screen ----
+      await new Promise(r=>setTimeout(r,400));
+      pendingAuth={mode:'login',email,first:email.split('@')[0]};
+      showVerifyScreen(email);
+    }else{
+      // ---- REAL: verify password first, then require the emailed code as a 2nd factor ----
+      const {error}=await sb.auth.signInWithPassword({email,password:pass});
+      if(error){alert(error.message);btn.disabled=false;btn.textContent=oldTxt;return;}
+      // password was correct — sign the session back out and email a fresh OTP code
+      await sb.auth.signOut();
+      const {error:otpErr}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:false}});
+      if(otpErr){alert('Could not send verification code: '+otpErr.message);btn.disabled=false;btn.textContent=oldTxt;return;}
+      pendingAuth={mode:'login',email};
+      showVerifyScreen(email);
+    }
+  }catch(err){alert('Login failed: '+err.message);}
+  btn.disabled=false; btn.textContent=oldTxt;
+}
+async function handleSignup(){
+  const first=document.getElementById('suFirst').value.trim();
+  const last=document.getElementById('suLast').value.trim();
+  const email=document.getElementById('suEmail').value.trim();
+  const phone=document.getElementById('suPhone').value.trim();
+  const pass=document.getElementById('suPassword').value;
+  let ok=true;
+  setErr('f_suFirst',!first); if(!first)ok=false;
+  setErr('f_suLast',!last); if(!last)ok=false;
+  const emailOk=/^\S+@\S+\.\S+$/.test(email);
+  setErr('f_suEmail',!emailOk); if(!emailOk)ok=false;
+  setErr('f_suPhone',!phone); if(!phone)ok=false;
+  const passOk=pass.length>=6;
+  setErr('f_suPassword',!passOk); if(!passOk)ok=false;
+  if(!ok)return;
+  const btn=document.getElementById('signupBtn'); btn.disabled=true; const oldTxt=btn.textContent; btn.textContent='Creating account...';
+  try{
+    if(DEMO_MODE){
+      // ---- DEMO: no backend connected yet, skip straight to a simulated code screen ----
+      await new Promise(r=>setTimeout(r,400));
+      pendingAuth={mode:'signup',email,first,last,phone};
+      showVerifyScreen(email);
+    }else{
+      // ---- REAL: create the account, Supabase emails the "Confirm signup" code automatically ----
+      const {error}=await sb.auth.signUp({email,password:pass});
+      if(error){alert(error.message);btn.disabled=false;btn.textContent=oldTxt;return;}
+      pendingAuth={mode:'signup',email,first,last,phone};
+      showVerifyScreen(email);
+    }
+  }catch(err){alert('Signup failed: '+err.message);}
+  btn.disabled=false; btn.textContent=oldTxt;
+}
+
+async function handleVerifyCode(){
+  if(!pendingAuth)return;
+  const code=document.getElementById('verifyCode').value.trim();
+  const codeOk=/^\d{4,10}$/.test(code);
+  setErr('f_verifyCode',!codeOk);
+  if(!codeOk)return;
+  const btn=document.getElementById('verifyBtn'); btn.disabled=true; const oldTxt=btn.textContent; btn.textContent='Verifying...';
+  try{
+    const {email,mode,first,last,phone}=pendingAuth;
+    if(DEMO_MODE){
+      // ---- DEMO: any 6-digit code is accepted ----
+      await new Promise(r=>setTimeout(r,400));
+      currentUser={first:first||email.split('@')[0],last,email,phone};
+    }else{
+      // ---- REAL: verify the emailed code against Supabase ----
+      const otpType=mode==='signup'?'signup':'email';
+      const {data,error}=await sb.auth.verifyOtp({email,token:code,type:otpType});
+      if(error){alert(error.message);btn.disabled=false;btn.textContent=oldTxt;return;}
+      if(mode==='signup'){
+        const {error:insertErr}=await sb.from('users').insert({id:data.user.id,first_name:first,last_name:last,phone,is_verified:true});
+        if(insertErr){alert('Verified, but saving the profile failed: '+insertErr.message+' — check the INSERT policy on the users table (it usually needs: auth.uid() = id).');btn.disabled=false;btn.textContent=oldTxt;return;}
+        currentUser={first,last,email,phone,id:data.user.id};
+      }else{
+        const {data:profile}=await sb.from('users').select('*').eq('id',data.user.id).single();
+        currentUser={first:profile?.first_name||email.split('@')[0],last:profile?.last_name,email,phone:profile?.phone,id:data.user.id};
+      }
+    }
+    // pre-fill account step
+    document.getElementById('accFirst').value=currentUser.first||'';
+    document.getElementById('accLast').value=currentUser.last||'';
+    document.getElementById('accEmail').value=currentUser.email||'';
+    document.getElementById('accPhone').value=currentUser.phone||'';
+    pendingAuth=null;
+    enterApp();
+  }catch(err){alert('Verification failed: '+err.message);}
+  btn.disabled=false; btn.textContent=oldTxt;
+}
+
+async function handleResendCode(){
+  if(!pendingAuth)return;
+  const resendBtn=document.getElementById('resendBtn'); resendBtn.disabled=true;
+  try{
+    if(!DEMO_MODE){
+      if(pendingAuth.mode==='signup'){
+        const {error}=await sb.auth.resend({type:'signup',email:pendingAuth.email});
+        if(error){alert(error.message);}
+      }else{
+        const {error}=await sb.auth.signInWithOtp({email:pendingAuth.email,options:{shouldCreateUser:false}});
+        if(error){alert(error.message);}
+      }
+    }
+    alert('A new code has been sent to '+pendingAuth.email);
+  }catch(err){alert('Could not resend code: '+err.message);}
+  resendBtn.disabled=false;
+}
+function enterApp(){
+  document.getElementById('authScreen').style.display='none';
+  document.getElementById('wizard').classList.add('active');
+  // Optional: only touch these if a user-chip element exists on the page
+  // (the standalone topbar was removed since the site header already shows branding).
+  const chip=document.getElementById('userChip');
+  if(chip){
+    chip.style.display='flex';
+    const av=document.getElementById('userAvatar'); if(av) av.textContent=(currentUser.first||'U')[0].toUpperCase();
+    const nl=document.getElementById('userNameLabel'); if(nl) nl.textContent=currentUser.first||'Account';
+  }
+  document.getElementById('welcomeName').textContent=currentUser.first||'Friend';
+  buildDynamicSteps();
+  showStep(1);
+}
+
+/* ===================== BUILD DYNAMIC CONTENT ===================== */
+function buildDynamicSteps(){
+  const expGrid=document.getElementById('experienceGrid');
+  expGrid.innerHTML=experiences.map(e=>`
+    <div class="choice-card" data-exp="${e.id}" onclick="selectExperience('${e.id}')">
+      <div class="icon">${e.icon}</div>
+      <div class="title">${e.title}</div>
+      <div class="desc">${e.desc}</div>
+    </div>`).join('');
+
+  const addonList=document.getElementById('addonList');
+  addonList.innerHTML=addons.map(a=>`
+    <div class="addon-row" data-addon="${a.id}" onclick="toggleAddon('${a.id}')">
+      <div class="left"><div class="chk"></div><span>${a.name}</span></div>
+      <div class="price">+$${a.price}</div>
+    </div>`).join('');
+
+  const groomerGrid=document.getElementById('groomerGrid');
+  groomerGrid.innerHTML=groomers.map(g=>`
+    <div class="groomer-card" data-groomer="${g.id}" onclick="selectGroomer('${g.id}')">
+      <div class="groomer-avatar">${g.name[0]}</div>
+      <div class="name">${g.name}</div>
+      <div class="role">${g.role}</div>
+    </div>`).join('');
+
+  // time selects
+  const hourSel=document.getElementById('bookHour');
+  for(let h=1;h<=12;h++){const o=document.createElement('option');o.value=h;o.textContent=String(h).padStart(2,'0');hourSel.appendChild(o);}
+  const minSel=document.getElementById('bookMin');
+  for(let m=0;m<60;m+=5){const o=document.createElement('option');o.value=m;o.textContent=String(m).padStart(2,'0');minSel.appendChild(o);}
+}
+
+function selectExperience(id){
+  booking.experience=id;booking.category=null;
+  document.querySelectorAll('#experienceGrid .choice-card').forEach(c=>c.classList.toggle('selected',c.dataset.exp===id));
+  renderCategoryStep();
+}
+function renderCategoryStep(){
+  const grid=document.getElementById('categoryGrid');
+  const list=categories[booking.experience]||[];
+  grid.innerHTML=list.map(c=>`
+    <div class="choice-card" data-cat="${c.id}" onclick="selectCategory('${c.id}')">
+      <div class="title">${c.title}</div>
+      <div class="desc">${c.desc}</div>
+      <div class="price">$${c.price}</div>
+    </div>`).join('');
+}
+function selectCategory(id){
+  booking.category=id;
+  document.querySelectorAll('#categoryGrid .choice-card').forEach(c=>c.classList.toggle('selected',c.dataset.cat===id));
+}
+function toggleAddon(id){
+  const idx=booking.addons.indexOf(id);
+  if(idx>-1)booking.addons.splice(idx,1);else booking.addons.push(id);
+  document.querySelectorAll('#addonList .addon-row').forEach(r=>r.classList.toggle('selected',booking.addons.includes(r.dataset.addon)));
+}
+function selectGroomer(id){
+  booking.groomer=id;
+  document.querySelectorAll('#groomerGrid .groomer-card').forEach(c=>c.classList.toggle('selected',c.dataset.groomer===id));
+}
+function renderBreeds(){
+  const type=document.getElementById('petType').value;
+  const sel=document.getElementById('petBreed');
+  const list=type==='Dog'?dogBreeds:type==='Cat'?catBreeds:[];
+  sel.innerHTML='<option value="">Select breed</option>'+list.map(b=>`<option>${b}</option>`).join('');
+}
+function fileChosen(inputId,labelId){
+  const f=document.getElementById(inputId).files[0];
+  document.getElementById(labelId).textContent=f?('✓ '+f.name):'';
+  if(inputId==='vaccineDoc')clearErr('f_vaccine');
+}
+
+/* ===================== NAV / VALIDATION ===================== */
+/* Vertical stepper — simple, reliable list with connecting line + dot markers.
+   No translate/opacity trickery, so text is always fully visible. Auto-scrolls
+   the current step into view inside its own scrollable box. */
+function renderWheel(){
+  const track=document.getElementById('wheelTrack');
+  if(!track.dataset.built){
+    track.innerHTML=stepLabels.map((l,i)=>
+      `<div class="wheel-item" data-n="${i+1}"><span class="num">${i+1}</span><span class="lbl">${l}</span></div>`
+    ).join('');
+    track.dataset.built='1';
+  }
+  const items=[...track.children];
+  const isSuccess=currentStep==='success';
+  const activeN=isSuccess?totalSteps:currentStep;
+  items.forEach((el,i)=>{
+    const n=i+1,done=(n<activeN)||isSuccess,current=(n===activeN)&&!isSuccess;
+    el.classList.toggle('done',done);
+    el.classList.toggle('current',current);
+    el.querySelector('.num').textContent=done?'✓':n;
+    if(current)el.scrollIntoView({block:'nearest',behavior:'smooth'});
+  });
+  const label=document.getElementById('wheelProgressLabel');
+  if(label)label.textContent=isSuccess?'All done! 🎉':`Step ${currentStep} of ${totalSteps}`;
+}
+function showStep(n){
+  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+  const panel=document.querySelector(`.step-panel[data-step="${n}"]`);
+  if(panel)panel.classList.add('active');
+  document.getElementById('barInner').style.width=((typeof n==='number'?n:totalSteps)/totalSteps*100)+'%';
+  document.getElementById('backBtn').style.visibility=n===1?'hidden':'visible';
+  document.getElementById('nextBtn').textContent=n===1?'Get Started →':n===totalSteps?'Book Now →':'Next →';
+  renderWheel();
+  if(n===10)renderSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function validateCurrentStep(){
+  const s=currentStep;
+  if(s===2){ if(!booking.experience){alert('Please choose an experience');return false;} return true;}
+  if(s===3){ if(!booking.category){alert('Please choose a category');return false;} return true;}
+  if(s===4){ return true; } // optional
+  if(s===5){ if(!booking.groomer){alert('Please choose a groomer (or No Preference)');return false;} return true;}
+  if(s===6){
+    let ok=true;
+    [['accFirst','f_accFirst'],['accLast','f_accLast'],['accPhone','f_accPhone'],['emName','f_emName'],['emPhone','f_emPhone']].forEach(([id,f])=>{
+      const v=document.getElementById(id).value.trim(); setErr(f,!v); if(!v)ok=false;
+    });
+    const email=document.getElementById('accEmail').value.trim();
+    const emailOk=/^\S+@\S+\.\S+$/.test(email); setErr('f_accEmail',!emailOk); if(!emailOk)ok=false;
+    if(!ok)alert('Please fill all required fields');
+    return ok;
+  }
+  if(s===7){
+    let ok=true;
+    [['petName','f_petName'],['petType','f_petType'],['petBreed','f_petBreed'],['petWeight','f_petWeight'],['petAge','f_petAge'],['petGender','f_petGender']].forEach(([id,f])=>{
+      const v=document.getElementById(id).value; setErr(f,!v); if(!v)ok=false;
+    });
+    const vaccine=document.getElementById('vaccineDoc').files.length>0;
+    setErr('f_vaccine',!vaccine); if(!vaccine)ok=false;
+    if(!ok)alert('Please complete all required pet fields and upload vaccine records');
+    return ok;
+  }
+  if(s===8){
+    const date=document.getElementById('bookDate').value;
+    const h=document.getElementById('bookHour').value, m=document.getElementById('bookMin').value, ap=document.getElementById('bookAmpm').value;
+    let ok=true;
+    setErr('f_bookDate',!date); if(!date)ok=false;
+    const timeErr=document.getElementById('timeErr');
+    if(!h||!m||!ap){timeErr.style.display='block';ok=false;}else timeErr.style.display='none';
+    if(!ok)alert('Please select a date and full time');
+    else{booking.date=date;booking.hour=h;booking.min=m;booking.ampm=ap;}
+    return ok;
+  }
+  if(s===9){
+    const c=document.getElementById('consentBox').checked;
+    document.getElementById('consentErr').style.display=c?'none':'block';
+    if(!c)alert('Please accept the terms to continue');
+    booking.consent=c;
+    return c;
+  }
+  if(s===10){
+    let ok=true;
+    [['cardName','f_cardName'],['cardExp','f_cardExp'],['cardCvc','f_cardCvc']].forEach(([id,f])=>{
+      const v=document.getElementById(id).value.trim(); setErr(f,!v); if(!v)ok=false;
+    });
+    const num=document.getElementById('cardNum').value.replace(/\s/g,'');
+    const numOk=/^\d{16}$/.test(num); setErr('f_cardNum',!numOk); if(!numOk)ok=false;
+    if(!ok)alert('Please complete valid payment details');
+    return ok;
+  }
+  return true;
+}
+async function nextStep(){
+  if(currentStep<=totalSteps){
+    if(!validateCurrentStep())return;
+  }
+  if(currentStep===totalSteps){
+    const btn=document.getElementById('nextBtn');
+    btn.disabled=true; const oldTxt=btn.textContent; btn.textContent='Processing payment...';
+    try{
+      await submitBooking();
+      showStep('success');
+      document.getElementById('navRow').style.display='none';
+      // Auto-redirect to the Client Portal after a successful payment.
+      // Kept short so the person still sees the confirmation message first.
+      setTimeout(()=>{ window.location.href='client-portal.html'; },1800);
+    }catch(err){
+      alert('Something went wrong submitting your booking: '+err.message);
+      btn.disabled=false; btn.textContent=oldTxt;
+    }
+    return;
+  }
+  currentStep++;
+  showStep(currentStep);
+}
+
+/* Saves the completed booking. In demo mode this just logs to console;
+   once SUPABASE_URL/KEY above are set, it writes a real row to `bookings`
+   (and, in production, payment should be charged server-side via a
+   Supabase Edge Function calling Stripe — never trust the browser for amount). */
+async function submitBooking(){
+  const payload={
+    user_id:currentUser?.id||null,
+    customer:{first:document.getElementById('accFirst').value,last:document.getElementById('accLast').value,
+      phone:document.getElementById('accPhone').value,email:document.getElementById('accEmail').value},
+    emergency_contact:{name:document.getElementById('emName').value,phone:document.getElementById('emPhone').value},
+    pet:{name:document.getElementById('petName').value,type:document.getElementById('petType').value,
+      breed:document.getElementById('petBreed').value,weight:document.getElementById('petWeight').value,
+      age:document.getElementById('petAge').value,gender:document.getElementById('petGender').value,
+      notes:document.getElementById('petNotes').value},
+    experience:booking.experience,category:booking.category,addons:booking.addons,groomer:booking.groomer,
+    date:document.getElementById('bookDate').value,
+    time:`${document.getElementById('bookHour').value}:${document.getElementById('bookMin').value} ${document.getElementById('bookAmpm').value}`,
+    total:priceLookup().total,
+    created_at:new Date().toISOString()
+  };
+  if(DEMO_MODE){
+    // ---- DEMO: no backend yet, just log what WOULD be saved ----
+    console.log('[demo] booking payload that will be sent to Supabase:',payload);
+    await new Promise(r=>setTimeout(r,600));
+    return payload;
+  }
+  // ---- REAL: insert into Supabase `bookings` table ----
+  // Pet picture / vaccine record files should be uploaded to Supabase Storage
+  // first (sb.storage.from('pet-docs').upload(...)) and their returned URLs
+  // added to the payload before this insert.
+  const {data,error}=await sb.from('bookings').insert(payload).select().single();
+  if(error)throw error;
+  // TODO: trigger confirmation email/SMS here via an Edge Function
+  return data;
+}
+function prevStep(){
+  if(currentStep<=1)return;
+  currentStep--;
+  showStep(currentStep);
+}
+function restartWizard(){
+  currentStep=1;
+  booking={experience:null,category:null,addons:[],groomer:null,date:null,hour:'',min:'',ampm:'',consent:false};
+  document.querySelectorAll('.choice-card.selected').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('.addon-row.selected').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('.groomer-card.selected').forEach(c=>c.classList.remove('selected'));
+  showStep(1);
+}
+
+function priceLookup(){
+  const catList=categories[booking.experience]||[];
+  const cat=catList.find(c=>c.id===booking.category);
+  const catPrice=cat?cat.price:0;
+  const addonTotal=booking.addons.reduce((sum,id)=>{const a=addons.find(x=>x.id===id);return sum+(a?a.price:0);},0);
+  return {catPrice,addonTotal,total:catPrice+addonTotal,catTitle:cat?cat.title:'—'};
+}
+function renderSummary(){
+  const p=priceLookup();
+  const box=document.getElementById('summaryBox');
+  const addonNames=booking.addons.map(id=>addons.find(a=>a.id===id).name).join(', ')||'None';
+  box.innerHTML=`
+    <div class="summary-row"><span>Category</span><span>${p.catTitle}</span></div>
+    <div class="summary-row"><span>Base Price</span><span>$${p.catPrice}</span></div>
+    <div class="summary-row"><span>Add-ons</span><span>${addonNames}</span></div>
+    <div class="summary-row"><span>Add-on Total</span><span>$${p.addonTotal}</span></div>
+    <div class="summary-row total"><span>Total Due</span><span>$${p.total}</span></div>
+  `;
+}
+
+/* ===================== INIT ===================== */
+document.getElementById('cardNum').addEventListener('input',function(){
+  let v=this.value.replace(/\D/g,'').slice(0,16);
+  this.value=v.replace(/(.{4})/g,'$1 ').trim();
+});
+document.getElementById('cardExp').addEventListener('input',function(){
+  let v=this.value.replace(/\D/g,'').slice(0,4);
+  if(v.length>=3)v=v.slice(0,2)+'/'+v.slice(2);
+  this.value=v;
+});
+
+
+/* If arrived via the header's "Login" button (book-appointment.html#login),
+   make sure the login tab is active and the auth card is in view. */
+if(window.location.hash==='#login'){
+  switchAuthTab('login');
+}
+
+</script>
+
+<script>
+const $=s=>document.querySelector(s);
+const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
+menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
+mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
+$('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+</script>
+</body>
+</html>

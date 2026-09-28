@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us | Flaky Bubbles</title>
+<title>Contact | Flaky Bubbles</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,16 +15,22 @@ tailwind.config={theme:{extend:{colors:{brand:{cream:'#FAF7F2',warm:'#F5F0E8',sa
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .floaty{animation:floaty 4s ease-in-out infinite}
-a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
-@keyframes hang{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(1deg) translateY(-6px)}}
-.hanger{animation:hang 5.5s ease-in-out infinite;transform-origin:top center}
-.hang-wrap{perspective:1600px}
-.flip-card{position:relative;transition:transform .9s cubic-bezier(.22,.9,.3,1);transform-style:preserve-3d}
-.flip-card.flipped{transform:rotateY(180deg)}
-.flip-face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.flip-front{position:relative}
-.flip-back{position:absolute;inset:0;transform:rotateY(180deg)}
-@media (prefers-reduced-motion:reduce){.floaty,.hanger{animation:none}.flip-card{transition:none}}
+@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.7,.2,1),transform .8s cubic-bezier(.22,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* Hanging form */
+.hang-wrap{position:relative;padding-top:38px}
+.hang-string{position:absolute;top:0;left:0;width:100%;height:44px;pointer-events:none;overflow:visible}
+.hang-pin{position:absolute;top:28px;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#C8A265,#8a6a34 70%);box-shadow:0 3px 5px rgba(0,0,0,.35);z-index:3}
+.flip-card{perspective:1800px}
+.flip-inner{position:relative;transition:transform .8s cubic-bezier(.22,.7,.2,1);transform-style:preserve-3d}
+.flip-inner.flipped{transform:rotateY(180deg)}
+.flip-front{position:relative;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.flip-inner{transition:none}}
 </style>
 </head>
 <body class="bg-brand-cream text-brand-ink font-sans antialiased">
@@ -37,29 +43,30 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     </a>
 
     <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
-      <a href="index.html#home" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
+      <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
       <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
-      <a href="index.html#shop" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
+      <a href="membership.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Membership</a>
+      <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
       <div class="relative group">
         <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
         <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
-            <a href="index.html#pet-grooming" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
-            <a href="index.html#pet-daycare" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
-            <a href="index.html#pet-hotel" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
-            <a href="index.html#pet-transport" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
+            <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
+            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
+            <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
+            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
           </div>
         </div>
       </div>
-      <a href="index.html#gallery" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
-      <a href="index.html#book" class="px-3 py-2 rounded-md hover:bg-brand-light">Book an Appointment</a>
-      <a href="contact.html" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Contact</a>
-      <a href="index.html#career" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+      <a href="gallery.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
+      <a href="contact.html" aria-current="page" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Contact</a>
+      <a href="career.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
     </nav>
 
     <div class="flex items-center gap-2">
-      <a href="index.html#book" class="hidden sm:inline-block bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors">Book now</a>
+      <a href="#" data-gingr="portal" class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login</a>
+      <a href="#" data-gingr="portal" class="hidden sm:inline-block bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors">Book now</a>
       <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -68,166 +75,179 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
   <!-- Mobile menu -->
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
-    <a href="index.html#home" class="block py-3 border-b border-brand-border/60">Home</a>
+    <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <a href="index.html#shop" class="block py-3 border-b border-brand-border/60">Shop</a>
+    <a href="membership.html" class="block py-3 border-b border-brand-border/60">Membership</a>
+    <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
     <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
       <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
     <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
-      <a href="index.html#pet-grooming" class="block py-2.5">Pet Grooming</a>
-      <a href="index.html#pet-daycare" class="block py-2.5">Pet DayCare</a>
-      <a href="index.html#pet-hotel" class="block py-2.5">Pet Hotel</a>
-      <a href="index.html#pet-transport" class="block py-2.5">Pet Transport</a>
+      <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
+      <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
+      <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
+      <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
     </div>
-    <a href="index.html#gallery" class="block py-3 border-b border-brand-border/60">Gallery</a>
-    <a href="index.html#book" class="block py-3 border-b border-brand-border/60">Book an Appointment</a>
-    <a href="contact.html" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Contact</a>
-    <a href="index.html#career" class="block py-3">Career</a>
-    <a href="index.html#book" class="mt-2 block text-center bg-brand-sage text-white font-semibold py-3 rounded-full">Book now</a>
+    <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
+    <a href="contact.html" aria-current="page" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Contact</a>
+    <a href="career.html" class="block py-3">Career</a>
+    <div class="mt-3 grid grid-cols-2 gap-2">
+      <a href="#" data-gingr="portal" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
+      <a href="#" data-gingr="portal" class="text-center bg-brand-sage text-white font-semibold py-3 rounded-full">Book now</a>
+    </div>
   </nav>
 </header>
 
 <main>
-<!-- CONTACT INTRO -->
-<section class="bg-gradient-to-b from-brand-cream to-brand-warm/60 pt-12 sm:pt-16 pb-4 text-center">
-  <h1 class="font-serif font-bold text-4xl sm:text-5xl leading-[1.12] tracking-tight">Come see <span class="italic font-normal text-brand-sage">the spa.</span></h1>
-  <p class="mt-3 text-brand-muted max-w-lg mx-auto px-4">Drop by, ring us up, or send a message below — our front desk replies fast.</p>
-</section>
+<!-- CONTACT -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-16 sm:pb-24 grid lg:grid-cols-2 gap-14 lg:gap-16">
 
-<!-- CONTACT: address/map + hanging form -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
-  <div class="grid lg:grid-cols-2 gap-10 items-start">
+  <!-- LEFT: Visit / Contact info -->
+  <div class="reveal">
+    <p class="flex items-center gap-2 text-xs font-bold tracking-widest text-brand-sage uppercase"><span class="w-5 h-px bg-brand-sage"></span>Visit / Contact</p>
+    <h1 class="mt-3 font-serif font-bold text-4xl sm:text-5xl leading-tight">Come see <span class="italic text-brand-sage">the spa.</span></h1>
 
-    <!-- LEFT: address + map -->
-    <div class="bg-brand-dark text-white rounded-3xl p-6 sm:p-8">
-      <dl class="space-y-6 text-sm">
-        <div>
-          <dt class="uppercase tracking-wide text-[11px] text-white/60 mb-1">Address</dt>
-          <dd class="text-base leading-snug">Suite 401, White Oak Plaza 2840 Hardy Venus, TX 76084<br><br>TX, USA</dd>
-        </div>
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div>
-            <dt class="uppercase tracking-wide text-[11px] text-white/60 mb-1">Phone</dt>
-            <dd class="text-base"><a href="tel:+1 (682) 351 8650" class="hover:text-brand-light">+1 (682) 351 8650</a></dd>
-          </div>
-          <div>
-            <dt class="uppercase tracking-wide text-[11px] text-white/60 mb-1">Email</dt>
-            <dd class="text-base break-words"><a href="mailto:info@flakybubbles.com" class="hover:text-brand-light">info@flakybubbles.com</a></dd>
-          </div>
-        </div>
-        <div>
-          <dt class="uppercase tracking-wide text-[11px] text-white/60 mb-1">Hours</dt>
-          <dd class="text-base leading-relaxed">
-            <span class="inline-flex items-center gap-1.5 text-emerald-300 font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>Open now</span><br>
-             Slot (Mon–Sat): 10:00 AM – 6:00 PM<br>
-          
-            
-          </dd>
-        </div>
-        <div>
-          <dt class="uppercase tracking-wide text-[11px] text-white/60 mb-2">Follow</dt>
-          <dd class="flex gap-2">
-            <a href="#" aria-label="Instagram" class="px-3 py-2 rounded-full border border-white/25 text-xs font-semibold hover:bg-white hover:text-brand-dark transition-colors">Instagram</a>
-            <a href="#" aria-label="Facebook" class="px-3 py-2 rounded-full border border-white/25 text-xs font-semibold hover:bg-white hover:text-brand-dark transition-colors">Facebook</a>
-          </dd>
-        </div>
-      </dl>
-
-      <div class="mt-6 rounded-2xl overflow-hidden border border-white/15">
-        <iframe
-          title="Flaky Bubbles location map"
-          src="https://www.google.com/maps?q=Suite%20401%2C%20White%20Oak%20Plaza%202840%20Hardy%20Venus%2C%20TX%2076084&output=embed"
-          class="w-full h-56 sm:h-64" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <dl class="mt-8 divide-y divide-brand-border border-t border-b border-brand-border text-sm">
+      <div class="py-4 grid grid-cols-[92px_1fr] gap-4">
+        <dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Address</dt>
+        <dd>Suite 401, White Oak Plaza<br>2840 Hardy Venus, TX 76084</dd>
       </div>
-      <a href="https://www.google.com/maps/search/?api=1&query=Suite%20401%2C%20White%20Oak%20Plaza%202840%20Hardy%20Venus%2C%20TX%2076084" target="_blank" rel="noopener"
-        class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-300 hover:text-white">
-        Open in Maps
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"/></svg>
+      <div class="py-4 grid grid-cols-[92px_1fr] gap-4">
+        <dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Phone</dt>
+        <dd><a href="tel:+16823518650" class="hover:text-brand-sage transition-colors">+1 (682) 351 8650</a></dd>
+      </div>
+      <div class="py-4 grid grid-cols-[92px_1fr] gap-4">
+        <dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Email</dt>
+        <dd><a href="mailto:info@flakybubbles.com" class="hover:text-brand-sage transition-colors">info@flakybubbles.com</a></dd>
+      </div>
+      <div class="py-4 grid grid-cols-[92px_1fr] gap-4">
+        <dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Hours</dt>
+        <dd>
+          <span class="inline-flex items-center gap-1.5 text-emerald-700 font-semibold text-xs mb-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>Open now</span><br>
+          Mon – Sat: 9:00 AM – 7:00 PM<br>
+          Sunday: 11:00 AM – 5:00 PM
+        </dd>
+      </div>
+    </dl>
+
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <span class="text-xs uppercase tracking-wide text-brand-muted mr-1">Follow</span>
+      <a href="#" class="inline-flex items-center gap-1.5 border border-brand-border rounded-full pl-3 pr-4 py-2 text-xs font-semibold hover:bg-brand-light transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+        Instagram
+      </a>
+      <a href="#" class="inline-flex items-center gap-1.5 border border-brand-border rounded-full pl-3 pr-4 py-2 text-xs font-semibold hover:bg-brand-light transition-colors">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Facebook
       </a>
     </div>
 
-    <!-- RIGHT: hanging flip form -->
-    <div class="hang-wrap flex justify-center pt-6 lg:pt-0">
-      <div class="hanger w-full max-w-md">
-        <svg viewBox="0 0 400 46" class="w-full h-10 block" preserveAspectRatio="none" aria-hidden="true">
-          <line x1="30" y1="44" x2="200" y2="4" stroke="#C8A265" stroke-width="2"/>
-          <line x1="370" y1="44" x2="200" y2="4" stroke="#C8A265" stroke-width="2"/>
-          <circle cx="200" cy="4" r="5" fill="#8a6a35"/>
-        </svg>
+    <div class="mt-6 relative rounded-2xl overflow-hidden border border-brand-border shadow-sm">
+      <a href="https://www.google.com/maps/search/?api=1&query=Suite+401+White+Oak+Plaza+2840+Hardy+Venus+TX+76084" target="_blank" rel="noopener" class="absolute top-3 left-3 z-10 bg-white/95 backdrop-blur text-brand-ink text-xs font-semibold px-3 py-2 rounded-full shadow flex items-center gap-1.5 hover:bg-white transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+        Open in Maps
+      </a>
+      <iframe title="Flaky Bubbles location map" class="w-full h-72 sm:h-80" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Suite+401+White+Oak+Plaza+2840+Hardy+Venus+TX+76084&output=embed"></iframe>
+    </div>
+  </div>
 
-        <div class="flip-card w-full" style="min-height:1px" id="flipCard">
+  <!-- RIGHT: hanging WhatsApp form -->
+  <div class="reveal flex flex-col items-center">
+    <p class="flex items-center gap-2 text-xs font-bold tracking-widest text-brand-sage uppercase self-start lg:self-center"><span class="w-5 h-px bg-brand-sage"></span>Send a Message</p>
+    <h2 class="mt-3 font-serif font-bold text-3xl sm:text-4xl text-left lg:text-center self-start lg:self-auto">We'll reply on <span class="italic text-brand-sage">WhatsApp.</span></h2>
+
+    <div class="hang-wrap floaty mt-4 w-full max-w-sm">
+      <svg class="hang-string" viewBox="0 0 320 44" preserveAspectRatio="none" aria-hidden="true"><path d="M22 6 C 120 60, 200 60, 298 6" stroke="#C8A265" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      <span class="hang-pin" style="left:16px"></span>
+      <span class="hang-pin" style="right:16px"></span>
+
+      <div class="flip-card">
+        <div id="flipInner" class="flip-inner">
+
           <!-- FRONT: the form -->
-          <div class="flip-face flip-front bg-white rounded-2xl shadow-2xl border border-brand-border p-6 sm:p-7">
-            <p class="text-[11px] font-semibold uppercase tracking-wide text-brand-sage mb-1">We'll reply on WhatsApp</p>
-            <h2 class="font-serif font-bold text-2xl mb-5">Send us a message</h2>
-            <form id="contactForm" class="space-y-4">
-              <div>
-                <label for="cName" class="block text-xs font-semibold uppercase tracking-wide text-brand-muted mb-1.5">Name</label>
-                <input id="cName" name="name" type="text" required placeholder="Your full name" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-4 py-2.5 text-sm focus:outline-none focus:border-brand-sage">
-              </div>
-              <div>
-                <label for="cPhone" class="block text-xs font-semibold uppercase tracking-wide text-brand-muted mb-1.5">Phone</label>
-                <input id="cPhone" name="phone" type="tel" required placeholder="03xx xxxxxxx" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-4 py-2.5 text-sm focus:outline-none focus:border-brand-sage">
-              </div>
-              <div>
-                <label for="cInterest" class="block text-xs font-semibold uppercase tracking-wide text-brand-muted mb-1.5">Interested in</label>
-                <select id="cInterest" name="interest" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-4 py-2.5 text-sm focus:outline-none focus:border-brand-sage">
-                  <option>Book a grooming appointment</option>
-                  <option>Pet DayCare &amp; Play Area</option>
-                  <option>Pet Hotel (overnight stays)</option>
-                  <option>Pet Transport</option>
-                  <option>Pricing &amp; packages</option>
-                  <option>Location &amp; timings</option>
-                  <option>Something else</option>
-                </select>
-              </div>
-              <div>
-                <label for="cMsg" class="block text-xs font-semibold uppercase tracking-wide text-brand-muted mb-1.5">Message</label>
-                <textarea id="cMsg" name="message" rows="3" placeholder="Tell us what you're looking for..." class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-4 py-2.5 text-sm focus:outline-none focus:border-brand-sage resize-none"></textarea>
-              </div>
-              <button type="submit" class="w-full bg-brand-sage hover:bg-brand-dark text-white font-semibold py-3 rounded-full transition-colors">Send message</button>
-              <p class="text-[11px] text-brand-muted text-center">This sends your details straight to our front desk.</p>
-            </form>
+          <form id="contactForm" class="flip-front bg-white rounded-[26px] shadow-xl border border-brand-border p-6 sm:p-7">
+            <label class="block mb-4">
+              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Name</span>
+              <input id="cName" type="text" required placeholder="Your full name" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
+            </label>
+            <label class="block mb-4">
+              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Phone</span>
+              <input id="cPhone" type="tel" placeholder="03xx xxxxxxx" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
+            </label>
+            <label class="block mb-4">
+              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Interested in</span>
+              <select id="cInterest" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
+                <option>Pet Grooming</option>
+                <option>Pet DayCare &amp; Play Area</option>
+                <option>Pet Hotel (Overnight Stay)</option>
+                <option>Pet Transport</option>
+                <option>General Inquiry</option>
+                <option>Careers</option>
+              </select>
+            </label>
+            <label class="block mb-5">
+              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Message</span>
+              <textarea id="cMessage" rows="3" placeholder="Tell us what you're looking for..." class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors resize-none"></textarea>
+            </label>
+            <button type="submit" class="w-full bg-gradient-to-r from-brand-sage to-brand-dark hover:opacity-90 text-white font-semibold text-sm tracking-wide py-3 rounded-full transition-opacity">SEND ON WHATSAPP</button>
+            <p class="mt-3 text-[11px] text-brand-muted text-center leading-relaxed">This opens WhatsApp with your details filled in, sent straight to our front desk.</p>
+          </form>
+
+          <!-- BACK: thank you -->
+          <div class="flip-back bg-brand-dark text-white rounded-[26px] shadow-xl p-6 sm:p-7 flex flex-col items-center justify-center text-center">
+            <div class="text-5xl">🐾💌</div>
+            <h3 class="mt-4 font-serif font-bold text-2xl">Thanks for reaching out! 🎉</h3>
+            <p class="mt-2 text-white/80 text-sm leading-relaxed">We've opened WhatsApp with your message — our team will get back to you shortly. Happy tails ahead! 🐶✨</p>
+            <button id="flipBack" type="button" class="mt-6 border border-white/40 hover:bg-white/10 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">Send another message</button>
           </div>
 
-          <!-- BACK: thank-you -->
-          <div class="flip-face flip-back bg-brand-dark text-white rounded-2xl shadow-2xl border border-white/10 p-6 sm:p-7 flex flex-col items-center justify-center text-center">
-            <span class="text-4xl mb-3">🐾😊</span>
-            <h2 class="font-serif font-bold text-2xl mb-2">Thanks for reaching out!</h2>
-            <p class="text-white/75 text-sm max-w-xs">We've got your message and our front desk will reply on WhatsApp shortly.</p>
-            <button id="flipBack" class="mt-6 text-sm font-semibold border border-white/30 rounded-full px-5 py-2.5 hover:bg-white/10 transition-colors">Send another message</button>
-          </div>
         </div>
       </div>
     </div>
   </div>
+
 </section>
 </main>
 
 <!-- FOOTER: stacked circular -->
 <footer class="bg-brand-dark text-white">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex flex-col items-center text-center">
-    <a href="index.html" class="floaty mb-8 bg-white/95 rounded-2xl shadow-xl px-6 py-4">
+    <div class="floaty mb-8 bg-white/95 rounded-2xl shadow-xl px-6 py-4">
       <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-40 sm:w-48 h-auto object-contain">
-    </a>
+    </div>
     <nav class="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm" aria-label="Footer">
-      <a href="index.html#home" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Home</a>
+      <a href="index.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Home</a>
       <a href="about.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">About Us</a>
-      <a href="index.html#shop" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Shop</a>
+      <a href="membership.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Membership</a>
+      <a href="shop.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Shop</a>
       <a href="index.html#services" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Services</a>
-      <a href="index.html#gallery" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Gallery</a>
-      <a href="index.html#book" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Book an Appointment</a>
-      <a href="contact.html" class="relative text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-white">Contact</a>
-      <a href="index.html#career" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Career</a>
+      <a href="gallery.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Gallery</a>
+      <a href="#" data-gingr="portal" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Book an Appointment</a>
+      <a href="contact.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Contact</a>
+      <a href="career.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Career</a>
     </nav>
+    <div class="mb-8 flex gap-3">
+      <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+      <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+      <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+    <form class="mb-8 w-full max-w-md flex gap-2" onsubmit="event.preventDefault()">
+      <label for="fEmail" class="sr-only">Email</label>
+      <input id="fEmail" type="email" required placeholder="Enter your email" class="flex-1 min-w-0 rounded-full bg-white/10 border border-white/25 placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-white">
+      <button type="submit" class="rounded-full bg-white text-brand-dark font-semibold text-sm px-5 py-2.5 hover:bg-brand-light transition-colors">Subscribe</button>
+    </form>
+    <div class="mb-6 flex flex-wrap justify-center gap-2">
+      <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40">Get it on <b class="block text-sm">Google Play</b></a>
+      <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40">Download on the <b class="block text-sm">App Store</b></a>
+    </div>
     <p class="text-xs text-white/60">© 2026 Flaky Bubbles. All rights reserved.</p>
   </div>
 </footer>
 
 <!-- Floating WhatsApp chat bubble -->
-<div id="waWidget" class="fixed bottom-4 right-4 z-40 flex flex-col items-end">
-  <div id="waPanel" class="hidden mb-3 w-[86vw] max-w-[300px] sm:w-80 bg-white rounded-2xl shadow-2xl border border-brand-border overflow-hidden origin-bottom-right flex flex-col" style="max-height:72vh">
-    <div class="bg-[#25D366] text-white px-4 py-3 flex items-center gap-3 shrink-0">
+<div id="waWidget" class="fixed bottom-[88px] sm:bottom-24 right-4 z-40 flex flex-col items-end">
+  <div id="waPanel" class="hidden mb-3 w-[86vw] max-w-[300px] sm:w-80 bg-white rounded-2xl shadow-2xl border border-brand-border overflow-hidden origin-bottom-right">
+    <div class="bg-[#25D366] text-white px-4 py-3 flex items-center gap-3">
       <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center shrink-0">
         <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm5.83 14.26c-.24.68-1.4 1.3-1.93 1.38-.52.08-1.05.15-1.78-.11-.41-.14-.94-.32-1.62-.62-2.86-1.24-4.72-4.12-4.86-4.31-.14-.19-1.16-1.55-1.16-2.95 0-1.4.73-2.08.99-2.36.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.65.5.24.53.8 1.83.87 1.96.07.13.11.29.02.47-.09.18-.13.29-.26.44-.13.15-.28.34-.4.46-.13.13-.27.27-.11.53.15.26.68 1.12 1.47 1.81 1.01.9 1.86 1.18 2.12 1.31.26.13.42.11.57-.07.15-.18.65-.75.83-1.01.18-.26.35-.21.58-.13.24.09 1.5.71 1.76.84.26.13.43.19.5.31.06.11.06.66-.18 1.34z"/></svg>
       </div>
@@ -237,29 +257,31 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
       </div>
       <button id="waClose" class="text-white/85 hover:text-white text-xl leading-none px-1" aria-label="Close chat">×</button>
     </div>
-    <div id="waMessages" class="px-4 py-4 flex flex-col gap-2.5 overflow-y-auto flex-1" style="min-height:160px">
-      <div class="bg-brand-light rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm text-brand-ink max-w-[92%] self-start">Hi! 👋 Welcome to Flaky Bubbles — Organic Pet Spa. How can we help your pet today?</div>
+    <div class="px-4 pt-4">
+      <div class="bg-brand-light rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm text-brand-ink max-w-[92%]">Hi! 👋 Welcome to Flaky Bubbles — Organic Pet Spa. How can we help your pet today?</div>
     </div>
-    <div id="waQuick" class="px-4 pb-3 flex flex-col gap-2 text-sm shrink-0">
+    <div class="p-4 flex flex-col gap-2 text-sm">
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, I'd like to book a grooming appointment.">🐾 Book a grooming appointment</button>
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, can you tell me about Pet DayCare & Play Area?">🏡 Pet DayCare &amp; Play Area</button>
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, I want details about the Pet Hotel / overnight stays.">🛏️ Pet Hotel (overnight stays)</button>
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, do you offer pet pick-up & drop-off transport?">🚗 Pet Transport</button>
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, what are your prices and packages?">💲 Pricing &amp; packages</button>
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, where are you located and what are your timings?">📍 Location &amp; timings</button>
+      <a id="waDirect" href="#" target="_blank" rel="noopener" class="mt-1 text-center bg-[#25D366] hover:bg-[#1fb959] text-white font-semibold py-2.5 rounded-xl transition-colors">Chat on WhatsApp</a>
     </div>
-    <form id="waForm" class="border-t border-brand-border p-3 flex items-center gap-2 shrink-0">
-      <label for="waInput" class="sr-only">Type a message</label>
-      <input id="waInput" type="text" placeholder="Type a message..." autocomplete="off" class="flex-1 min-w-0 bg-brand-light rounded-full px-4 py-2.5 text-sm focus:outline-none">
-      <button type="submit" aria-label="Send message" class="w-10 h-10 rounded-full bg-[#25D366] hover:bg-[#1fb959] text-white flex items-center justify-center shrink-0 transition-colors">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
-      </button>
-    </form>
   </div>
-  <button id="waToggle" aria-label="Chat with us" aria-expanded="false" class="floaty w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1fb959] border-2 border-white shadow-xl flex items-center justify-center transition-colors">
+  <button id="waToggle" aria-label="Chat with us on WhatsApp" aria-expanded="false" class="floaty w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1fb959] border-2 border-white shadow-xl flex items-center justify-center transition-colors">
     <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm5.83 14.26c-.24.68-1.4 1.3-1.93 1.38-.52.08-1.05.15-1.78-.11-.41-.14-.94-.32-1.62-.62-2.86-1.24-4.72-4.12-4.86-4.31-.14-.19-1.16-1.55-1.16-2.95 0-1.4.73-2.08.99-2.36.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.65.5.24.53.8 1.83.87 1.96.07.13.11.29.02.47-.09.18-.13.29-.26.44-.13.15-.28.34-.4.46-.13.13-.27.27-.11.53.15.26.68 1.12 1.47 1.81 1.01.9 1.86 1.18 2.12 1.31.26.13.42.11.57-.07.15-.18.65-.75.83-1.01.18-.26.35-.21.58-.13.24.09 1.5.71 1.76.84.26.13.43.19.5.31.06.11.06.66-.18 1.34z"/></svg>
   </button>
 </div>
+
+<!-- Floating VR tour bubble -->
+<a href="index.html#home" class="fixed bottom-4 right-4 z-40 flex items-center gap-2" aria-label="Virtual walkthrough">
+  <span class="hidden sm:block bg-brand-ink/95 text-white text-xs px-3 py-2 rounded-xl">Virtual walkthrough</span>
+  <span class="floaty w-12 h-12 rounded-full bg-gradient-to-tr from-white via-emerald-100 to-brand-sage border-2 border-white shadow-xl flex items-center justify-center">
+    <svg class="w-6 h-6 text-brand-dark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+  </span>
+</a>
 
 <script>
 const $=s=>document.querySelector(s);
@@ -269,53 +291,41 @@ menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribut
 mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
 $('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 
-// Contact form: flip on submit
+// Reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Hanging contact form: submit -> open WhatsApp with details -> flip card to thank-you
 (()=>{
-const card=$('#flipCard'),form=$('#contactForm'),back=$('#flipBack');
-form.addEventListener('submit',e=>{e.preventDefault();card.classList.add('flipped')});
-back.onclick=()=>{card.classList.remove('flipped');form.reset()};
+const BUSINESS_WA='16823518650'; // TODO: confirm this is the number's WhatsApp-enabled line
+const form=$('#contactForm'),inner=$('#flipInner'),back=$('#flipBack');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=$('#cName').value.trim();
+  const phone=$('#cPhone').value.trim();
+  const interest=$('#cInterest').value;
+  const message=$('#cMessage').value.trim();
+  const text=`Hi! I'm ${name||'a visitor'}.%0APhone: ${phone||'-'}%0AInterested in: ${interest}%0AMessage: ${message||'-'}`;
+  window.open(`https://wa.me/${BUSINESS_WA}?text=${text}`,'_blank');
+  inner.classList.add('flipped');
+});
+back.onclick=()=>{inner.classList.remove('flipped');form.reset()};
 })();
 
-// Inline chat widget (replies appear in-panel, no redirect)
+// WhatsApp chat widget
 (()=>{
-const toggle=$('#waToggle'),panel=$('#waPanel'),close=$('#waClose'),msgs=$('#waMessages'),form=$('#waForm'),input=$('#waInput');
+const WA_NUMBER='923218633268'; // TODO: replace with the business's real WhatsApp number (country code, no + or spaces)
+const toggle=$('#waToggle'),panel=$('#waPanel'),close=$('#waClose'),direct=$('#waDirect');
+const link=msg=>`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+direct.href=link("Hi! I'd like to know more about Flaky Bubbles.");
 const open=()=>{panel.classList.remove('hidden');toggle.setAttribute('aria-expanded','true')};
 const shut=()=>{panel.classList.add('hidden');toggle.setAttribute('aria-expanded','false')};
 toggle.onclick=()=>panel.classList.contains('hidden')?open():shut();
 close.onclick=shut;
+document.querySelectorAll('.wa-q').forEach(b=>b.onclick=()=>window.open(link(b.dataset.msg),'_blank'));
 document.addEventListener('click',e=>{if(!panel.classList.contains('hidden')&&!$('#waWidget').contains(e.target))shut()});
-
-function addMsg(text,from){
-  const b=document.createElement('div');
-  b.className=from==='user'
-    ? 'bg-brand-sage text-white rounded-2xl rounded-tr-sm px-3.5 py-2.5 text-sm max-w-[92%] self-end'
-    : 'bg-brand-light text-brand-ink rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm max-w-[92%] self-start';
-  b.textContent=text;
-  msgs.appendChild(b);
-  msgs.scrollTop=msgs.scrollHeight;
-}
-const replies={
- "Hi, I'd like to book a grooming appointment.":"Great choice! 🐾 Share your pet's name & a preferred time and our team will confirm your grooming slot shortly.",
- "Hi, can you tell me about Pet DayCare & Play Area?":"Our DayCare & Play Area is open daily with supervised play, rest breaks and organic snacks. Want us to hold a spot for your pet?",
- "Hi, I want details about the Pet Hotel / overnight stays.":"Our Pet Hotel offers cosy overnight suites with webcam check-ins. Let us know the dates and your pet's size and we'll send pricing.",
- "Hi, do you offer pet pick-up & drop-off transport?":"Yes! We offer door-to-door pick-up & drop-off. Share your area and we'll confirm availability & cost.",
- "Hi, what are your prices and packages?":"Our packages start at $65 for grooming, with bundled daycare & hotel rates. Tell us your pet's breed and we'll send exact pricing.",
- "Hi, where are you located and what are your timings?":"We're on the contact page map 📍 — open Mon–Sat 7am–12pm & 3pm–1am, Sunday 6pm–12am."
-};
-function botReply(userText){
-  const text=replies[userText]||"Thanks for reaching out! Our front desk will get back to you shortly with all the details. 🐶💬";
-  setTimeout(()=>addMsg(text,'bot'),650);
-}
-document.querySelectorAll('.wa-q').forEach(b=>b.onclick=()=>{addMsg(b.dataset.msg,'user');botReply(b.dataset.msg)});
-form.addEventListener('submit',e=>{
-  e.preventDefault();
-  const val=input.value.trim();
-  if(!val)return;
-  addMsg(val,'user');
-  botReply(val);
-  input.value='';
-});
 })();
 </script>
+<script src="gingr-config.js"></script>
 </body>
 </html>

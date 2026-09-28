@@ -63,26 +63,28 @@ html.lock{overflow:hidden}
     <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
       <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
       <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
-      <a href="membership.html" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Membership</a>
+      <a href="membership.html" aria-current="page" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Membership</a>
+      <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
       <div class="relative group">
         <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
         <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
-            <a href="index.html#pet-grooming" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
-            <a href="index.html#pet-daycare" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
-            <a href="index.html#pet-hotel" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
-            <a href="index.html#pet-transport" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
+            <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
+            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
+            <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
+            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
           </div>
         </div>
       </div>
-      <a href="index.html#gallery" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
+      <a href="gallery.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
       <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
-      <a href="index.html#career" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+      <a href="career.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
     </nav>
 
     <div class="flex items-center gap-2">
-      <a href="index.html#book" class="hidden sm:inline-block bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors">Book now</a>
+      <a href="#" data-gingr="portal" class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login</a>
+      <a href="#" data-gingr="portal" class="hidden sm:inline-block bg-brand-sage hover:bg-brand-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors">Book now</a>
       <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -93,19 +95,23 @@ html.lock{overflow:hidden}
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
     <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <a href="membership.html" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Membership</a>
+    <a href="membership.html" aria-current="page" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Membership</a>
+    <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
     <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
       <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
     <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
-      <a href="index.html#pet-grooming" class="block py-2.5">Pet Grooming</a>
-      <a href="index.html#pet-daycare" class="block py-2.5">Pet DayCare</a>
-      <a href="index.html#pet-hotel" class="block py-2.5">Pet Hotel</a>
-      <a href="index.html#pet-transport" class="block py-2.5">Pet Transport</a>
+      <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
+      <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
+      <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
+      <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
     </div>
-    <a href="index.html#gallery" class="block py-3 border-b border-brand-border/60">Gallery</a>
+    <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
     <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
-    <a href="index.html#career" class="block py-3">Career</a>
-    <a href="index.html#book" class="mt-2 block text-center bg-brand-sage text-white font-semibold py-3 rounded-full">Book now</a>
+    <a href="career.html" class="block py-3">Career</a>
+    <div class="mt-3 grid grid-cols-2 gap-2">
+      <a href="#" data-gingr="portal" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
+      <a href="#" data-gingr="portal" class="text-center bg-brand-sage text-white font-semibold py-3 rounded-full">Book now</a>
+    </div>
   </nav>
 </header>
 
@@ -126,7 +132,7 @@ html.lock{overflow:hidden}
       </div>
       <div>
         <p class="mb-4"><span class="font-serif font-bold text-3xl">$125</span><span class="text-brand-muted text-sm"> / month</span></p>
-        <a href="index.html#book" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-light hover:bg-brand-border text-brand-dark">Choose Silver Bubble</a>
+        <a href="#" data-gingr="membership" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-light hover:bg-brand-border text-brand-dark">Choose Silver Bubble</a>
       </div>
     </div><div class="reveal relative bg-white rounded-2xl p-8 flex flex-col justify-between shadow-lg md:-translate-y-2 ring-1 ring-brand-sage/20"><div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-amber text-brand-ink text-[10px] font-bold uppercase px-4 py-1 rounded-full tracking-widest shadow">Most Popular</div>
       <div>
@@ -137,7 +143,7 @@ html.lock{overflow:hidden}
       </div>
       <div>
         <p class="mb-4"><span class="font-serif font-bold text-3xl">$165</span><span class="text-brand-muted text-sm"> / month</span></p>
-        <a href="index.html#book" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-sage hover:bg-brand-dark text-white">Choose Gold Bubble</a>
+        <a href="#" data-gingr="membership" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-sage hover:bg-brand-dark text-white">Choose Gold Bubble</a>
       </div>
     </div><div class="reveal relative bg-white rounded-2xl p-8 flex flex-col justify-between shadow-sm border border-brand-border">
       <div>
@@ -148,7 +154,7 @@ html.lock{overflow:hidden}
       </div>
       <div>
         <p class="mb-4"><span class="font-serif font-bold text-3xl">$225</span><span class="text-brand-muted text-sm"> / month</span></p>
-        <a href="index.html#book" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-light hover:bg-brand-border text-brand-dark">Choose Platinum Bubble</a>
+        <a href="#" data-gingr="membership" class="block text-center py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors bg-brand-light hover:bg-brand-border text-brand-dark">Choose Platinum Bubble</a>
       </div>
     </div></div>
 </section>
@@ -174,23 +180,24 @@ html.lock{overflow:hidden}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24"><div class="reveal relative rounded-3xl overflow-hidden bg-brand-dark text-white py-14 px-6 md:px-16 text-center shadow-xl"><div class="max-w-3xl mx-auto space-y-5">
   <h2 class="font-serif font-semibold text-3xl md:text-[44px] leading-tight">Ready to join the Bubble Club?</h2>
   <p class="text-white/85 max-w-xl mx-auto">Pick a tier above, or ask us in person at your next visit — we'll set it up in minutes.</p>
-  <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3"><a href="index.html#book" class="w-full sm:w-auto bg-brand-cream text-brand-ink rounded-full px-8 py-3.5 text-sm font-semibold hover:bg-white transition-colors">Book an Appointment</a><a href="index.html" class="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/10 hover:bg-white/20 transition-colors">Back to Home</a></div></div></div></section>
+  <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3"><a href="#" data-gingr="portal" class="w-full sm:w-auto bg-brand-cream text-brand-ink rounded-full px-8 py-3.5 text-sm font-semibold hover:bg-white transition-colors">Book an Appointment</a><a href="index.html" class="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/10 hover:bg-white/20 transition-colors">Back to Home</a></div></div></div></section>
 
 </main>
-<footer id="contact" class="bg-brand-dark text-white">
+<footer class="bg-brand-dark text-white">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex flex-col items-center text-center">
     <div class="floaty mb-8 bg-white/95 rounded-2xl shadow-xl px-6 py-4">
       <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-40 sm:w-48 h-auto object-contain">
     </div>
-
     <nav class="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm" aria-label="Footer">
       <a href="index.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Home</a>
       <a href="about.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">About Us</a>
       <a href="membership.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Membership</a>
+      <a href="shop.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Shop</a>
       <a href="index.html#services" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Services</a>
-      <a href="index.html#gallery" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Gallery</a>
+      <a href="gallery.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Gallery</a>
+      <a href="#" data-gingr="portal" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Book an Appointment</a>
       <a href="contact.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Contact</a>
-      <a href="index.html#career" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Career</a>
+      <a href="career.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Career</a>
     </nav>
     <div class="mb-8 flex gap-3">
       <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
@@ -222,5 +229,6 @@ const rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>{el.style.cssText+=';opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease';new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting){el.style.opacity=1;el.style.transform='none';ob.disconnect()}}),{threshold:.1}).observe(el)});
 </script>
+<script src="gingr-config.js"></script>
 </body>
 </html>

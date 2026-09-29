@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop | Flaky Bubbles</title>
+<title>Packages | Flaky Bubbles</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,13 +41,6 @@ html.lock{overflow:hidden}
 @keyframes dot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
 
 @media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}.b,.orb,.orb::after,.shine,.chip,.dots span{animation:none!important}.shine{color:#456553;background:none}}
-/* FOOTER */
-.flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
-.flink:hover{color:#fff}
-.flink::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:0;background:#fff;transition:width .3s}
-.flink:hover::after{width:100%}
-.fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
-.fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
 </style>
 </head>
 <body class="bg-brand-cream text-brand-ink font-sans antialiased">
@@ -61,16 +54,16 @@ html.lock{overflow:hidden}
       <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
       <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
       <div class="relative group">
-        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Membership
+        <button class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold flex items-center gap-1" aria-haspopup="true">Membership
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
         <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="membership.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Membership</a>
-            <a href="packages.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Packages</a>
+            <a href="packages.html" class="block px-3 py-2 rounded-lg bg-brand-light font-semibold">Packages</a>
           </div>
         </div>
       </div>
-      <a href="shop.html" aria-current="page" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Shop</a>
+      <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
       <div class="relative group">
         <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
@@ -101,13 +94,13 @@ html.lock{overflow:hidden}
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
     <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Membership
-      <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-    <div id="memSub" class="hidden pl-4 text-sm text-brand-muted">
+    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60 text-brand-dark font-semibold" aria-expanded="true">Membership
+      <svg class="w-4 h-4 transition-transform" id="memIcon" style="transform:rotate(180deg)" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+    <div id="memSub" class="pl-4 text-sm text-brand-muted">
       <a href="membership.html" class="block py-2.5">Membership</a>
-      <a href="packages.html" class="block py-2.5">Packages</a>
+      <a href="packages.html" class="block py-2.5 text-brand-dark font-semibold">Packages</a>
     </div>
-    <a href="shop.html" aria-current="page" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Shop</a>
+    <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
     <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
       <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
     <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
@@ -130,20 +123,19 @@ html.lock{overflow:hidden}
   <div class="absolute inset-0" aria-hidden="true"><span class="b" style="width:34px;height:34px;left:21%;--d:12.2s;--dl:-0.7s;--sx:28px"></span><span class="b" style="width:20px;height:20px;left:48%;--d:13.7s;--dl:-12.7s;--sx:-13px"></span><span class="b" style="width:16px;height:16px;left:13%;--d:12.5s;--dl:-1.0s;--sx:-29px"></span><span class="b" style="width:49px;height:49px;left:56%;--d:9.5s;--dl:-7.9s;--sx:-12px"></span><span class="b" style="width:54px;height:54px;left:82%;--d:13.7s;--dl:-0.9s;--sx:34px"></span><span class="b" style="width:39px;height:39px;left:8%;--d:16.8s;--dl:-0.7s;--sx:-23px"></span><span class="b" style="width:32px;height:32px;left:55%;--d:10.2s;--dl:-1.6s;--sx:-1px"></span><span class="b" style="width:49px;height:49px;left:89%;--d:10.4s;--dl:-8.1s;--sx:-16px"></span><span class="b" style="width:37px;height:37px;left:14%;--d:13.4s;--dl:-0.9s;--sx:-33px"></span><span class="b" style="width:53px;height:53px;left:28%;--d:13.0s;--dl:-7.4s;--sx:0px"></span><span class="b" style="width:43px;height:43px;left:76%;--d:16.4s;--dl:-5.1s;--sx:-9px"></span><span class="b" style="width:64px;height:64px;left:25%;--d:14.6s;--dl:-3.4s;--sx:33px"></span><span class="b" style="width:33px;height:33px;left:69%;--d:13.0s;--dl:-4.8s;--sx:17px"></span><span class="b" style="width:32px;height:32px;left:79%;--d:16.8s;--dl:-1.7s;--sx:13px"></span><span class="b" style="width:24px;height:24px;left:45%;--d:10.2s;--dl:-6.8s;--sx:-35px"></span><span class="b" style="width:56px;height:56px;left:11%;--d:15.1s;--dl:-8.0s;--sx:0px"></span></div>
   <div class="relative max-w-3xl mx-auto px-4 sm:px-6 py-14 sm:py-20 flex flex-col items-center text-center">
     <div class="orb">
-      <p class="text-sm font-semibold text-brand-dark/80">Flaky Bubbles Shop</p>
-      <h1 id="soonTitle" class="mt-2 font-serif font-bold text-4xl sm:text-5xl leading-[1.08] shine">Opening<br>soon</h1>
+      <p class="text-sm font-semibold text-brand-dark/80">Flaky Bubbles</p>
+      <h1 id="soonTitle" class="mt-2 font-serif font-bold text-4xl sm:text-5xl leading-[1.08] shine">Our<br>Packages</h1>
       <p class="mt-3 text-sm sm:text-base text-brand-muted dots" aria-hidden="true"><span>&bull;</span> <span>&bull;</span> <span>&bull;</span></p>
     </div>
-    <p class="mt-10 max-w-xl text-brand-muted text-base sm:text-lg">We are stocking the shelves with the same organic care we use at the spa, so you can keep the bubbles going at home.</p>
-    <ul class="mt-6 flex flex-wrap justify-center gap-2.5 max-w-xl"><li class="chip bg-white/85 backdrop-blur border border-brand-border rounded-full px-4 py-2 text-sm font-medium text-brand-dark" style="--i:0">Organic shampoos</li><li class="chip bg-white/85 backdrop-blur border border-brand-border rounded-full px-4 py-2 text-sm font-medium text-brand-dark" style="--i:1">Eucalyptus balms</li><li class="chip bg-white/85 backdrop-blur border border-brand-border rounded-full px-4 py-2 text-sm font-medium text-brand-dark" style="--i:2">Treats &amp; chews</li><li class="chip bg-white/85 backdrop-blur border border-brand-border rounded-full px-4 py-2 text-sm font-medium text-brand-dark" style="--i:3">Toys &amp; accessories</li></ul>
+    <p class="mt-10 max-w-xl text-brand-muted text-base sm:text-lg">Pick the Bubble Club package that suits your pet.</p>
+    <ul class="mt-6 flex flex-wrap justify-center gap-2.5 max-w-xl"><li class="chip bg-white/85 backdrop-blur border border-brand-border rounded-full px-4 py-2 text-sm font-medium text-brand-dark" style="--i:0">🥈 Silver Bubble</li><li class="chip bg-white/85 backdrop-blur border border-brand-border rounded-full px-4 py-2 text-sm font-medium text-brand-dark" style="--i:1">🥇 Gold Bubble</li><li class="chip bg-white/85 backdrop-blur border border-brand-border rounded-full px-4 py-2 text-sm font-medium text-brand-dark" style="--i:2">🏆 Platinum Bubble</li></ul>
     <div class="mt-9 flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-      <a href="#" data-gingr="portal" class="bg-brand-sage hover:bg-brand-dark text-white font-semibold px-7 py-3.5 rounded-full text-center transition-colors">Book a spa day</a>
+      <a href="membership.html" class="bg-brand-sage hover:bg-brand-dark text-white font-semibold px-7 py-3.5 rounded-full text-center transition-colors">View memberships</a>
       <a href="index.html" class="border border-brand-sage/60 hover:bg-brand-light text-brand-dark font-semibold px-7 py-3.5 rounded-full text-center transition-colors">Back to home</a>
     </div>
   </div>
-</section>
+  </section>
 </main>
-<!-- FOOTER -->
 <footer class="bg-brand-dark text-white">
   <!-- Top call-to-action band -->
   <div class="border-b border-white/15">

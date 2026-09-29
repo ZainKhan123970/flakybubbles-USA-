@@ -27,7 +27,11 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
 .rv.active{background:#456553;border-color:#456553;transform:translateY(-8px) scale(1.03)}
 .rv.active blockquote,.rv.active figcaption{color:#fff}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee-track{animation:none}.marquee{overflow-x:auto}}
-.svc-track{--pad:max(1rem,calc((100vw - 80rem)/2 + 1.5rem));padding-inline:var(--pad);scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.svc-track{gap:1.5rem;margin-inline:-.75rem;padding:.5rem .75rem 1.5rem;scroll-padding-inline:.75rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.svc{flex:0 0 100%;min-width:0;scroll-snap-align:start}
+.svc-title{min-height:0}
+@media (min-width:640px){.svc{flex-basis:calc((100% - 1.5rem)/2)}.svc:nth-child(even){scroll-snap-align:none}}
+@media (min-width:640px) and (max-width:1023px){.svc-title{min-height:3.5rem}}
 .svc-track::-webkit-scrollbar{display:none}
 .svc-track.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
 .svc{opacity:0;transform:translateX(80px);transition:opacity .9s cubic-bezier(.22,.7,.2,1),transform .9s cubic-bezier(.22,.7,.2,1),box-shadow .3s;transition-delay:calc(var(--i)*120ms),calc(var(--i)*120ms),0s}
@@ -48,9 +52,32 @@ html.lock{overflow:hidden}
 .gate-logo{transition:opacity .6s ease,transform .8s ease}
 #intro.open .gate-logo{opacity:0;transform:scale(.9)}
 #intro.leaving{opacity:0;transform:scale(1.04);pointer-events:none;transition:opacity .8s ease,transform .8s ease}
-@keyframes bubbleRise{0%{transform:translateY(0) scale(.6);opacity:0}12%{opacity:1}80%{opacity:.55}100%{transform:translateY(-115vh) scale(1.1);opacity:0}}
-.gate-bubble{position:absolute;bottom:-10%;border-radius:50%;background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.98),rgba(255,255,255,.25) 55%,rgba(255,255,255,0) 75%);box-shadow:inset 0 0 8px rgba(255,255,255,.7),0 0 10px rgba(255,255,255,.25);animation:bubbleRise linear forwards;will-change:transform,opacity}
-@media (prefers-reduced-motion:reduce){.svc{opacity:1;transform:none;transition:none}.svc video{transform:none}.gate-bubble{display:none}}
+@media (prefers-reduced-motion:reduce){.svc{opacity:1;transform:none;transition:none}.svc video{transform:none}}
+/* FOOTER */
+.flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
+.flink:hover{color:#fff}
+.flink::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:0;background:#fff;transition:width .3s}
+.flink:hover::after{width:100%}
+.fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
+.fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
+/* FAQ */
+.faq-item{background:#fff;border:1px solid #D3E2D8;border-radius:1.25rem;transition:box-shadow .35s ease,border-color .35s ease,background-color .35s ease,transform .35s ease}
+.faq-item:hover{border-color:#5F856F;box-shadow:0 6px 20px -10px rgba(69,101,83,.35)}
+.faq-item.open{border-color:#5F856F;box-shadow:0 14px 34px -16px rgba(69,101,83,.45);background:linear-gradient(180deg,#fff,#F7FAF8)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;text-align:left;padding:1.35rem 1.4rem;font-weight:600;font-size:1.0625rem;line-height:1.4;color:#212B26;cursor:pointer;background:none;border:0;border-radius:1.25rem;-webkit-tap-highlight-color:transparent}
+.faq-ico{position:relative;flex:none;width:2.25rem;height:2.25rem;border-radius:9999px;background:#EBF3EE;border:1px solid #D3E2D8;transition:background-color .35s ease,border-color .35s ease,transform .45s cubic-bezier(.22,.7,.2,1)}
+.faq-ico::before,.faq-ico::after{content:"";position:absolute;left:50%;top:50%;width:.75rem;height:2px;margin:-1px 0 0 -.375rem;border-radius:2px;background:#456553;transition:transform .45s cubic-bezier(.22,.7,.2,1),background-color .35s ease}
+.faq-ico::after{transform:rotate(90deg)}
+.faq-item.open .faq-ico{background:#456553;border-color:#456553}
+.faq-item.open .faq-ico::before,.faq-item.open .faq-ico::after{background:#fff}
+.faq-item.open .faq-ico::after{transform:rotate(0)}
+.faq-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.22,.7,.2,1)}
+.faq-item.open .faq-panel{grid-template-rows:1fr}
+.faq-panel>div{overflow:hidden;min-height:0}
+.faq-a{padding:0 1.4rem 1.4rem;padding-right:4rem;font-size:1rem;line-height:1.7;color:#627068;opacity:0;transform:translateY(-6px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,.7,.2,1)}
+.faq-item.open .faq-a{opacity:1;transform:none;transition-delay:.08s}
+@media (min-width:640px){.faq-q{padding:1.7rem 1.9rem;font-size:1.1875rem}.faq-a{padding:0 1.9rem 1.8rem;padding-right:5rem}}
+@media (prefers-reduced-motion:reduce){.faq-item,.faq-ico,.faq-ico::before,.faq-ico::after,.faq-panel,.faq-a{transition:none}}
 </style>
 <noscript><style>#intro{display:none}.svc{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -60,7 +87,6 @@ html.lock{overflow:hidden}
   <video id="introVideo" class="absolute inset-0 w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted playsinline preload="auto"></video>
   <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/25 pointer-events-none"></div>
   <div class="gate gate-l"></div><div class="gate gate-r"></div>
-  <div id="gateBubbles" class="absolute inset-0 z-[15] overflow-hidden pointer-events-none"></div>
   <div class="gate-logo absolute inset-0 z-20 flex flex-col items-center justify-center text-white pointer-events-none">
     <div class="bg-white/95 rounded-[28px] px-8 py-5 sm:px-10 sm:py-6 shadow-2xl">
       <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-48 sm:w-64 h-auto object-contain">
@@ -83,7 +109,16 @@ html.lock{overflow:hidden}
     <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
       <a href="index.html" aria-current="page" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Home</a>
       <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
-      <a href="membership.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Membership</a>
+      <div class="relative group">
+        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Membership
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
+          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+            <a href="membership.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Membership</a>
+            <a href="packages.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Packages</a>
+          </div>
+        </div>
+      </div>
       <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
       <div class="relative group">
         <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
@@ -115,7 +150,12 @@ html.lock{overflow:hidden}
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
     <a href="index.html" aria-current="page" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <a href="membership.html" class="block py-3 border-b border-brand-border/60">Membership</a>
+    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Membership
+      <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+    <div id="memSub" class="hidden pl-4 text-sm text-brand-muted">
+      <a href="membership.html" class="block py-2.5">Membership</a>
+      <a href="packages.html" class="block py-2.5">Packages</a>
+    </div>
     <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
     <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
       <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
@@ -167,16 +207,17 @@ html.lock{overflow:hidden}
       <button id="svcNext" class="w-11 h-11 rounded-full bg-brand-sage text-white hover:bg-brand-dark disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center transition-colors" aria-label="Next service"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
   </div>
-  <div id="svcTrack" class="svc-track mt-8 flex gap-5 sm:gap-6 overflow-x-auto snap-x snap-mandatory md:cursor-grab pb-2">
-    <article id="pet-grooming" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-6">
+  <div id="svcTrack" class="svc-track flex overflow-x-auto snap-x snap-mandatory md:cursor-grab">
+    <article id="pet-grooming" class="svc h-full bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:0">
       <div class="relative aspect-video overflow-hidden bg-black">
         <video class="w-full h-full object-cover" src="grooming.mp4" poster="grooming.jpg" muted loop playsinline preload="none" aria-label="Pet Grooming Suite preview"></video>
         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Signature Organic Grooming</span>
       </div>
       <div class="p-5 flex-1 flex flex-col">
-        <div class="flex items-baseline justify-between gap-3">
-          <h3 class="font-serif font-bold text-xl">Pet Grooming Suite</h3>
-          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base">$65+</span>
+        <div class="svc-title flex items-start justify-between gap-3">
+          <h3 class="font-serif font-bold text-xl leading-snug min-w-0">Pet Grooming Suite</h3>
+          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base leading-snug pt-0.5">$65+</span>
         </div>
         <p class="mt-2 text-sm text-brand-muted flex-1">Gentle hypoallergenic oat bubble bath, dead sea mineral coat massage, blueberry facial and a paw pad balm.</p>
         <div class="mt-5 flex gap-3">
@@ -185,15 +226,15 @@ html.lock{overflow:hidden}
         </div>
       </div>
     </article>
-    <article id="pet-daycare" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:1">
+    <article id="pet-daycare" class="svc h-full bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:1">
       <div class="relative aspect-video overflow-hidden bg-black">
         <video class="w-full h-full object-cover" src="daycare.mp4" poster="daycare.jpg" muted loop playsinline preload="none" aria-label="Pet DayCare &amp; Play Area preview"></video>
         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Supervised Play &amp; Rest</span>
       </div>
       <div class="p-5 flex-1 flex flex-col">
-        <div class="flex items-baseline justify-between gap-3">
-          <h3 class="font-serif font-bold text-xl">Pet DayCare &amp; Play Area</h3>
-          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base">Get a quote</span>
+        <div class="svc-title flex items-start justify-between gap-3">
+          <h3 class="font-serif font-bold text-xl leading-snug min-w-0">Pet DayCare &amp; Play Area</h3>
+          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base leading-snug pt-0.5">Get a quote</span>
         </div>
         <p class="mt-2 text-sm text-brand-muted flex-1">Full-day or half-day care with supervised play, quiet rest time and fresh water, so your pet comes home happy and tired.</p>
         <div class="mt-5 flex gap-3">
@@ -202,15 +243,15 @@ html.lock{overflow:hidden}
         </div>
       </div>
     </article>
-    <article id="pet-hotel" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:2">
+    <article id="pet-hotel" class="svc h-full bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:2">
       <div class="relative aspect-video overflow-hidden bg-black">
         <video class="w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted loop playsinline preload="none" aria-label="Pet Hotel preview"></video>
         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Overnight Comfort Suites</span>
       </div>
       <div class="p-5 flex-1 flex flex-col">
-        <div class="flex items-baseline justify-between gap-3">
-          <h3 class="font-serif font-bold text-xl">Pet Hotel</h3>
-          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base">Get a quote</span>
+        <div class="svc-title flex items-start justify-between gap-3">
+          <h3 class="font-serif font-bold text-xl leading-snug min-w-0">Pet Hotel</h3>
+          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base leading-snug pt-0.5">Get a quote</span>
         </div>
         <p class="mt-2 text-sm text-brand-muted flex-1">Comfortable overnight stays in sound-dampened suites, with daily walks, a steady routine and updates for you.</p>
         <div class="mt-5 flex gap-3">
@@ -219,15 +260,15 @@ html.lock{overflow:hidden}
         </div>
       </div>
     </article>
-    <article id="pet-transport" class="svc snap-start shrink-0 w-[86%] sm:w-[62%] md:w-[44%] lg:w-[40%] bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:3">
+    <article id="pet-transport" class="svc h-full bg-white rounded-2xl border border-brand-border shadow-sm hover:shadow-lg transition-shadow overflow-hidden flex flex-col" style="--i:3">
       <div class="relative aspect-video overflow-hidden bg-black">
         <video class="w-full h-full object-cover" src="hero.mp4" poster="poster.jpg" muted loop playsinline preload="none" aria-label="Pet Transport preview"></video>
         <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-[11px] font-bold px-2.5 py-1 rounded text-brand-dark">Safe Door-to-Door Ride</span>
       </div>
       <div class="p-5 flex-1 flex flex-col">
-        <div class="flex items-baseline justify-between gap-3">
-          <h3 class="font-serif font-bold text-xl">Pet Transport</h3>
-          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base">Get a quote</span>
+        <div class="svc-title flex items-start justify-between gap-3">
+          <h3 class="font-serif font-bold text-xl leading-snug min-w-0">Pet Transport</h3>
+          <span class="font-bold text-brand-sage whitespace-nowrap text-sm sm:text-base leading-snug pt-0.5">Get a quote</span>
         </div>
         <p class="mt-2 text-sm text-brand-muted flex-1">Clean, climate-controlled pick-up and drop-off for spa visits, vet appointments and travel.</p>
         <div class="mt-5 flex gap-3">
@@ -237,16 +278,23 @@ html.lock{overflow:hidden}
       </div>
     </article>
   </div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-4"><div class="h-1 rounded-full bg-brand-border overflow-hidden"><div id="svcBar" class="h-full w-full bg-brand-sage rounded-full origin-left" style="transform:scaleX(.2)"></div></div></div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 mt-2"><div class="h-1 rounded-full bg-brand-border overflow-hidden"><div id="svcBar" class="h-full w-full bg-brand-sage rounded-full origin-left" style="transform:scaleX(.2)"></div></div></div>
+</section>
+
+<!-- APP BANNER: full width -->
+<section id="app" class="relative w-full bg-[#F8F6EA] overflow-hidden sm:h-[424px] lg:h-[558px]" aria-label="The Flaky Bubbles mobile app, launching soon">
+  <!-- soft blurred copy fills the side space so the banner spans the full width -->
+  <img src="app-banner.jpg" alt="" aria-hidden="true" class="hidden sm:block absolute inset-0 w-full h-full object-cover blur-2xl scale-110" loading="lazy" decoding="async">
+  <img src="app-banner.jpg" alt="The Flaky Bubbles App: your pet's care, right in your pocket. Mobile app launching soon on the App Store and Google Play." width="2400" height="1339" class="relative block mx-auto w-full h-auto sm:w-auto sm:max-w-full sm:h-full sm:object-contain" loading="lazy" decoding="async">
 </section>
 
 <!-- REVIEWS: sliding marquee -->
 <section id="reviews" class="bg-brand-warm/60 border-y border-brand-border overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-14 sm:pt-20 pb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-14 sm:pt-20 pb-6 text-center">
     <h2 class="font-serif font-bold text-3xl sm:text-4xl">What pet parents say</h2>
-    <p class="text-amber-600 font-semibold">★★★★★ <span class="text-brand-muted font-medium">4.9/5 from 420+ pets</span></p>
   </div>
-  <div id="marquee" class="marquee fade-x pt-4 pb-14 sm:pb-20">
+  <div id="marquee" class="marquee fade-x pt-4 pb-8 sm:pb-10">
     <div id="track" class="marquee-track flex w-max">
       <figure class="rv w-[280px] sm:w-[340px] shrink-0 mr-5 bg-white rounded-2xl border border-brand-border p-6 cursor-pointer select-none transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-brand-sage" tabindex="0">
         <div class="text-amber-500 text-sm">★★★★★</div>
@@ -280,7 +328,47 @@ html.lock{overflow:hidden}
       </figure>
     </div>
   </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pb-14 sm:pb-20 text-center">
+    <p class="text-amber-600 font-semibold text-base sm:text-lg">★★★★★ <span class="text-brand-muted font-medium">4.9/5 from 420+ pets</span></p>
+  </div>
   <p class="sr-only">Reviews slide automatically. Hover or tap a review to pause.</p>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+  <div class="grid lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+    <div class="lg:col-span-4 lg:sticky lg:top-28 reveal">
+      <span class="text-xs uppercase tracking-[.25em] font-semibold text-brand-sage block mb-3">Good to Know</span>
+      <h2 class="font-serif font-bold text-3xl sm:text-4xl leading-tight">Frequently Asked Questions</h2>
+      <p class="mt-4 text-brand-muted max-w-md">Quick answers about our services, bookings and what to expect at the spa.</p>
+    </div>
+    <div class="lg:col-span-8 space-y-3 reveal" data-faq>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="hf-q0" aria-expanded="false" aria-controls="hf-a0"><span>What services does Flaky Bubbles offer?</span><span class="faq-ico" aria-hidden="true"></span></button></h3>
+        <div class="faq-panel" id="hf-a0" role="region" aria-labelledby="hf-q0" aria-hidden="true"><div><p class="faq-a">We offer organic grooming, daycare and play, pet hotel stays and pet transport. Every service is designed around calm, gentle, spa-level care for your pet.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="hf-q1" aria-expanded="false" aria-controls="hf-a1"><span>What&#x27;s included in a grooming session?</span><span class="faq-ico" aria-hidden="true"></span></button></h3>
+        <div class="faq-panel" id="hf-a1" role="region" aria-labelledby="hf-q1" aria-hidden="true"><div><p class="faq-a">Our grooming suite includes a gentle hypoallergenic oat bubble bath, a dead sea mineral coat massage, a blueberry facial and a paw pad balm.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="hf-q2" aria-expanded="false" aria-controls="hf-a2"><span>How do I book an appointment?</span><span class="faq-ico" aria-hidden="true"></span></button></h3>
+        <div class="faq-panel" id="hf-a2" role="region" aria-labelledby="hf-q2" aria-hidden="true"><div><p class="faq-a">Tap any Book button on this page, choose your service and a time that suits you, and we&#x27;ll take care of the rest. You can also message us on WhatsApp.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="hf-q3" aria-expanded="false" aria-controls="hf-a3"><span>Is my pet&#x27;s first visit different?</span><span class="faq-ico" aria-hidden="true"></span></button></h3>
+        <div class="faq-panel" id="hf-a3" role="region" aria-labelledby="hf-q3" aria-hidden="true"><div><p class="faq-a">We take a little extra time on a first visit so your pet can settle in and meet the team. Let us know about any allergies, anxieties or special needs when you book.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="hf-q4" aria-expanded="false" aria-controls="hf-a4"><span>Do you offer monthly membership savings?</span><span class="faq-ico" aria-hidden="true"></span></button></h3>
+        <div class="faq-panel" id="hf-a4" role="region" aria-labelledby="hf-q4" aria-hidden="true"><div><p class="faq-a">Yes. Our Bubble Club membership gives ongoing discounts, free nights and priority perks. Visit the Membership page to compare the tiers.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <h3><button type="button" class="faq-q" id="hf-q5" aria-expanded="false" aria-controls="hf-a5"><span>Can I watch or check in on my pet?</span><span class="faq-ico" aria-hidden="true"></span></button></h3>
+        <div class="faq-panel" id="hf-a5" role="region" aria-labelledby="hf-q5" aria-hidden="true"><div><p class="faq-a">Our daycare team shares photo updates through the day, so you can see how much fun your pet is having.</p></div></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- BOOKING CTA -->
@@ -296,39 +384,104 @@ html.lock{overflow:hidden}
 </section>
 </main>
 
-<!-- FOOTER: stacked circular -->
+<!-- FOOTER -->
 <footer class="bg-brand-dark text-white">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex flex-col items-center text-center">
-    <div class="floaty mb-8 bg-white/95 rounded-2xl shadow-xl px-6 py-4">
-      <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-40 sm:w-48 h-auto object-contain">
+  <!-- Top call-to-action band -->
+  <div class="border-b border-white/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
+      <div>
+        <h2 class="font-serif font-bold text-2xl sm:text-3xl">Ready for a spa day?</h2>
+        <p class="mt-2 text-white/75 max-w-xl">Book an organic grooming, daycare, hotel stay or ride in a few taps. We'll take care of the rest.</p>
+      </div>
+      <div class="flex flex-wrap justify-center md:justify-end gap-3 shrink-0">
+        <a href="#" data-gingr="portal" class="bg-white text-brand-dark font-semibold px-6 py-3 rounded-full hover:bg-brand-light transition-colors">Book an Appointment</a>
+        <a href="contact.html" class="border border-white/60 font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors">Contact us</a>
+      </div>
     </div>
-    <nav class="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm" aria-label="Footer">
-      <a href="index.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Home</a>
-      <a href="about.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">About Us</a>
-      <a href="membership.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Membership</a>
-      <a href="shop.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Shop</a>
-      <a href="index.html#services" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Services</a>
-      <a href="gallery.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Gallery</a>
-      <a href="#" data-gingr="portal" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Book an Appointment</a>
-      <a href="contact.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Contact</a>
-      <a href="career.html" class="relative text-white/80 hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white hover:after:w-full after:transition-all after:duration-300">Career</a>
+  </div>
+
+  <!-- Main columns -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
+    <div class="sm:col-span-2 lg:col-span-1">
+      <div class="floaty inline-block bg-white/95 rounded-2xl shadow-xl px-5 py-3">
+        <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-36 sm:w-44 h-auto object-contain">
+      </div>
+      <p class="mt-5 text-sm leading-relaxed text-white/75 max-w-sm">An organic pet spa for grooming, daycare, boarding and door-to-door transport. Gentle, clean blends and calm, caring hands for every pet we welcome.</p>
+      <div class="mt-6 flex gap-3">
+        <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+        <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+        <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+      <form class="mt-6 w-full max-w-sm flex gap-2" onsubmit="event.preventDefault()">
+        <label for="fEmail" class="sr-only">Email</label>
+        <input id="fEmail" type="email" required placeholder="Enter your email" class="flex-1 min-w-0 rounded-full bg-white/10 border border-white/25 placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-white">
+        <button type="submit" class="rounded-full bg-white text-brand-dark font-semibold text-sm px-5 py-2.5 hover:bg-brand-light transition-colors">Subscribe</button>
+      </form>
+    </div>
+
+    <nav aria-label="Quick links">
+      <h3 class="fhead">Quick Links</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="index.html" class="flink">Home</a></li>
+        <li><a href="about.html" class="flink">About Us</a></li>
+        <li><a href="index.html#services" class="flink">Services</a></li>
+        <li><a href="membership.html" class="flink">Membership</a></li>
+        <li><a href="packages.html" class="flink">Packages</a></li>
+        <li><a href="shop.html" class="flink">Shop</a></li>
+        <li><a href="gallery.html" class="flink">Gallery</a></li>
+        <li><a href="career.html" class="flink">Career</a></li>
+        <li><a href="contact.html" class="flink">Contact</a></li>
+      </ul>
     </nav>
-    <div class="mb-8 flex gap-3">
-      <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-      <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
-      <a href="#" aria-label="Twitter" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
-      <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+
+    <nav aria-label="Services">
+      <h3 class="fhead">Services</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="service-grooming.html" class="flink">Pet Grooming</a></li>
+        <li><a href="service-daycare.html" class="flink">Pet DayCare</a></li>
+        <li><a href="service-hotel.html" class="flink">Pet Hotel</a></li>
+        <li><a href="service-transport.html" class="flink">Pet Transport</a></li>
+        <li><a href="packages.html" class="flink">Spa Packages</a></li>
+        <!-- Add Bathing / Pool / Outdoor links here once those pages exist -->
+      </ul>
+    </nav>
+
+    <div>
+      <h3 class="fhead">Contact &amp; Information</h3>
+      <ul class="space-y-4 text-sm text-white/80">
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+000000000000" class="flink">+00 000 000 0000</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:hello@flakybubbles.com" class="flink break-all">hello@flakybubbles.com</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Street address, City, Country</span></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
+      </ul>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40 transition-colors">Get it on <b class="block text-sm">Google Play</b></a>
+        <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40 transition-colors">Download on the <b class="block text-sm">App Store</b></a>
+      </div>
     </div>
-    <form class="mb-8 w-full max-w-md flex gap-2" onsubmit="event.preventDefault()">
-      <label for="fEmail" class="sr-only">Email</label>
-      <input id="fEmail" type="email" required placeholder="Enter your email" class="flex-1 min-w-0 rounded-full bg-white/10 border border-white/25 placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-white">
-      <button type="submit" class="rounded-full bg-white text-brand-dark font-semibold text-sm px-5 py-2.5 hover:bg-brand-light transition-colors">Subscribe</button>
-    </form>
-    <div class="mb-6 flex flex-wrap justify-center gap-2">
-      <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40">Get it on <b class="block text-sm">Google Play</b></a>
-      <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40">Download on the <b class="block text-sm">App Store</b></a>
+
+    <nav aria-label="Legal">
+      <h3 class="fhead">Legal</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
+        <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
+        <!-- Additional legal / help links will be added here -->
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-white/15 bg-black/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65 text-center sm:text-left">
+      <p>© 2026 Flaky Bubbles. All rights reserved.</p>
+      <p class="hidden md:block">Organic Pet Spa · Grooming · Daycare · Hotel · Transport</p>
+      <div class="flex items-center gap-5">
+        <a href="privacy.html" class="flink">Privacy</a>
+        <a href="terms.html" class="flink">Terms</a>
+        <a href="#top" class="flink">Back to top ↑</a>
+      </div>
     </div>
-    <p class="text-xs text-white/60">© 2026 Flaky Bubbles. All rights reserved.</p>
   </div>
 </footer>
 
@@ -387,6 +540,7 @@ const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
 menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
 mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
 $('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+$('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 // Demo modal
 const dlg=$('#demoDialog'),dv=$('#demoVideo');
 document.querySelectorAll('.demo-btn').forEach(b=>b.onclick=()=>{dv.src=b.dataset.video;$('#demoTitle').textContent=b.dataset.title;dlg.showModal();dv.play().catch(()=>{})});
@@ -419,8 +573,10 @@ function upd(){q=false;const max=track.scrollWidth-track.clientWidth,sl=track.sc
   el.querySelector('video').style.transform=`translate3d(${d*-36}px,0,0) scale(1.12)`})}
 const req=()=>{if(!q){q=true;requestAnimationFrame(upd)}};
 track.addEventListener('scroll',req,{passive:true});addEventListener('resize',req);upd();
-const step=()=>cards[0].offsetWidth+parseFloat(getComputedStyle(track).columnGap||24);
-next.onclick=()=>track.scrollBy({left:step(),behavior:'smooth'});prev.onclick=()=>track.scrollBy({left:-step(),behavior:'smooth'});
+const perView=()=>innerWidth>=640?2:1;
+const pageW=()=>{const gap=parseFloat(getComputedStyle(track).columnGap)||24;return perView()*(cards[0].offsetWidth+gap)};
+const go=d=>{const w=pageW(),pages=Math.ceil(cards.length/perView()),i=Math.max(0,Math.min(pages-1,Math.round(track.scrollLeft/w)+d));track.scrollTo({left:i*w,behavior:'smooth'})};
+next.onclick=()=>go(1);prev.onclick=()=>go(-1);
 let down=false,sx=0,s0=0;
 track.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.target.closest('button,a'))return;down=true;sx=e.clientX;s0=track.scrollLeft;track.classList.add('drag')});
 addEventListener('pointermove',e=>{if(down)track.scrollLeft=s0-(e.clientX-sx)});
@@ -431,33 +587,25 @@ const vio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.targ
 cards.forEach(el=>vio.observe(el.querySelector('video')));
 })();
 (()=>{
-const intro=$('#intro'),iv=$('#introVideo'),hv=$('#heroVideo'),root=document.documentElement,bubbleHost=$('#gateBubbles');let done=false;
+const intro=$('#intro'),iv=$('#introVideo'),hv=$('#heroVideo'),root=document.documentElement;let done=false;
 const heroPlay=()=>hv.play().catch(()=>{});
 if(matchMedia('(prefers-reduced-motion:reduce)').matches){intro.remove();heroPlay();return}
-function spawnGateBubbles(){
- if(!bubbleHost)return;
- const n=60;
- for(let i=0;i<n;i++){
-  const b=document.createElement('div');
-  b.className='gate-bubble';
-  const size=8+Math.random()*36;
-  b.style.width=b.style.height=size+'px';
-  b.style.left=Math.random()*100+'%';
-  const dur=3+Math.random()*3.2;
-  const delay=Math.random()*1.4;
-  b.style.animationDuration=dur+'s';
-  b.style.animationDelay=delay+'s';
-  bubbleHost.appendChild(b);
-  setTimeout(()=>b.remove(),(dur+delay)*1000+300);
- }
-}
 function finish(){if(done)return;done=true;intro.classList.add('leaving');root.classList.remove('lock');heroPlay();setTimeout(()=>{iv.pause();intro.remove()},900)}
 root.classList.add('lock');
-setTimeout(()=>{intro.classList.add('open');spawnGateBubbles();iv.play().catch(()=>setTimeout(finish,1800))},900);
+setTimeout(()=>{intro.classList.add('open');iv.play().catch(()=>setTimeout(finish,1800))},900);
 iv.addEventListener('ended',finish);iv.addEventListener('error',()=>setTimeout(finish,1800));
 $('#introSkip').onclick=finish;addEventListener('keydown',e=>{if(e.key==='Escape')finish()});
 const sb=$('#introSound');sb.onclick=()=>{iv.muted=!iv.muted;sb.textContent=iv.muted?'Sound on':'Sound off'};
 setTimeout(finish,16000);
+})();
+
+// FAQ accordion (one open at a time, click again to close)
+(()=>{
+const items=[...document.querySelectorAll('.faq-item')];
+items.forEach(it=>{const b=it.querySelector('.faq-q'),p=it.querySelector('.faq-panel');
+ b.addEventListener('click',()=>{const open=!it.classList.contains('open');
+  items.forEach(o=>{if(o!==it&&o.closest('[data-faq]')===it.closest('[data-faq]')){o.classList.remove('open');o.querySelector('.faq-q').setAttribute('aria-expanded','false');o.querySelector('.faq-panel').setAttribute('aria-hidden','true')}});
+  it.classList.toggle('open',open);b.setAttribute('aria-expanded',open);p.setAttribute('aria-hidden',!open)})});
 })();
 // Reviews: duplicate for seamless loop, click to highlight + pause
 (()=>{

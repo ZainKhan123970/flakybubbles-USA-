@@ -54,6 +54,17 @@ html.lock{overflow:hidden}
 .sweep:hover::before{transform:translateX(120%)}
 
 @media (prefers-reduced-motion:reduce){.floaty,.b,.ill-item,.reveal,.cat-card,.cat-icon,.arrow-btn svg,.sweep::before{animation:none!important;transition:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
+
+/* Opening-soon overlay: blurs the whole page, bubbles + floating circle on top */
+.soonOverlay{position:fixed;inset:0;z-index:40;overflow:hidden;display:flex;align-items:center;justify-content:center;padding-top:4rem;
+ -webkit-backdrop-filter:blur(9px) saturate(1.05);backdrop-filter:blur(9px) saturate(1.05);background:rgba(250,247,242,.45)}
+.soonBubble{position:relative;z-index:2;width:clamp(190px,48vw,260px);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+ background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.98),rgba(255,255,255,.72) 45%,rgba(235,243,238,.9) 75%,rgba(95,133,111,.18) 100%);
+ box-shadow:inset 0 0 22px rgba(255,255,255,.95),inset -12px -16px 30px rgba(95,133,111,.22),0 24px 50px -16px rgba(69,101,83,.35),0 0 0 1.5px rgba(95,133,111,.28);
+ animation:soonFloat 5s ease-in-out infinite}
+.soonBubble span{font-family:"Playfair Display",serif;font-weight:700;font-style:italic;color:#456553;font-size:clamp(1.5rem,5.5vw,2.1rem);line-height:1.15;padding:0 1.5rem}
+@keyframes soonFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@media (prefers-reduced-motion:reduce){.soonBubble{animation:none!important}}
 /* FOOTER */
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
@@ -74,7 +85,7 @@ html.lock{overflow:hidden}
       <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
       <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
       <div class="relative group">
-        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Membership
+        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Plans
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
         <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
@@ -113,7 +124,7 @@ html.lock{overflow:hidden}
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
     <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Membership
+    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Plans
       <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
     <div id="memSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="membership.html" class="block py-2.5">Membership</a>
@@ -136,6 +147,12 @@ html.lock{overflow:hidden}
     </div>
   </nav>
 </header>
+
+<!-- OPENING SOON OVERLAY (delete this block to make the shop visible again) -->
+<div class="soonOverlay" role="status" aria-label="Opening soon">
+  <div class="absolute inset-0" aria-hidden="true"><span class="b" style="width:34px;height:34px;left:21%;--d:12.2s;--dl:-0.7s;--sx:28px"></span><span class="b" style="width:20px;height:20px;left:48%;--d:13.7s;--dl:-12.7s;--sx:-13px"></span><span class="b" style="width:16px;height:16px;left:13%;--d:12.5s;--dl:-1.0s;--sx:-29px"></span><span class="b" style="width:49px;height:49px;left:56%;--d:9.5s;--dl:-7.9s;--sx:-12px"></span><span class="b" style="width:54px;height:54px;left:82%;--d:13.7s;--dl:-0.9s;--sx:34px"></span><span class="b" style="width:39px;height:39px;left:8%;--d:16.8s;--dl:-0.7s;--sx:-23px"></span><span class="b" style="width:32px;height:32px;left:55%;--d:10.2s;--dl:-1.6s;--sx:-1px"></span><span class="b" style="width:49px;height:49px;left:89%;--d:10.4s;--dl:-8.1s;--sx:-16px"></span><span class="b" style="width:37px;height:37px;left:14%;--d:13.4s;--dl:-0.9s;--sx:-33px"></span><span class="b" style="width:53px;height:53px;left:28%;--d:13.0s;--dl:-7.4s;--sx:0px"></span><span class="b" style="width:43px;height:43px;left:76%;--d:16.4s;--dl:-5.1s;--sx:-9px"></span><span class="b" style="width:64px;height:64px;left:25%;--d:14.6s;--dl:-3.4s;--sx:33px"></span><span class="b" style="width:33px;height:33px;left:69%;--d:13.0s;--dl:-4.8s;--sx:17px"></span><span class="b" style="width:32px;height:32px;left:79%;--d:16.8s;--dl:-1.7s;--sx:13px"></span><span class="b" style="width:24px;height:24px;left:45%;--d:10.2s;--dl:-6.8s;--sx:-35px"></span><span class="b" style="width:56px;height:56px;left:11%;--d:15.1s;--dl:-8.0s;--sx:0px"></span></div>
+  <div class="soonBubble"><span>Opening soon</span></div>
+</div>
 
 <main>
 <!-- HERO -->

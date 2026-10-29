@@ -152,7 +152,11 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
       </ul>
     </div>
 
-    <form id="jobForm" class="lg:col-span-3 floaty bg-white rounded-[2rem] p-6 sm:p-9 shadow-[0_30px_70px_-20px_rgba(0,0,0,.45)] grid gap-4 sm:grid-cols-2" novalidate>
+    <form id="jobForm" action="https://formsubmit.co/info@flakybubbles.com" method="POST" enctype="multipart/form-data" class="lg:col-span-3 floaty bg-white rounded-[2rem] p-6 sm:p-9 shadow-[0_30px_70px_-20px_rgba(0,0,0,.45)] grid gap-4 sm:grid-cols-2" novalidate>
+      <input type="hidden" name="_subject" value="New Job Application - Flaky Bubbles">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" id="nextUrl" value="">
       <h3 class="sm:col-span-2 font-serif text-2xl font-bold text-brand-ink">Job application</h3>
 
       <!-- Spam trap: real users never see or fill this -->
@@ -329,10 +333,8 @@ document.querySelectorAll('.role-chip').forEach(b=>b.addEventListener('click',()
   document.getElementById('apply').scrollIntoView({behavior:'smooth'});
 }));
 
-/* ---------- Job application -> email (FormSubmit) ---------- */
-const FORM_ENDPOINT='https://formsubmit.co/ajax/info@flakybubbles.com';
+/* ---------- Job application -> email (FormSubmit, normal POST) ---------- */
 const MAX_FILE=5*1024*1024; // 5 MB
-
 const jobForm=document.getElementById('jobForm'),
       submitBtn=document.getElementById('submitBtn'),
       formMsg=document.getElementById('formMsg'),
@@ -343,38 +345,20 @@ function showMsg(text,ok){
   formMsg.className='sm:col-span-2 text-center text-sm '+(ok?'text-brand-dark font-semibold':'text-red-600');
 }
 
-jobForm.addEventListener('submit',async e=>{
-  e.preventDefault();
-  if(!jobForm.checkValidity()){jobForm.reportValidity();return}
-
+jobForm.addEventListener('submit',e=>{
+  if(!jobForm.checkValidity()){e.preventDefault();jobForm.reportValidity();return}
   const file=resume.files[0];
-  if(file&&file.size>MAX_FILE){showMsg('Your resume is larger than 5 MB. Please upload a smaller file.',false);return}
-
-  const data=new FormData(jobForm);
-  if(!file)data.delete('attachment'); // don't send an empty file field
-  data.append('_subject','New Job Application - '+(data.get('Position')||''));
-  data.append('_replyto',data.get('email'));
-  data.append('_template','table');
-  data.append('_captcha','false');
-
+  if(file&&file.size>MAX_FILE){e.preventDefault();showMsg('Your resume is larger than 5 MB. Please upload a smaller file.',false);return}
+  document.getElementById('nextUrl').value=location.origin+location.pathname+'?sent=1';
   submitBtn.disabled=true;submitBtn.textContent='Sending...';
-  formMsg.className='hidden';
-
-  try{
-    const res=await fetch(FORM_ENDPOINT,{method:'POST',headers:{Accept:'application/json'},body:data});
-    const json=await res.json().catch(()=>({}));
-    if(res.ok&&(json.success===true||json.success==='true')){
-      jobForm.reset();
-      showMsg('Thank you! Your application has been sent. We will be in touch soon.',true);
-    }else{
-      throw new Error(json.message||'Request failed');
-    }
-  }catch(err){
-    showMsg('Sorry, something went wrong. Please email your details to info@flakybubbles.com.',false);
-  }finally{
-    submitBtn.disabled=false;submitBtn.textContent='Submit';
-  }
 });
+
+// Shown after FormSubmit redirects back to this page
+if(new URLSearchParams(location.search).get('sent')==='1'){
+  showMsg('Thank you! Your application has been sent. We will be in touch soon.',true);
+  document.getElementById('apply').scrollIntoView();
+  history.replaceState(null,'',location.pathname);
+}
 </script>
 <script src="gingr-config.js"></script>
 </body>

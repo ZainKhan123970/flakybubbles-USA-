@@ -41,7 +41,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
 .fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
 </style>
 </head>
-<body class="bg-brand-cream text-brand-ink font-sans antialiased">
+<body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
 
 <!-- HEADER -->
 <header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
@@ -170,10 +170,10 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
     </div>
   </div>
 
-  <!-- RIGHT: hanging WhatsApp form -->
+  <!-- RIGHT: hanging contact form (sends to email) -->
   <div class="reveal flex flex-col items-center">
     <p class="flex items-center gap-2 text-xs font-bold tracking-widest text-brand-sage uppercase self-start lg:self-center"><span class="w-5 h-px bg-brand-sage"></span>Send a Message</p>
-    <h2 class="mt-3 font-serif font-bold text-3xl sm:text-4xl text-left lg:text-center self-start lg:self-auto">We'll reply on <span class="italic text-brand-sage">WhatsApp.</span></h2>
+    <h2 class="mt-3 font-serif font-bold text-3xl sm:text-4xl text-left lg:text-center self-start lg:self-auto">We'll get back <span class="italic text-brand-sage">to you.</span></h2>
 
     <div class="hang-wrap floaty mt-4 w-full max-w-sm">
       <svg class="hang-string" viewBox="0 0 320 44" preserveAspectRatio="none" aria-hidden="true"><path d="M22 6 C 120 60, 200 60, 298 6" stroke="#C8A265" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
@@ -212,15 +212,15 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
               <label>Leave this field empty<input id="hpField" type="text" name="hp_confirm" tabindex="-1" autocomplete="off"></label>
             </div>
             <p id="formErr" role="alert" aria-live="assertive" class="hidden mb-3 text-[12px] leading-snug text-red-700 bg-red-50 border border-red-200 rounded-xl px-3 py-2"></p>
-            <button type="submit" class="w-full bg-gradient-to-r from-brand-sage to-brand-dark hover:opacity-90 text-white font-semibold text-sm tracking-wide py-3 rounded-full transition-opacity">SEND ON WHATSAPP</button>
-            <p class="mt-3 text-[11px] text-brand-muted text-center leading-relaxed">This opens WhatsApp with your details filled in, sent straight to our front desk.</p>
+            <button id="submitBtn" type="submit" class="w-full bg-gradient-to-r from-brand-sage to-brand-dark hover:opacity-90 text-white font-semibold text-sm tracking-wide py-3 rounded-full transition-opacity disabled:opacity-60 disabled:cursor-not-allowed">Submit</button>
+            <p class="mt-3 text-[11px] text-brand-muted text-center leading-relaxed">Your message goes straight to our front desk by email.</p>
           </form>
 
           <!-- BACK: thank you -->
           <div class="flip-back bg-brand-dark text-white rounded-[26px] shadow-xl p-6 sm:p-7 flex flex-col items-center justify-center text-center">
             <div class="text-5xl">🐾💌</div>
             <h3 class="mt-4 font-serif font-bold text-2xl">Thanks for reaching out! 🎉</h3>
-            <p class="mt-2 text-white/80 text-sm leading-relaxed">We've opened WhatsApp with your message — our team will get back to you shortly. Happy tails ahead! 🐶✨</p>
+            <p class="mt-2 text-white/80 text-sm leading-relaxed">We've received your message and our team will get back to you shortly. Happy tails ahead! 🐶✨</p>
             <button id="flipBack" type="button" class="mt-6 border border-white/40 hover:bg-white/10 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">Send another message</button>
           </div>
 
@@ -232,7 +232,6 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
 </section>
 </main>
 
-<!-- FOOTER: stacked circular -->
 <!-- FOOTER -->
 <footer class="bg-brand-dark text-white">
   <!-- Top call-to-action band -->
@@ -292,16 +291,15 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
         <li><a href="service-hotel.html" class="flink">Pet Hotel</a></li>
         <li><a href="service-transport.html" class="flink">Pet Transport</a></li>
         <li><a href="packages.html" class="flink">Spa Packages</a></li>
-        <!-- Add Bathing / Pool / Outdoor links here once those pages exist -->
       </ul>
     </nav>
 
     <div>
       <h3 class="fhead">Contact &amp; Information</h3>
       <ul class="space-y-4 text-sm text-white/80">
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+000000000000" class="flink">+1 (682) 351 8650</a></li>
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:infoflakybubbles.com" class="flink break-all">infoflakybubbles.com</a></li>
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Street address, City, Country</span></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+16823518650" class="flink">+1 (682) 351 8650</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:info@flakybubbles.com" class="flink break-all">info@flakybubbles.com</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Suite 401, White Oak Plaza, 2840 Hardy Venus, TX 76084</span></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
       </ul>
       <div class="mt-6 flex flex-wrap gap-2">
@@ -315,7 +313,6 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
       <ul class="space-y-3 text-sm">
         <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
         <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
-        <!-- Additional legal / help links will be added here -->
       </ul>
     </nav>
   </div>
@@ -386,7 +383,6 @@ $('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#mem
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// Hanging contact form: validate -> open WhatsApp with details -> flip card to thank-you
 // ---- Input safety helpers (no links, no markup, no control/hidden characters) ----
 const TLD='com|net|org|info|biz|io|co|me|app|dev|xyz|top|site|online|store|shop|click|link|live|club|vip|icu|cc|tk|ml|ga|cf|gq|ly|gl|gd|to|tv|us|uk|pk|in|ru|cn|de|fr|ae|sa|ca|au|ws|su|zip|mov|page|cloud|tech|work|support|help|ngrok|ai|sh|rs|fm|am|im|is|it|nl|es|br|jp|kr|id|ir|tr|ua|pw|buzz|rest|monster|cyou|sbs|cfd|lol|wtf|one|pro|name|mobi|asia|eu|gg|ink|run|art|fun|bio|life|world|today|email|space|website|digital|network|agency|center|company|services|solutions|win|bid|loan|download|review|stream|date|racing|party|trade|webcam|science|gdn';
 const BAD=[
@@ -419,9 +415,10 @@ const validate=(v,allowed)=>{
   return null;
 };
 
+// ---- Contact form: validate -> send to email (FormSubmit) -> flip card to thank-you ----
 (()=>{
-const BUSINESS_WA='16823518650'; // TODO: confirm this is the number's WhatsApp-enabled line
-const form=$('#contactForm'),inner=$('#flipInner'),back=$('#flipBack'),err=$('#formErr');
+const ENDPOINT='https://formsubmit.co/ajax/info@flakybubbles.com';
+const form=$('#contactForm'),inner=$('#flipInner'),back=$('#flipBack'),err=$('#formErr'),btn=$('#submitBtn');
 const ids={name:'#cName',phone:'#cPhone',interest:'#cInterest',message:'#cMessage'};
 const ALLOWED=[...$('#cInterest').options].map(o=>o.value);
 let last=0;
@@ -430,7 +427,7 @@ const showErr=(m,f)=>{err.textContent=m;err.classList.remove('hidden');
   if(f&&ids[f]){const el=$(ids[f]);el.setAttribute('aria-invalid','true');el.focus()}};
 const hideErr=()=>{err.classList.add('hidden');err.textContent='';Object.values(ids).forEach(i=>$(i).removeAttribute('aria-invalid'))};
 form.addEventListener('input',hideErr);
-form.addEventListener('submit',e=>{
+form.addEventListener('submit',async e=>{
   e.preventDefault();
   if($('#hpField').value){inner.classList.add('flipped');return} // bot filled the hidden field: pretend success, send nothing
   const now=Date.now();
@@ -438,10 +435,32 @@ form.addEventListener('submit',e=>{
   const v={name:clean($('#cName').value),phone:clean($('#cPhone').value),interest:$('#cInterest').value,message:clean($('#cMessage').value)};
   const bad=validate(v,ALLOWED);
   if(bad){showErr(bad.m,bad.f);return}
-  hideErr();last=now;
-  const text="Hi! I'm "+v.name+".\nPhone: "+(v.phone||'-')+"\nInterested in: "+v.interest+"\nMessage: "+(v.message||'-');
-  window.open('https://wa.me/'+BUSINESS_WA+'?text='+encodeURIComponent(text),'_blank','noopener,noreferrer');
-  inner.classList.add('flipped');
+  hideErr();
+  btn.disabled=true;btn.textContent='Sending...';
+  try{
+    const res=await fetch(ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({
+        Name:v.name,
+        Phone:v.phone||'-',
+        'Interested in':v.interest,
+        Message:v.message||'-',
+        _subject:'New Contact Message - '+v.interest,
+        _template:'table',
+        _captcha:'false'
+      })
+    });
+    const json=await res.json().catch(()=>({}));
+    if(!(res.ok&&(json.success===true||json.success==='true')))throw new Error(json.message||('HTTP '+res.status));
+    last=now;
+    inner.classList.add('flipped');
+  }catch(ex){
+    console.error('Contact form send failed:',ex);
+    showErr('Sorry, your message could not be sent. Please email us at info@flakybubbles.com.');
+  }finally{
+    btn.disabled=false;btn.textContent='Submit';
+  }
 });
 back.onclick=()=>{inner.classList.remove('flipped');form.reset();hideErr()};
 })();

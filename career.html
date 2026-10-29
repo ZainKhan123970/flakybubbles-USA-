@@ -15,44 +15,8 @@ tailwind.config={theme:{extend:{colors:{brand:{cream:'#FAF7F2',warm:'#F5F0E8',sa
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .floaty{animation:floaty 4s ease-in-out infinite}
-dialog::backdrop{background:rgba(20,28,24,.75)}
 @media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
 a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.7,.2,1),transform .8s cubic-bezier(.22,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-.fade-x{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-@keyframes slideRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.marquee-track{animation:slideRight 50s linear infinite}
-.marquee:hover .marquee-track,.marquee:focus-within .marquee-track,.marquee.paused .marquee-track{animation-play-state:paused}
-.rv.active{background:#456553;border-color:#456553;transform:translateY(-8px) scale(1.03)}
-.rv.active blockquote,.rv.active figcaption{color:#fff}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee-track{animation:none}.marquee{overflow-x:auto}}
-.svc-track{gap:1.5rem;margin-inline:-.75rem;padding:.5rem .75rem 1.5rem;scroll-padding-inline:.75rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.svc{flex:0 0 100%;min-width:0;scroll-snap-align:start}
-.svc-title{min-height:0}
-@media (min-width:640px){.svc{flex-basis:calc((100% - 1.5rem)/2)}.svc:nth-child(even){scroll-snap-align:none}}
-@media (min-width:640px) and (max-width:1023px){.svc-title{min-height:3.5rem}}
-.svc-track::-webkit-scrollbar{display:none}
-.svc-track.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
-.svc{opacity:0;transform:translateX(80px);transition:opacity .9s cubic-bezier(.22,.7,.2,1),transform .9s cubic-bezier(.22,.7,.2,1),box-shadow .3s;transition-delay:calc(var(--i)*120ms),calc(var(--i)*120ms),0s}
-.svc-track.in .svc{opacity:1;transform:none}
-.svc video{transform:scale(1.12);will-change:transform}
-#svcBar{transition:transform .25s ease-out}
-html.lock{overflow:hidden}
-#intro{perspective:1600px}
-#introVideo{transform:scale(1.15);transition:transform 2.6s cubic-bezier(.22,.7,.2,1)}
-#intro.open #introVideo{transform:scale(1)}
-#intro .gate{position:absolute;top:0;bottom:0;width:50.3%;z-index:10;backface-visibility:hidden;transition:transform 1.9s cubic-bezier(.76,0,.24,1);
- background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 48px),linear-gradient(180deg,#4d7360,#35503f);box-shadow:inset 0 0 0 10px rgba(255,255,255,.05),inset 0 0 80px rgba(0,0,0,.25)}
-#intro .gate::after{content:"";position:absolute;top:50%;width:6px;height:96px;margin-top:-48px;background:#C8A265;border-radius:3px}
-.gate-l{left:0;transform-origin:0 50%}.gate-l::after{right:18px}
-.gate-r{right:0;transform-origin:100% 50%}.gate-r::after{left:18px}
-#intro.open .gate-l{transform:rotateY(-105deg)}
-#intro.open .gate-r{transform:rotateY(105deg)}
-.gate-logo{transition:opacity .6s ease,transform .8s ease}
-#intro.open .gate-logo{opacity:0;transform:scale(.9)}
-#intro.leaving{opacity:0;transform:scale(1.04);pointer-events:none;transition:opacity .8s ease,transform .8s ease}
-@media (prefers-reduced-motion:reduce){.svc{opacity:1;transform:none;transition:none}.svc video{transform:none}}
 /* FOOTER */
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
@@ -60,28 +24,12 @@ html.lock{overflow:hidden}
 .flink:hover::after{width:100%}
 .fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
 .fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
-/* FAQ */
-.faq-item{background:#fff;border:1px solid #D3E2D8;border-radius:1.25rem;transition:box-shadow .35s ease,border-color .35s ease,background-color .35s ease,transform .35s ease}
-.faq-item:hover{border-color:#5F856F;box-shadow:0 6px 20px -10px rgba(69,101,83,.35)}
-.faq-item.open{border-color:#5F856F;box-shadow:0 14px 34px -16px rgba(69,101,83,.45);background:linear-gradient(180deg,#fff,#F7FAF8)}
-.faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;text-align:left;padding:1.35rem 1.4rem;font-weight:600;font-size:1.0625rem;line-height:1.4;color:#212B26;cursor:pointer;background:none;border:0;border-radius:1.25rem;-webkit-tap-highlight-color:transparent}
-.faq-ico{position:relative;flex:none;width:2.25rem;height:2.25rem;border-radius:9999px;background:#EBF3EE;border:1px solid #D3E2D8;transition:background-color .35s ease,border-color .35s ease,transform .45s cubic-bezier(.22,.7,.2,1)}
-.faq-ico::before,.faq-ico::after{content:"";position:absolute;left:50%;top:50%;width:.75rem;height:2px;margin:-1px 0 0 -.375rem;border-radius:2px;background:#456553;transition:transform .45s cubic-bezier(.22,.7,.2,1),background-color .35s ease}
-.faq-ico::after{transform:rotate(90deg)}
-.faq-item.open .faq-ico{background:#456553;border-color:#456553}
-.faq-item.open .faq-ico::before,.faq-item.open .faq-ico::after{background:#fff}
-.faq-item.open .faq-ico::after{transform:rotate(0)}
-.faq-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.22,.7,.2,1)}
-.faq-item.open .faq-panel{grid-template-rows:1fr}
-.faq-panel>div{overflow:hidden;min-height:0}
-.faq-a{padding:0 1.4rem 1.4rem;padding-right:4rem;font-size:1rem;line-height:1.7;color:#627068;opacity:0;transform:translateY(-6px);transition:opacity .35s ease,transform .45s cubic-bezier(.22,.7,.2,1)}
-.faq-item.open .faq-a{opacity:1;transform:none;transition-delay:.08s}
-@media (min-width:640px){.faq-q{padding:1.7rem 1.9rem;font-size:1.1875rem}.faq-a{padding:0 1.9rem 1.8rem;padding-right:5rem}}
-@media (prefers-reduced-motion:reduce){.faq-item,.faq-ico,.faq-ico::before,.faq-ico::after,.faq-panel,.faq-a{transition:none}}
+/* FORM */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
 </style>
-<noscript><style>#intro{display:none}.svc{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body class="bg-brand-cream text-brand-ink font-sans antialiased">
+<body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
+
 <!-- HEADER -->
 <header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
@@ -106,7 +54,7 @@ html.lock{overflow:hidden}
       <div class="relative group">
         <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
             <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
@@ -122,7 +70,7 @@ html.lock{overflow:hidden}
 
     <div class="flex items-center gap-2">
       <a href="#" data-gingr="portal" class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login</a>
-      <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <button id="menuBtn" type="button" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
@@ -132,14 +80,14 @@ html.lock{overflow:hidden}
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
     <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Plans
+    <button id="memBtn" type="button" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false" aria-controls="memSub">Plans
       <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
     <div id="memSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="membership.html" class="block py-2.5">Membership</a>
       <a href="packages.html" class="block py-2.5">Packages</a>
     </div>
     <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
-    <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
+    <button id="svcBtn" type="button" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false" aria-controls="svcSub">Services
       <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
     <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
@@ -196,39 +144,82 @@ html.lock{overflow:hidden}
   <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-5 gap-10 items-center">
     <div class="lg:col-span-2 text-white">
       <h2 class="font-serif text-3xl sm:text-4xl font-bold">Luxury Grooming &amp; SPA, <span class="italic font-normal text-brand-border">with you on the team</span></h2>
-      <p class="mt-4 text-white/80 leading-relaxed">Fill in the form and your details go straight to us on WhatsApp. Send your resume in the same chat.</p>
+      <p class="mt-4 text-white/80 leading-relaxed">Fill in the form and attach your resume. Your application goes straight to our team by email.</p>
       <ul class="mt-6 space-y-3 text-sm text-white/90">
         <li class="flex gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-brand-border shrink-0"></span>Working days: Tuesday to Saturday, closing 4:00 PM</li>
         <li class="flex gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-brand-border shrink-0"></span>Email: <a href="mailto:info@flakybubbles.com" class="underline">info@flakybubbles.com</a></li>
         <li class="flex gap-3"><span class="mt-1 w-2 h-2 rounded-full bg-brand-border shrink-0"></span>WhatsApp: <a href="https://wa.me/16823518650" target="_blank" rel="noopener" class="underline">+1 (682) 351 8650</a></li>
       </ul>
     </div>
+
     <form id="jobForm" class="lg:col-span-3 floaty bg-white rounded-[2rem] p-6 sm:p-9 shadow-[0_30px_70px_-20px_rgba(0,0,0,.45)] grid gap-4 sm:grid-cols-2" novalidate>
       <h3 class="sm:col-span-2 font-serif text-2xl font-bold text-brand-ink">Job application</h3>
+
+      <!-- Spam trap: real users never see or fill this -->
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
       <label class="sm:col-span-2 text-sm font-medium text-brand-ink">Position you are applying for *
-        <select id="position" name="position" required class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
-          <option value="">Select a position</option><option>Groomer</option><option>Sales Associate</option><option>Apprentice Groomer</option><option>Bather</option><option>Store Manager</option><option>Dog Counsellor</option>
-        </select></label>
-      <label class="text-sm font-medium text-brand-ink">Name *<input name="name" required class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage"></label>
-      <label class="text-sm font-medium text-brand-ink">Phone *<input name="phone" type="tel" required class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage"></label>
-      <label class="sm:col-span-2 text-sm font-medium text-brand-ink">Email address *<input name="email" type="email" required class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage"></label>
-      <label class="sm:col-span-2 text-sm font-medium text-brand-ink">Street address<input name="street" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage"></label>
-      <label class="text-sm font-medium text-brand-ink">City<input name="city" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage"></label>
-      <label class="text-sm font-medium text-brand-ink">State / Province<input name="state" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage"></label>
-      <label class="sm:col-span-2 text-sm font-medium text-brand-ink">ZIP / Postal code<input name="zip" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage"></label>
-      <fieldset class="sm:col-span-2 text-sm font-medium text-brand-ink"><legend>Have you ever worked, or do you currently work, at a pet shop?</legend>
-        <div class="mt-2 flex gap-3"><label class="flex items-center gap-2 rounded-full border border-brand-border bg-brand-cream px-5 py-2.5"><input type="radio" name="petshop" value="Yes" class="accent-[#5F856F]"> Yes</label><label class="flex items-center gap-2 rounded-full border border-brand-border bg-brand-cream px-5 py-2.5"><input type="radio" name="petshop" value="No" class="accent-[#5F856F]"> No</label></div></fieldset>
-      <button type="submit" class="sm:col-span-2 bg-brand-sage hover:bg-brand-dark text-white font-semibold py-3.5 rounded-full transition-colors">Submit</button>
-      <p class="sm:col-span-2 text-center text-xs text-brand-muted">WhatsApp will open with your details filled in. Please attach your resume there.</p>
+        <select id="position" name="Position" required class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
+          <option value="">Select a position</option>
+          <option>Groomer</option>
+          <option>Sales Associate</option>
+          <option>Apprentice Groomer</option>
+          <option>Bather</option>
+          <option>Store Manager</option>
+          <option>Dog Counsellor</option>
+        </select>
+      </label>
+
+      <label class="text-sm font-medium text-brand-ink">Name *
+        <input name="Name" required autocomplete="name" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
+      </label>
+
+      <label class="text-sm font-medium text-brand-ink">Phone *
+        <input name="Phone" type="tel" required autocomplete="tel" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
+      </label>
+
+      <label class="sm:col-span-2 text-sm font-medium text-brand-ink">Email address *
+        <input name="email" type="email" required autocomplete="email" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
+      </label>
+
+      <label class="sm:col-span-2 text-sm font-medium text-brand-ink">Street address
+        <input name="Street" autocomplete="street-address" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
+      </label>
+
+      <label class="text-sm font-medium text-brand-ink">City
+        <input name="City" autocomplete="address-level2" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
+      </label>
+
+      <label class="text-sm font-medium text-brand-ink">State / Province
+        <input name="State" autocomplete="address-level1" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
+      </label>
+
+      <label class="sm:col-span-2 text-sm font-medium text-brand-ink">ZIP / Postal code
+        <input name="ZIP" autocomplete="postal-code" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-sage">
+      </label>
+
+      <fieldset class="sm:col-span-2 text-sm font-medium text-brand-ink">
+        <legend>Have you ever worked, or do you currently work, at a pet shop?</legend>
+        <div class="mt-2 flex gap-3">
+          <label class="flex items-center gap-2 rounded-full border border-brand-border bg-brand-cream px-5 py-2.5"><input type="radio" name="Worked at a pet shop" value="Yes" class="accent-[#5F856F]"> Yes</label>
+          <label class="flex items-center gap-2 rounded-full border border-brand-border bg-brand-cream px-5 py-2.5"><input type="radio" name="Worked at a pet shop" value="No" class="accent-[#5F856F]"> No</label>
+        </div>
+      </fieldset>
+
+      <label class="sm:col-span-2 text-sm font-medium text-brand-ink">Resume (PDF, DOC or DOCX, max 5 MB)
+        <input id="resume" name="attachment" type="file" accept=".pdf,.doc,.docx" class="mt-1.5 w-full rounded-2xl border border-brand-border bg-brand-cream px-4 py-3 text-sm file:mr-3 file:rounded-full file:border-0 file:bg-brand-sage file:text-white file:font-semibold file:px-4 file:py-1.5 file:cursor-pointer">
+      </label>
+
+      <button id="submitBtn" type="submit" class="sm:col-span-2 bg-brand-sage hover:bg-brand-dark text-white font-semibold py-3.5 rounded-full transition-colors disabled:opacity-60 disabled:cursor-not-allowed">Submit</button>
+
+      <p id="formMsg" class="sm:col-span-2 text-center text-sm hidden" role="status" aria-live="polite"></p>
+      <p class="sm:col-span-2 text-center text-xs text-brand-muted">Your application will be sent directly to our team by email.</p>
     </form>
   </div>
 </section>
 </main>
 
 <footer class="bg-brand-dark text-white">
-  <!-- Top call-to-action band -->
-
-
   <!-- Main columns -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
     <div class="sm:col-span-2 lg:col-span-1">
@@ -272,7 +263,6 @@ html.lock{overflow:hidden}
         <li><a href="service-hotel.html" class="flink">Pet Hotel</a></li>
         <li><a href="service-transport.html" class="flink">Pet Transport</a></li>
         <li><a href="packages.html" class="flink">Spa Packages</a></li>
-        <!-- Add Bathing / Pool / Outdoor links here once those pages exist -->
       </ul>
     </nav>
 
@@ -281,7 +271,7 @@ html.lock{overflow:hidden}
       <ul class="space-y-4 text-sm text-white/80">
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+16823518650" class="flink">+1 (682) 351 8650</a></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:info@flakybubbles.com" class="flink break-all">info@flakybubbles.com</a></li>
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Street address, City, Country</span></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Suite 401, White Oak Plaza, 2840 Hardy Venus, TX 76084</span></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
       </ul>
       <div class="mt-6 flex flex-wrap gap-2">
@@ -295,7 +285,6 @@ html.lock{overflow:hidden}
       <ul class="space-y-3 text-sm">
         <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
         <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
-        <!-- Additional legal / help links will be added here -->
       </ul>
     </nav>
   </div>
@@ -315,20 +304,76 @@ html.lock{overflow:hidden}
 </footer>
 
 <script>
+/* ---------- Mobile menu ---------- */
 const menuBtn=document.getElementById('menuBtn'),mNav=document.getElementById('mobileNav');
-menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
-mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
+menuBtn.addEventListener('click',()=>{
+  const hidden=mNav.classList.toggle('hidden');
+  menuBtn.setAttribute('aria-expanded',String(!hidden));
+});
+mNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded','false');
+}));
+[['memBtn','memSub','memIcon'],['svcBtn','svcSub','svcIcon']].forEach(([b,s,i])=>{
+  const btn=document.getElementById(b),sub=document.getElementById(s),ico=document.getElementById(i);
+  btn.addEventListener('click',()=>{
+    const hidden=sub.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded',String(!hidden));
+    ico.style.transform=hidden?'':'rotate(180deg)';
+  });
+});
+
+/* ---------- Role chips preselect the position ---------- */
 const pos=document.getElementById('position');
-document.querySelectorAll('.role-chip').forEach(b=>b.addEventListener('click',()=>{pos.value=b.dataset.role;document.getElementById('apply').scrollIntoView({behavior:'smooth'})}));
-document.getElementById('jobForm').addEventListener('submit',e=>{
-  e.preventDefault();const f=e.target;
-  if(!f.checkValidity()){f.reportValidity();return}
-  const d=new FormData(f),v=k=>(d.get(k)||'-').toString().trim()||'-';
-  const msg='*Job Application - Flaky Bubbles*\n'+
-    'Position: '+v('position')+'\nName: '+v('name')+'\nPhone: '+v('phone')+'\nEmail: '+v('email')+
-    '\nAddress: '+v('street')+', '+v('city')+', '+v('state')+' '+v('zip')+
-    '\nWorked at a pet shop: '+v('petshop')+'\n(Resume attached in chat)';
-  window.open('https://wa.me/16823518650?text='+encodeURIComponent(msg),'_blank','noopener');
+document.querySelectorAll('.role-chip').forEach(b=>b.addEventListener('click',()=>{
+  pos.value=b.dataset.role;
+  document.getElementById('apply').scrollIntoView({behavior:'smooth'});
+}));
+
+/* ---------- Job application -> email (FormSubmit) ---------- */
+const FORM_ENDPOINT='https://formsubmit.co/ajax/info@flakybubbles.com';
+const MAX_FILE=5*1024*1024; // 5 MB
+
+const jobForm=document.getElementById('jobForm'),
+      submitBtn=document.getElementById('submitBtn'),
+      formMsg=document.getElementById('formMsg'),
+      resume=document.getElementById('resume');
+
+function showMsg(text,ok){
+  formMsg.textContent=text;
+  formMsg.className='sm:col-span-2 text-center text-sm '+(ok?'text-brand-dark font-semibold':'text-red-600');
+}
+
+jobForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!jobForm.checkValidity()){jobForm.reportValidity();return}
+
+  const file=resume.files[0];
+  if(file&&file.size>MAX_FILE){showMsg('Your resume is larger than 5 MB. Please upload a smaller file.',false);return}
+
+  const data=new FormData(jobForm);
+  if(!file)data.delete('attachment'); // don't send an empty file field
+  data.append('_subject','New Job Application - '+(data.get('Position')||''));
+  data.append('_replyto',data.get('email'));
+  data.append('_template','table');
+  data.append('_captcha','false');
+
+  submitBtn.disabled=true;submitBtn.textContent='Sending...';
+  formMsg.className='hidden';
+
+  try{
+    const res=await fetch(FORM_ENDPOINT,{method:'POST',headers:{Accept:'application/json'},body:data});
+    const json=await res.json().catch(()=>({}));
+    if(res.ok&&(json.success===true||json.success==='true')){
+      jobForm.reset();
+      showMsg('Thank you! Your application has been sent. We will be in touch soon.',true);
+    }else{
+      throw new Error(json.message||'Request failed');
+    }
+  }catch(err){
+    showMsg('Sorry, something went wrong. Please email your details to info@flakybubbles.com.',false);
+  }finally{
+    submitBtn.disabled=false;submitBtn.textContent='Submit';
+  }
 });
 </script>
 <script src="gingr-config.js"></script>

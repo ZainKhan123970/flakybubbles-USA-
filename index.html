@@ -422,42 +422,30 @@ html.lock{overflow:hidden}
   </div>
 </div></section>
 
-<!-- APP AD: full banner image. App Store / Play Store buttons open the "Launching soon" bubble -->
-<section id="app" class="w-full bg-[#F7F6EC] overflow-hidden" aria-label="The FlakyBubbles mobile app">
+<!-- APP AD: full-width banner. App Store / Play Store buttons open the "Launching soon" bubble -->
+<section id="app" class="relative w-full overflow-hidden bg-[#F7F6EC]" aria-label="The FlakyBubbles mobile app">
   <style>
-/* Banner image: save your banner as app-banner.jpg in the same folder as index.html */
+/* Banner image: keep it saved as app-banner.jpg next to index.html */
 #app{--appimg:url(app-banner.jpg)}
-#app .ap{background-image:var(--appimg);background-repeat:no-repeat;position:relative}
-/* mobile / tablet: full width, 2000:1116 */
-#app .ap-m{display:block;width:100%;aspect-ratio:2000/1116;background-size:100% 100%}
-#app .ap-d{display:none}
-#app .cut-r{-webkit-mask-image:linear-gradient(to right,#000 94%,transparent);mask-image:linear-gradient(to right,#000 94%,transparent)}
-#app .cut-l{-webkit-mask-image:linear-gradient(to left,#000 94%,transparent);mask-image:linear-gradient(to left,#000 94%,transparent)}
-/* desktop: 432 + 488 = 920 x 513 */
-@media(min-width:960px){
- #app .ap-m{display:none}
- #app .ap-d{display:flex;justify-content:space-between;max-width:1120px;margin:0 auto}
- #app .ap-l{width:432px;height:513px;background-size:920px 513px;background-position:left top}
- #app .ap-r{width:488px;height:513px;background-size:920px 513px;background-position:right top}
+/* soft backdrop that fills the empty sides on wide screens (blurred copy of the banner) */
+#app .ap-bg{position:absolute;inset:0;background-image:var(--appimg);background-size:cover;background-position:center;filter:blur(36px) saturate(1.05);transform:scale(1.25);opacity:.9}
+#app .ap-veil{position:absolute;inset:0;background:rgba(247,246,236,.35)}
+/* the real banner: always scales with the screen, never stretches */
+#app .ap{position:relative;z-index:1;display:block;width:100%;margin:0 auto;aspect-ratio:1000/551;background-image:var(--appimg);background-repeat:no-repeat;background-size:100% 100%}
+/* wide screens: banner stays centred at a good height, edges melt into the backdrop */
+@media(min-width:1100px){
+ #app .ap{max-width:1180px;-webkit-mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent)}
 }
+@media(min-width:1700px){#app .ap{max-width:1320px}}
 </style>
+  <div class="ap-bg" aria-hidden="true"></div>
+  <div class="ap-veil" aria-hidden="true"></div>
   <div class="reveal relative w-full">
     <h2 class="sr-only">Your Pet's Care, Right in Your Pocket.</h2>
     <p class="sr-only">Our mobile app is launching soon. Book services, manage appointments, explore memberships and stay connected with your pet's care, all from one place.</p>
-
-    <!-- mobile / tablet: single full-width banner -->
-    <div class="ap ap-m" role="img" aria-label="The FlakyBubbles App: Your pet's care, right in your pocket. Launching soon on the App Store and Google Play.">
-      <a href="#" data-app-soon aria-label="Download on the App Store - launching soon" class="app-hot absolute rounded-xl" style="left:8.7%;top:86.6%;width:13.5%;height:8.3%"></a>
-      <a href="#" data-app-soon aria-label="Get it on Google Play - launching soon" class="app-hot absolute rounded-xl" style="left:23.5%;top:86.6%;width:14.7%;height:8.3%"></a>
-    </div>
-
-    <!-- desktop: text half pushed left, phone half pushed right -->
-    <div class="ap-d">
-      <div class="ap ap-l cut-r" role="img" aria-label="The FlakyBubbles App: Your pet's care, right in your pocket. Launching soon on the App Store and Google Play.">
-        <a href="#" data-app-soon aria-label="Download on the App Store - launching soon" class="app-hot absolute rounded-xl" style="left:18.5%;top:86.6%;width:28.6%;height:8.3%"></a>
-        <a href="#" data-app-soon aria-label="Get it on Google Play - launching soon" class="app-hot absolute rounded-xl" style="left:50%;top:86.6%;width:31%;height:8.3%"></a>
-      </div>
-      <div class="ap ap-r cut-l" aria-hidden="true"></div>
+    <div class="ap" role="img" aria-label="The FlakyBubbles App: Your pet's care, right in your pocket. Launching soon on the App Store and Google Play.">
+      <a href="#" data-app-soon aria-label="Download on the App Store - launching soon" class="app-hot absolute rounded-xl" style="left:8.7%;top:86.6%;width:13.4%;height:8.3%"></a>
+      <a href="#" data-app-soon aria-label="Get it on Google Play - launching soon" class="app-hot absolute rounded-xl" style="left:23.5%;top:86.6%;width:14.5%;height:8.3%"></a>
     </div>
   </div>
 </section>

@@ -16,40 +16,10 @@ tailwind.config={theme:{extend:{colors:{brand:{peach:'#FDEED9',gold:'#735c00',am
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .floaty{animation:floaty 4s ease-in-out infinite}
-dialog::backdrop{background:rgba(20,28,24,.75)}
-@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
 a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.7,.2,1),transform .8s cubic-bezier(.22,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
-.fade-x{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-@keyframes slideRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.marquee-track{animation:slideRight 50s linear infinite}
-.marquee:hover .marquee-track,.marquee:focus-within .marquee-track,.marquee.paused .marquee-track{animation-play-state:paused}
-.rv.active{background:#456553;border-color:#456553;transform:translateY(-8px) scale(1.03)}
-.rv.active blockquote,.rv.active figcaption{color:#fff}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee-track{animation:none}.marquee{overflow-x:auto}}
-.svc-track{--pad:max(1rem,calc((100vw - 80rem)/2 + 1.5rem));padding-inline:var(--pad);scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.svc-track::-webkit-scrollbar{display:none}
-.svc-track.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
-.svc{opacity:0;transform:translateX(80px);transition:opacity .9s cubic-bezier(.22,.7,.2,1),transform .9s cubic-bezier(.22,.7,.2,1),box-shadow .3s;transition-delay:calc(var(--i)*120ms),calc(var(--i)*120ms),0s}
-.svc-track.in .svc{opacity:1;transform:none}
-.svc video{transform:scale(1.12);will-change:transform}
-#svcBar{transition:transform .25s ease-out}
-html.lock{overflow:hidden}
-#intro{perspective:1600px}
-#introVideo{transform:scale(1.15);transition:transform 2.6s cubic-bezier(.22,.7,.2,1)}
-#intro.open #introVideo{transform:scale(1)}
-#intro .gate{position:absolute;top:0;bottom:0;width:50.3%;z-index:10;backface-visibility:hidden;transition:transform 1.9s cubic-bezier(.76,0,.24,1);
- background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 48px),linear-gradient(180deg,#4d7360,#35503f);box-shadow:inset 0 0 0 10px rgba(255,255,255,.05),inset 0 0 80px rgba(0,0,0,.25)}
-#intro .gate::after{content:"";position:absolute;top:50%;width:6px;height:96px;margin-top:-48px;background:#C8A265;border-radius:3px}
-.gate-l{left:0;transform-origin:0 50%}.gate-l::after{right:18px}
-.gate-r{right:0;transform-origin:100% 50%}.gate-r::after{left:18px}
-#intro.open .gate-l{transform:rotateY(-105deg)}
-#intro.open .gate-r{transform:rotateY(105deg)}
-.gate-logo{transition:opacity .6s ease,transform .8s ease}
-#intro.open .gate-logo{opacity:0;transform:scale(.9)}
-#intro.leaving{opacity:0;transform:scale(1.04);pointer-events:none;transition:opacity .8s ease,transform .8s ease}
-@media (prefers-reduced-motion:reduce){.svc{opacity:1;transform:none;transition:none}.svc video{transform:none}}
+@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
 /* FOOTER */
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
@@ -57,9 +27,7 @@ html.lock{overflow:hidden}
 .flink:hover::after{width:100%}
 .fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
 .fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
-</style>
-<noscript><style>#intro{display:none}.svc{opacity:1!important;transform:none!important}</style></noscript>
-<style>
+/* Gallery halo */
 .halo-stage{position:relative;height:340px;touch-action:pan-y;outline:none;cursor:grab;overflow:hidden;border-radius:1.25rem}
 .halo-stage:active{cursor:grabbing}
 .halo-card{position:absolute;top:50%;left:50%;border-radius:1rem;overflow:hidden;box-shadow:0 18px 34px -14px rgba(33,43,38,.4);will-change:transform}
@@ -67,9 +35,25 @@ html.lock{overflow:hidden}
 .halo-stage:focus-visible{outline:2px solid #5F856F;outline-offset:6px;border-radius:1rem}
 @media(min-width:640px){.halo-stage{height:400px}}
 @media (prefers-reduced-motion:reduce){.halo-stage{cursor:default}}
+/* Bubbles */
+.b{position:absolute;bottom:-14%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 42%,rgba(95,133,111,.10) 70%,rgba(95,133,111,0) 76%);
+ box-shadow:inset 0 0 10px rgba(255,255,255,.9),inset -6px -8px 16px rgba(95,133,111,.16),0 0 0 1px rgba(95,133,111,.14);
+ animation:rise var(--d) linear var(--dl) infinite;will-change:transform}
+@keyframes rise{0%{transform:translate3d(0,0,0) scale(.7);opacity:0}10%{opacity:1}50%{transform:translate3d(var(--sx),-60vh,0) scale(1)}100%{transform:translate3d(calc(var(--sx)*-1),-125vh,0) scale(1.08);opacity:0}}
+/* Coming soon overlay: blurs the whole page, bubbles + floating circle on top */
+.soonOverlay{position:fixed;inset:0;z-index:40;overflow:hidden;display:flex;align-items:center;justify-content:center;padding-top:4rem;
+ -webkit-backdrop-filter:blur(10px) saturate(1.05);backdrop-filter:blur(10px) saturate(1.05);background:rgba(250,247,242,.55)}
+.soonBubble{position:relative;z-index:2;width:clamp(190px,48vw,260px);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+ background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.98),rgba(255,255,255,.72) 45%,rgba(235,243,238,.9) 75%,rgba(95,133,111,.18) 100%);
+ box-shadow:inset 0 0 22px rgba(255,255,255,.95),inset -12px -16px 30px rgba(95,133,111,.22),0 24px 50px -16px rgba(69,101,83,.35),0 0 0 1.5px rgba(95,133,111,.28);
+ animation:soonFloat 5s ease-in-out infinite}
+.soonBubble span{font-family:"Playfair Display",serif;font-weight:700;font-style:italic;color:#456553;font-size:clamp(1.5rem,5.5vw,2.1rem);line-height:1.15;padding:0 1.5rem}
+@keyframes soonFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@media (prefers-reduced-motion:reduce){.b,.soonBubble{animation:none!important}}
 </style>
 </head>
-<body class="bg-brand-cream text-brand-ink font-sans antialiased">
+<body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
 <header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
     <a href="index.html" class="flex items-center shrink-0">
@@ -93,12 +77,12 @@ html.lock{overflow:hidden}
       <div class="relative group">
         <button class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold flex items-center gap-1" aria-haspopup="true">Services
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
-          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
+          <div class="w-60 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
             <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
             <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
-            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
+            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport <span class="text-[11px] text-brand-sage font-semibold">(Coming soon)</span></a>
           </div>
         </div>
       </div>
@@ -132,7 +116,7 @@ html.lock{overflow:hidden}
       <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
       <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
       <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
-      <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
+      <a href="service-transport.html" class="block py-2.5">Pet Transport <span class="text-xs text-brand-sage font-semibold">(Coming soon)</span></a>
     </div>
     <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
     <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
@@ -142,6 +126,12 @@ html.lock{overflow:hidden}
     </div>
   </nav>
 </header>
+
+<!-- COMING SOON OVERLAY (delete this block to make the page visible again) -->
+<div class="soonOverlay" role="status" aria-label="Coming soon">
+  <div class="absolute inset-0" aria-hidden="true"><span class="b" style="width:34px;height:34px;left:21%;--d:12.2s;--dl:-0.7s;--sx:28px"></span><span class="b" style="width:20px;height:20px;left:48%;--d:13.7s;--dl:-12.7s;--sx:-13px"></span><span class="b" style="width:16px;height:16px;left:13%;--d:12.5s;--dl:-1.0s;--sx:-29px"></span><span class="b" style="width:49px;height:49px;left:56%;--d:9.5s;--dl:-7.9s;--sx:-12px"></span><span class="b" style="width:54px;height:54px;left:82%;--d:13.7s;--dl:-0.9s;--sx:34px"></span><span class="b" style="width:39px;height:39px;left:8%;--d:16.8s;--dl:-0.7s;--sx:-23px"></span><span class="b" style="width:32px;height:32px;left:55%;--d:10.2s;--dl:-1.6s;--sx:-1px"></span><span class="b" style="width:49px;height:49px;left:89%;--d:10.4s;--dl:-8.1s;--sx:-16px"></span><span class="b" style="width:37px;height:37px;left:14%;--d:13.4s;--dl:-0.9s;--sx:-33px"></span><span class="b" style="width:53px;height:53px;left:28%;--d:13.0s;--dl:-7.4s;--sx:0px"></span><span class="b" style="width:43px;height:43px;left:76%;--d:16.4s;--dl:-5.1s;--sx:-9px"></span><span class="b" style="width:64px;height:64px;left:25%;--d:14.6s;--dl:-3.4s;--sx:33px"></span><span class="b" style="width:33px;height:33px;left:69%;--d:13.0s;--dl:-4.8s;--sx:17px"></span><span class="b" style="width:32px;height:32px;left:79%;--d:16.8s;--dl:-1.7s;--sx:13px"></span><span class="b" style="width:24px;height:24px;left:45%;--d:10.2s;--dl:-6.8s;--sx:-35px"></span><span class="b" style="width:56px;height:56px;left:11%;--d:15.1s;--dl:-8.0s;--sx:0px"></span></div>
+  <div class="soonBubble"><span>Coming soon</span></div>
+</div>
 
 <main>
 <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-14 sm:pb-20">
@@ -180,9 +170,9 @@ html.lock{overflow:hidden}
   <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3"><a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="w-full sm:w-auto bg-brand-cream text-brand-ink rounded-full px-8 py-3.5 text-sm font-semibold hover:bg-white transition-colors">Book a Ride</a><a href="index.html#services" class="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/10 hover:bg-white/20 transition-colors">See All Services</a></div>
 </div></div></section>
 </main>
+
 <!-- FOOTER -->
 <footer class="bg-brand-dark text-white">
-  <!-- Top call-to-action band -->
   <div class="border-b border-white/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
       <div>
@@ -196,7 +186,6 @@ html.lock{overflow:hidden}
     </div>
   </div>
 
-  <!-- Main columns -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
     <div class="sm:col-span-2 lg:col-span-1">
       <div class="floaty inline-block bg-white/95 rounded-2xl shadow-xl px-5 py-3">
@@ -239,14 +228,13 @@ html.lock{overflow:hidden}
         <li><a href="service-hotel.html" class="flink">Pet Hotel</a></li>
         <li><a href="service-transport.html" class="flink">Pet Transport</a></li>
         <li><a href="packages.html" class="flink">Spa Packages</a></li>
-        <!-- Add Bathing / Pool / Outdoor links here once those pages exist -->
       </ul>
     </nav>
 
     <div>
       <h3 class="fhead">Contact &amp; Information</h3>
       <ul class="space-y-4 text-sm text-white/80">
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+1 (682) 351 8650" class="flink">+1 (682) 351 8650</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+16823518650" class="flink">+1 (682) 351 8650</a></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:info@flakybubbles.com" class="flink break-all">info@flakybubbles.com</a></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Street address, City, Country</span></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
@@ -262,12 +250,10 @@ html.lock{overflow:hidden}
       <ul class="space-y-3 text-sm">
         <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
         <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
-        <!-- Additional legal / help links will be added here -->
       </ul>
     </nav>
   </div>
 
-  <!-- Bottom bar -->
   <div class="border-t border-white/15 bg-black/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65 text-center sm:text-left">
       <p>© 2026 Flaky Bubbles. All rights reserved.</p>
@@ -283,21 +269,22 @@ html.lock{overflow:hidden}
 
 <script>
 const $=s=>document.querySelector(s);
-// Mobile menu
 const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
 menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
 mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
 $('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 $('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 const rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>{el.style.cssText+=';opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease';new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting){el.style.opacity=1;el.style.transform='none';ob.disconnect()}}),{threshold:.1}).observe(el)});
+document.querySelectorAll('.reveal').forEach(el=>{
+ if(rmq)return;
+ el.style.cssText+=';opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease';
+ new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting){el.style.opacity=1;el.style.transform='none';ob.disconnect()}}),{threshold:.1}).observe(el)});
 
 function initHalo(id, items){
   const stage=document.getElementById(id); if(!stage) return;
   const cards=items.map((src,i)=>{const d=document.createElement('div');d.className='halo-card';
     const img=document.createElement('img');img.src=src;img.alt='';img.loading='lazy';img.draggable=false;d.appendChild(img);stage.appendChild(d);return d;});
-  const n=cards.length,step=2*Math.PI/n,rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const n=cards.length,step=2*Math.PI/n;
   let rot=0,dragging=false,hover=false,startAngle=0,raf=null;
   function angleAt(clientX,clientY){const r=stage.getBoundingClientRect();
     return Math.atan2((clientY-r.top-r.height/2)/(r.height*0.34),(clientX-r.left-r.width/2)/(r.width*0.42));}

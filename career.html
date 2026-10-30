@@ -152,6 +152,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
       </ul>
     </div>
 
+    <!-- Normal POST is only a no-JavaScript fallback; with JavaScript the form is sent in the background (see script) -->
     <form id="jobForm" action="https://formsubmit.co/info@flakybubbles.com" method="POST" enctype="multipart/form-data" class="lg:col-span-3 floaty bg-white rounded-[2rem] p-6 sm:p-9 shadow-[0_30px_70px_-20px_rgba(0,0,0,.45)] grid gap-4 sm:grid-cols-2" novalidate>
       <input type="hidden" name="_subject" value="New Job Application - Flaky Bubbles">
       <input type="hidden" name="_template" value="table">
@@ -217,6 +218,17 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
       <button id="submitBtn" type="submit" class="sm:col-span-2 bg-brand-sage hover:bg-brand-dark text-white font-semibold py-3.5 rounded-full transition-colors disabled:opacity-60 disabled:cursor-not-allowed">Submit</button>
 
       <p id="formMsg" class="sm:col-span-2 text-center text-sm hidden" role="status" aria-live="polite"></p>
+
+      <!-- Shown only if sending fails: backup ways to apply -->
+      <div id="formFallback" class="sm:col-span-2 hidden rounded-2xl border border-brand-border bg-brand-light p-4 text-center">
+        <p class="text-sm text-brand-ink">Our mail service is having a problem right now. Your details are still in the form. You can apply another way:</p>
+        <div class="mt-3 flex flex-col sm:flex-row gap-2 justify-center">
+          <a id="fbMail" href="#" class="rounded-full bg-brand-sage hover:bg-brand-dark text-white font-semibold text-sm px-5 py-2.5 transition-colors">Send by email app</a>
+          <a id="fbWa" href="#" target="_blank" rel="noopener" class="rounded-full border border-brand-sage/60 hover:bg-white text-brand-dark font-semibold text-sm px-5 py-2.5 transition-colors">Send on WhatsApp</a>
+        </div>
+        <p class="mt-2 text-xs text-brand-muted">If you use email, please attach your resume there. You can also try Submit again in a few minutes.</p>
+      </div>
+
       <p class="sm:col-span-2 text-center text-xs text-brand-muted">Your application will be sent directly to our team by email.</p>
     </form>
   </div>
@@ -333,11 +345,20 @@ document.querySelectorAll('.role-chip').forEach(b=>b.addEventListener('click',()
   document.getElementById('apply').scrollIntoView({behavior:'smooth'});
 }));
 
-/* ---------- Job application -> email (FormSubmit, normal POST) ---------- */
-const MAX_FILE=5*1024*1024; // 5 MB
+/* ---------- Job application ----------
+   Sent in the background so a mail-service outage never replaces the page with an error screen.
+   If sending fails, the visitor gets email / WhatsApp backup buttons and keeps what they typed. */
+const MAX_FILE=5*1024*1024;                  // 5 MB
+const TO_EMAIL='info@flakybubbles.com';
+const WHATSAPP='16823518650';
+// Optional backup service: create a free key at web3forms.com for info@flakybubbles.com and paste it here.
+// If set, it is tried automatically when FormSubmit is down.
+const WEB3FORMS_KEY='';
+
 const jobForm=document.getElementById('jobForm'),
       submitBtn=document.getElementById('submitBtn'),
       formMsg=document.getElementById('formMsg'),
+      fallback=document.getElementById('formFallback'),
       resume=document.getElementById('resume');
 
 function showMsg(text,ok){
@@ -345,20 +366,62 @@ function showMsg(text,ok){
   formMsg.className='sm:col-span-2 text-center text-sm '+(ok?'text-brand-dark font-semibold':'text-red-600');
 }
 
-jobForm.addEventListener('submit',e=>{
-  if(!jobForm.checkValidity()){e.preventDefault();jobForm.reportValidity();return}
-  const file=resume.files[0];
-  if(file&&file.size>MAX_FILE){e.preventDefault();showMsg('Your resume is larger than 5 MB. Please upload a smaller file.',false);return}
-  document.getElementById('nextUrl').value=location.origin+location.pathname+'?sent=1';
-  submitBtn.disabled=true;submitBtn.textContent='Sending...';
-});
-
-// Shown after FormSubmit redirects back to this page
-if(new URLSearchParams(location.search).get('sent')==='1'){
-  showMsg('Thank you! Your application has been sent. We will be in touch soon.',true);
-  document.getElementById('apply').scrollIntoView();
-  history.replaceState(null,'',location.pathname);
+function summary(){
+  const f=new FormData(jobForm),g=k=>(f.get(k)||'').toString().trim();
+  return 'Job application - Flaky Bubbles\n'+
+    'Position: '+g('Position')+'\nName: '+g('Name')+'\nPhone: '+g('Phone')+'\nEmail: '+g('email')+
+    '\nAddress: '+[g('Street'),g('City'),g('State'),g('ZIP')].filter(Boolean).join(', ')+
+    '\nWorked at a pet shop: '+(g('Worked at a pet shop')||'-');
 }
+function setFallback(){
+  const body=summary();
+  document.getElementById('fbMail').href='mailto:'+TO_EMAIL+'?subject='+encodeURIComponent('Job Application - '+(jobForm.Position.value||'Flaky Bubbles'))+'&body='+encodeURIComponent(body+'\n\n(Resume attached)');
+  document.getElementById('fbWa').href='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(body);
+  fallback.classList.remove('hidden');
+}
+
+async function post(url,data){
+  const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),25000);
+  try{
+    const r=await fetch(url,{method:'POST',body:data,headers:{Accept:'application/json'},signal:ctl.signal});
+    const j=await r.json().catch(()=>({}));
+    return r.ok&&(j.success===true||j.success==='true');
+  }catch(err){return false}
+  finally{clearTimeout(t)}
+}
+
+jobForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  fallback.classList.add('hidden');
+  if(!jobForm.checkValidity()){jobForm.reportValidity();return}
+  const file=resume.files[0];
+  if(file&&file.size>MAX_FILE){showMsg('Your resume is larger than 5 MB. Please upload a smaller file.',false);return}
+
+  submitBtn.disabled=true;submitBtn.textContent='Sending...';
+  showMsg('Sending your application, please wait...',true);
+
+  const data=new FormData(jobForm);
+  data.delete('_next');
+  let ok=await post('https://formsubmit.co/ajax/'+TO_EMAIL,data);
+
+  if(!ok&&WEB3FORMS_KEY){
+    const d2=new FormData(jobForm);
+    ['_subject','_template','_captcha','_next','_honey'].forEach(k=>d2.delete(k));
+    d2.append('access_key',WEB3FORMS_KEY);
+    d2.append('subject','New Job Application - Flaky Bubbles');
+    d2.append('from_name','Flaky Bubbles Website');
+    ok=await post('https://api.web3forms.com/submit',d2);
+  }
+
+  submitBtn.disabled=false;submitBtn.textContent='Submit';
+  if(ok){
+    jobForm.reset();
+    showMsg('Thank you! Your application has been sent. We will be in touch soon.',true);
+  }else{
+    showMsg('Sorry, we could not send your application right now.',false);
+    setFallback();
+  }
+});
 </script>
 <script src="gingr-config.js"></script>
 </body>

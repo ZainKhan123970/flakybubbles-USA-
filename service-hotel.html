@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pet Hotel | Flaky Bubbles</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -16,40 +15,8 @@ tailwind.config={theme:{extend:{colors:{brand:{peach:'#FDEED9',gold:'#735c00',am
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .floaty{animation:floaty 4s ease-in-out infinite}
-dialog::backdrop{background:rgba(20,28,24,.75)}
-@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
 a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.7,.2,1),transform .8s cubic-bezier(.22,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-.fade-x{-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-@keyframes slideRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.marquee-track{animation:slideRight 50s linear infinite}
-.marquee:hover .marquee-track,.marquee:focus-within .marquee-track,.marquee.paused .marquee-track{animation-play-state:paused}
-.rv.active{background:#456553;border-color:#456553;transform:translateY(-8px) scale(1.03)}
-.rv.active blockquote,.rv.active figcaption{color:#fff}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.marquee-track{animation:none}.marquee{overflow-x:auto}}
-.svc-track{--pad:max(1rem,calc((100vw - 80rem)/2 + 1.5rem));padding-inline:var(--pad);scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.svc-track::-webkit-scrollbar{display:none}
-.svc-track.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
-.svc{opacity:0;transform:translateX(80px);transition:opacity .9s cubic-bezier(.22,.7,.2,1),transform .9s cubic-bezier(.22,.7,.2,1),box-shadow .3s;transition-delay:calc(var(--i)*120ms),calc(var(--i)*120ms),0s}
-.svc-track.in .svc{opacity:1;transform:none}
-.svc video{transform:scale(1.12);will-change:transform}
-#svcBar{transition:transform .25s ease-out}
-html.lock{overflow:hidden}
-#intro{perspective:1600px}
-#introVideo{transform:scale(1.15);transition:transform 2.6s cubic-bezier(.22,.7,.2,1)}
-#intro.open #introVideo{transform:scale(1)}
-#intro .gate{position:absolute;top:0;bottom:0;width:50.3%;z-index:10;backface-visibility:hidden;transition:transform 1.9s cubic-bezier(.76,0,.24,1);
- background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 48px),linear-gradient(180deg,#4d7360,#35503f);box-shadow:inset 0 0 0 10px rgba(255,255,255,.05),inset 0 0 80px rgba(0,0,0,.25)}
-#intro .gate::after{content:"";position:absolute;top:50%;width:6px;height:96px;margin-top:-48px;background:#C8A265;border-radius:3px}
-.gate-l{left:0;transform-origin:0 50%}.gate-l::after{right:18px}
-.gate-r{right:0;transform-origin:100% 50%}.gate-r::after{left:18px}
-#intro.open .gate-l{transform:rotateY(-105deg)}
-#intro.open .gate-r{transform:rotateY(105deg)}
-.gate-logo{transition:opacity .6s ease,transform .8s ease}
-#intro.open .gate-logo{opacity:0;transform:scale(.9)}
-#intro.leaving{opacity:0;transform:scale(1.04);pointer-events:none;transition:opacity .8s ease,transform .8s ease}
-@media (prefers-reduced-motion:reduce){.svc{opacity:1;transform:none;transition:none}.svc video{transform:none}}
+@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
 /* FOOTER */
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
@@ -57,9 +24,24 @@ html.lock{overflow:hidden}
 .flink:hover::after{width:100%}
 .fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
 .fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
-</style>
-<noscript><style>#intro{display:none}.svc{opacity:1!important;transform:none!important}</style></noscript>
-<style>
+/* OFFER ACCORDION */
+.off-item{background:#fff;border:1px solid #D3E2D8;border-radius:26px;overflow:hidden;transition:box-shadow .35s ease,border-color .35s ease}
+.off-item:hover{border-color:rgba(95,133,111,.6);box-shadow:0 14px 28px -18px rgba(69,101,83,.5)}
+.off-item.open{border-color:#5F856F;box-shadow:0 18px 32px -18px rgba(69,101,83,.55)}
+.off-btn{display:flex;align-items:center;gap:.65rem;width:100%;min-height:52px;padding:.8rem 1rem;text-align:left;font-size:13px;font-weight:500;color:#212B26;cursor:pointer}
+@media(min-width:1280px){.off-btn{font-size:14px}}
+.off-tick{flex:none;width:1.25rem;height:1.25rem;border-radius:9999px;background:#EBF3EE;color:#5F856F;display:flex;align-items:center;justify-content:center;transition:background .3s ease,color .3s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
+.off-item.open .off-tick,.off-btn:hover .off-tick{background:#5F856F;color:#fff}
+.off-item.open .off-tick{transform:scale(1.12)}
+.off-chev{flex:none;margin-left:auto;width:1rem;height:1rem;color:#5F856F;transition:transform .4s cubic-bezier(.22,.7,.2,1)}
+.off-item.open .off-chev{transform:rotate(180deg)}
+.off-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.22,.7,.2,1)}
+.off-item.open .off-panel{grid-template-rows:1fr}
+.off-panel>div{overflow:hidden;min-height:0}
+.off-panel p{padding:0 1.1rem 1rem 3.15rem;font-size:13px;line-height:1.55;color:#627068;opacity:0;transform:translateY(-4px);transition:opacity .35s ease .08s,transform .35s ease .08s}
+.off-item.open .off-panel p{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.off-item,.off-tick,.off-chev,.off-panel,.off-panel p{transition:none}}
+/* GALLERY HALO */
 .halo-stage{position:relative;height:340px;touch-action:pan-y;outline:none;cursor:grab;overflow:hidden;border-radius:1.25rem}
 .halo-stage:active{cursor:grabbing}
 .halo-card{position:absolute;top:50%;left:50%;border-radius:1rem;overflow:hidden;box-shadow:0 18px 34px -14px rgba(33,43,38,.4);will-change:transform}
@@ -69,7 +51,7 @@ html.lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.halo-stage{cursor:default}}
 </style>
 </head>
-<body class="bg-brand-cream text-brand-ink font-sans antialiased">
+<body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
 <header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
     <a href="index.html" class="flex items-center shrink-0">
@@ -93,7 +75,7 @@ html.lock{overflow:hidden}
       <div class="relative group">
         <button class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold flex items-center gap-1" aria-haspopup="true">Services
           <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
             <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
@@ -108,7 +90,7 @@ html.lock{overflow:hidden}
     </nav>
 
     <div class="flex items-center gap-2">
-      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login</a>
+      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login|Book Now</a>
       <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -162,11 +144,23 @@ html.lock{overflow:hidden}
   </div>
 </section>
 
+<!-- OFFER: each box opens a one-line description (edit the text inside each <p>) -->
 <section class="bg-brand-warm py-16 sm:py-20"><div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
   <span class="reveal text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Our Offer</span>
   <h2 class="reveal font-serif font-semibold text-3xl sm:text-4xl leading-tight">FlakyBubbles Offer</h2>
   <p class="reveal mt-3 text-brand-muted max-w-2xl mx-auto">At FlakyBubbles Organic Pet Spa, boarding is more than just an overnight stay — it's a personalized wellness experience designed for comfort, safety, and peace of mind. We offer individualized boarding in a calm, luxury environment where every pet receives one-on-one attention. Our space is 100% organic and chemical-free, carefully maintained using natural, non-toxic cleaning products to support sensitive skin, allergies, and overall well-being.</p>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-9"><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>A private, stress-free setting</span></div><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Luxury V.I.P. Suite</span></div><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>CCTV Camera</span></div><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Personalized care routines</span></div><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Premium Feeding for Pets</span></div><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Daily housekeeping services</span></div><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Daily enrichment, rest, and gentle play</span></div><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Organic, non-toxic sanitation practices</span></div><div class="reveal flex items-center justify-start gap-2.5 bg-white rounded-full border border-brand-border px-4 py-3 min-h-[52px] text-left text-[13px] xl:text-sm font-medium xl:whitespace-nowrap"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Wellness check for Pets</span></div></div>
+
+  <div id="offerGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-9 items-start text-left">
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off1"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>A private, stress-free setting</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off1"><div><p>Quiet individual suites keep your pet calm, relaxed and away from noisy crowds.</p></div></div></div></div>
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off2"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Luxury V.I.P. Suite</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off2"><div><p>A spacious, cozy suite with premium comforts for the most relaxing stay.</p></div></div></div></div>
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off3"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>CCTV Camera</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off3"><div><p>Camera monitoring helps our team keep a watchful eye on every pet's safety.</p></div></div></div></div>
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off4"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Personalized care routines</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off4"><div><p>Meals, rest and play follow your pet's own habits, needs and preferences.</p></div></div></div></div>
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off5"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Premium Feeding for Pets</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off5"><div><p>Quality meals served on a steady schedule, matched to your pet's diet.</p></div></div></div></div>
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off6"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Daily housekeeping services</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off6"><div><p>Suites are cleaned and refreshed every day for a spotless, healthy space.</p></div></div></div></div>
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off7"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Daily enrichment, rest, and gentle play</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off7"><div><p>A balanced day of gentle play, mental stimulation and peaceful downtime.</p></div></div></div></div>
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off8"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Organic, non-toxic sanitation practices</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off8"><div><p>We clean with natural, chemical-free products that are gentle on sensitive skin.</p></div></div></div></div>
+    <div class="reveal"><div class="off-item"><button type="button" class="off-btn" aria-expanded="false" aria-controls="off9"><span class="off-tick"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Wellness check for Pets</span><svg class="off-chev" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="off-panel" id="off9"><div><p>Our team checks appetite, mood and comfort daily to keep your pet well.</p></div></div></div></div>
+  </div>
 </div></section>
 
 <section class="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
@@ -180,9 +174,9 @@ html.lock{overflow:hidden}
   <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3"><a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="w-full sm:w-auto bg-brand-cream text-brand-ink rounded-full px-8 py-3.5 text-sm font-semibold hover:bg-white transition-colors">Book a Stay</a><a href="index.html#services" class="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/10 hover:bg-white/20 transition-colors">See All Services</a></div>
 </div></div></section>
 </main>
+
 <!-- FOOTER -->
 <footer class="bg-brand-dark text-white">
-  <!-- Top call-to-action band -->
   <div class="border-b border-white/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
       <div>
@@ -196,7 +190,6 @@ html.lock{overflow:hidden}
     </div>
   </div>
 
-  <!-- Main columns -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
     <div class="sm:col-span-2 lg:col-span-1">
       <div class="floaty inline-block bg-white/95 rounded-2xl shadow-xl px-5 py-3">
@@ -239,14 +232,13 @@ html.lock{overflow:hidden}
         <li><a href="service-hotel.html" class="flink">Pet Hotel</a></li>
         <li><a href="service-transport.html" class="flink">Pet Transport</a></li>
         <li><a href="packages.html" class="flink">Spa Packages</a></li>
-        <!-- Add Bathing / Pool / Outdoor links here once those pages exist -->
       </ul>
     </nav>
 
     <div>
       <h3 class="fhead">Contact &amp; Information</h3>
       <ul class="space-y-4 text-sm text-white/80">
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+1 (682) 351 8650" class="flink">+1 (682) 351 8650</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+16823518650" class="flink">+1 (682) 351 8650</a></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:info@flakybubbles.com" class="flink break-all">info@flakybubbles.com</a></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Street address, City, Country</span></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
@@ -262,12 +254,10 @@ html.lock{overflow:hidden}
       <ul class="space-y-3 text-sm">
         <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
         <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
-        <!-- Additional legal / help links will be added here -->
       </ul>
     </nav>
   </div>
 
-  <!-- Bottom bar -->
   <div class="border-t border-white/15 bg-black/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65 text-center sm:text-left">
       <p>© 2026 Flaky Bubbles. All rights reserved.</p>
@@ -290,14 +280,25 @@ mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden'
 $('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 $('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 const rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>{el.style.cssText+=';opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease';new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting){el.style.opacity=1;el.style.transform='none';ob.disconnect()}}),{threshold:.1}).observe(el)});
+
+// Scroll reveal
+document.querySelectorAll('.reveal').forEach(el=>{
+ if(rmq)return;
+ el.style.cssText+=';opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease';
+ new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting){el.style.opacity=1;el.style.transform='none';ob.disconnect()}}),{threshold:.1}).observe(el)});
+
+// Offer accordion: one box open at a time, click again to close
+(()=>{const items=[...document.querySelectorAll('#offerGrid .off-item')];
+ items.forEach(it=>{const b=it.querySelector('.off-btn');
+  b.addEventListener('click',()=>{const willOpen=!it.classList.contains('open');
+   items.forEach(o=>{o.classList.remove('open');o.querySelector('.off-btn').setAttribute('aria-expanded','false')});
+   if(willOpen){it.classList.add('open');b.setAttribute('aria-expanded','true')}})})})();
 
 function initHalo(id, items){
   const stage=document.getElementById(id); if(!stage) return;
   const cards=items.map((src,i)=>{const d=document.createElement('div');d.className='halo-card';
     const img=document.createElement('img');img.src=src;img.alt='';img.loading='lazy';img.draggable=false;d.appendChild(img);stage.appendChild(d);return d;});
-  const n=cards.length,step=2*Math.PI/n,rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const n=cards.length,step=2*Math.PI/n;
   let rot=0,dragging=false,hover=false,startAngle=0,raf=null;
   function angleAt(clientX,clientY){const r=stage.getBoundingClientRect();
     return Math.atan2((clientY-r.top-r.height/2)/(r.height*0.34),(clientX-r.left-r.width/2)/(r.width*0.42));}

@@ -190,6 +190,10 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
               <input id="cName" name="name" type="text" required minlength="2" maxlength="60" autocomplete="name" placeholder="Your full name" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
             </label>
             <label class="block mb-4">
+              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Email</span>
+              <input id="cEmail" name="email" type="email" required maxlength="80" autocomplete="email" placeholder="you@example.com" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
+            </label>
+            <label class="block mb-4">
               <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Phone</span>
               <input id="cPhone" name="phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="+1 (xxx)xxx xxxxx" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
             </label>
@@ -400,11 +404,15 @@ const clean=s=>String(s==null?'':s).normalize('NFKC')
   .replace(/\s+/g,' ').trim();
 const deobf=s=>s.replace(/\s*[\[\(\{]\s*(?:\.|dot)\s*[\]\)\}]\s*/gi,'.').replace(/\s+(?:dot|d0t)\s+(?=[a-z]{2,})/gi,'.').replace(/\s*\[\s*at\s*\]\s*/gi,'@');
 const hasLink=s=>{const t=deobf(s);return BAD.some(r=>r.test(s)||r.test(t))};
+// Email is validated on its own (it is deliberately NOT run through hasLink, which blocks domains/emails)
+const EMAIL_RE=/^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/;
 const validate=(v,allowed)=>{
   if(!v.name||v.name.length<2)return{f:'name',m:'Please enter your name.'};
   if(v.name.length>60)return{f:'name',m:'Name is too long (max 60 characters).'};
   if(!/^[\p{L}\p{M}][\p{L}\p{M} .'’-]*$/u.test(v.name))return{f:'name',m:'Name can only contain letters, spaces and . \' -'};
   if(hasLink(v.name))return{f:'name',m:'Links are not allowed in the name.'};
+  if(!v.email)return{f:'email',m:'Please enter your email address so we can reply to you.'};
+  if(v.email.length>80||!EMAIL_RE.test(v.email))return{f:'email',m:'Please enter a valid email address.'};
   if(v.phone){
     if(!/^\+?[0-9 ()\-.]{7,20}$/.test(v.phone)||(v.phone.match(/\d/g)||[]).length<7||(v.phone.match(/\d/g)||[]).length>15)
       return{f:'phone',m:'Please enter a valid phone number (digits, +, spaces, brackets only).'};
@@ -419,7 +427,7 @@ const validate=(v,allowed)=>{
 (()=>{
 const ENDPOINT='https://formsubmit.co/ajax/info@flakybubbles.com';
 const form=$('#contactForm'),inner=$('#flipInner'),back=$('#flipBack'),err=$('#formErr'),btn=$('#submitBtn');
-const ids={name:'#cName',phone:'#cPhone',interest:'#cInterest',message:'#cMessage'};
+const ids={name:'#cName',email:'#cEmail',phone:'#cPhone',interest:'#cInterest',message:'#cMessage'};
 const ALLOWED=[...$('#cInterest').options].map(o=>o.value);
 let last=0;
 const showErr=(m,f)=>{err.textContent=m;err.classList.remove('hidden');
@@ -432,10 +440,21 @@ form.addEventListener('submit',async e=>{
   if($('#hpField').value){inner.classList.add('flipped');return} // bot filled the hidden field: pretend success, send nothing
   const now=Date.now();
   if(now-last<30000){showErr('Please wait a few seconds before sending another message.');return}
-  const v={name:clean($('#cName').value),phone:clean($('#cPhone').value),interest:$('#cInterest').value,message:clean($('#cMessage').value)};
+  const v={
+    name:clean($('#cName').value),
+    email:clean($('#cEmail').value).toLowerCase(),
+    phone:clean($('#cPhone').value),
+    interest:$('#cInterest').value,
+    message:clean($('#cMessage').value)
+  };
   const bad=validate(v,ALLOWED);
   if(bad){showErr(bad.m,bad.f);return}
   hideErr();
+  // FormSubmit cannot work when the page is opened straight from disk (file://)
+  if(location.protocol==='file:'){
+    showErr('This page is opened from your computer (file://). Please open it from your live website or a local server (e.g. VS Code Live Server) to send messages.');
+    return;
+  }
   btn.disabled=true;btn.textContent='Sending...';
   try{
     const res=await fetch(ENDPOINT,{
@@ -443,6 +462,8 @@ form.addEventListener('submit',async e=>{
       headers:{'Content-Type':'application/json',Accept:'application/json'},
       body:JSON.stringify({
         Name:v.name,
+        Email:v.email,
+        _replyto:v.email,
         Phone:v.phone||'-',
         'Interested in':v.interest,
         Message:v.message||'-',
@@ -457,7 +478,12 @@ form.addEventListener('submit',async e=>{
     inner.classList.add('flipped');
   }catch(ex){
     console.error('Contact form send failed:',ex);
-    showErr('Sorry, your message could not be sent. Please email us at info@flakybubbles.com.');
+    const msg=String(ex&&ex.message||'');
+    if(/activat/i.test(msg)){
+      showErr('Almost there: the form still needs to be activated. Please open the FormSubmit activation email sent to info@flakybubbles.com and click "Activate Form", then try again.');
+    }else{
+      showErr('Sorry, your message could not be sent. Please email us at info@flakybubbles.com.');
+    }
   }finally{
     btn.disabled=false;btn.textContent='Submit';
   }

@@ -423,9 +423,16 @@ const validate=(v,allowed)=>{
   return null;
 };
 
-// ---- Contact form: validate -> send to email (FormSubmit) -> flip card to thank-you ----
+// ---- Contact form: validate -> send to email (Web3Forms or FormSubmit) -> flip card to thank-you ----
 (()=>{
-const ENDPOINT='https://formsubmit.co/ajax/info@flakybubbles.com';
+/* ===== EMAIL SETTINGS (edit only these two lines) =====
+   OPTION A (recommended): Web3Forms. Go to https://web3forms.com, type the email that should
+            RECEIVE the messages, copy the Access Key they email you, and paste it below.
+   OPTION B: leave WEB3FORMS_KEY empty to use FormSubmit instead (needs a one-time
+            "Activate Form" click in the inbox of FORMSUBMIT_EMAIL).                          */
+const WEB3FORMS_KEY='';                         // e.g. 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+const FORMSUBMIT_EMAIL='info@flakybubbles.com'; // used only when WEB3FORMS_KEY is empty
+const ENDPOINT='https://formsubmit.co/ajax/'+FORMSUBMIT_EMAIL;
 const form=$('#contactForm'),inner=$('#flipInner'),back=$('#flipBack'),err=$('#formErr'),btn=$('#submitBtn');
 const ids={name:'#cName',email:'#cEmail',phone:'#cPhone',interest:'#cInterest',message:'#cMessage'};
 const ALLOWED=[...$('#cInterest').options].map(o=>o.value);
@@ -457,30 +464,51 @@ form.addEventListener('submit',async e=>{
   }
   btn.disabled=true;btn.textContent='Sending...';
   try{
-    const res=await fetch(ENDPOINT,{
-      method:'POST',
-      headers:{'Content-Type':'application/json',Accept:'application/json'},
-      body:JSON.stringify({
-        Name:v.name,
-        Email:v.email,
-        _replyto:v.email,
-        Phone:v.phone||'-',
-        'Interested in':v.interest,
-        Message:v.message||'-',
-        _subject:'New Contact Message - '+v.interest,
-        _template:'table',
-        _captcha:'false'
-      })
-    });
-    const json=await res.json().catch(()=>({}));
-    if(!(res.ok&&(json.success===true||json.success==='true')))throw new Error(json.message||('HTTP '+res.status));
+    let res,json;
+    if(WEB3FORMS_KEY){
+      res=await fetch('https://api.web3forms.com/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({
+          access_key:WEB3FORMS_KEY,
+          subject:'New Contact Message - '+v.interest,
+          from_name:'Flaky Bubbles Website',
+          name:v.name,
+          email:v.email,
+          phone:v.phone||'-',
+          interested_in:v.interest,
+          message:v.message||'-',
+          botcheck:''
+        })
+      });
+      json=await res.json().catch(()=>({}));
+      if(!(res.ok&&json.success===true))throw new Error(json.message||('HTTP '+res.status));
+    }else{
+      res=await fetch(ENDPOINT,{
+        method:'POST',
+        headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({
+          Name:v.name,
+          Email:v.email,
+          _replyto:v.email,
+          Phone:v.phone||'-',
+          'Interested in':v.interest,
+          Message:v.message||'-',
+          _subject:'New Contact Message - '+v.interest,
+          _template:'table',
+          _captcha:'false'
+        })
+      });
+      json=await res.json().catch(()=>({}));
+      if(!(res.ok&&(json.success===true||json.success==='true')))throw new Error(json.message||('HTTP '+res.status));
+    }
     last=now;
     inner.classList.add('flipped');
   }catch(ex){
     console.error('Contact form send failed:',ex);
     const msg=String(ex&&ex.message||'');
     if(/activat/i.test(msg)){
-      showErr('Almost there: the form still needs to be activated. Please open the FormSubmit activation email sent to info@flakybubbles.com and click "Activate Form", then try again.');
+      showErr('Almost there: the form still needs to be activated. Please open the activation email sent to '+FORMSUBMIT_EMAIL+' and click "Activate Form", then try again.');
     }else{
       showErr('Sorry, your message could not be sent. Please email us at info@flakybubbles.com.');
     }

@@ -31,8 +31,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
 .svc-track{gap:1.5rem;margin-inline:-.75rem;padding:.5rem .75rem 1.5rem;scroll-padding-inline:.75rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .svc{flex:0 0 100%;min-width:0;scroll-snap-align:start}
 .svc-title{min-height:0}
-@media (min-width:640px){.svc{flex-basis:calc((100% - 1.5rem)/2)}.svc:nth-child(even){scroll-snap-align:none}}
-@media (min-width:640px) and (max-width:1023px){.svc-title{min-height:3.5rem}}
+@media (min-width:560px){.svc{flex-basis:calc((100% - 1.5rem)/2)}.svc:nth-child(even){scroll-snap-align:none}}
+@media (min-width:560px) and (max-width:1023px){.svc-title{min-height:3.5rem}}
 .svc-track::-webkit-scrollbar{display:none}
 .svc-track.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}
 .svc{opacity:0;transform:translateX(80px);transition:opacity .9s cubic-bezier(.22,.7,.2,1),transform .9s cubic-bezier(.22,.7,.2,1),box-shadow .3s;transition-delay:calc(var(--i)*120ms),calc(var(--i)*120ms),0s}
@@ -432,11 +432,13 @@ html.lock{overflow:hidden}
 #app .ap-veil{position:absolute;inset:0;background:rgba(247,246,236,.35)}
 /* the real banner: always scales with the screen, never stretches */
 #app .ap{position:relative;z-index:1;display:block;width:100%;margin:0 auto;aspect-ratio:1000/551;background-image:var(--appimg);background-repeat:no-repeat;background-size:100% 100%}
-/* wide screens: banner stays centred at a good height, edges melt into the backdrop */
-@media(min-width:1100px){
- #app .ap{max-width:1180px;-webkit-mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent)}
+/* tablet: banner chota */
+@media(min-width:640px){#app .ap{max-width:640px}}
+/* laptop/desktop: banner chota aur centered, edges blur backdrop mein melt */
+@media(min-width:1024px){
+ #app .ap{max-width:720px;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
 }
-@media(min-width:1700px){#app .ap{max-width:1320px}}
+@media(min-width:1700px){#app .ap{max-width:900px}}
 </style>
   <div class="ap-bg" aria-hidden="true"></div>
   <div class="ap-veil" aria-hidden="true"></div>

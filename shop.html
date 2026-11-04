@@ -15,10 +15,11 @@ tailwind.config={theme:{extend:{colors:{brand:{peach:'#FDEED9',gold:'#735c00',am
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .floaty{animation:floaty 4s ease-in-out infinite}
-a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
+a:focus-visible,button:focus-visible,.pcard:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
 html.lock{overflow:hidden}
+[hidden]{display:none!important}
 
-/* Floating bubbles background (kept) */
+/* Floating bubbles background */
 .bubbleField{position:relative;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,#f3f8f4 0%,#FAF7F2 55%,#F5F0E8 100%)}
 .b{position:absolute;bottom:-14%;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 42%,rgba(95,133,111,.10) 70%,rgba(95,133,111,0) 76%);
@@ -26,45 +27,87 @@ html.lock{overflow:hidden}
  animation:rise var(--d) linear var(--dl) infinite;will-change:transform}
 @keyframes rise{0%{transform:translate3d(0,0,0) scale(.7);opacity:0}10%{opacity:1}50%{transform:translate3d(var(--sx),-60vh,0) scale(1)}100%{transform:translate3d(calc(var(--sx)*-1),-125vh,0) scale(1.08);opacity:0}}
 
-/* Hero illustration blob */
-.blob{position:relative;border-radius:999px 999px 999px 70px / 999px 999px 180px 999px;overflow:hidden}
-.blob::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.5),rgba(255,255,255,0) 55%)}
-.ill-item{animation:illFloat 5s ease-in-out infinite}
-.ill-item.d2{animation-delay:.6s}
-@keyframes illFloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-10px) rotate(var(--r,0deg))}}
-
 /* Reveal on scroll */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 
-/* Category cards */
-.cat-card{transition:transform .35s cubic-bezier(.22,.7,.2,1),box-shadow .35s ease,border-color .35s ease}
-.cat-card:hover{transform:translateY(-8px);box-shadow:0 22px 40px -18px rgba(69,101,83,.28);border-color:rgba(95,133,111,.35)}
-.cat-icon{transition:transform .45s cubic-bezier(.22,.7,.2,1)}
-.cat-card:hover .cat-icon{transform:scale(1.12) rotate(-6deg)}
-
 /* Slide-arrow buttons */
-.arrow-btn{display:inline-flex;align-items:center;gap:.4rem}
+.arrow-btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem}
 .arrow-btn svg{transition:transform .3s ease}
 .arrow-btn:hover svg{transform:translateX(5px)}
 
-/* CTA band accent sweep */
-.sweep{position:relative;overflow:hidden}
-.sweep::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.12) 45%,transparent 60%);transform:translateX(-120%);transition:transform .9s ease}
-.sweep:hover::before{transform:translateX(120%)}
+/* ===== SHOP ===== */
+.chip{padding:.55rem 1.1rem;border-radius:999px;border:1px solid #D3E2D8;background:#fff;font-size:.8rem;font-weight:600;color:#627068;transition:all .3s ease;cursor:pointer}
+.chip:hover{border-color:#5F856F;color:#456553}
+.chip.on{background:#5F856F;border-color:#5F856F;color:#fff;box-shadow:0 10px 20px -10px rgba(69,101,83,.6)}
 
-@media (prefers-reduced-motion:reduce){.floaty,.b,.ill-item,.reveal,.cat-card,.cat-icon,.arrow-btn svg,.sweep::before{animation:none!important;transition:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
+.pcard{background:#fff;border:1px solid #D3E2D8;border-radius:1.25rem;overflow:hidden;cursor:pointer;transition:transform .4s cubic-bezier(.22,.7,.2,1),box-shadow .4s ease,border-color .4s ease}
+.pcard:hover{transform:translateY(-8px);box-shadow:0 26px 44px -20px rgba(69,101,83,.35);border-color:rgba(95,133,111,.4)}
+.pmedia{position:relative;aspect-ratio:4/5;overflow:hidden;background:#EBF3EE}
+.pmedia img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,.7,.2,1)}
+.pcard:hover .pmedia img{transform:scale(1.08)}
+.pph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;color:#5F856F;background:radial-gradient(circle at 30% 20%,#fff 0%,#EBF3EE 60%,#dcebe1 100%)}
+.pph svg{width:3.5rem;height:3.5rem;transition:transform .5s cubic-bezier(.22,.7,.2,1)}
+.pph small{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.6}
+.pcard:hover .pph svg{transform:scale(1.15) rotate(-6deg)}
+.pbadge{position:absolute;top:.9rem;left:.9rem;background:#FFC861;color:#735c00;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;z-index:2}
+.pview{position:absolute;left:50%;bottom:1rem;transform:translate(-50%,16px);opacity:0;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);color:#456553;font-size:.75rem;font-weight:700;padding:.55rem 1.1rem;border-radius:999px;transition:all .4s cubic-bezier(.22,.7,.2,1);z-index:2;white-space:nowrap}
+.pcard:hover .pview,.pcard:focus-visible .pview{opacity:1;transform:translate(-50%,0)}
+@media (hover:none){.pview{opacity:1;transform:translate(-50%,0)}}
+.stars{color:#C8A265;letter-spacing:.1em;font-size:.8rem}
 
-/* Opening-soon overlay: blurs the whole page, bubbles + floating circle on top */
-.soonOverlay{position:fixed;inset:0;z-index:40;overflow:hidden;display:flex;align-items:center;justify-content:center;padding-top:4rem;
- -webkit-backdrop-filter:blur(9px) saturate(1.05);backdrop-filter:blur(9px) saturate(1.05);background:rgba(250,247,242,.45)}
-.soonBubble{position:relative;z-index:2;width:clamp(190px,48vw,260px);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+/* Product opening burst */
+.burst{position:fixed;inset:0;z-index:80;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,#f3f8f4 0%,#EBF3EE 60%,#dcebe1 100%);clip-path:circle(0px at var(--x) var(--y));transition:clip-path .75s cubic-bezier(.65,0,.25,1),opacity .5s ease}
+.burst.go{clip-path:circle(150vmax at var(--x) var(--y))}
+.burst.out{opacity:0}
+.burst .core{position:absolute;left:50%;top:50%;width:clamp(120px,28vw,180px);aspect-ratio:1;margin:calc(clamp(120px,28vw,180px)/-2) 0 0 calc(clamp(120px,28vw,180px)/-2);border-radius:50%;
  background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.98),rgba(255,255,255,.72) 45%,rgba(235,243,238,.9) 75%,rgba(95,133,111,.18) 100%);
  box-shadow:inset 0 0 22px rgba(255,255,255,.95),inset -12px -16px 30px rgba(95,133,111,.22),0 24px 50px -16px rgba(69,101,83,.35),0 0 0 1.5px rgba(95,133,111,.28);
- animation:soonFloat 5s ease-in-out infinite}
-.soonBubble span{font-family:"Playfair Display",serif;font-weight:700;font-style:italic;color:#456553;font-size:clamp(1.5rem,5.5vw,2.1rem);line-height:1.15;padding:0 1.5rem}
-@keyframes soonFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
-@media (prefers-reduced-motion:reduce){.soonBubble{animation:none!important}}
+ animation:soonFloat 2s ease-in-out infinite}
+@keyframes soonFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+/* Detail page entrance */
+.enter>*{opacity:0;transform:translateY(20px);animation:up .75s cubic-bezier(.22,.7,.2,1) forwards;animation-delay:calc(var(--i,0)*70ms + 120ms)}
+@keyframes up{to{opacity:1;transform:none}}
+.gal-main{position:relative;aspect-ratio:1;border-radius:2rem 2rem 2rem 5rem;overflow:hidden;background:#EBF3EE;border:1px solid #D3E2D8;animation:pop .9s cubic-bezier(.22,.7,.2,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.9) rotate(-2deg)}to{opacity:1;transform:none}}
+.gal-main img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,opacity .35s ease;transform-origin:var(--ox,50%) var(--oy,50%)}
+@media (hover:hover){.gal-main:hover img{transform:scale(1.6)}}
+.gal-main .pph svg{width:6rem;height:6rem;animation:floaty 4s ease-in-out infinite}
+.thumb{width:4.5rem;height:4.5rem;border-radius:1rem;overflow:hidden;border:2px solid transparent;background:#EBF3EE;cursor:pointer;transition:all .3s ease;opacity:.7}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb:hover{opacity:1;transform:translateY(-3px)}
+.thumb.on{border-color:#5F856F;opacity:1}
+.orb{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.3) 55%,rgba(95,133,111,.12));box-shadow:inset -4px -6px 12px rgba(95,133,111,.18),0 0 0 1px rgba(95,133,111,.2);animation:floaty 5s ease-in-out infinite;z-index:3}
+.opt{padding:.6rem 1.1rem;border-radius:999px;border:1.5px solid #D3E2D8;background:#fff;font-size:.85rem;font-weight:600;color:#627068;transition:all .25s ease;cursor:pointer}
+.opt:hover{border-color:#5F856F}
+.opt.on{background:#EBF3EE;border-color:#5F856F;color:#456553}
+.qty{display:inline-flex;align-items:center;border:1.5px solid #D3E2D8;border-radius:999px;background:#fff;overflow:hidden}
+.qty button{width:2.8rem;height:3rem;font-size:1.2rem;color:#456553;transition:background .2s}
+.qty button:hover{background:#EBF3EE}
+.qty span{min-width:2rem;text-align:center;font-weight:700}
+.tab{padding:.8rem 0;margin-right:1.6rem;font-weight:600;font-size:.9rem;color:#627068;border-bottom:2px solid transparent;transition:all .25s;cursor:pointer}
+.tab.on{color:#456553;border-color:#5F856F}
+.tabpane{animation:up .5s ease both}
+.perk{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:#627068}
+.perk svg{width:1.2rem;height:1.2rem;color:#5F856F;flex-shrink:0}
+.addbtn{position:relative;overflow:hidden;transition:background .3s,transform .2s}
+.addbtn:active{transform:scale(.97)}
+.pop{position:fixed;width:12px;height:12px;border-radius:50%;pointer-events:none;z-index:90;background:radial-gradient(circle at 30% 28%,#fff,rgba(95,133,111,.25));box-shadow:0 0 0 1px rgba(95,133,111,.4);animation:popout .9s ease-out forwards}
+@keyframes popout{to{transform:translate(var(--dx),var(--dy)) scale(var(--s));opacity:0}}
+
+/* Cart */
+#cartBack{position:fixed;inset:0;background:rgba(33,43,38,.4);backdrop-filter:blur(3px);z-index:70;opacity:0;pointer-events:none;transition:opacity .35s}
+#cart{position:fixed;top:0;right:0;height:100%;width:min(26rem,100%);background:#FAF7F2;z-index:71;transform:translateX(100%);transition:transform .5s cubic-bezier(.22,.7,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 50px -20px rgba(0,0,0,.25)}
+body.cartOpen #cartBack{opacity:1;pointer-events:auto}
+body.cartOpen #cart{transform:none}
+.bump{animation:bump .5s ease}
+@keyframes bump{40%{transform:scale(1.5)}}
+#toast{position:fixed;left:50%;bottom:1.5rem;transform:translate(-50%,30px);opacity:0;background:#456553;color:#fff;font-size:.85rem;font-weight:600;padding:.8rem 1.3rem;border-radius:999px;box-shadow:0 18px 30px -12px rgba(0,0,0,.4);z-index:95;transition:all .4s cubic-bezier(.22,.7,.2,1);pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.reveal,.enter>*{opacity:1!important;transform:none!important}.burst{display:none}}
+
 /* FOOTER */
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
@@ -113,6 +156,10 @@ html.lock{overflow:hidden}
     </nav>
 
     <div class="flex items-center gap-2">
+      <button id="cartBtn" class="relative w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center hover:bg-brand-light transition-colors" aria-label="Open cart">
+        <svg class="w-5 h-5 text-brand-dark" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span id="cartCount" class="absolute -top-1.5 -right-1.5 min-w-[1.15rem] h-[1.15rem] px-1 rounded-full bg-brand-sage text-white text-[10px] font-bold flex items-center justify-center" hidden>0</span>
+      </button>
       <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -144,127 +191,63 @@ html.lock{overflow:hidden}
   </nav>
 </header>
 
-<!-- OPENING SOON OVERLAY (delete this block to make the shop visible again) -->
-<div class="soonOverlay" role="status" aria-label="Opening soon">
-  <div class="absolute inset-0" aria-hidden="true"><span class="b" style="width:34px;height:34px;left:21%;--d:12.2s;--dl:-0.7s;--sx:28px"></span><span class="b" style="width:20px;height:20px;left:48%;--d:13.7s;--dl:-12.7s;--sx:-13px"></span><span class="b" style="width:16px;height:16px;left:13%;--d:12.5s;--dl:-1.0s;--sx:-29px"></span><span class="b" style="width:49px;height:49px;left:56%;--d:9.5s;--dl:-7.9s;--sx:-12px"></span><span class="b" style="width:54px;height:54px;left:82%;--d:13.7s;--dl:-0.9s;--sx:34px"></span><span class="b" style="width:39px;height:39px;left:8%;--d:16.8s;--dl:-0.7s;--sx:-23px"></span><span class="b" style="width:32px;height:32px;left:55%;--d:10.2s;--dl:-1.6s;--sx:-1px"></span><span class="b" style="width:49px;height:49px;left:89%;--d:10.4s;--dl:-8.1s;--sx:-16px"></span><span class="b" style="width:37px;height:37px;left:14%;--d:13.4s;--dl:-0.9s;--sx:-33px"></span><span class="b" style="width:53px;height:53px;left:28%;--d:13.0s;--dl:-7.4s;--sx:0px"></span><span class="b" style="width:43px;height:43px;left:76%;--d:16.4s;--dl:-5.1s;--sx:-9px"></span><span class="b" style="width:64px;height:64px;left:25%;--d:14.6s;--dl:-3.4s;--sx:33px"></span><span class="b" style="width:33px;height:33px;left:69%;--d:13.0s;--dl:-4.8s;--sx:17px"></span><span class="b" style="width:32px;height:32px;left:79%;--d:16.8s;--dl:-1.7s;--sx:13px"></span><span class="b" style="width:24px;height:24px;left:45%;--d:10.2s;--dl:-6.8s;--sx:-35px"></span><span class="b" style="width:56px;height:56px;left:11%;--d:15.1s;--dl:-8.0s;--sx:0px"></span></div>
-  <div class="soonBubble"><span>Opening soon</span></div>
+<main>
+<!-- ================= LIST VIEW ================= -->
+<div id="listView">
+  <section class="bubbleField" aria-labelledby="shopTitle">
+    <div class="absolute inset-0" aria-hidden="true"><span class="b" style="width:34px;height:34px;left:21%;--d:12.2s;--dl:-0.7s;--sx:28px"></span><span class="b" style="width:20px;height:20px;left:48%;--d:13.7s;--dl:-12.7s;--sx:-13px"></span><span class="b" style="width:16px;height:16px;left:13%;--d:12.5s;--dl:-1.0s;--sx:-29px"></span><span class="b" style="width:49px;height:49px;left:56%;--d:9.5s;--dl:-7.9s;--sx:-12px"></span><span class="b" style="width:54px;height:54px;left:82%;--d:13.7s;--dl:-0.9s;--sx:34px"></span><span class="b" style="width:39px;height:39px;left:8%;--d:16.8s;--dl:-0.7s;--sx:-23px"></span><span class="b" style="width:32px;height:32px;left:55%;--d:10.2s;--dl:-1.6s;--sx:-1px"></span><span class="b" style="width:49px;height:49px;left:89%;--d:10.4s;--dl:-8.1s;--sx:-16px"></span><span class="b" style="width:37px;height:37px;left:14%;--d:13.4s;--dl:-0.9s;--sx:-33px"></span><span class="b" style="width:53px;height:53px;left:28%;--d:13.0s;--dl:-7.4s;--sx:0px"></span><span class="b" style="width:43px;height:43px;left:76%;--d:16.4s;--dl:-5.1s;--sx:-9px"></span><span class="b" style="width:64px;height:64px;left:25%;--d:14.6s;--dl:-3.4s;--sx:33px"></span><span class="b" style="width:33px;height:33px;left:69%;--d:13.0s;--dl:-4.8s;--sx:17px"></span><span class="b" style="width:32px;height:32px;left:79%;--d:16.8s;--dl:-1.7s;--sx:13px"></span><span class="b" style="width:24px;height:24px;left:45%;--d:10.2s;--dl:-6.8s;--sx:-35px"></span><span class="b" style="width:56px;height:56px;left:11%;--d:15.1s;--dl:-8.0s;--sx:0px"></span></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-20 text-center">
+      <p class="text-xs uppercase tracking-[.25em] font-semibold text-brand-sage">Flaky Bubbles Lux</p>
+      <h1 id="shopTitle" class="mt-3 font-serif font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] text-brand-ink">A little care.<br><em class="font-medium text-brand-sage font-serif" style="font-style:italic">To take home.</em></h1>
+      <p class="mt-5 mx-auto max-w-xl text-brand-muted text-base sm:text-lg leading-relaxed">Gentle, organic grooming essentials for the everyday moments you share with your pet.</p>
+    </div>
+  </section>
+
+  <section id="essentials" class="py-12 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
+        <h2 class="font-serif font-bold text-3xl sm:text-4xl text-brand-ink">The little essentials.</h2>
+        <div id="chips" class="flex flex-wrap gap-2" role="tablist" aria-label="Filter products"></div>
+      </div>
+      <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <div class="reveal mt-14 bg-brand-light rounded-3xl px-6 sm:px-10 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
+        <div>
+          <p class="text-xs uppercase tracking-[.2em] font-semibold text-brand-sage">Prefer a spa day?</p>
+          <h3 class="mt-2 font-serif font-bold text-2xl sm:text-3xl text-brand-ink">Let the pampering begin.</h3>
+          <p class="mt-2 text-brand-muted">Explore grooming, daycare, and hotel stays today.</p>
+        </div>
+        <a href="index.html#services" class="arrow-btn self-center md:self-auto shrink-0 bg-brand-sage hover:bg-brand-dark text-white font-semibold px-6 py-3.5 rounded-full transition-colors">
+          Explore services
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 </div>
 
-<main>
-<!-- HERO -->
-<section class="bubbleField" aria-labelledby="shopTitle">
-  <div class="absolute inset-0" aria-hidden="true"><span class="b" style="width:34px;height:34px;left:21%;--d:12.2s;--dl:-0.7s;--sx:28px"></span><span class="b" style="width:20px;height:20px;left:48%;--d:13.7s;--dl:-12.7s;--sx:-13px"></span><span class="b" style="width:16px;height:16px;left:13%;--d:12.5s;--dl:-1.0s;--sx:-29px"></span><span class="b" style="width:49px;height:49px;left:56%;--d:9.5s;--dl:-7.9s;--sx:-12px"></span><span class="b" style="width:54px;height:54px;left:82%;--d:13.7s;--dl:-0.9s;--sx:34px"></span><span class="b" style="width:39px;height:39px;left:8%;--d:16.8s;--dl:-0.7s;--sx:-23px"></span><span class="b" style="width:32px;height:32px;left:55%;--d:10.2s;--dl:-1.6s;--sx:-1px"></span><span class="b" style="width:49px;height:49px;left:89%;--d:10.4s;--dl:-8.1s;--sx:-16px"></span><span class="b" style="width:37px;height:37px;left:14%;--d:13.4s;--dl:-0.9s;--sx:-33px"></span><span class="b" style="width:53px;height:53px;left:28%;--d:13.0s;--dl:-7.4s;--sx:0px"></span><span class="b" style="width:43px;height:43px;left:76%;--d:16.4s;--dl:-5.1s;--sx:-9px"></span><span class="b" style="width:64px;height:64px;left:25%;--d:14.6s;--dl:-3.4s;--sx:33px"></span><span class="b" style="width:33px;height:33px;left:69%;--d:13.0s;--dl:-4.8s;--sx:17px"></span><span class="b" style="width:32px;height:32px;left:79%;--d:16.8s;--dl:-1.7s;--sx:13px"></span><span class="b" style="width:24px;height:24px;left:45%;--d:10.2s;--dl:-6.8s;--sx:-35px"></span><span class="b" style="width:56px;height:56px;left:11%;--d:15.1s;--dl:-8.0s;--sx:0px"></span></div>
-
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
-    <div class="reveal">
-      <span class="inline-block text-[11px] uppercase tracking-[.2em] font-semibold text-brand-dark border border-brand-sage/40 bg-white/70 backdrop-blur rounded-full px-3.5 py-1.5">Opening soon</span>
-      <p class="mt-5 text-xs uppercase tracking-[.25em] font-semibold text-brand-sage">Flaky Bubbles Lux</p>
-      <h1 id="shopTitle" class="mt-3 font-serif font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] text-brand-ink">A little care.<br><em class="italic font-medium text-brand-sage not-italic font-serif" style="font-style:italic">To take home.</em></h1>
-      <p class="mt-5 max-w-md text-brand-muted text-base sm:text-lg leading-relaxed">A thoughtful collection for the everyday moments you share with your pet. Our shop is getting ready — here's a peek at what's planned.</p>
-      <a href="#essentials" class="arrow-btn mt-8 bg-brand-sage hover:bg-brand-dark text-white font-semibold px-6 py-3.5 rounded-full transition-colors">
-        Ask about the shop
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg>
-      </a>
-    </div>
-
-    <div class="reveal" style="transition-delay:.12s">
-      <div class="blob bg-brand-light aspect-[16/11] w-full flex items-center justify-center">
-        <div class="relative flex items-center gap-6 sm:gap-10">
-          <div class="ill-item w-28 sm:w-36" style="--r:-2deg">
-            <div class="bg-white rounded-2xl border-2 border-brand-sage/70 shadow-xl p-4 flex flex-col items-center gap-2">
-              <svg class="w-10 h-10 text-brand-sage" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="7" y="4" width="10" height="17" rx="2"/><rect x="9" y="1.5" width="6" height="3" rx="1"/></svg>
-              <span class="text-[10px] font-semibold text-brand-dark">flaky bubbles</span>
-            </div>
-          </div>
-          <div class="ill-item d2 w-16 sm:w-20 self-start mt-2" style="--r:4deg">
-            <div class="bg-brand-peach rounded-full aspect-square shadow-lg flex items-center justify-center">
-              <svg class="w-7 h-7 text-brand-gold" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M12 3c2 2 3 4 3 6a3 3 0 1 1-6 0c0-2 1-4 3-6Z"/><path d="M5 14c1.5-1 3-1 4.5 0M14.5 14c1.5-1 3-1 4.5 0"/></svg>
-            </div>
-          </div>
-          <div class="ill-item w-24 sm:w-28 self-end" style="--r:-3deg">
-            <div class="bg-white rounded-2xl border-2 border-brand-sage/70 shadow-xl p-4 flex flex-col items-center gap-1.5">
-              <svg class="w-8 h-8 text-brand-sage" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 9V7a4 4 0 0 1 8 0v2"/></svg>
-              <div class="w-10 h-1 rounded-full bg-brand-light"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CATEGORIES -->
-<section id="essentials" class="py-16 sm:py-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <div class="reveal flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-      <h2 class="font-serif font-bold text-3xl sm:text-4xl text-brand-ink">The little essentials.</h2>
-      <p class="text-sm sm:text-base text-brand-muted max-w-sm">Preview our planned categories. Products, pricing, and availability will be shared at launch.</p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="reveal cat-card bg-white border border-brand-border rounded-2xl overflow-hidden" style="transition-delay:.05s">
-        <div class="bg-brand-light h-36 flex items-center justify-center">
-          <svg class="cat-icon w-12 h-12 text-brand-sage" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="14" rx="2"/><path d="M9.5 7V5a2.5 2.5 0 0 1 5 0v2"/><path d="M10.5 11.5 12 13l1.5-1.5"/></svg>
-        </div>
-        <div class="p-5">
-          <h3 class="font-serif font-bold text-lg text-brand-ink">Coat care</h3>
-          <p class="mt-1.5 text-sm text-brand-muted">Bath-time essentials for your care routine.</p>
-          <span class="mt-4 inline-block text-[10px] uppercase tracking-wider font-bold text-brand-sage">Coming soon</span>
-        </div>
-      </div>
-
-      <div class="reveal cat-card bg-white border border-brand-border rounded-2xl overflow-hidden" style="transition-delay:.12s">
-        <div class="bg-[#EAF2F7] h-36 flex items-center justify-center">
-          <svg class="cat-icon w-12 h-12 text-[#4C7489]" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="5" y="9" width="14" height="10" rx="2"/><path d="M9 9V6.5a3 3 0 0 1 6 0V9"/><path d="M9 13.5h6"/></svg>
-        </div>
-        <div class="p-5">
-          <h3 class="font-serif font-bold text-lg text-brand-ink">Balms &amp; care</h3>
-          <p class="mt-1.5 text-sm text-brand-muted">Little additions to everyday pampering.</p>
-          <span class="mt-4 inline-block text-[10px] uppercase tracking-wider font-bold text-brand-sage">Coming soon</span>
-        </div>
-      </div>
-
-      <div class="reveal cat-card bg-white border border-brand-border rounded-2xl overflow-hidden" style="transition-delay:.19s">
-        <div class="bg-brand-peach h-36 flex items-center justify-center">
-          <svg class="cat-icon w-12 h-12 text-brand-gold" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M8 9c-2 0-3 1.5-3 3.5S6 19 12 19s7-2.5 7-6.5S14 9 12 9"/><path d="M12 9V6a2 2 0 1 1 4 0"/><path d="M9.5 14a2.5 2.5 0 0 0 5 0"/></svg>
-        </div>
-        <div class="p-5">
-          <h3 class="font-serif font-bold text-lg text-brand-ink">Treats &amp; chews</h3>
-          <p class="mt-1.5 text-sm text-brand-muted">Something special for happy little moments.</p>
-          <span class="mt-4 inline-block text-[10px] uppercase tracking-wider font-bold text-brand-sage">Coming soon</span>
-        </div>
-      </div>
-
-      <div class="reveal cat-card bg-white border border-brand-border rounded-2xl overflow-hidden" style="transition-delay:.26s">
-        <div class="bg-[#EDEAF6] h-36 flex items-center justify-center">
-          <svg class="cat-icon w-12 h-12 text-[#7A6AA8]" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="9" cy="9" r="4"/><circle cx="16" cy="15" r="4"/><circle cx="7" cy="17" r="2.2"/></svg>
-        </div>
-        <div class="p-5">
-          <h3 class="font-serif font-bold text-lg text-brand-ink">Toys &amp; accessories</h3>
-          <p class="mt-1.5 text-sm text-brand-muted">Playful finds for life together.</p>
-          <span class="mt-4 inline-block text-[10px] uppercase tracking-wider font-bold text-brand-sage">Coming soon</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="reveal sweep mt-12 bg-brand-light rounded-3xl px-6 sm:px-10 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
-      <div>
-        <p class="text-xs uppercase tracking-[.2em] font-semibold text-brand-sage">While we get the shelves ready</p>
-        <h3 class="mt-2 font-serif font-bold text-2xl sm:text-3xl text-brand-ink">Let the pampering begin.</h3>
-        <p class="mt-2 text-brand-muted">Explore grooming, daycare, and hotel stays today.</p>
-      </div>
-      <a href="index.html#services" class="arrow-btn self-center md:self-auto shrink-0 bg-brand-sage hover:bg-brand-dark text-white font-semibold px-6 py-3.5 rounded-full transition-colors">
-        Explore services
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
+<!-- ================= PRODUCT VIEW ================= -->
+<div id="detailView" hidden></div>
 </main>
+
+<!-- Cart drawer -->
+<div id="cartBack"></div>
+<aside id="cart" aria-label="Shopping cart">
+  <div class="flex items-center justify-between px-6 h-16 border-b border-brand-border shrink-0">
+    <h2 class="font-serif font-bold text-xl">Your cart</h2>
+    <button id="cartClose" class="w-9 h-9 rounded-full hover:bg-brand-light flex items-center justify-center" aria-label="Close cart"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-4"></div>
+  <div class="border-t border-brand-border px-6 py-5 shrink-0 bg-white">
+    <div class="flex justify-between font-semibold"><span>Subtotal</span><span id="cartTotal">$0.00</span></div>
+    <p class="text-xs text-brand-muted mt-1">Shipping and taxes are confirmed at checkout.</p>
+    <a href="contact.html" class="arrow-btn mt-4 w-full bg-brand-sage hover:bg-brand-dark text-white font-semibold px-6 py-3.5 rounded-full transition-colors">Checkout</a>
+  </div>
+</aside>
+<div id="toast" role="status"></div>
 
 <!-- FOOTER -->
 <footer class="bg-brand-dark text-white">
-  <!-- Top call-to-action band -->
   <div class="border-b border-white/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
       <div>
@@ -277,7 +260,6 @@ html.lock{overflow:hidden}
     </div>
   </div>
 
-  <!-- Main columns -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
     <div class="sm:col-span-2 lg:col-span-1">
       <div class="floaty inline-block bg-white/95 rounded-2xl shadow-xl px-5 py-3">
@@ -327,11 +309,7 @@ html.lock{overflow:hidden}
     <div>
       <h3 class="fhead">Contact &amp; Information</h3>
       <ul class="space-y-4 text-sm text-white/80">
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+1 (682) 351 8650
-
-" class="flink">+1 (682) 351 8650
-
-</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+16823518650" class="flink">+1 (682) 351 8650</a></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:info@flakybubbles.com" class="flink break-all">info@flakybubbles.com</a></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Street address, City, Country</span></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
@@ -347,12 +325,10 @@ html.lock{overflow:hidden}
       <ul class="space-y-3 text-sm">
         <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
         <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
-        <!-- Additional legal / help links will be added here -->
       </ul>
     </nav>
   </div>
 
-  <!-- Bottom bar -->
   <div class="border-t border-white/15 bg-black/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65 text-center sm:text-left">
       <p>© 2026 Flaky Bubbles. All rights reserved.</p>
@@ -365,7 +341,9 @@ html.lock{overflow:hidden}
     </div>
   </div>
 </footer>
+
 <script>
+/* ===================== NAV (unchanged) ===================== */
 const $=s=>document.querySelector(s);
 const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
 menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
@@ -373,14 +351,291 @@ mNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mNav.class
 $('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 $('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 
-// Scroll reveal
-if('IntersectionObserver' in window){
-  const io=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  },{threshold:.15,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-}else{
-  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+/* ===================== PRODUCTS =====================
+   >>> SIRF YAHAN IMAGES DALNI HAIN <<<
+   img     : main image ka path, e.g. 'images/shampoo.jpg'
+   gallery : extra images (optional), e.g. ['images/shampoo-2.jpg','images/shampoo-3.jpg']
+   Baaki sab (name, price, text) baad me change kar sakte ho.
+=====================================================*/
+const P=[
+ {id:1,cat:'Coat care',badge:'Bestseller',rating:4.9,reviews:128,
+  name:'Oatmeal Soothing Shampoo',tag:'Gentle bath-time cleanse for sensitive skin.',
+  img:'',gallery:[],
+  options:[{l:'250 ml',p:18},{l:'500 ml',p:29}],
+  desc:'A creamy, soap-free shampoo made with colloidal oatmeal and aloe to lift dirt and loose hair while keeping your pet\'s skin calm and comfortable. Lathers softly and rinses clean, leaving a light, fresh scent.',
+  ingr:'Colloidal oatmeal, aloe vera juice, coconut-derived cleansers, chamomile extract, vitamin E, glycerin.',
+  use:'Wet the coat with lukewarm water. Massage in a small amount, avoiding eyes and ears. Leave for 2 minutes, then rinse thoroughly.'},
+ {id:2,cat:'Coat care',badge:'',rating:4.8,reviews:96,
+  name:'Coconut Silk Conditioner',tag:'Soft, shiny and tangle-free coats.',
+  img:'',gallery:[],
+  options:[{l:'250 ml',p:16},{l:'500 ml',p:26}],
+  desc:'A lightweight conditioner with virgin coconut oil and shea butter that smooths the coat, adds natural shine and makes brushing easier after every bath.',
+  ingr:'Coconut oil, shea butter, panthenol, oat protein, sunflower seed oil, natural fragrance.',
+  use:'After shampooing, apply evenly through the coat. Leave for 3 minutes, then rinse well. Towel dry gently.'},
+ {id:3,cat:'Coat care',badge:'New',rating:4.7,reviews:54,
+  name:'Gentle Detangling Spray',tag:'Knots melt away, no tears.',
+  img:'',gallery:[],
+  options:[{l:'150 ml',p:14},{l:'300 ml',p:22}],
+  desc:'A leave-in spray that loosens knots and mats before brushing. Light on the coat, with a calming lavender note, ideal for long-haired and double-coated pets.',
+  ingr:'Aloe vera, argan oil, lavender water, hydrolyzed silk protein, glycerin.',
+  use:'Spritz onto a dry or damp coat, then comb through from the tips upward. No rinsing needed.'},
+ {id:4,cat:'Balms & care',badge:'Bestseller',rating:4.9,reviews:141,
+  name:'Paw & Nose Healing Balm',tag:'Soothes dry, cracked paws and noses.',
+  img:'',gallery:[],
+  options:[{l:'30 g',p:12},{l:'60 g',p:20}],
+  desc:'A rich, lick-safe balm with beeswax, calendula and shea butter to protect and moisturize paw pads, noses and elbows through every season.',
+  ingr:'Beeswax, shea butter, calendula extract, jojoba oil, vitamin E.',
+  use:'Massage a pea-sized amount into clean paw pads or nose twice daily. Keep your pet from licking for a minute while it absorbs.'},
+ {id:5,cat:'Balms & care',badge:'',rating:4.6,reviews:63,
+  name:'Soft Ear Cleaning Solution',tag:'Everyday ear care, made easy.',
+  img:'',gallery:[],
+  options:[{l:'120 ml',p:13}],
+  desc:'An alcohol-free ear cleanser that dissolves wax and debris and keeps ears fresh. Gentle enough for routine weekly care.',
+  ingr:'Purified water, witch hazel, aloe vera, tea tree hydrosol, glycerin.',
+  use:'Fill the ear canal, massage the base of the ear for 20 seconds, and let your pet shake. Wipe away debris with cotton.'},
+ {id:6,cat:'Accessories',badge:'',rating:4.8,reviews:88,
+  name:'Soft-Pin Slicker Brush',tag:'Detangles and removes loose fur.',
+  img:'',gallery:[],
+  options:[{l:'Small',p:13},{l:'Medium',p:15},{l:'Large',p:18}],
+  desc:'A cushioned slicker brush with rounded, flexible pins that glide through the coat without scratching. Non-slip bamboo handle for a comfortable grip.',
+  ingr:'Bamboo handle, soft stainless-steel pins, rubber cushion pad.',
+  use:'Brush gently in the direction of hair growth. Clean the pins after use and store dry.'},
+ {id:7,cat:'Accessories',badge:'New',rating:4.7,reviews:47,
+  name:'Quick-Dry Microfiber Towel',tag:'Absorbs up to 5x its weight.',
+  img:'',gallery:[],
+  options:[{l:'Medium',p:15},{l:'Large',p:21}],
+  desc:'An ultra-absorbent, ultra-soft towel that cuts drying time in half. Machine washable, with a hand pocket for easy rubbing after baths and muddy walks.',
+  ingr:'80% polyester, 20% polyamide microfiber.',
+  use:'Pat and squeeze the coat dry. Machine wash cold without fabric softener.'},
+ {id:8,cat:'Treats & chews',badge:'',rating:4.8,reviews:72,
+  name:'Fresh Breath Dental Chews',tag:'Cleaner teeth, happier snuggles.',
+  img:'',gallery:[],
+  options:[{l:'12 pcs',p:10},{l:'30 pcs',p:21}],
+  desc:'Crunchy, grain-free chews with mint and parsley that help scrape away plaque and freshen breath. A treat your pet will actually look forward to.',
+  ingr:'Sweet potato, chicken protein, peppermint, parsley, chickpea flour, natural preservatives.',
+  use:'Give one chew daily as a treat. Always supervise and provide fresh water.'},
+ {id:9,cat:'Coat care',badge:'Travel size',rating:4.6,reviews:39,
+  name:'Waterless Foam Bath',tag:'A quick clean when there is no time for a wash.',
+  img:'',gallery:[],
+  options:[{l:'200 ml',p:15}],
+  desc:'A no-rinse foaming cleanser for quick touch-ups between spa days. Freshens the coat and neutralizes odor with a gentle, organic cucumber scent.',
+  ingr:'Cucumber extract, aloe vera, coconut-derived foaming agent, vitamin B5, rosemary extract.',
+  use:'Pump foam into your hands, work through the coat, then towel off. Brush once dry.'}
+];
+
+const CATS=['All','Coat care','Balms & care','Treats & chews','Accessories'];
+const ICONS={
+ 'Coat care':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="14" rx="2"/><path d="M9.5 7V5a2.5 2.5 0 0 1 5 0v2"/><path d="M10.5 11.5 12 13l1.5-1.5"/></svg>',
+ 'Balms & care':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="9" width="14" height="10" rx="2"/><path d="M9 9V6.5a3 3 0 0 1 6 0V9"/><path d="M9 13.5h6"/></svg>',
+ 'Treats & chews':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9c-2 0-3 1.5-3 3.5S6 19 12 19s7-2.5 7-6.5S14 9 12 9"/><path d="M12 9V6a2 2 0 1 1 4 0"/><path d="M9.5 14a2.5 2.5 0 0 0 5 0"/></svg>',
+ 'Accessories':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="4"/><circle cx="16" cy="15" r="4"/><circle cx="7" cy="17" r="2.2"/></svg>'
+};
+
+const money=n=>'$'+n.toFixed(2);
+const stars=r=>'★'.repeat(Math.round(r))+'☆'.repeat(5-Math.round(r));
+const media=(src,cat,alt)=>src?`<img src="${src}" alt="${alt||''}" loading="lazy">`:`<div class="pph">${ICONS[cat]}<small>Product image</small></div>`;
+
+/* ===================== REVEAL ===================== */
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'}):null;
+function watch(root){root.querySelectorAll('.reveal').forEach(el=>io?io.observe(el):el.classList.add('in'))}
+watch(document);
+
+/* ===================== GRID ===================== */
+let curCat='All';
+const card=(p,i)=>`
+<article class="pcard reveal" style="transition-delay:${(i%3)*90}ms" data-id="${p.id}" tabindex="0" role="link" aria-label="View ${p.name}">
+  <div class="pmedia">${media(p.img,p.cat,p.name)}${p.badge?`<span class="pbadge">${p.badge}</span>`:''}<span class="pview">Quick look</span></div>
+  <div class="p-5">
+    <p class="text-[11px] font-semibold uppercase tracking-wider text-brand-sage">${p.cat}</p>
+    <h3 class="mt-1 font-serif font-bold text-xl text-brand-ink leading-snug">${p.name}</h3>
+    <p class="mt-1.5 text-sm text-brand-muted">${p.tag}</p>
+    <div class="mt-4 flex items-center justify-between">
+      <span class="font-bold text-brand-dark">From ${money(Math.min(...p.options.map(o=>o.p)))}</span>
+      <span class="stars" aria-label="${p.rating} out of 5">${stars(p.rating)} <span class="text-brand-muted font-medium tracking-normal">(${p.reviews})</span></span>
+    </div>
+  </div>
+</article>`;
+
+function renderChips(){
+  $('#chips').innerHTML=CATS.map(c=>`<button class="chip ${c===curCat?'on':''}" data-cat="${c}" role="tab" aria-selected="${c===curCat}">${c}</button>`).join('');
+}
+function renderGrid(){
+  const list=curCat==='All'?P:P.filter(p=>p.cat===curCat);
+  const g=$('#grid');g.innerHTML=list.map(card).join('');watch(g);
+}
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;curCat=b.dataset.cat;renderChips();renderGrid()});
+$('#grid').addEventListener('click',e=>{const c=e.target.closest('.pcard');if(c)openProduct(+c.dataset.id,e.clientX,e.clientY)});
+$('#grid').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const c=e.target.closest('.pcard');if(c){e.preventDefault();const r=c.getBoundingClientRect();openProduct(+c.dataset.id,r.left+r.width/2,r.top+r.height/2)}}});
+renderChips();renderGrid();
+
+/* ===================== OPEN ANIMATION (bubble burst) ===================== */
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function openProduct(id,x,y){
+  if(reduce){location.hash='product-'+id;return}
+  const o=document.createElement('div');o.className='burst';o.style.setProperty('--x',x+'px');o.style.setProperty('--y',y+'px');
+  let bs='';for(let i=0;i<16;i++){const s=16+Math.random()*50;bs+=`<span class="b" style="width:${s}px;height:${s}px;left:${Math.random()*96}%;--d:${(2.4+Math.random()*2.2).toFixed(1)}s;--dl:-${(Math.random()*2).toFixed(1)}s;--sx:${Math.round(Math.random()*60-30)}px"></span>`}
+  o.innerHTML=bs+'<div class="core"></div>';
+  document.body.appendChild(o);document.documentElement.classList.add('lock');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>o.classList.add('go')));
+  setTimeout(()=>{location.hash='product-'+id;window.scrollTo(0,0);},700);
+  setTimeout(()=>{o.classList.add('out')},900);
+  setTimeout(()=>{o.remove();document.documentElement.classList.remove('lock')},1450);
+}
+
+/* ===================== DETAIL VIEW ===================== */
+let sel={opt:0,qty:1,img:0};
+function renderDetail(id){
+  const p=P.find(x=>x.id===id);if(!p){location.hash='';return}
+  sel={opt:0,qty:1,img:0};
+  const imgs=[p.img,...p.gallery].filter(Boolean);
+  const rel=P.filter(x=>x.id!==p.id).sort((a,b)=>(b.cat===p.cat)-(a.cat===p.cat)).slice(0,3);
+  document.title=p.name+' | Flaky Bubbles';
+  const v=$('#detailView');
+  v.innerHTML=`
+  <section class="bubbleField">
+    <div class="absolute inset-0" aria-hidden="true">${[0,1,2,3,4,5,6,7].map(i=>`<span class="b" style="width:${18+i*7}px;height:${18+i*7}px;left:${8+i*12}%;--d:${11+i}s;--dl:-${i*1.3}s;--sx:${(i%2?1:-1)*25}px"></span>`).join('')}</div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-16 sm:pb-24">
+      <nav class="text-sm text-brand-muted flex items-center gap-2 flex-wrap" aria-label="Breadcrumb">
+        <a href="shop.html" id="backLink" class="inline-flex items-center gap-1.5 font-semibold text-brand-dark hover:text-brand-sage"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to shop</a>
+        <span>/</span><span>${p.cat}</span><span>/</span><span class="text-brand-ink font-medium">${p.name}</span>
+      </nav>
+
+      <div class="mt-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div class="lg:sticky lg:top-24">
+          <div class="relative">
+            <span class="orb" style="width:46px;height:46px;top:-14px;right:-8px"></span>
+            <span class="orb" style="width:26px;height:26px;bottom:14%;left:-10px;animation-delay:.8s"></span>
+            <div class="gal-main" id="galMain">${imgs.length?`<img id="mainImg" src="${imgs[0]}" alt="${p.name}">`:`<div class="pph">${ICONS[p.cat]}<small>Product image</small></div>`}${p.badge?`<span class="pbadge" style="top:1.2rem;left:1.2rem">${p.badge}</span>`:''}</div>
+          </div>
+          ${imgs.length>1?`<div class="mt-4 flex gap-3 flex-wrap" id="thumbs">${imgs.map((s,i)=>`<button class="thumb ${i?'':'on'}" data-i="${i}" aria-label="Image ${i+1}"><img src="${s}" alt=""></button>`).join('')}</div>`:''}
+        </div>
+
+        <div class="enter" id="info">
+          <p class="text-xs uppercase tracking-[.2em] font-semibold text-brand-sage">${p.cat}</p>
+          <h1 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.1] text-brand-ink">${p.name}</h1>
+          <div class="flex items-center gap-3"><span class="stars text-base">${stars(p.rating)}</span><span class="text-sm text-brand-muted">${p.rating} · ${p.reviews} reviews</span></div>
+          <p class="font-serif font-bold text-3xl text-brand-dark" id="price"></p>
+          <p class="text-brand-muted text-base sm:text-lg leading-relaxed max-w-lg">${p.tag} ${p.desc.split('. ')[0]}.</p>
+
+          <div>
+            <p class="text-sm font-semibold mb-2.5">Size</p>
+            <div class="flex flex-wrap gap-2" id="opts">${p.options.map((o,i)=>`<button class="opt ${i?'':'on'}" data-i="${i}">${o.l}</button>`).join('')}</div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="qty"><button id="qm" aria-label="Decrease quantity">−</button><span id="qv">1</span><button id="qp" aria-label="Increase quantity">+</button></div>
+            <button id="addBtn" class="addbtn arrow-btn flex-1 min-w-[10rem] bg-brand-sage hover:bg-brand-dark text-white font-semibold px-6 py-3.5 rounded-full">Add to cart</button>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div class="perk"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-3 2-6 5-9Z"/></svg>Organic, gentle blends</div>
+            <div class="perk"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>Skin-safe for pets</div>
+            <div class="perk"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg>Fast local delivery</div>
+            <div class="perk"><svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z"/></svg>Made with love</div>
+          </div>
+
+          <div class="border-t border-brand-border pt-2">
+            <div class="flex" role="tablist" id="tabs">
+              <button class="tab on" data-t="desc" role="tab">Description</button>
+              <button class="tab" data-t="ingr" role="tab">Ingredients</button>
+              <button class="tab" data-t="use" role="tab">How to use</button>
+            </div>
+            <p id="pane" class="tabpane text-sm sm:text-base text-brand-muted leading-relaxed py-3 max-w-lg">${p.desc}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <h2 class="reveal font-serif font-bold text-3xl text-brand-ink mb-8">You may also love</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="related">${rel.map(card).join('')}</div>
+    </div>
+  </section>`;
+
+  [...$('#info').children].forEach((el,i)=>el.style.setProperty('--i',i));
+  watch(v);
+  const upd=()=>{$('#price').textContent=money(p.options[sel.opt].p*sel.qty);$('#qv').textContent=sel.qty};
+  upd();
+
+  $('#opts').onclick=e=>{const b=e.target.closest('.opt');if(!b)return;sel.opt=+b.dataset.i;document.querySelectorAll('.opt').forEach(x=>x.classList.toggle('on',x===b));upd()};
+  $('#qm').onclick=()=>{sel.qty=Math.max(1,sel.qty-1);upd()};
+  $('#qp').onclick=()=>{sel.qty=Math.min(20,sel.qty+1);upd()};
+  $('#tabs').onclick=e=>{const b=e.target.closest('.tab');if(!b)return;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));const pane=$('#pane');pane.style.animation='none';pane.offsetWidth;pane.style.animation='';pane.textContent=p[b.dataset.t]};
+  $('#addBtn').onclick=e=>{addToCart(p,sel.opt,sel.qty);popBubbles(e.currentTarget)};
+  $('#backLink').onclick=e=>{e.preventDefault();location.hash=''};
+  const th=$('#thumbs');
+  if(th)th.onclick=e=>{const b=e.target.closest('.thumb');if(!b)return;const i=+b.dataset.i,m=$('#mainImg');m.style.opacity=0;setTimeout(()=>{m.src=imgs[i];m.style.opacity=1},200);th.querySelectorAll('.thumb').forEach(x=>x.classList.toggle('on',x===b))};
+  const gm=$('#galMain');
+  gm.addEventListener('mousemove',e=>{const r=gm.getBoundingClientRect(),m=$('#mainImg');if(!m)return;m.style.setProperty('--ox',((e.clientX-r.left)/r.width*100)+'%');m.style.setProperty('--oy',((e.clientY-r.top)/r.height*100)+'%')});
+}
+$('#detailView').addEventListener('click',e=>{const c=e.target.closest('#related .pcard');if(c)openProduct(+c.dataset.id,e.clientX,e.clientY)});
+
+/* ===================== ROUTER ===================== */
+function route(){
+  const m=location.hash.match(/^#product-(\d+)$/);
+  const lv=$('#listView'),dv=$('#detailView');
+  if(m){lv.hidden=true;dv.hidden=false;renderDetail(+m[1]);window.scrollTo(0,0)}
+  else{dv.hidden=true;lv.hidden=false;document.title='Shop | Flaky Bubbles';const h=location.hash;if(h&&$(h))$(h).scrollIntoView()}
+}
+addEventListener('hashchange',route);route();
+
+/* ===================== CART ===================== */
+let cart=[];try{cart=JSON.parse(localStorage.getItem('fbCart')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('fbCart',JSON.stringify(cart))}catch(e){}};
+function addToCart(p,oi,q){
+  const o=p.options[oi],k=p.id+'|'+o.l,ex=cart.find(c=>c.k===k);
+  if(ex)ex.q=Math.min(20,ex.q+q);else cart.push({k,id:p.id,l:o.l,price:o.p,q});
+  save();drawCart();toast(`${p.name} added to your cart`);
+  const c=$('#cartCount');c.classList.remove('bump');c.offsetWidth;c.classList.add('bump');
+}
+function drawCart(){
+  const n=cart.reduce((s,c)=>s+c.q,0),t=cart.reduce((s,c)=>s+c.q*c.price,0);
+  const cc=$('#cartCount');cc.textContent=n;cc.hidden=!n;
+  $('#cartTotal').textContent=money(t);
+  $('#cartItems').innerHTML=cart.length?cart.map(c=>{const p=P.find(x=>x.id===c.id);return `
+   <div class="flex gap-4 py-4 border-b border-brand-border/70">
+     <div class="w-20 h-20 rounded-xl overflow-hidden bg-brand-light shrink-0 relative">${media(p.img,p.cat,p.name)}</div>
+     <div class="flex-1 min-w-0">
+       <p class="font-semibold leading-snug">${p.name}</p>
+       <p class="text-xs text-brand-muted mt-0.5">${c.l} · ${money(c.price)}</p>
+       <div class="mt-2 flex items-center justify-between">
+         <div class="qty" style="transform:scale(.85);transform-origin:left"><button data-a="m" data-k="${c.k}" aria-label="Decrease">−</button><span>${c.q}</span><button data-a="p" data-k="${c.k}" aria-label="Increase">+</button></div>
+         <button class="text-xs font-semibold text-brand-muted hover:text-brand-ink underline" data-a="r" data-k="${c.k}">Remove</button>
+       </div>
+     </div>
+   </div>`}).join(''):`<div class="h-full flex flex-col items-center justify-center text-center text-brand-muted gap-3 py-16"><div class="w-16 h-16 rounded-full bg-brand-light flex items-center justify-center text-brand-sage"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div><p class="font-semibold text-brand-ink">Your cart is empty</p><p class="text-sm">Add a product to get started.</p></div>`;
+}
+$('#cartItems').addEventListener('click',e=>{
+  const b=e.target.closest('[data-a]');if(!b)return;
+  const c=cart.find(x=>x.k===b.dataset.k);if(!c)return;
+  if(b.dataset.a==='p')c.q=Math.min(20,c.q+1);
+  if(b.dataset.a==='m')c.q=Math.max(1,c.q-1);
+  if(b.dataset.a==='r')cart=cart.filter(x=>x!==c);
+  save();drawCart();
+});
+const setCart=o=>{document.body.classList.toggle('cartOpen',o);document.documentElement.classList.toggle('lock',o)};
+$('#cartBtn').onclick=()=>setCart(true);
+$('#cartClose').onclick=()=>setCart(false);
+$('#cartBack').onclick=()=>setCart(false);
+addEventListener('keydown',e=>{if(e.key==='Escape')setCart(false)});
+drawCart();
+
+/* ===================== FX ===================== */
+let tt;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2200)}
+function popBubbles(el){
+  if(reduce)return;
+  const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  for(let i=0;i<10;i++){
+    const s=document.createElement('span');s.className='pop';
+    s.style.left=cx+'px';s.style.top=cy+'px';
+    s.style.setProperty('--dx',(Math.random()*160-80)+'px');
+    s.style.setProperty('--dy',(-30-Math.random()*90)+'px');
+    s.style.setProperty('--s',(.6+Math.random()*1.6).toFixed(2));
+    document.body.appendChild(s);setTimeout(()=>s.remove(),950);
+  }
 }
 </script>
 <script src="gingr-config.js"></script>

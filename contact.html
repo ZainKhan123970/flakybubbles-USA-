@@ -423,101 +423,159 @@ const validate=(v,allowed)=>{
   return null;
 };
 
-// ---- Contact form: validate -> send to email (Web3Forms or FormSubmit) -> flip card to thank-you ----
+
+// ---- Contact form: FormSubmit email integration ----
 (()=>{
-/* ===== EMAIL SETTINGS (edit only these two lines) =====
-   OPTION A (recommended): Web3Forms. Go to https://web3forms.com, type the email that should
-            RECEIVE the messages, copy the Access Key they email you, and paste it below.
-   OPTION B: leave WEB3FORMS_KEY empty to use FormSubmit instead (needs a one-time
-            "Activate Form" click in the inbox of FORMSUBMIT_EMAIL).                          */
-const WEB3FORMS_KEY='';                         // e.g. 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-const FORMSUBMIT_EMAIL='info@flakybubbles.com'; // used only when WEB3FORMS_KEY is empty
-const ENDPOINT='https://formsubmit.co/ajax/'+FORMSUBMIT_EMAIL;
-const form=$('#contactForm'),inner=$('#flipInner'),back=$('#flipBack'),err=$('#formErr'),btn=$('#submitBtn');
-const ids={name:'#cName',email:'#cEmail',phone:'#cPhone',interest:'#cInterest',message:'#cMessage'};
-const ALLOWED=[...$('#cInterest').options].map(o=>o.value);
-let last=0;
-const showErr=(m,f)=>{err.textContent=m;err.classList.remove('hidden');
-  Object.values(ids).forEach(i=>$(i).removeAttribute('aria-invalid'));
-  if(f&&ids[f]){const el=$(ids[f]);el.setAttribute('aria-invalid','true');el.focus()}};
-const hideErr=()=>{err.classList.add('hidden');err.textContent='';Object.values(ids).forEach(i=>$(i).removeAttribute('aria-invalid'))};
-form.addEventListener('input',hideErr);
-form.addEventListener('submit',async e=>{
-  e.preventDefault();
-  if($('#hpField').value){inner.classList.add('flipped');return} // bot filled the hidden field: pretend success, send nothing
-  const now=Date.now();
-  if(now-last<30000){showErr('Please wait a few seconds before sending another message.');return}
-  const v={
-    name:clean($('#cName').value),
-    email:clean($('#cEmail').value).toLowerCase(),
-    phone:clean($('#cPhone').value),
-    interest:$('#cInterest').value,
-    message:clean($('#cMessage').value)
+  const FORMSUBMIT_EMAIL = 'info@flakybubbles.com';
+  const ENDPOINT = 'https://formsubmit.co/ajax/' + FORMSUBMIT_EMAIL;
+
+  const form = $('#contactForm');
+  const inner = $('#flipInner');
+  const back = $('#flipBack');
+  const err = $('#formErr');
+  const btn = $('#submitBtn');
+
+  const ids = {
+    name: '#cName',
+    email: '#cEmail',
+    phone: '#cPhone',
+    interest: '#cInterest',
+    message: '#cMessage'
   };
-  const bad=validate(v,ALLOWED);
-  if(bad){showErr(bad.m,bad.f);return}
-  hideErr();
-  // FormSubmit cannot work when the page is opened straight from disk (file://)
-  if(location.protocol==='file:'){
-    showErr('This page is opened from your computer (file://). Please open it from your live website or a local server (e.g. VS Code Live Server) to send messages.');
-    return;
-  }
-  btn.disabled=true;btn.textContent='Sending...';
-  try{
-    let res,json;
-    if(WEB3FORMS_KEY){
-      res=await fetch('https://api.web3forms.com/submit',{
-        method:'POST',
-        headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({
-          access_key:WEB3FORMS_KEY,
-          subject:'New Contact Message - '+v.interest,
-          from_name:'Flaky Bubbles Website',
-          name:v.name,
-          email:v.email,
-          phone:v.phone||'-',
-          interested_in:v.interest,
-          message:v.message||'-',
-          botcheck:''
-        })
-      });
-      json=await res.json().catch(()=>({}));
-      if(!(res.ok&&json.success===true))throw new Error(json.message||('HTTP '+res.status));
-    }else{
-      res=await fetch(ENDPOINT,{
-        method:'POST',
-        headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({
-          Name:v.name,
-          Email:v.email,
-          _replyto:v.email,
-          Phone:v.phone||'-',
-          'Interested in':v.interest,
-          Message:v.message||'-',
-          _subject:'New Contact Message - '+v.interest,
-          _template:'table',
-          _captcha:'false'
-        })
-      });
-      json=await res.json().catch(()=>({}));
-      if(!(res.ok&&(json.success===true||json.success==='true')))throw new Error(json.message||('HTTP '+res.status));
+
+  const ALLOWED = [...$('#cInterest').options].map(o => o.value);
+  let last = 0;
+
+  const showErr = (message, field) => {
+    err.textContent = message;
+    err.classList.remove('hidden');
+
+    Object.values(ids).forEach(id => {
+      $(id).removeAttribute('aria-invalid');
+    });
+
+    if (field && ids[field]) {
+      const el = $(ids[field]);
+      el.setAttribute('aria-invalid', 'true');
+      el.focus();
     }
-    last=now;
-    inner.classList.add('flipped');
-  }catch(ex){
-    console.error('Contact form send failed:',ex);
-    const msg=String(ex&&ex.message||'');
-    if(/activat/i.test(msg)){
-      showErr('Almost there: the form still needs to be activated. Please open the activation email sent to '+FORMSUBMIT_EMAIL+' and click "Activate Form", then try again.');
-    }else{
-      showErr('Sorry, your message could not be sent. Please email us at info@flakybubbles.com.');
+  };
+
+  const hideErr = () => {
+    err.classList.add('hidden');
+    err.textContent = '';
+
+    Object.values(ids).forEach(id => {
+      $(id).removeAttribute('aria-invalid');
+    });
+  };
+
+  form.addEventListener('input', hideErr);
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    if ($('#hpField').value) return;
+
+    const now = Date.now();
+
+    if (now - last < 30000) {
+      showErr('Please wait a few seconds before sending another message.');
+      return;
     }
-  }finally{
-    btn.disabled=false;btn.textContent='Submit';
-  }
-});
-back.onclick=()=>{inner.classList.remove('flipped');form.reset();hideErr()};
+
+    const v = {
+      name: clean($('#cName').value),
+      email: clean($('#cEmail').value).toLowerCase(),
+      phone: clean($('#cPhone').value),
+      interest: $('#cInterest').value,
+      message: clean($('#cMessage').value)
+    };
+
+    const bad = validate(v, ALLOWED);
+
+    if (bad) {
+      showErr(bad.m, bad.f);
+      return;
+    }
+
+    hideErr();
+
+    if (location.protocol === 'file:') {
+      showErr(
+        'Please open this page through your live website to send messages.'
+      );
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      // FormSubmit AJAX requires form data.
+      const formData = new FormData(form);
+
+      formData.set('_replyto', v.email);
+      formData.set('_subject', 'New Contact Message - ' + v.interest);
+      formData.set('_template', 'table');
+      formData.set('_captcha', 'false');
+
+      const response = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (
+        !response.ok ||
+        result.success !== true &&
+        result.success !== 'true'
+      ) {
+        throw new Error(
+          result.message || 'Email service rejected the request.'
+        );
+      }
+
+      last = Date.now();
+
+      // Show thank-you card only after successful submission.
+      inner.classList.add('flipped');
+
+    } catch (error) {
+      console.error('Contact form error:', error);
+
+      const message = String(error.message || '');
+
+      if (/activat|confirm|verify/i.test(message)) {
+        showErr(
+          'Please check the activation email sent by FormSubmit to ' +
+          FORMSUBMIT_EMAIL +
+          ' and activate your form.'
+        );
+      } else {
+        showErr(
+          'Sorry, your message could not be sent. Please try again or email us at info@flakybubbles.com.'
+        );
+      }
+
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Submit';
+    }
+  });
+
+  back.onclick = () => {
+    inner.classList.remove('flipped');
+    form.reset();
+    hideErr();
+  };
+
 })();
+
 
 // WhatsApp chat widget
 (()=>{

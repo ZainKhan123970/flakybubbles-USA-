@@ -511,62 +511,58 @@ const validate=(v,allowed)=>{
     btn.disabled = true;
     btn.textContent = 'Sending...';
 
-    try {
-      // FormSubmit AJAX requires form data.
-      const formData = new FormData(form);
-
-      formData.set('_replyto', v.email);
-      formData.set('_subject', 'New Contact Message - ' + v.interest);
-      formData.set('_template', 'table');
-      formData.set('_captcha', 'false');
-
-      const response = await fetch(ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json'
-        },
-        body: formData
-      });
-
-      const result = await response.json();
-
-      if (
-        !response.ok ||
-        result.success !== true &&
-        result.success !== 'true'
-      ) {
-        throw new Error(
-          result.message || 'Email service rejected the request.'
-        );
-      }
-
-      last = Date.now();
-
-      // Show thank-you card only after successful submission.
-      inner.classList.add('flipped');
-
-    } catch (error) {
-      console.error('Contact form error:', error);
-
-      const message = String(error.message || '');
-
-      if (/activat|confirm|verify/i.test(message)) {
-        showErr(
-          'Please check the activation email sent by FormSubmit to ' +
-          FORMSUBMIT_EMAIL +
-          ' and activate your form.'
-        );
-      } else {
-        showErr(
-          'Sorry, your message could not be sent. Please try again or email us at info@flakybubbles.com.'
-        );
-      }
-
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Submit';
+    
+try {
+  const response = await fetch(
+    'https://formsubmit.co/ajax/info@flakybubbles.com',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        Name: v.name,
+        Email: v.email,
+        _replyto: v.email,
+        Phone: v.phone || '-',
+        'Interested in': v.interest,
+        Message: v.message || '-',
+        _subject: 'New Contact Message - ' + v.interest,
+        _template: 'table'
+      })
     }
-  });
+  );
+
+  const result = await response.json();
+
+  console.log('FormSubmit HTTP status:', response.status);
+  console.log('FormSubmit response:', result);
+
+  if (
+    !response.ok ||
+    String(result.success) !== 'true'
+  ) {
+    throw new Error(
+      result.message || 'FormSubmit rejected the request.'
+    );
+  }
+
+  last = Date.now();
+  inner.classList.add('flipped');
+
+} catch (error) {
+  console.error('ACTUAL EMAIL ERROR:', error);
+
+  showErr(
+    'Email error: ' + (error.message || 'Unknown error') +
+    '. Please contact info@flakybubbles.com.'
+  );
+
+} finally {
+  btn.disabled = false;
+  btn.textContent = 'Submit';
+}
 
   back.onclick = () => {
     inner.classList.remove('flipped');

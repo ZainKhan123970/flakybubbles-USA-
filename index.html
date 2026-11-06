@@ -422,37 +422,44 @@ html.lock{overflow:hidden}
   </div>
 </div></section>
 
-<!-- APP AD: compact rectangular banner. App Store / Play Store buttons open the "Launching soon" bubble -->
+<!-- APP AD: compact rectangular banner, always horizontal (text left, phone right) on every device. App Store / Play Store buttons open the "Launching soon" bubble -->
 <section id="app" class="relative w-full overflow-hidden bg-gradient-to-br from-[#E3EEE7] via-[#EBF3EE] to-[#F6F1E8]" aria-label="The FlakyBubbles mobile app">
   <style>
+    #app{--s:.56}
+    @media(min-width:420px){#app{--s:.7}}
+    @media(min-width:640px){#app{--s:.85}}
+    @media(min-width:768px){#app{--s:1}}
     #app .blob{position:absolute;border-radius:50%;pointer-events:none}
-    #app .phone{position:relative;width:min(40vw,158px);aspect-ratio:9/17.5;background:#fff;border:6px solid #2f4a3b;border-radius:1.7rem;box-shadow:0 26px 40px -20px rgba(33,43,38,.45);transform:rotate(7deg);padding:9px 8px;display:flex;flex-direction:column;overflow:hidden}
-    #app .phone::before{content:"";position:absolute;top:5px;left:50%;width:34%;height:10px;margin-left:-17%;background:#2f4a3b;border-radius:99px}
-    #app .tile{flex:1;border-radius:9px;padding:6px 0;text-align:center;font-size:7px;line-height:1.25;color:#627068}
-    #app .store{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:6px 13px;transition:transform .25s,box-shadow .25s}
+    #app .phone-box{position:relative;flex:none;width:calc(224px*var(--s));height:calc(376px*var(--s))}
+    #app .phone{position:absolute;left:50%;top:50%;width:182px;height:354px;background:#fff;border:7px solid #2f4a3b;border-radius:1.9rem;box-shadow:0 28px 44px -20px rgba(33,43,38,.45);transform:translate(-50%,-50%) scale(var(--s)) rotate(7deg);padding:10px 9px;display:flex;flex-direction:column;overflow:hidden}
+    #app .phone::before{content:"";position:absolute;top:6px;left:50%;width:34%;height:11px;margin-left:-17%;background:#2f4a3b;border-radius:99px}
+    #app .tile{flex:1;border-radius:10px;padding:7px 0;text-align:center;font-size:8px;line-height:1.25;color:#627068}
+    #app .store{display:inline-flex;align-items:center;gap:5px;background:#000;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:7px;padding:3px 8px;transition:transform .25s,box-shadow .25s}
+    #app .store svg{width:14px;height:14px}
+    #app .store small{display:block;font-size:7px;line-height:1;opacity:.85}
+    #app .store b{display:block;font-size:11px;line-height:1.15;font-weight:600}
+    @media(min-width:640px){#app .store{gap:6px;border-radius:8px;padding:4px 10px}#app .store svg{width:17px;height:17px}#app .store small{font-size:8px}#app .store b{font-size:13px}}
     #app .store:hover{transform:translateY(-3px);box-shadow:0 12px 24px -10px rgba(0,0,0,.5)}
-    #app .store small{display:block;font-size:9px;line-height:1;opacity:.85}
-    #app .store b{display:block;font-size:16px;line-height:1.15;font-weight:600}
     #app .care-card{position:absolute;left:-22px;bottom:30px;transform:rotate(-6deg);background:#fff;border-radius:12px;box-shadow:0 14px 24px -12px rgba(33,43,38,.35);padding:8px 12px;display:flex;gap:8px;align-items:center;font-size:10px;line-height:1.3;color:#212B26}
-    @media(max-width:640px){#app .care-card{left:-4px;bottom:18px}}
+    @media(max-width:639px){#app .care-card{display:none}}
     @media (prefers-reduced-motion:reduce){#app .store{transition:none}}
   </style>
 
   <div class="blob" style="width:300px;height:300px;left:-100px;top:-120px;background:rgba(255,255,255,.55)" aria-hidden="true"></div>
   <div class="blob" style="width:260px;height:260px;right:-80px;bottom:-120px;background:rgba(243,232,210,.7)" aria-hidden="true"></div>
 
-  <div class="relative max-w-6xl mx-auto px-5 sm:px-8 py-8 sm:py-9 lg:py-8 grid lg:grid-cols-2 gap-6 lg:gap-6 items-center">
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-8 py-6 sm:py-9 lg:py-8 grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-2 gap-3 sm:gap-6 items-center">
     <!-- LEFT: text -->
-    <div class="reveal max-w-xl mx-auto lg:mx-0 lg:ml-auto lg:pr-6 text-center lg:text-left">
-      <span class="text-[10px] uppercase tracking-[.22em] font-semibold text-brand-ink">The Flaky Bubbles App</span>
-      <h2 class="mt-2 font-serif font-bold text-3xl sm:text-4xl lg:text-[40px] leading-[1.1] text-brand-ink">Less planning.<span class="block italic font-normal text-brand-sage">More tail wagging.</span></h2>
-      <p class="mt-3 text-brand-ink/80 text-sm sm:text-base leading-relaxed">Keep your pet's care close at hand. Plan visits, manage their profile, and bring a little more ease to your everyday.</p>
-      <ul class="mt-3 space-y-1 text-[13px] text-brand-ink/85 inline-block text-left">
+    <div class="reveal min-w-0 max-w-xl md:ml-auto md:pr-6 text-left">
+      <span class="block text-[8px] min-[420px]:text-[9px] sm:text-[10px] uppercase tracking-[.18em] sm:tracking-[.22em] font-semibold text-brand-ink">The Flaky Bubbles App</span>
+      <h2 class="mt-1.5 sm:mt-2 font-serif font-bold text-[20px] min-[420px]:text-2xl sm:text-4xl lg:text-[40px] leading-[1.1] text-brand-ink">Less planning.<span class="block italic font-normal text-brand-sage">More tail wagging.</span></h2>
+      <p class="mt-2 sm:mt-3 text-brand-ink/80 text-[11px] min-[420px]:text-xs sm:text-base leading-relaxed">Keep your pet's care close at hand. Plan visits, manage their profile, and bring a little more ease to your everyday.</p>
+      <ul class="mt-2 sm:mt-3 space-y-0.5 sm:space-y-1 text-[10px] min-[420px]:text-[11px] sm:text-[13px] text-brand-ink/85">
         <li>✓ Plan their next visit</li>
         <li>✓ Keep pet details together</li>
         <li>✓ Explore their care options</li>
       </ul>
-      <div class="mt-4 flex flex-wrap justify-center lg:justify-start gap-3">
+      <div class="mt-3 sm:mt-4 flex flex-wrap gap-2 sm:gap-3">
         <a href="#" data-app-soon class="store" aria-label="Download on the App Store - launching soon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.15-2.8.85-3.5.85-.75 0-1.85-.83-3.05-.8-1.55.02-3 .92-3.8 2.3-1.65 2.85-.42 7.05 1.15 9.35.8 1.1 1.7 2.35 2.9 2.3 1.15-.05 1.6-.75 3-.75s1.8.75 3.05.72c1.25-.02 2.05-1.13 2.8-2.25.9-1.3 1.25-2.55 1.27-2.6-.03-.02-2.45-.95-2.5-3.8zM14.1 5.9c.63-.77 1.06-1.83.94-2.9-.9.04-2.02.6-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.05-.52 2.69-1.27z"/></svg>
           <span><small>Download on the</small><b>App Store</b></span>
@@ -464,27 +471,29 @@ html.lock{overflow:hidden}
       </div>
     </div>
 
-    <!-- RIGHT: phone mockup (smaller, shifted to the right) -->
-    <div class="reveal from-r relative flex justify-center lg:justify-start lg:pl-24 xl:pl-32 py-3 pl-8 sm:pl-0">
-      <div class="blob" style="width:min(48vw,210px);height:min(48vw,210px);left:50%;top:50%;transform:translate(-70%,-45%);background:#CFE5F2;opacity:.85" aria-hidden="true"></div>
-      <div class="blob" style="width:min(42vw,185px);height:min(42vw,185px);left:50%;top:50%;transform:translate(-5%,-70%);background:#D4EBC8;opacity:.8" aria-hidden="true"></div>
+    <!-- RIGHT: phone mockup (scales with screen size, stays on the right) -->
+    <div class="reveal from-r relative flex justify-center md:justify-start md:pl-16 lg:pl-24 xl:pl-32 py-1">
+      <div class="blob" style="width:calc(230px*var(--s));height:calc(230px*var(--s));left:50%;top:50%;transform:translate(-70%,-45%);background:#CFE5F2;opacity:.85" aria-hidden="true"></div>
+      <div class="blob" style="width:calc(200px*var(--s));height:calc(200px*var(--s));left:50%;top:50%;transform:translate(-5%,-70%);background:#D4EBC8;opacity:.8" aria-hidden="true"></div>
 
-      <div class="phone" role="img" aria-label="FlakyBubbles app preview">
-        <div class="flex justify-between text-[7px] font-semibold text-brand-ink mt-1 px-1"><span>9:41</span><span>•••</span></div>
-        <img src="logo.png" alt="" class="h-6 w-auto object-contain self-start mt-1">
-        <p class="mt-1 font-bold text-[11px] leading-tight text-brand-ink">Hello, pet parent!</p>
-        <p class="text-[6px] text-brand-muted">A little care. A lot of happy.</p>
-        <div class="flex gap-1.5 mt-2">
-          <div class="tile" style="background:#DCEEF8">✂<br>Grooming</div>
-          <div class="tile" style="background:#E2EFD8">☀<br>Daycare</div>
-          <div class="tile" style="background:#F9E6D0">⌂<br>Boarding</div>
+      <div class="phone-box">
+        <div class="phone" role="img" aria-label="FlakyBubbles app preview">
+          <div class="flex justify-between text-[8px] font-semibold text-brand-ink mt-1 px-1"><span>9:41</span><span>•••</span></div>
+          <img src="logo.png" alt="" class="h-7 w-auto object-contain self-start mt-1">
+          <p class="mt-1 font-bold text-[12.5px] leading-tight text-brand-ink">Hello, pet parent!</p>
+          <p class="text-[7px] text-brand-muted">A little care. A lot of happy.</p>
+          <div class="flex gap-1.5 mt-2">
+            <div class="tile" style="background:#DCEEF8">✂<br>Grooming</div>
+            <div class="tile" style="background:#E2EFD8">☀<br>Daycare</div>
+            <div class="tile" style="background:#F9E6D0">⌂<br>Boarding</div>
+          </div>
+          <div class="mt-2 rounded-xl p-2 flex items-center gap-1.5" style="background:#F6F1E8">
+            <div class="flex-1 text-[9px] leading-snug font-semibold text-brand-ink">Someone's ready for a spa day.<span class="block font-normal text-[7px] text-brand-muted mt-0.5">Make their day a little brighter</span></div>
+            <img src="about-puppy.jpg" alt="" class="w-[42%] aspect-[4/5] object-cover rounded-lg" loading="lazy">
+          </div>
+          <div class="mt-2 rounded-lg bg-brand-sage text-white text-[8px] px-2.5 py-1.5 flex justify-between"><span>Plan a visit</span><span>→</span></div>
+          <div class="mt-auto flex justify-around text-[7px] text-brand-muted pt-1"><span>Home</span><span>Bookings</span><span>My pet</span><span>Menu</span></div>
         </div>
-        <div class="mt-2 rounded-xl p-2 flex items-center gap-1.5" style="background:#F6F1E8">
-          <div class="flex-1 text-[8px] leading-snug font-semibold text-brand-ink">Someone's ready for a spa day.<span class="block font-normal text-[6px] text-brand-muted mt-0.5">Make their day a little brighter</span></div>
-          <img src="about-puppy.jpg" alt="" class="w-[42%] aspect-[4/5] object-cover rounded-lg" loading="lazy">
-        </div>
-        <div class="mt-2 rounded-lg bg-brand-sage text-white text-[7px] px-2.5 py-1.5 flex justify-between"><span>Plan a visit</span><span>→</span></div>
-        <div class="mt-auto flex justify-around text-[6px] text-brand-muted pt-1"><span>Home</span><span>Bookings</span><span>My pet</span><span>Menu</span></div>
       </div>
 
       <div class="care-card">

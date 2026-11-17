@@ -70,64 +70,6 @@ html.lock{overflow:hidden}
 .pk-reveal.in .hp{animation:hpIn .85s cubic-bezier(.22,.7,.2,1) forwards;animation-delay:calc(var(--i)*240ms + 300ms)}
 @keyframes hpIn{to{opacity:1;transform:none}}
 
-/* ===== SERVICE PRICES (short / long hair) ===== */
-#spSwitch .sp-opt{transition:color .35s ease}
-#spSwitch .sp-opt[aria-checked="true"]{color:#fff}
-#spPill{transition:transform .55s cubic-bezier(.22,.8,.2,1),width .55s cubic-bezier(.22,.8,.2,1)}
-.sp-card{position:relative;height:100%;background:#fff;border:1px solid #D3E2D8;border-radius:1.5rem;padding:2rem 1.6rem 1.6rem;overflow:hidden;transition:transform .5s cubic-bezier(.22,.7,.2,1),box-shadow .5s ease,border-color .35s ease}
-.sp-card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#5F856F,#C8A265);transform:scaleX(0);transform-origin:left;transition:transform .55s cubic-bezier(.22,.7,.2,1)}
-.sp-card::after{content:"";position:absolute;left:-50px;top:-50px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,97,.22),rgba(255,200,97,0) 70%);opacity:0;transition:opacity .5s ease}
-.sp-card:hover{transform:translateY(-8px);border-color:#5F856F;box-shadow:0 28px 46px -24px rgba(69,101,83,.45)}
-.sp-card:hover::before{transform:scaleX(1)}.sp-card:hover::after{opacity:1}
-.sp-heart{width:2.6rem;height:2.6rem;margin:0 auto;color:#5F856F;transition:transform .5s cubic-bezier(.34,1.56,.64,1),color .3s}
-.sp-card:hover .sp-heart{color:#C8A265;animation:pkBeat 1.4s ease-in-out infinite}
-.sp-row{display:flex;align-items:baseline;gap:.6rem;padding:.4rem .5rem;margin:0 -.5rem;border-radius:.6rem;font-size:.9rem;color:#627068;transition:background .25s ease,color .25s ease}
-.sp-row i{flex:1;border-bottom:1.5px dotted #b9cfc0;transform:translateY(-3px)}
-.sp-row b{font-weight:700;color:#456553;display:inline-block;min-width:2.6rem;text-align:right;transition:transform .25s ease}
-.sp-row:hover{background:#EBF3EE;color:#212B26}.sp-row:hover b{transform:scale(1.12)}
-.sp-pop{animation:pkPop .5s cubic-bezier(.34,1.56,.64,1)}
-
-/* ===== SPECIALTY CUTS ===== */
-.sc-box{position:relative;overflow:hidden;background:#fff;border:1px solid #D3E2D8;border-radius:1.75rem;padding:2.5rem 1.5rem;box-shadow:0 1px 2px rgba(69,101,83,.06)}
-@media(min-width:640px){.sc-box{padding:3rem 2.5rem}}
-.sc-box::after{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,97,.22),rgba(255,200,97,0) 70%);pointer-events:none}
-.sc-item{display:flex;align-items:center;gap:.75rem;background:#EBF3EE;border:1px solid #D3E2D8;border-radius:1rem;padding:.8rem 1rem;font-weight:600;font-size:.95rem;color:#212B26;transition:transform .4s cubic-bezier(.22,.7,.2,1),background .3s ease,border-color .3s ease,box-shadow .4s ease}
-.sc-item:hover{transform:translateY(-4px);background:#FDEED9;border-color:#FFC861;box-shadow:0 16px 26px -18px rgba(69,101,83,.5)}
-.sc-item .sc-ico{flex:none;width:2rem;height:2rem;border-radius:9999px;background:#fff;border:1px solid #D3E2D8;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
-.sc-item:hover .sc-ico{transform:rotate(-14deg) scale(1.12)}
-.sc-cta{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.8rem 1.6rem;border-radius:9999px;border:1.5px solid rgba(95,133,111,.55);color:#456553;font-weight:600;font-size:.875rem;background:#fff;transition:background .3s ease,color .3s ease,border-color .3s ease}
-.sc-cta:hover,.sc-cta:focus-visible{background:#5F856F;border-color:#5F856F;color:#fff}
-.sc-cta .arr{display:inline-block;transition:transform .3s ease}
-.sc-cta:hover .arr{transform:translate(3px,-3px)}
-
-/* ===== MEET OUR GROOMERS ===== */
-.gm-track{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:1.5rem .25rem 2rem;-webkit-overflow-scrolling:touch}
-.gm-track::-webkit-scrollbar{display:none}
-.gm-card{--bg:#EBF3EE;--ring:#5F856F;--ink:#456553;position:relative;flex:0 0 82%;scroll-snap-align:start;background:var(--bg);border-radius:1.5rem;padding:1.8rem 1.4rem 1.7rem;text-align:center;overflow:hidden;transition:transform .55s cubic-bezier(.22,.7,.2,1),box-shadow .55s ease}
-@media(min-width:640px){.gm-card{flex-basis:calc(50% - .65rem)}}
-@media(min-width:1024px){.gm-card{flex-basis:calc(25% - .95rem)}}
-.gm-card.c2{--bg:#FDEED9;--ring:#C8A265;--ink:#735c00}
-.gm-card.c3{--bg:#F5F0E8;--ring:#456553;--ink:#456553}
-.gm-card.c4{--bg:#FFF4D6;--ring:#FFC861;--ink:#735c00}
-.gm-card:hover{transform:translateY(-10px);box-shadow:0 30px 46px -26px rgba(69,101,83,.55)}
-.gm-av{position:relative;width:min(78%,200px);aspect-ratio:1;margin:0 auto}
-.gm-ring,.gm-ph{position:absolute;-webkit-clip-path:url(#gmWave);clip-path:url(#gmWave)}
-.gm-ring{inset:0;background:var(--ring);transition:transform 1s cubic-bezier(.22,.7,.2,1)}
-.gm-ph{inset:5%;background:linear-gradient(160deg,#fff,rgba(255,255,255,.55));display:flex;align-items:center;justify-content:center;color:var(--ring);transition:transform .8s cubic-bezier(.22,.7,.2,1)}
-.gm-ph img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.gm-card:hover .gm-ring{transform:rotate(30deg) scale(1.05)}
-.gm-card:hover .gm-ph{transform:scale(1.05)}
-.gm-ph svg{width:42%;height:42%;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
-.gm-card:hover .gm-ph svg{transform:rotate(-12deg) scale(1.15)}
-.gm-name{margin-top:1.1rem;font-family:"Playfair Display",serif;font-weight:700;font-size:1.7rem;line-height:1.1;color:var(--ink)}
-.gm-role{margin-top:.55rem;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ring)}
-.gm-bio{margin-top:.8rem;font-size:.85rem;line-height:1.55;color:#627068;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s ease,opacity .5s ease}
-.gm-card:hover .gm-bio,.gm-card:focus-within .gm-bio{max-height:7rem;opacity:1}
-@media(hover:none){.gm-bio{max-height:7rem;opacity:1}}
-.gm-arrow{width:2.75rem;height:2.75rem;border-radius:9999px;border:1.5px solid rgba(95,133,111,.5);color:#456553;background:#fff;display:inline-flex;align-items:center;justify-content:center;transition:background .3s,color .3s,transform .3s,opacity .3s}
-.gm-arrow:hover:not(:disabled){background:#5F856F;color:#fff;transform:scale(1.08)}
-.gm-arrow:disabled{opacity:.35;cursor:default}
-
 /* ===== FAQ (same look as home page) ===== */
 .faq-item{background:#fff;border:1px solid #D3E2D8;border-radius:1.25rem;transition:box-shadow .35s ease,border-color .35s ease,background-color .35s ease,transform .35s ease}
 .faq-item:hover{border-color:#5F856F;box-shadow:0 6px 20px -10px rgba(69,101,83,.35)}
@@ -147,7 +89,7 @@ html.lock{overflow:hidden}
 @media(min-width:640px){.faq-q{padding:1.7rem 1.9rem;font-size:1.1875rem}.faq-a{padding:0 1.9rem 1.8rem;padding-right:5rem}}
 @media (prefers-reduced-motion:reduce){.faq-item,.faq-ico,.faq-ico::before,.faq-ico::after,.faq-panel,.faq-a{transition:none}}
 
-@media (prefers-reduced-motion:reduce){.pk-reveal,.pk-reveal.from-l,.pk-reveal.from-r{opacity:1;transform:none;transition:none}.pk-note-ico,.sp-card:hover .sp-heart{animation:none}.pk-price.pop,.sp-pop{animation:none}.hp{opacity:1;transform:none}.pk-reveal.in .hp{animation:none}#pkPill,#spPill{transition:none}.pk-card,.wp-card,.pk-ico,.wp-ico,.sp-card,.sc-item,.sc-ico,.gm-card,.gm-ring,.gm-ph,.gm-ph svg{transition:none}.gm-track{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.pk-reveal,.pk-reveal.from-l,.pk-reveal.from-r{opacity:1;transform:none;transition:none}.pk-note-ico{animation:none}.pk-price.pop{animation:none}.hp{opacity:1;transform:none}.pk-reveal.in .hp{animation:none}#pkPill{transition:none}.pk-card,.wp-card,.pk-ico,.wp-ico{transition:none}}
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
 .flink::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:0;background:#fff;transition:width .3s}
@@ -155,11 +97,9 @@ html.lock{overflow:hidden}
 .fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
 .fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
 </style>
-<noscript><style>.pk-reveal{opacity:1!important;transform:none!important}.hp{opacity:1!important;transform:none!important}.gm-bio{max-height:7rem;opacity:1}</style></noscript>
+<noscript><style>.pk-reveal{opacity:1!important;transform:none!important}.hp{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
-<!-- shape used to scallop the groomer photo frames -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="gmWave" clipPathUnits="objectBoundingBox"><path id="gmWavePath" d=""/></clipPath></defs></svg>
 
 <header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
@@ -310,88 +250,6 @@ html.lock{overflow:hidden}
         <span class="pk-note-ico text-brand-sage shrink-0"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.6A5.1 5.1 0 0 1 12 6.3a5.1 5.1 0 0 1 9.4 4.6c-1.9 5-9.4 9.6-9.4 9.6z"/></svg></span>
         <p>Packages are non-refundable and non-transferable.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SERVICE PRICES (Short Hair / Long Hair) + SPECIALTY CUTS ===== -->
-<section id="service-prices" class="relative overflow-hidden bg-brand-warm/60 border-y border-brand-border/60" aria-labelledby="spTitle">
-  <div class="absolute inset-0" aria-hidden="true"><span class="b" style="width:30px;height:30px;left:10%;--d:14s;--dl:-2s;--sx:20px"></span><span class="b" style="width:46px;height:46px;left:35%;--d:16s;--dl:-8s;--sx:-24px"></span><span class="b" style="width:22px;height:22px;left:60%;--d:12s;--dl:-5s;--sx:14px"></span><span class="b" style="width:52px;height:52px;left:84%;--d:15s;--dl:-10s;--sx:-30px"></span><span class="b" style="width:36px;height:36px;left:72%;--d:13s;--dl:-1s;--sx:26px"></span><span class="b" style="width:26px;height:26px;left:48%;--d:17s;--dl:-12s;--sx:-12px"></span></div>
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-    <div class="pk-reveal text-center max-w-2xl mx-auto">
-      <span class="text-[11px] sm:text-xs uppercase tracking-[.25em] font-semibold text-brand-sage block mb-5">Grooming</span>
-      <h2 id="spTitle" class="font-serif font-bold text-4xl md:text-5xl leading-[1.15] shine">Service <span class="italic font-normal">Prices</span></h2>
-    </div>
-
-    <div class="pk-reveal mt-9 flex flex-col items-center gap-5" style="--d:120ms">
-      <div id="spSwitch" role="radiogroup" aria-label="Choose coat type" class="relative grid grid-cols-2 w-full max-w-xs p-1.5 rounded-full bg-white border border-brand-border shadow-sm">
-        <span id="spPill" class="absolute top-1.5 bottom-1.5 left-0 rounded-full bg-brand-sage shadow-md" style="width:50%" aria-hidden="true"></span>
-        <button type="button" role="radio" aria-checked="true" data-t="short" tabindex="0" class="sp-opt relative z-10 rounded-full px-4 py-2.5 text-sm font-semibold text-brand-ink">Short Hair</button>
-        <button type="button" role="radio" aria-checked="false" data-t="long" tabindex="-1" class="sp-opt relative z-10 rounded-full px-4 py-2.5 text-sm font-semibold text-brand-ink">Long Hair</button>
-      </div>
-      <p class="text-sm sm:text-[15px] text-brand-muted text-center max-w-xl">*All prices shown are <b class="text-brand-ink">starting prices</b>, your dog's condition, size and temperament may alter pricing.</p>
-    </div>
-
-    <div id="spGrid" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="pk-reveal" style="--d:0ms"><article class="sp-card" data-size="xs"><svg class="sp-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.6A5.1 5.1 0 0 1 12 6.3a5.1 5.1 0 0 1 9.4 4.6c-1.9 5-9.4 9.6-9.4 9.6z"/></svg><h3 class="mt-5 mb-4 text-center font-serif font-semibold text-[21px] text-brand-ink">XSmall <span class="text-brand-muted text-base font-normal">(1-10 lbs)</span></h3><div class="sp-row"><span>Bath Only</span><i></i><b data-k="0"></b></div><div class="sp-row"><span>Bath &amp; Nails</span><i></i><b data-k="1"></b></div><div class="sp-row"><span>Bath &amp; Trim</span><i></i><b data-k="2"></b></div><div class="sp-row"><span>Full Haircut</span><i></i><b data-k="3"></b></div></article></div>
-      <div class="pk-reveal" style="--d:100ms"><article class="sp-card" data-size="s"><svg class="sp-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.6A5.1 5.1 0 0 1 12 6.3a5.1 5.1 0 0 1 9.4 4.6c-1.9 5-9.4 9.6-9.4 9.6z"/></svg><h3 class="mt-5 mb-4 text-center font-serif font-semibold text-[21px] text-brand-ink">Small <span class="text-brand-muted text-base font-normal">(11-30 lbs)</span></h3><div class="sp-row"><span>Bath Only</span><i></i><b data-k="0"></b></div><div class="sp-row"><span>Bath &amp; Nails</span><i></i><b data-k="1"></b></div><div class="sp-row"><span>Bath &amp; Trim</span><i></i><b data-k="2"></b></div><div class="sp-row"><span>Full Haircut</span><i></i><b data-k="3"></b></div></article></div>
-      <div class="pk-reveal" style="--d:200ms"><article class="sp-card" data-size="m"><svg class="sp-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.6A5.1 5.1 0 0 1 12 6.3a5.1 5.1 0 0 1 9.4 4.6c-1.9 5-9.4 9.6-9.4 9.6z"/></svg><h3 class="mt-5 mb-4 text-center font-serif font-semibold text-[21px] text-brand-ink">Medium <span class="text-brand-muted text-base font-normal">(31-60 lbs)</span></h3><div class="sp-row"><span>Bath Only</span><i></i><b data-k="0"></b></div><div class="sp-row"><span>Bath &amp; Nails</span><i></i><b data-k="1"></b></div><div class="sp-row"><span>Bath &amp; Trim</span><i></i><b data-k="2"></b></div><div class="sp-row"><span>Full Haircut</span><i></i><b data-k="3"></b></div></article></div>
-      <div class="pk-reveal" style="--d:0ms"><article class="sp-card" data-size="l"><svg class="sp-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.6A5.1 5.1 0 0 1 12 6.3a5.1 5.1 0 0 1 9.4 4.6c-1.9 5-9.4 9.6-9.4 9.6z"/></svg><h3 class="mt-5 mb-4 text-center font-serif font-semibold text-[21px] text-brand-ink">Large <span class="text-brand-muted text-base font-normal">(61-90 lbs)</span></h3><div class="sp-row"><span>Bath Only</span><i></i><b data-k="0"></b></div><div class="sp-row"><span>Bath &amp; Nails</span><i></i><b data-k="1"></b></div><div class="sp-row"><span>Bath &amp; Trim</span><i></i><b data-k="2"></b></div><div class="sp-row"><span>Full Haircut</span><i></i><b data-k="3"></b></div></article></div>
-      <div class="pk-reveal" style="--d:100ms"><article class="sp-card" data-size="xl"><svg class="sp-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.6A5.1 5.1 0 0 1 12 6.3a5.1 5.1 0 0 1 9.4 4.6c-1.9 5-9.4 9.6-9.4 9.6z"/></svg><h3 class="mt-5 mb-4 text-center font-serif font-semibold text-[21px] text-brand-ink">XLarge <span class="text-brand-muted text-base font-normal">(91-120 lbs)</span></h3><div class="sp-row"><span>Bath Only</span><i></i><b data-k="0"></b></div><div class="sp-row"><span>Bath &amp; Nails</span><i></i><b data-k="1"></b></div><div class="sp-row"><span>Bath &amp; Trim</span><i></i><b data-k="2"></b></div><div class="sp-row"><span>Full Haircut</span><i></i><b data-k="3"></b></div></article></div>
-      <div class="pk-reveal" style="--d:200ms"><article class="sp-card" data-size="g"><svg class="sp-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.4-9.6A5.1 5.1 0 0 1 12 6.3a5.1 5.1 0 0 1 9.4 4.6c-1.9 5-9.4 9.6-9.4 9.6z"/></svg><h3 class="mt-5 mb-4 text-center font-serif font-semibold text-[21px] text-brand-ink">Giant <span class="text-brand-muted text-base font-normal">(121+ lbs)</span></h3><div class="sp-row"><span>Bath Only</span><i></i><b data-k="0"></b></div><div class="sp-row"><span>Bath &amp; Nails</span><i></i><b data-k="1"></b></div><div class="sp-row"><span>Bath &amp; Trim</span><i></i><b data-k="2"></b></div><div class="sp-row"><span>Full Haircut</span><i></i><b data-k="3"></b></div></article></div>
-    </div>
-
-    <!-- Specialty cuts (apply to both short and long hair) -->
-    <div class="pk-reveal mt-12" style="--d:100ms">
-      <div class="sc-box">
-        <div class="relative text-center max-w-2xl mx-auto">
-          <span class="text-[11px] sm:text-xs uppercase tracking-[.25em] font-semibold text-brand-sage block mb-4">Short Hair &amp; Long Hair</span>
-          <h3 class="font-serif font-bold text-3xl md:text-4xl leading-[1.15] text-brand-dark">Specialty <span class="italic font-normal">Cuts</span></h3>
-          <p class="mt-4 text-brand-muted text-sm sm:text-base">Want something a little extra? We offer these specialty styles for both short and long coats.</p>
-        </div>
-
-        <ul class="relative mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto">
-          <li class="sc-item"><span class="sc-ico" aria-hidden="true">🧸</span>Teddy Bear Cut</li>
-          <li class="sc-item"><span class="sc-ico" aria-hidden="true">🌸</span>Asian Fusion</li>
-          <li class="sc-item"><span class="sc-ico" aria-hidden="true">🦁</span>Lion Cut</li>
-          <li class="sc-item"><span class="sc-ico" aria-hidden="true">🐶</span>Puppy Cut</li>
-          <li class="sc-item"><span class="sc-ico" aria-hidden="true">✂️</span>Continental Cut</li>
-          <li class="sc-item"><span class="sc-ico" aria-hidden="true">🐕</span>Schnauzer Cut</li>
-          <li class="sc-item sm:col-span-2"><span class="sc-ico" aria-hidden="true">🎨</span>Creative Grooming</li>
-        </ul>
-
-        <div class="relative mt-8 flex flex-col items-center gap-4 text-center">
-          <p class="text-sm sm:text-[15px] text-brand-muted max-w-xl"><b class="text-brand-ink">Pricing for specialty cuts is provided on request</b> &mdash; it depends on your dog's coat, size and the style you choose.</p>
-          <a href="contact.html" class="sc-cta" aria-label="Request pricing for specialty cuts">Request Pricing <span class="arr" aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== MEET OUR GROOMERS ===== -->
-<section id="groomers" class="relative overflow-hidden bg-brand-cream" aria-labelledby="gmTitle">
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-    <div class="pk-reveal text-center max-w-3xl mx-auto">
-      <span class="text-[11px] sm:text-xs uppercase tracking-[.25em] font-semibold text-brand-sage block mb-5">The Spa Team</span>
-      <h2 id="gmTitle" class="font-serif font-bold text-4xl md:text-5xl leading-[1.15] shine">Meet Our <span class="italic font-normal">Groomers!</span></h2>
-      <p class="mt-5 text-brand-muted text-base sm:text-lg leading-relaxed">With years of hands-on experience and a passion for gentle, personalized care, our groomers offer a calm, organic spa experience tailored to your dog's individual needs. Every appointment is focused on comfort, quality, and helping your pup look and feel their very best.</p>
-    </div>
-
-    <div id="gmTrack" class="gm-track pk-reveal mt-6" style="--d:120ms" tabindex="0" aria-label="Our groomers">
-      <!-- Lois's photo: save the photo as lois.jpg in the same folder as this file.
-           To add another groomer: copy a card and replace the <svg> inside .gm-ph with <img src="name.jpg" alt="Name"> -->
-      <article class="gm-card"><div class="gm-av"><div class="gm-ring"></div><div class="gm-ph"><img src="lois.png" alt="Lois" width="480" height="480" onerror="var s=['lois.jpg','lois.jpeg','lois.webp'],i=+(this.dataset.i||0);if(i<s.length){this.dataset.i=i+1;this.src=s[i]}else{this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='block'}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11c-3 0-6 3.2-6 6 0 2 1.6 3 3.4 3 1 0 1.8-.4 2.6-.4s1.6.4 2.6.4c1.8 0 3.4-1 3.4-3 0-2.8-3-6-6-6z"/></svg></div></div><h3 class="gm-name">Lois</h3><p class="gm-role">CMG Certified Groomer</p><p class="gm-bio">CMG certified groomer offering gentle, personalized care and a calm spa experience for every pup.</p></article>
-      <article class="gm-card c2"><div class="gm-av"><div class="gm-ring"></div><div class="gm-ph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11c-3 0-6 3.2-6 6 0 2 1.6 3 3.4 3 1 0 1.8-.4 2.6-.4s1.6.4 2.6.4c1.8 0 3.4-1 3.4-3 0-2.8-3-6-6-6z"/></svg></div></div><h3 class="gm-name">David</h3><p class="gm-role">Senior Stylist</p><p class="gm-bio">Dummy bio: specialist in de-shedding treatments and calm, patient bath-time routines.</p></article>
-      <article class="gm-card c3"><div class="gm-av"><div class="gm-ring"></div><div class="gm-ph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11c-3 0-6 3.2-6 6 0 2 1.6 3 3.4 3 1 0 1.8-.4 2.6-.4s1.6.4 2.6.4c1.8 0 3.4-1 3.4-3 0-2.8-3-6-6-6z"/></svg></div></div><h3 class="gm-name">Elisa</h3><p class="gm-role">Stylist</p><p class="gm-bio">Dummy bio: loves creative trims, fluffy finishes and organic, skin-friendly products.</p></article>
-      <article class="gm-card c4"><div class="gm-av"><div class="gm-ring"></div><div class="gm-ph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11c-3 0-6 3.2-6 6 0 2 1.6 3 3.4 3 1 0 1.8-.4 2.6-.4s1.6.4 2.6.4c1.8 0 3.4-1 3.4-3 0-2.8-3-6-6-6z"/></svg></div></div><h3 class="gm-name">Bark</h3><p class="gm-role">Junior Stylist</p><p class="gm-bio">Dummy bio: friendly, detail-focused and always ready with a treat and a cuddle.</p></article>
-      <article class="gm-card"><div class="gm-av"><div class="gm-ring"></div><div class="gm-ph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11c-3 0-6 3.2-6 6 0 2 1.6 3 3.4 3 1 0 1.8-.4 2.6-.4s1.6.4 2.6.4c1.8 0 3.4-1 3.4-3 0-2.8-3-6-6-6z"/></svg></div></div><h3 class="gm-name">Josh</h3><p class="gm-role">Stylist</p><p class="gm-bio">Dummy bio: experienced with long-coat breeds, detangling and gentle finishing.</p></article>
-      <article class="gm-card c2"><div class="gm-av"><div class="gm-ring"></div><div class="gm-ph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="5.5" cy="11" rx="2" ry="2.8"/><ellipse cx="9.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="14.5" cy="6.5" rx="2" ry="2.8"/><ellipse cx="18.5" cy="11" rx="2" ry="2.8"/><path d="M12 11c-3 0-6 3.2-6 6 0 2 1.6 3 3.4 3 1 0 1.8-.4 2.6-.4s1.6.4 2.6.4c1.8 0 3.4-1 3.4-3 0-2.8-3-6-6-6z"/></svg></div></div><h3 class="gm-name">Steven</h3><p class="gm-role">Spa Assistant</p><p class="gm-bio">Dummy bio: keeps every bubble bath calm, clean and cozy from start to finish.</p></article>
-    </div>
-
-    <div class="mt-2 flex justify-center sm:justify-end gap-3">
-      <button id="gmPrev" type="button" class="gm-arrow" aria-label="Previous groomers"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-      <button id="gmNext" type="button" class="gm-arrow" aria-label="Next groomers"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
   </div>
 </section>
@@ -583,7 +441,7 @@ $('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svc
 $('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 </script>
 <script>
-// Reveal-on-scroll + package switch + service prices + groomers carousel + FAQ
+// Reveal-on-scroll + package switch + FAQ
 (()=>{
 const rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const els=document.querySelectorAll('.pk-reveal');
@@ -637,57 +495,6 @@ addEventListener('resize',place);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
 addEventListener('load',place);
 }
-
-/* ---- Service prices: Short Hair / Long Hair ----
-   Order per size: [Bath Only, Bath & Nails, Bath & Trim, Full Haircut]
-   xs=Extra Small, s=Small, m=Medium, l=Large, xl=Extra Large, g=Giant */
-const SP={
- short:{xs:[45,60,75,85],s:[55,70,85,105],m:[65,80,95,125],l:[85,100,125,150],xl:[95,115,135,175],g:[150,175,200,250]},
- long: {xs:[55,65,85,95],s:[65,85,95,125],m:[85,100,125,150],l:[125,150,175,200],xl:[150,175,195,250],g:[200,225,275,320]}
-};
-const ssw=document.getElementById('spSwitch');
-if(ssw){
- const so=[...ssw.querySelectorAll('[role=radio]')],sp=document.getElementById('spPill'),sc=[...document.querySelectorAll('.sp-card')];
- let si=0;
- const sPlace=()=>{const b=so[si];sp.style.width=b.offsetWidth+'px';sp.style.transform='translateX('+b.offsetLeft+'px)'};
- function sApply(type,animate){
-  sc.forEach(c=>{
-   c.querySelectorAll('[data-k]').forEach(b=>{
-    const to=SP[type][c.dataset.size][+b.dataset.k],from=+b.dataset.cur||to;
-    if(animate){tween(b,from,to);b.classList.remove('sp-pop');void b.offsetWidth;b.classList.add('sp-pop')}else b.textContent=fmt(to);
-    b.dataset.cur=to;
-   });
-  });
- }
- function sSelect(i,focus){
-  si=i;so.forEach((b,k)=>{b.setAttribute('aria-checked',k===i);b.tabIndex=k===i?0:-1});
-  sPlace();sApply(so[i].dataset.t,true);if(focus)so[i].focus();
- }
- so.forEach((b,i)=>b.addEventListener('click',()=>sSelect(i)));
- ssw.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(e.key))return;e.preventDefault();sSelect(si?0:1,true)});
- sApply('short',false);sPlace();
- addEventListener('resize',sPlace);
- if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sPlace);
- addEventListener('load',sPlace);
-}
-
-/* ---- Groomers: scalloped photo frame + arrows ---- */
-(()=>{
- const p=document.getElementById('gmWavePath');
- if(p){let d='';const N=12;
-  for(let a=0;a<=360;a+=3){const th=a*Math.PI/180,r=.5*(.93+.07*Math.cos(N*th));
-   d+=(a?'L':'M')+(.5+r*Math.cos(th)).toFixed(4)+' '+(.5+r*Math.sin(th)).toFixed(4)}
-  p.setAttribute('d',d+'Z')}
- const tr=document.getElementById('gmTrack'),pv=document.getElementById('gmPrev'),nx=document.getElementById('gmNext');
- if(!tr)return;
- const step=()=>{const c=tr.querySelector('.gm-card');return c?c.getBoundingClientRect().width+20:300};
- const upd=()=>{pv.disabled=tr.scrollLeft<4;nx.disabled=tr.scrollLeft+tr.clientWidth>=tr.scrollWidth-4};
- pv.onclick=()=>tr.scrollBy({left:-step(),behavior:rmq?'auto':'smooth'});
- nx.onclick=()=>tr.scrollBy({left:step(),behavior:rmq?'auto':'smooth'});
- tr.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
- tr.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();nx.click()}else if(e.key==='ArrowLeft'){e.preventDefault();pv.click()}});
- upd();
-})();
 
 /* ---- FAQ accordion (one open at a time, click again to close) ---- */
 (()=>{

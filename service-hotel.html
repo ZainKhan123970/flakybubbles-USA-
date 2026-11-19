@@ -49,6 +49,27 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
 .halo-stage:focus-visible{outline:2px solid #5F856F;outline-offset:6px;border-radius:1rem}
 @media(min-width:640px){.halo-stage{height:400px}}
 @media (prefers-reduced-motion:reduce){.halo-stage{cursor:default}}
+
+/* ===== HOTEL PRICING: matched to the Grooming Service Prices cards ===== */
+@keyframes hotelPop{0%{transform:translateY(12px) scale(.96);opacity:.25}100%{transform:none;opacity:1}}
+.hotel-price-card{position:relative;height:100%;background:#fff;border:1px solid #D3E2D8;border-radius:1.5rem;padding:1.8rem 1.5rem 1.5rem;overflow:hidden;transition:transform .5s cubic-bezier(.22,.7,.2,1),box-shadow .5s ease,border-color .35s ease}
+.hotel-price-card:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#5F856F,#C8A265);transform:scaleX(0);transform-origin:left;transition:transform .55s cubic-bezier(.22,.7,.2,1)}
+.hotel-price-card:after{content:"";position:absolute;left:-55px;top:-55px;width:155px;height:155px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,97,.2),transparent 70%);opacity:0;transition:opacity .5s ease;pointer-events:none}
+.hotel-price-card:hover{transform:translateY(-8px);border-color:#5F856F;box-shadow:0 28px 46px -24px rgba(69,101,83,.4)}
+.hotel-price-card:hover:before{transform:scaleX(1)}.hotel-price-card:hover:after{opacity:1}
+.hotel-price-card .hotel-icon{width:2.55rem;height:2.55rem;margin:0 auto;color:#5F856F;transition:transform .5s cubic-bezier(.34,1.56,.64,1),color .3s}
+.hotel-price-card:hover .hotel-icon{color:#C8A265;transform:scale(1.13) rotate(-7deg)}
+.hotel-price{font-family:"Playfair Display",serif;font-size:2rem;font-weight:700;color:#456553;line-height:1.2}
+.hotel-feature{display:flex;align-items:flex-start;gap:.55rem;color:#627068;font-size:.82rem;line-height:1.5;margin-top:.55rem}
+.hotel-feature:before{content:"✓";flex:none;display:inline-flex;align-items:center;justify-content:center;width:1.15rem;height:1.15rem;border-radius:50%;background:#EBF3EE;color:#5F856F;font-size:.7rem;font-weight:700;margin-top:.05rem}
+.hotel-category{display:inline-block;border:1px solid #D3E2D8;background:#EBF3EE;color:#456553;border-radius:999px;padding:.3rem .7rem;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.hotel-add-card{background:#fff;border:1px solid #D3E2D8;border-radius:1.1rem;padding:1rem 1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:transform .3s,border-color .3s,box-shadow .3s}
+.hotel-add-card:hover{transform:translateY(-4px);border-color:#5F856F;box-shadow:0 15px 28px -20px rgba(69,101,83,.45)}
+.hotel-add-card b{color:#456553;white-space:nowrap}
+.hotel-promo{position:relative;overflow:hidden;border:1px solid #D3E2D8;border-radius:1.6rem;background:linear-gradient(120deg,#456553,#5F856F);color:white}
+.hotel-promo:after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(255,255,255,.15);border-radius:50%;right:-75px;top:-115px;box-shadow:0 0 0 25px rgba(255,255,255,.035),0 0 0 50px rgba(255,255,255,.025);pointer-events:none}
+@media(prefers-reduced-motion:reduce){.hotel-price-card,.hotel-icon,.hotel-add-card{transition:none}.hotel-price-card:hover,.hotel-add-card:hover{transform:none}}
+
 </style>
 </head>
 <body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
@@ -141,6 +162,72 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
       <p class="reveal text-brand-muted text-base sm:text-lg mb-7">Flaky Bubbles Organic Pet Spa Hotel offers a safe, cozy, and luxurious home away from home for your pets. With comfortable private spaces, attentive care, and a calm environment, we ensure your pets feel relaxed, secure, and well cared for throughout their stay.</p>
       <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="reveal inline-block bg-brand-sage hover:bg-brand-dark text-white font-semibold px-7 py-3.5 rounded-full transition-colors">Book Now</a>
     </div>
+  </div>
+</section>
+
+
+<!-- ===== PET HOTEL SUITE PRICES + LUXURY ADD-ONS ===== -->
+<section id="hotel-prices" class="relative overflow-hidden bg-brand-warm/60 border-y border-brand-border/60" aria-labelledby="hotelPriceTitle">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+    <div class="reveal text-center max-w-2xl mx-auto">
+      <span class="text-[11px] sm:text-xs uppercase tracking-[.25em] font-semibold text-brand-sage block mb-5">Luxury Boarding</span>
+      <h2 id="hotelPriceTitle" class="font-serif font-bold text-4xl md:text-5xl leading-[1.15] text-brand-dark">Suite <span class="italic font-normal">Prices</span></h2>
+      <p class="mt-4 text-brand-muted text-sm sm:text-base">Thoughtfully designed spaces, attentive care, and a comfortable stay for every member of your family.</p>
+    </div>
+
+    <div class="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="hotel-price-card reveal">
+        <svg class="hotel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10M9 20v-6h6v6"/><path d="M8 8.8h.01M16 8.8h.01"/></svg>
+        <div class="text-center mt-4"><span class="hotel-category">V.I.D. Luxury Suites</span><h3 class="font-serif text-xl font-semibold mt-3">V.I.D. Suite 1</h3><p class="text-xs text-brand-muted mt-1">One dog</p><p class="hotel-price mt-3">$125<span class="text-sm font-sans font-medium text-brand-muted"> / night</span></p></div>
+        <div class="border-t border-brand-border mt-5 pt-4"><p class="text-sm text-brand-muted">A private premium retreat with personalized attention and a calm, comfortable environment.</p><p class="hotel-feature">Premium accommodation features</p><p class="hotel-feature">Personalized care for your dog</p><p class="hotel-feature">24-hour camera monitoring</p></div>
+      </article>
+      <article class="hotel-price-card reveal">
+        <svg class="hotel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10M9 20v-6h6v6"/><path d="M8 8.8h.01M16 8.8h.01"/></svg>
+        <div class="text-center mt-4"><span class="hotel-category">V.I.D. Luxury Suites</span><h3 class="font-serif text-xl font-semibold mt-3">V.I.D. Suite 2 Plus</h3><p class="text-xs text-brand-muted mt-1">Two or more dogs from the same household</p><p class="hotel-price mt-3">$199<span class="text-sm font-sans font-medium text-brand-muted"> / night</span></p></div>
+        <div class="border-t border-brand-border mt-5 pt-4"><p class="text-sm text-brand-muted">A shared luxury suite for household companions to enjoy their stay together.</p><p class="hotel-feature">Premium accommodation features</p><p class="hotel-feature">Personalized care for each guest</p><p class="hotel-feature">24-hour camera monitoring</p></div>
+      </article>
+      <article class="hotel-price-card reveal">
+        <svg class="hotel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13c0-4 3-7 8-7s8 3 8 7"/><path d="M5 13h14l-1 6H6l-1-6Z"/><path d="M9 10c-1-2 1-3 0-5M15 10c-1-2 1-3 0-5"/></svg>
+        <div class="text-center mt-4"><span class="hotel-category">Classic Suites</span><h3 class="font-serif text-xl font-semibold mt-3">Classic Suite</h3><p class="text-xs text-brand-muted mt-1">Comfortable everyday boarding</p><p class="hotel-price mt-3">$105<span class="text-sm font-sans font-medium text-brand-muted"> / night</span></p></div>
+        <div class="border-t border-brand-border mt-5 pt-4"><p class="text-sm text-brand-muted">A welcoming, cozy space for a relaxed overnight stay and dependable daily care.</p><p class="hotel-feature">Standard boarding features</p><p class="hotel-feature">Daily care and attention</p><p class="hotel-feature">Clean, comfortable private space</p></div>
+      </article>
+      <article class="hotel-price-card reveal">
+        <svg class="hotel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.2-9-8.8A4.8 4.8 0 0 1 12 6a4.8 4.8 0 0 1 9 5.2C19 15.8 12 20 12 20Z"/><path d="M8 12h8M12 8v8"/></svg>
+        <div class="text-center mt-4"><span class="hotel-category">Royal Cat Suites</span><h3 class="font-serif text-xl font-semibold mt-3">Royal Cat 1</h3><p class="text-xs text-brand-muted mt-1">One cat</p><p class="hotel-price mt-3">$125<span class="text-sm font-sans font-medium text-brand-muted"> / night</span></p></div>
+        <div class="border-t border-brand-border mt-5 pt-4"><p class="text-sm text-brand-muted">A dedicated cat suite offering a peaceful, cozy setting for feline guests.</p><p class="hotel-feature">Private cat accommodation</p><p class="hotel-feature">Daily care and comfort checks</p><p class="hotel-feature">Calm, clean environment</p></div>
+      </article>
+      <article class="hotel-price-card reveal">
+        <svg class="hotel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.2-9-8.8A4.8 4.8 0 0 1 12 6a4.8 4.8 0 0 1 9 5.2C19 15.8 12 20 12 20Z"/><path d="M8 12h8M12 8v8"/></svg>
+        <div class="text-center mt-4"><span class="hotel-category">Royal Cat Suites</span><h3 class="font-serif text-xl font-semibold mt-3">Royal Cat 2</h3><p class="text-xs text-brand-muted mt-1">Two cats from the same household</p><p class="hotel-price mt-3">$185<span class="text-sm font-sans font-medium text-brand-muted"> / night</span></p></div>
+        <div class="border-t border-brand-border mt-5 pt-4"><p class="text-sm text-brand-muted">A shared royal retreat so cats from the same home can stay together.</p><p class="hotel-feature">Shared private cat accommodation</p><p class="hotel-feature">Daily care and comfort checks</p><p class="hotel-feature">Calm, clean environment</p></div>
+      </article>
+      <article class="hotel-price-card reveal">
+        <svg class="hotel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M5.6 5.6l2.1 2.1M3 12h3M18 12h3M16.3 7.7l2.1-2.1"/><path d="M7 14a5 5 0 1 1 10 0c0 2-1.5 2.8-2 4H9c-.5-1.2-2-2-2-4Z"/><path d="M9 21h6"/></svg>
+        <div class="text-center mt-4"><span class="hotel-category">Specialized Care</span><h3 class="font-serif text-xl font-semibold mt-3">Specialized Care Suite</h3><p class="text-xs text-brand-muted mt-1">For dogs requiring additional care</p><p class="hotel-price mt-3">$125<span class="text-sm font-sans font-medium text-brand-muted"> / night</span></p></div>
+        <div class="border-t border-brand-border mt-5 pt-4"><p class="text-sm text-brand-muted">A thoughtfully considered stay for dogs who need extra attention during boarding.</p><p class="hotel-feature">Additional care and attention</p><p class="hotel-feature">Personalized daily routine</p><p class="hotel-feature">Comfort-focused environment</p></div>
+      </article>
+    </div>
+
+    <div class="reveal mt-16">
+      <div class="text-center max-w-2xl mx-auto mb-8"><span class="text-[11px] uppercase tracking-[.25em] font-semibold text-brand-sage block mb-3">Make Their Stay Extra Special</span><h3 class="font-serif font-bold text-3xl sm:text-4xl text-brand-dark">Luxury <span class="italic font-normal">Add-Ons</span></h3><p class="mt-3 text-sm text-brand-muted">Enhance your pet's stay with a little extra pampering, play, and keepsakes.</p></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="hotel-add-card reveal"><span class="text-sm font-medium">Luxury Spa Bath</span><b>$65+</b></div>
+        <div class="hotel-add-card reveal"><span class="text-sm font-medium">Enrichment Session</span><b>$25</b></div>
+        <div class="hotel-add-card reveal"><span class="text-sm font-medium">Birthday Celebration</span><b>$65</b></div>
+        <div class="hotel-add-card reveal"><span class="text-sm font-medium">Professional Portrait</span><b>$75</b></div>
+        <div class="hotel-add-card reveal"><span class="text-sm font-medium">Welcome Treat Package</span><b>$55</b></div>
+        <div class="hotel-add-card reveal"><span class="text-sm font-medium">Private Playtime</span><b>$25</b></div>
+      </div>
+    </div>
+
+    <div class="hotel-promo reveal mt-12 p-7 sm:p-10 text-center">
+      <span class="text-xs uppercase tracking-[.25em] font-semibold text-white/75">A Little Welcome Gift</span>
+      <h3 class="font-serif font-bold text-3xl sm:text-4xl mt-3">Your First Night Is On Us!</h3>
+      <p class="max-w-2xl mx-auto mt-3 text-sm sm:text-base text-white/85">One complimentary night for new boarding customers booking a minimum five-night stay.</p>
+      <p class="max-w-2xl mx-auto mt-3 text-xs text-white/75">One free night per household. Cannot be combined with boarding package discounts.</p>
+      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="inline-flex mt-6 bg-brand-cream text-brand-dark rounded-full px-7 py-3 text-sm font-semibold hover:bg-white transition-colors">Book Your Stay</a>
+    </div>
+    <p class="reveal text-center text-xs text-brand-muted mt-7">Explore the available suite photos and videos in the gallery below.</p>
   </div>
 </section>
 

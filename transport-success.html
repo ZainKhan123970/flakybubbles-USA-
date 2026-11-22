@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Confirmed | Flaky Bubbles</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{brand:{cream:'#FAF7F2',sage:'#5F856F',dark:'#456553',light:'#EBF3EE',border:'#D3E2D8',ink:'#212B26',muted:'#627068'}},fontFamily:{serif:['"Playfair Display"','serif'],sans:['"Plus Jakarta Sans"','sans-serif']}}}}
+</script>
+</head>
+<body class="bg-brand-cream text-brand-ink font-sans antialiased">
+<header class="border-b border-brand-border">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center">
+    <a href="index.html"><img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain"></a>
+  </div>
+</header>
+<main class="max-w-xl mx-auto px-4 sm:px-6 py-16 text-center">
+  <div class="w-16 h-16 rounded-full bg-brand-light text-brand-sage flex items-center justify-center mx-auto mb-6">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+  </div>
+  <h1 class="font-serif font-semibold text-3xl sm:text-4xl mb-4">Your ride is booked!</h1>
+  <p class="text-brand-muted mb-3">Thank you. Your payment was received and a confirmation email is on its way. Please check your spam folder if you don't see it within a few minutes.</p>
+  <p class="text-brand-muted mb-8">Our team will reach out if anything needs adjusting. Questions? Call <a class="font-semibold text-brand-dark" href="tel:+16823518650">+1 (682) 351 8650</a>.</p>
+  <a href="index.html" class="inline-block bg-brand-sage hover:bg-brand-dark text-white font-semibold px-7 py-3.5 rounded-full transition-colors">Back to home</a>
+</main>
+</body>
+</html>

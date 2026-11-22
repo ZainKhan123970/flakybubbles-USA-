@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Pet Transport | Flaky Bubbles</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{brand:{peach:'#FDEED9',gold:'#735c00',amber:'#FFC861',cream:'#FAF7F2',warm:'#F5F0E8',sage:'#5F856F',dark:'#456553',light:'#EBF3EE',border:'#D3E2D8',ink:'#212B26',muted:'#627068'}},fontFamily:{serif:['"Playfair Display"','serif'],sans:['"Plus Jakarta Sans"','sans-serif']}}}}
+</script>
+<style>
+html{scroll-behavior:smooth}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
+.inp{width:100%;background:#fff;border:1px solid #D3E2D8;border-radius:.75rem;padding:.7rem .9rem;font-size:.95rem;color:#212B26}
+.inp::placeholder{color:#9aa8a0}
+.lbl{display:block;font-size:.8rem;font-weight:600;color:#456553;margin-bottom:.35rem}
+.card{background:#fff;border:1px solid #D3E2D8;border-radius:1.5rem;box-shadow:0 18px 40px -24px rgba(33,43,38,.35)}
+.opt{display:flex;align-items:center;gap:.6rem;border:1.5px solid #D3E2D8;border-radius:.9rem;padding:.8rem 1rem;cursor:pointer;background:#fff;font-weight:600;font-size:.9rem}
+.opt:has(input:checked){border-color:#5F856F;background:#EBF3EE}
+.opt input{accent-color:#5F856F}
+.step-dot{width:2rem;height:2rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;border:2px solid #D3E2D8;background:#fff;color:#627068}
+.step-dot.on{background:#5F856F;border-color:#5F856F;color:#fff}
+.step-dot.done{background:#EBF3EE;border-color:#5F856F;color:#456553}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body class="bg-brand-cream text-brand-ink font-sans antialiased">
+<header class="bg-brand-cream/95 border-b border-brand-border">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <a href="index.html"><img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain"></a>
+    <a href="service-transport.html" class="text-sm font-semibold text-brand-dark hover:underline">&larr; Back to Pet Transport</a>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+  <div class="text-center mb-8">
+    <span class="text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Pet Transport</span>
+    <h1 class="font-serif font-semibold text-3xl sm:text-4xl">Book a safe ride for your pet</h1>
+    <p class="mt-3 text-brand-muted text-sm sm:text-base">Tell us where and when. You'll see your exact price before you pay.</p>
+  </div>
+
+  <div id="cancelBanner" class="hidden mb-5 rounded-xl bg-brand-peach border border-brand-amber/60 px-4 py-3 text-sm">Payment was cancelled. Your details are still here, so you can try again whenever you're ready.</div>
+
+  <!-- progress -->
+  <ol class="flex items-center justify-center gap-3 mb-6 text-xs font-semibold text-brand-muted" aria-label="Progress">
+    <li class="flex items-center gap-2"><span class="step-dot on" data-dot="1">1</span><span class="hidden sm:inline">Trip</span></li>
+    <li class="w-8 h-px bg-brand-border"></li>
+    <li class="flex items-center gap-2"><span class="step-dot" data-dot="2">2</span><span class="hidden sm:inline">You &amp; your pet</span></li>
+    <li class="w-8 h-px bg-brand-border"></li>
+    <li class="flex items-center gap-2"><span class="step-dot" data-dot="3">3</span><span class="hidden sm:inline">Price &amp; pay</span></li>
+  </ol>
+
+  <form id="bookingForm" class="card p-5 sm:p-8" novalidate autocomplete="on">
+    <!-- STEP 1 -->
+    <section data-step="1" class="space-y-5">
+      <h2 class="font-serif font-semibold text-2xl">Trip details</h2>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <label class="opt"><input type="radio" name="tripType" value="oneway" checked> One way</label>
+        <label class="opt"><input type="radio" name="tripType" value="round"> Round trip</label>
+      </div>
+      <div>
+        <label class="lbl" for="purpose">What is the ride for?</label>
+        <select id="purpose" class="inp" required>
+          <option value="Grooming appointment">Grooming appointment</option>
+          <option value="Vet visit">Vet visit</option>
+          <option value="Daycare">Daycare</option>
+          <option value="Boarding / Pet hotel">Boarding / Pet hotel</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label class="lbl" for="pickup">Pick-up address</label>
+        <input id="pickup" class="inp" required autocomplete="street-address" placeholder="Street, city, state, ZIP">
+      </div>
+      <div>
+        <label class="lbl" for="dropoff">Drop-off address</label>
+        <input id="dropoff" class="inp" required placeholder="Street, city, state, ZIP">
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div><label class="lbl" for="date">Pick-up date</label><input id="date" type="date" class="inp" required></div>
+        <div><label class="lbl" for="time">Pick-up time</label><select id="time" class="inp" required></select></div>
+      </div>
+      <div id="returnBox" class="hidden grid sm:grid-cols-2 gap-4">
+        <div><label class="lbl" for="returnDate">Return date</label><input id="returnDate" type="date" class="inp"></div>
+        <div><label class="lbl" for="returnTime">Return pick-up time</label><select id="returnTime" class="inp"></select></div>
+      </div>
+      <p class="text-xs text-brand-muted">Regular hours are 9am to 6pm. Rides outside those hours include an after-hours fee, shown in your price.</p>
+    </section>
+
+    <!-- STEP 2 -->
+    <section data-step="2" class="space-y-5 hidden">
+      <h2 class="font-serif font-semibold text-2xl">You &amp; your pet</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div><label class="lbl" for="ownerName">Your full name</label><input id="ownerName" class="inp" required autocomplete="name"></div>
+        <div><label class="lbl" for="phone">Phone</label><input id="phone" type="tel" class="inp" required autocomplete="tel" placeholder="(555) 123-4567"></div>
+      </div>
+      <div><label class="lbl" for="email">Email (for your receipt)</label><input id="email" type="email" class="inp" required autocomplete="email"></div>
+
+      <div class="border-t border-brand-border pt-5 grid sm:grid-cols-2 gap-4">
+        <div><label class="lbl" for="petName">Pet's name</label><input id="petName" class="inp" required></div>
+        <div><label class="lbl" for="petType">Pet type</label>
+          <select id="petType" class="inp"><option>Dog</option><option>Cat</option><option>Other</option></select></div>
+        <div><label class="lbl" for="breed">Breed (optional)</label><input id="breed" class="inp"></div>
+        <div><label class="lbl" for="weight">Approx. weight (lbs)</label><input id="weight" type="number" min="1" max="300" class="inp" required></div>
+        <div><label class="lbl" for="pets">Number of pets</label>
+          <select id="pets" class="inp"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+      </div>
+      <div><label class="lbl" for="petNotes">Anything we should know? (anxious, senior, medication, allergies)</label><textarea id="petNotes" rows="2" class="inp" maxlength="300"></textarea></div>
+
+      <div class="border-t border-brand-border pt-5 space-y-4">
+        <h3 class="font-semibold text-brand-dark">Who hands over and who receives?</h3>
+        <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="pickupOther" class="accent-[#5F856F]"> Someone other than me will hand the pet over at pick-up</label>
+        <div id="pickupOtherBox" class="hidden grid sm:grid-cols-2 gap-4">
+          <div><label class="lbl" for="pickupContact">Name</label><input id="pickupContact" class="inp"></div>
+          <div><label class="lbl" for="pickupContactPhone">Phone</label><input id="pickupContactPhone" type="tel" class="inp"></div>
+        </div>
+        <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="dropOther" class="accent-[#5F856F]"> Someone other than me will receive the pet at drop-off</label>
+        <div id="dropOtherBox" class="hidden grid sm:grid-cols-2 gap-4">
+          <div><label class="lbl" for="dropContact">Name</label><input id="dropContact" class="inp"></div>
+          <div><label class="lbl" for="dropContactPhone">Phone</label><input id="dropContactPhone" type="tel" class="inp"></div>
+        </div>
+      </div>
+      <div><label class="lbl" for="driverNotes">Notes for the driver (gate code, apartment, parking)</label><textarea id="driverNotes" rows="2" class="inp" maxlength="300"></textarea></div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section data-step="3" class="space-y-5 hidden">
+      <h2 class="font-serif font-semibold text-2xl">Review &amp; pay</h2>
+      <div id="summary" class="rounded-2xl bg-brand-warm border border-brand-border p-4 text-sm space-y-1.5"></div>
+      <div id="quoteBox" class="rounded-2xl border border-brand-border p-4 text-sm">
+        <p class="text-brand-muted">Calculating your price&hellip;</p>
+      </div>
+      <label class="flex items-start gap-2.5 text-sm">
+        <input type="checkbox" id="agreed" class="mt-1 accent-[#5F856F]">
+        <span>I agree to the <a href="terms.html" target="_blank" class="underline font-semibold text-brand-dark">Terms &amp; Conditions</a> and <a href="privacy.html" target="_blank" class="underline font-semibold text-brand-dark">Privacy Policy</a>, and confirm my pet is healthy, vaccinated and safe to travel.</span>
+      </label>
+      <div class="hp" aria-hidden="true"><label>Website <input id="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="text-xs text-brand-muted flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-brand-sage shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secure payment by Stripe. We never see or store your card details.
+      </p>
+    </section>
+
+    <div id="err" role="alert" class="hidden mt-5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm px-4 py-3"></div>
+
+    <div class="mt-7 flex items-center justify-between gap-3">
+      <button type="button" id="backBtn" class="hidden rounded-full border border-brand-sage/60 text-brand-dark font-semibold px-6 py-3 hover:bg-brand-light transition-colors">Back</button>
+      <span id="spacer"></span>
+      <button type="button" id="nextBtn" class="rounded-full bg-brand-sage hover:bg-brand-dark text-white font-semibold px-8 py-3 transition-colors">Continue</button>
+      <button type="button" id="payBtn" class="hidden rounded-full bg-brand-sage hover:bg-brand-dark text-white font-semibold px-8 py-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>Pay securely</button>
+    </div>
+  </form>
+
+  <p class="text-center text-sm text-brand-muted mt-6">Need help or a custom trip? Call <a class="font-semibold text-brand-dark" href="tel:+16823518650">+1 (682) 351 8650</a> or email <a class="font-semibold text-brand-dark" href="mailto:info@flakybubbles.com">info@flakybubbles.com</a>.</p>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const val = id => $(id).value.trim();
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money = c => '$' + (c / 100).toFixed(2);
+let step = 1, quoteOk = false, quoteSeq = 0;
+
+// time slots 7:00 AM - 8:00 PM, every 30 min
+(function(){
+  let html = '<option value="">Select time</option>';
+  for (let m = 7*60; m <= 20*60; m += 30) {
+    const h = Math.floor(m/60), mm = m % 60;
+    const label = `${((h+11)%12)+1}:${String(mm).padStart(2,'0')} ${h>=12?'PM':'AM'}`;
+    html += `<option value="${String(h).padStart(2,'0')}:${String(mm).padStart(2,'0')}">${label}</option>`;
+  }
+  $('time').innerHTML = html; $('returnTime').innerHTML = html;
+})();
+
+const todayStr = (() => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0,10); })();
+$('date').min = todayStr; $('returnDate').min = todayStr;
+$('date').addEventListener('change', () => { $('returnDate').min = val('date') || todayStr; if (!val('returnDate')) $('returnDate').value = val('date'); });
+if (new URLSearchParams(location.search).get('cancelled')) $('cancelBanner').classList.remove('hidden');
+
+const tripType = () => document.querySelector('input[name=tripType]:checked').value;
+document.querySelectorAll('input[name=tripType]').forEach(r => r.addEventListener('change', () => {
+  const round = tripType() === 'round';
+  $('returnBox').classList.toggle('hidden', !round);
+  $('returnDate').required = round; $('returnTime').required = round;
+  if (round && !val('returnDate')) $('returnDate').value = val('date');
+}));
+[['pickupOther','pickupOtherBox',['pickupContact','pickupContactPhone']],['dropOther','dropOtherBox',['dropContact','dropContactPhone']]].forEach(([cb,box,ids]) => {
+  $(cb).addEventListener('change', () => {
+    $(box).classList.toggle('hidden', !$(cb).checked);
+    ids.forEach(i => $(i).required = $(cb).checked);
+  });
+});
+
+function showErr(msg) { const e = $('err'); if (msg) { e.textContent = msg; e.classList.remove('hidden'); } else { e.classList.add('hidden'); } }
+
+function payload() {
+  return {
+    tripType: tripType(), purpose: val('purpose'), pickup: val('pickup'), dropoff: val('dropoff'),
+    date: val('date'), time: val('time'), returnDate: val('returnDate'), returnTime: val('returnTime'),
+    ownerName: val('ownerName'), phone: val('phone'), email: val('email'),
+    petName: val('petName'), petType: val('petType'), breed: val('breed'), weight: val('weight'), pets: val('pets'), petNotes: val('petNotes'),
+    pickupContact: $('pickupOther').checked ? val('pickupContact') : '', pickupContactPhone: $('pickupOther').checked ? val('pickupContactPhone') : '',
+    dropContact: $('dropOther').checked ? val('dropContact') : '', dropContactPhone: $('dropOther').checked ? val('dropContactPhone') : '',
+    driverNotes: val('driverNotes'), website: val('website'), agreed: $('agreed').checked,
+  };
+}
+
+function go(n) {
+  step = n;
+  document.querySelectorAll('[data-step]').forEach(s => s.classList.toggle('hidden', Number(s.dataset.step) !== n));
+  document.querySelectorAll('[data-dot]').forEach(d => {
+    const i = Number(d.dataset.dot);
+    d.classList.toggle('on', i === n); d.classList.toggle('done', i < n);
+    d.textContent = i < n ? '\u2713' : i;
+  });
+  $('backBtn').classList.toggle('hidden', n === 1);
+  $('nextBtn').classList.toggle('hidden', n === 3);
+  $('payBtn').classList.toggle('hidden', n !== 3);
+  showErr('');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function stepValid(n) {
+  const els = document.querySelectorAll(`[data-step="${n}"] input, [data-step="${n}"] select, [data-step="${n}"] textarea`);
+  for (const el of els) { if (el.offsetParent !== null && !el.checkValidity()) { el.reportValidity(); return false; } }
+  if (n === 1 && tripType() === 'round' && val('returnDate') < val('date')) { showErr('Return date cannot be before the pick-up date.'); return false; }
+  if (n === 2 && val('phone').replace(/\D/g,'').length < 10) { showErr('Please enter a valid phone number.'); $('phone').focus(); return false; }
+  return true;
+}
+
+$('nextBtn').onclick = () => {
+  showErr('');
+  if (!stepValid(step)) return;
+  if (step === 2) { renderSummary(); go(3); loadQuote(); } else go(step + 1);
+};
+$('backBtn').onclick = () => go(step - 1);
+
+function renderSummary() {
+  const p = payload();
+  const t12 = t => { if (!t) return ''; const [h,m] = t.split(':').map(Number); return `${((h+11)%12)+1}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`; };
+  const row = (k, v) => v ? `<div class="flex gap-3"><span class="text-brand-muted w-32 shrink-0">${esc(k)}</span><span class="font-semibold break-words">${esc(v)}</span></div>` : '';
+  $('summary').innerHTML =
+    row('Trip', (p.tripType === 'round' ? 'Round trip' : 'One way') + ' \u2022 ' + p.purpose) +
+    row('From', p.pickup) + row('To', p.dropoff) +
+    row('Pick-up', `${p.date} at ${t12(p.time)}`) +
+    (p.tripType === 'round' ? row('Return', `${p.returnDate} at ${t12(p.returnTime)}`) : '') +
+    row('Pet', `${p.petName} (${p.petType}${p.breed ? ', ' + p.breed : ''}, ${p.weight} lbs${Number(p.pets) > 1 ? ', ' + p.pets + ' pets' : ''})`) +
+    row('Owner', `${p.ownerName} \u2022 ${p.phone}`) +
+    row('Hand-over', p.pickupContact ? `${p.pickupContact} ${p.pickupContactPhone}` : 'Owner') +
+    row('Receiving', p.dropContact ? `${p.dropContact} ${p.dropContactPhone}` : 'Owner');
+}
+
+async function loadQuote() {
+  const seq = ++quoteSeq; quoteOk = false; $('payBtn').disabled = true;
+  $('quoteBox').innerHTML = '<p class="text-brand-muted">Calculating your price&hellip;</p>';
+  try {
+    const r = await fetch('/api/quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload()) });
+    const j = await r.json();
+    if (seq !== quoteSeq) return;
+    if (!r.ok) throw new Error(j.error || 'Could not calculate the price.');
+    $('quoteBox').innerHTML =
+      `<div class="space-y-1.5">` +
+      j.lines.map(l => `<div class="flex justify-between gap-3"><span class="text-brand-muted">${esc(l.label)}</span><span class="font-semibold">${money(l.amount)}</span></div>`).join('') +
+      `<div class="flex justify-between gap-3 border-t border-brand-border pt-3 mt-2 text-lg"><span class="font-serif font-semibold">Total</span><span class="font-bold text-brand-dark">${money(j.total)}</span></div>` +
+      `<p class="text-xs text-brand-muted pt-1">Driving distance: about ${j.miles} miles one way.</p></div>`;
+    quoteOk = true; $('payBtn').disabled = false;
+  } catch (e) {
+    if (seq !== quoteSeq) return;
+    $('quoteBox').innerHTML = `<p class="text-red-700">${esc(e.message)}</p><p class="text-xs text-brand-muted mt-1">Go back and fix the details, or call us for help.</p>`;
+  }
+}
+
+$('payBtn').onclick = async () => {
+  showErr('');
+  if (!quoteOk) return;
+  if (!$('agreed').checked) { showErr('Please accept the terms to continue.'); return; }
+  const btn = $('payBtn'); btn.disabled = true; btn.textContent = 'Redirecting to secure payment\u2026';
+  try {
+    const r = await fetch('/api/create-checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload()) });
+    const j = await r.json();
+    if (!r.ok || !j.url) throw new Error(j.error || 'Could not start payment.');
+    location.href = j.url;
+  } catch (e) {
+    showErr(e.message); btn.disabled = false; btn.textContent = 'Pay securely';
+  }
+};
+</script>
+</body>
+</html>

@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book Pet Transport | Flaky Bubbles</title>
+<title>Pet Transport | Flaky Bubbles</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,281 +13,295 @@
 tailwind.config={theme:{extend:{colors:{brand:{peach:'#FDEED9',gold:'#735c00',amber:'#FFC861',cream:'#FAF7F2',warm:'#F5F0E8',sage:'#5F856F',dark:'#456553',light:'#EBF3EE',border:'#D3E2D8',ink:'#212B26',muted:'#627068'}},fontFamily:{serif:['"Playfair Display"','serif'],sans:['"Plus Jakarta Sans"','sans-serif']}}}}
 </script>
 <style>
-html{scroll-behavior:smooth}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
-.inp{width:100%;background:#fff;border:1px solid #D3E2D8;border-radius:.75rem;padding:.7rem .9rem;font-size:.95rem;color:#212B26}
-.inp::placeholder{color:#9aa8a0}
-.lbl{display:block;font-size:.8rem;font-weight:600;color:#456553;margin-bottom:.35rem}
-.card{background:#fff;border:1px solid #D3E2D8;border-radius:1.5rem;box-shadow:0 18px 40px -24px rgba(33,43,38,.35)}
-.opt{display:flex;align-items:center;gap:.6rem;border:1.5px solid #D3E2D8;border-radius:.9rem;padding:.8rem 1rem;cursor:pointer;background:#fff;font-weight:600;font-size:.9rem}
-.opt:has(input:checked){border-color:#5F856F;background:#EBF3EE}
-.opt input{accent-color:#5F856F}
-.step-dot{width:2rem;height:2rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;border:2px solid #D3E2D8;background:#fff;color:#627068}
-.step-dot.on{background:#5F856F;border-color:#5F856F;color:#fff}
-.step-dot.done{background:#EBF3EE;border-color:#5F856F;color:#456553}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.floaty{animation:floaty 4s ease-in-out infinite}
+a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.7,.2,1),transform .8s cubic-bezier(.22,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+/* FOOTER */
+.flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
+.flink:hover{color:#fff}
+.flink::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:0;background:#fff;transition:width .3s}
+.flink:hover::after{width:100%}
+.fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
+.fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
+/* Gallery halo */
+.halo-stage{position:relative;height:340px;touch-action:pan-y;outline:none;cursor:grab;overflow:hidden;border-radius:1.25rem}
+.halo-stage:active{cursor:grabbing}
+.halo-card{position:absolute;top:50%;left:50%;border-radius:1rem;overflow:hidden;box-shadow:0 18px 34px -14px rgba(33,43,38,.4);will-change:transform}
+.halo-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
+.halo-stage:focus-visible{outline:2px solid #5F856F;outline-offset:6px;border-radius:1rem}
+@media(min-width:640px){.halo-stage{height:400px}}
+@media (prefers-reduced-motion:reduce){.halo-stage{cursor:default}}
 </style>
 </head>
-<body class="bg-brand-cream text-brand-ink font-sans antialiased">
-<header class="bg-brand-cream/95 border-b border-brand-border">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-    <a href="index.html"><img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain"></a>
-    <a href="service-transport.html" class="text-sm font-semibold text-brand-dark hover:underline">&larr; Back to Pet Transport</a>
+<body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
+<header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+    <a href="index.html" class="flex items-center shrink-0">
+      <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain">
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
+      <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
+      <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
+      <div class="relative group">
+        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Plans
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
+          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+            <a href="membership.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Membership</a>
+            <a href="packages.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Packages</a>
+          </div>
+        </div>
+      </div>
+      <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
+      <div class="relative group">
+        <button class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold flex items-center gap-1" aria-haspopup="true">Services
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
+          <div class="w-60 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+            <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
+            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
+            <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
+            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
+          </div>
+        </div>
+      </div>
+      <a href="gallery.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
+      <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
+      <a href="career.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login</a>
+      <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
   </div>
+
+  <!-- Mobile menu -->
+  <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
+    <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
+    <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
+    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Plans
+      <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+    <div id="memSub" class="hidden pl-4 text-sm text-brand-muted">
+      <a href="membership.html" class="block py-2.5">Membership</a>
+      <a href="packages.html" class="block py-2.5">Packages</a>
+    </div>
+    <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
+    <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60 text-brand-dark font-semibold" aria-expanded="false">Services
+      <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+    <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
+      <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
+      <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
+      <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
+      <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
+    </div>
+    <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
+    <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
+    <a href="career.html" class="block py-3">Career</a>
+    <div class="mt-3">
+      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="block text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
+    </div>
+  </nav>
 </header>
 
-<main class="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-  <div class="text-center mb-8">
-    <span class="text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Pet Transport</span>
-    <h1 class="font-serif font-semibold text-3xl sm:text-4xl">Book a safe ride for your pet</h1>
-    <p class="mt-3 text-brand-muted text-sm sm:text-base">Tell us where and when. You'll see your exact price before you pay.</p>
-  </div>
-
-  <div id="cancelBanner" class="hidden mb-5 rounded-xl bg-brand-peach border border-brand-amber/60 px-4 py-3 text-sm">Payment was cancelled. Your details are still here, so you can try again whenever you're ready.</div>
-
-  <!-- progress -->
-  <ol class="flex items-center justify-center gap-3 mb-6 text-xs font-semibold text-brand-muted" aria-label="Progress">
-    <li class="flex items-center gap-2"><span class="step-dot on" data-dot="1">1</span><span class="hidden sm:inline">Trip</span></li>
-    <li class="w-8 h-px bg-brand-border"></li>
-    <li class="flex items-center gap-2"><span class="step-dot" data-dot="2">2</span><span class="hidden sm:inline">You &amp; your pet</span></li>
-    <li class="w-8 h-px bg-brand-border"></li>
-    <li class="flex items-center gap-2"><span class="step-dot" data-dot="3">3</span><span class="hidden sm:inline">Price &amp; pay</span></li>
-  </ol>
-
-  <form id="bookingForm" class="card p-5 sm:p-8" novalidate autocomplete="on">
-    <!-- STEP 1 -->
-    <section data-step="1" class="space-y-5">
-      <h2 class="font-serif font-semibold text-2xl">Trip details</h2>
-      <div class="grid sm:grid-cols-2 gap-3">
-        <label class="opt"><input type="radio" name="tripType" value="oneway" checked> One way</label>
-        <label class="opt"><input type="radio" name="tripType" value="round"> Round trip</label>
+<main>
+<section class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-14 sm:pb-20">
+  <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+    <div class="relative order-2 lg:order-1 max-w-md mx-auto lg:mx-0">
+      <div class="absolute -top-5 -left-5 w-2/3 h-2/3 rounded-3xl bg-brand-light -z-10"></div>
+      <div class="reveal relative rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-black aspect-[4/5] sm:aspect-square">
+        <video class="hero-video w-full h-full object-cover" src="transport.mp4" poster="transport.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <button class="sound-btn absolute bottom-3 right-3 bg-white/90 hover:bg-white text-brand-dark text-xs font-semibold px-3 py-2 rounded-full shadow">Sound on</button>
       </div>
-      <div>
-        <label class="lbl" for="purpose">What is the ride for?</label>
-        <select id="purpose" class="inp" required>
-          <option value="Grooming appointment">Grooming appointment</option>
-          <option value="Vet visit">Vet visit</option>
-          <option value="Daycare">Daycare</option>
-          <option value="Boarding / Pet hotel">Boarding / Pet hotel</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label class="lbl" for="pickup">Pick-up address</label>
-        <input id="pickup" class="inp" required autocomplete="street-address" placeholder="Street, city, state, ZIP">
-      </div>
-      <div>
-        <label class="lbl" for="dropoff">Drop-off address</label>
-        <input id="dropoff" class="inp" required placeholder="Street, city, state, ZIP">
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div><label class="lbl" for="date">Pick-up date</label><input id="date" type="date" class="inp" required></div>
-        <div><label class="lbl" for="time">Pick-up time</label><select id="time" class="inp" required></select></div>
-      </div>
-      <div id="returnBox" class="hidden grid sm:grid-cols-2 gap-4">
-        <div><label class="lbl" for="returnDate">Return date</label><input id="returnDate" type="date" class="inp"></div>
-        <div><label class="lbl" for="returnTime">Return pick-up time</label><select id="returnTime" class="inp"></select></div>
-      </div>
-      <p class="text-xs text-brand-muted">Regular hours are 9am to 6pm. Rides outside those hours include an after-hours fee, shown in your price.</p>
-    </section>
-
-    <!-- STEP 2 -->
-    <section data-step="2" class="space-y-5 hidden">
-      <h2 class="font-serif font-semibold text-2xl">You &amp; your pet</h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div><label class="lbl" for="ownerName">Your full name</label><input id="ownerName" class="inp" required autocomplete="name"></div>
-        <div><label class="lbl" for="phone">Phone</label><input id="phone" type="tel" class="inp" required autocomplete="tel" placeholder="(555) 123-4567"></div>
-      </div>
-      <div><label class="lbl" for="email">Email (for your receipt)</label><input id="email" type="email" class="inp" required autocomplete="email"></div>
-
-      <div class="border-t border-brand-border pt-5 grid sm:grid-cols-2 gap-4">
-        <div><label class="lbl" for="petName">Pet's name</label><input id="petName" class="inp" required></div>
-        <div><label class="lbl" for="petType">Pet type</label>
-          <select id="petType" class="inp"><option>Dog</option><option>Cat</option><option>Other</option></select></div>
-        <div><label class="lbl" for="breed">Breed (optional)</label><input id="breed" class="inp"></div>
-        <div><label class="lbl" for="weight">Approx. weight (lbs)</label><input id="weight" type="number" min="1" max="300" class="inp" required></div>
-        <div><label class="lbl" for="pets">Number of pets</label>
-          <select id="pets" class="inp"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
-      </div>
-      <div><label class="lbl" for="petNotes">Anything we should know? (anxious, senior, medication, allergies)</label><textarea id="petNotes" rows="2" class="inp" maxlength="300"></textarea></div>
-
-      <div class="border-t border-brand-border pt-5 space-y-4">
-        <h3 class="font-semibold text-brand-dark">Who hands over and who receives?</h3>
-        <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="pickupOther" class="accent-[#5F856F]"> Someone other than me will hand the pet over at pick-up</label>
-        <div id="pickupOtherBox" class="hidden grid sm:grid-cols-2 gap-4">
-          <div><label class="lbl" for="pickupContact">Name</label><input id="pickupContact" class="inp"></div>
-          <div><label class="lbl" for="pickupContactPhone">Phone</label><input id="pickupContactPhone" type="tel" class="inp"></div>
-        </div>
-        <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="dropOther" class="accent-[#5F856F]"> Someone other than me will receive the pet at drop-off</label>
-        <div id="dropOtherBox" class="hidden grid sm:grid-cols-2 gap-4">
-          <div><label class="lbl" for="dropContact">Name</label><input id="dropContact" class="inp"></div>
-          <div><label class="lbl" for="dropContactPhone">Phone</label><input id="dropContactPhone" type="tel" class="inp"></div>
-        </div>
-      </div>
-      <div><label class="lbl" for="driverNotes">Notes for the driver (gate code, apartment, parking)</label><textarea id="driverNotes" rows="2" class="inp" maxlength="300"></textarea></div>
-    </section>
-
-    <!-- STEP 3 -->
-    <section data-step="3" class="space-y-5 hidden">
-      <h2 class="font-serif font-semibold text-2xl">Review &amp; pay</h2>
-      <div id="summary" class="rounded-2xl bg-brand-warm border border-brand-border p-4 text-sm space-y-1.5"></div>
-      <div id="quoteBox" class="rounded-2xl border border-brand-border p-4 text-sm">
-        <p class="text-brand-muted">Calculating your price&hellip;</p>
-      </div>
-      <label class="flex items-start gap-2.5 text-sm">
-        <input type="checkbox" id="agreed" class="mt-1 accent-[#5F856F]">
-        <span>I agree to the <a href="terms.html" target="_blank" class="underline font-semibold text-brand-dark">Terms &amp; Conditions</a> and <a href="privacy.html" target="_blank" class="underline font-semibold text-brand-dark">Privacy Policy</a>, and confirm my pet is healthy, vaccinated and safe to travel.</span>
-      </label>
-      <div class="hp" aria-hidden="true"><label>Website <input id="website" tabindex="-1" autocomplete="off"></label></div>
-      <p class="text-xs text-brand-muted flex items-center gap-1.5">
-        <svg class="w-4 h-4 text-brand-sage shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Secure payment by Stripe. We never see or store your card details.
-      </p>
-    </section>
-
-    <div id="err" role="alert" class="hidden mt-5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm px-4 py-3"></div>
-
-    <div class="mt-7 flex items-center justify-between gap-3">
-      <button type="button" id="backBtn" class="hidden rounded-full border border-brand-sage/60 text-brand-dark font-semibold px-6 py-3 hover:bg-brand-light transition-colors">Back</button>
-      <span id="spacer"></span>
-      <button type="button" id="nextBtn" class="rounded-full bg-brand-sage hover:bg-brand-dark text-white font-semibold px-8 py-3 transition-colors">Continue</button>
-      <button type="button" id="payBtn" class="hidden rounded-full bg-brand-sage hover:bg-brand-dark text-white font-semibold px-8 py-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>Pay securely</button>
     </div>
-  </form>
+    <div class="order-1 lg:order-2 text-center lg:text-left">
+      <span class="reveal text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Luxury Pet Transport</span>
+      <h1 class="reveal font-serif font-semibold text-4xl sm:text-5xl leading-tight mb-4">Flaky Bubbles Pet Transport</h1>
+      <p class="reveal text-brand-muted text-base sm:text-lg mb-7">At Flaky Bubbles Organic Pet Spa, we offer trusted pet transport services for busy pet parents who want peace of mind. Whether your pet needs a local ride to grooming or vet appointments, or assistance with international pet travel coordination, we ensure every stop is handled with care, comfort, and transparency.</p>
+      <a href="transport-booking.html" class="reveal inline-block bg-brand-sage hover:bg-brand-dark text-white font-semibold px-7 py-3.5 rounded-full transition-colors">Book Now</a>
+    </div>
+  </div>
+</section>
 
-  <p class="text-center text-sm text-brand-muted mt-6">Need help or a custom trip? Call <a class="font-semibold text-brand-dark" href="tel:+16823518650">+1 (682) 351 8650</a> or email <a class="font-semibold text-brand-dark" href="mailto:info@flakybubbles.com">info@flakybubbles.com</a>.</p>
+<section class="bg-brand-warm py-16 sm:py-20"><div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+  <span class="reveal text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Our Offer</span>
+  <h2 class="reveal font-serif font-semibold text-3xl sm:text-4xl leading-tight">FlakyBubbles Transport Services We Offer</h2>
+  <p class="reveal mt-3 text-brand-muted max-w-2xl mx-auto">Your pet travels in a calm, climate-controlled vehicle with safety restraints or secured crates at all times.</p>
+  <div class="grid sm:grid-cols-2 gap-3 max-w-xl mx-auto mt-9">
+    <div class="reveal flex items-center gap-2.5 bg-white rounded-full border border-brand-border px-4 py-2.5 text-sm font-medium"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Grooming appointments</span></div>
+    <div class="reveal flex items-center gap-2.5 bg-white rounded-full border border-brand-border px-4 py-2.5 text-sm font-medium"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Vet visits</span></div>
+    <div class="reveal flex items-center gap-2.5 bg-white rounded-full border border-brand-border px-4 py-2.5 text-sm font-medium"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>Daycare or boarding</span></div>
+    <div class="reveal flex items-center gap-2.5 bg-white rounded-full border border-brand-border px-4 py-2.5 text-sm font-medium"><span class="w-5 h-5 rounded-full bg-brand-light text-brand-sage flex items-center justify-center shrink-0"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span>One-way or round-trip options</span></div>
+  </div>
+</div></section>
+
+<section class="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+  <div class="text-center max-w-2xl mx-auto mb-10 reveal"><span class="text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Take a Peek</span><h2 class="font-serif font-semibold text-3xl sm:text-4xl">On the Road</h2><p class="mt-3 text-brand-muted text-sm">Drag the photos, use the arrow keys, or just let them turn.</p></div>
+  <div id="halo-transport" class="halo-stage reveal" role="region" aria-label="On the Road photo gallery" tabindex="0"></div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24"><div class="reveal relative rounded-3xl overflow-hidden bg-brand-dark text-white py-14 px-6 md:px-16 text-center shadow-xl"><div class="max-w-2xl mx-auto space-y-5">
+  <h2 class="font-serif font-semibold text-3xl md:text-[40px] leading-tight">Book a safe ride for your pet</h2>
+  <p class="text-white/85">From grooming runs to vet visits, we’ve got the door-to-door covered.</p>
+  <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3"><a href="transport-booking.html" class="w-full sm:w-auto bg-brand-cream text-brand-ink rounded-full px-8 py-3.5 text-sm font-semibold hover:bg-white transition-colors">Book a Ride</a><a href="index.html#services" class="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/10 hover:bg-white/20 transition-colors">See All Services</a></div>
+</div></div></section>
 </main>
 
+<!-- FOOTER -->
+<footer class="bg-brand-dark text-white">
+  <div class="border-b border-white/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
+      <div>
+        <h2 class="font-serif font-bold text-2xl sm:text-3xl">Ready for a spa day?</h2>
+        <p class="mt-2 text-white/75 max-w-xl">Book an organic grooming, daycare, hotel stay or ride in a few taps. We'll take care of the rest.</p>
+      </div>
+      <div class="flex flex-wrap justify-center md:justify-end gap-3 shrink-0">
+        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="bg-white text-brand-dark font-semibold px-6 py-3 rounded-full hover:bg-brand-light transition-colors">Book an Appointment</a>
+        <a href="contact.html" class="border border-white/60 font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors">Contact us</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
+    <div class="sm:col-span-2 lg:col-span-1">
+      <div class="floaty inline-block bg-white/95 rounded-2xl shadow-xl px-5 py-3">
+        <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-36 sm:w-44 h-auto object-contain">
+      </div>
+      <p class="mt-5 text-sm leading-relaxed text-white/75 max-w-sm">An organic pet spa for grooming, daycare, boarding and door-to-door transport. Gentle, clean blends and calm, caring hands for every pet we welcome.</p>
+      <div class="mt-6 flex gap-3">
+        <a href="https://www.facebook.com/flakybubbles/" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.instagram.com/flaky.bubbles" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+        <a href="https://www.linkedin.com/company/flakybubbles/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+      <form class="mt-6 w-full max-w-sm flex gap-2" onsubmit="event.preventDefault()">
+        <label for="fEmail" class="sr-only">Email</label>
+        <input id="fEmail" type="email" required placeholder="Enter your email" class="flex-1 min-w-0 rounded-full bg-white/10 border border-white/25 placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-white">
+        <button type="submit" class="rounded-full bg-white text-brand-dark font-semibold text-sm px-5 py-2.5 hover:bg-brand-light transition-colors">Subscribe</button>
+      </form>
+    </div>
+
+    <nav aria-label="Quick links">
+      <h3 class="fhead">Quick Links</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="index.html" class="flink">Home</a></li>
+        <li><a href="about.html" class="flink">About Us</a></li>
+        <li><a href="index.html#services" class="flink">Services</a></li>
+        <li><a href="membership.html" class="flink">Membership</a></li>
+        <li><a href="packages.html" class="flink">Packages</a></li>
+        <li><a href="shop.html" class="flink">Shop</a></li>
+        <li><a href="gallery.html" class="flink">Gallery</a></li>
+        <li><a href="career.html" class="flink">Career</a></li>
+        <li><a href="contact.html" class="flink">Contact</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Services">
+      <h3 class="fhead">Services</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="service-grooming.html" class="flink">Pet Grooming</a></li>
+        <li><a href="service-daycare.html" class="flink">Pet DayCare</a></li>
+        <li><a href="service-hotel.html" class="flink">Pet Hotel</a></li>
+        <li><a href="service-transport.html" class="flink">Pet Transport</a></li>
+        <li><a href="packages.html" class="flink">Spa Packages</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <h3 class="fhead">Contact &amp; Information</h3>
+      <ul class="space-y-4 text-sm text-white/80">
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+16823518650" class="flink">+1 (682) 351 8650</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:info@flakybubbles.com" class="flink break-all">info@flakybubbles.com</a></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Street address, City, Country</span></li>
+        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
+      </ul>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40 transition-colors">Get it on <b class="block text-sm">Google Play</b></a>
+        <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40 transition-colors">Download on the <b class="block text-sm">App Store</b></a>
+      </div>
+    </div>
+
+    <nav aria-label="Legal">
+      <h3 class="fhead">Legal</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
+        <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="border-t border-white/15 bg-black/15">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65 text-center sm:text-left">
+      <p>© 2026 Flaky Bubbles. All rights reserved.</p>
+      <p class="hidden md:block">Organic Pet Spa · Grooming · Daycare · Hotel · Transport</p>
+      <div class="flex items-center gap-5">
+        <a href="privacy.html" class="flink">Privacy</a>
+        <a href="terms.html" class="flink">Terms</a>
+        <a href="#top" class="flink">Back to top ↑</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <script>
-const $ = id => document.getElementById(id);
-const val = id => $(id).value.trim();
-const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const money = c => '$' + (c / 100).toFixed(2);
-let step = 1, quoteOk = false, quoteSeq = 0;
+const $=s=>document.querySelector(s);
+const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
+menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
+mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
+$('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+$('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+const rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('.reveal').forEach(el=>{
+ if(rmq)return;
+ el.style.cssText+=';opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease';
+ new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting){el.style.opacity=1;el.style.transform='none';ob.disconnect()}}),{threshold:.1}).observe(el)});
 
-// time slots 7:00 AM - 8:00 PM, every 30 min
-(function(){
-  let html = '<option value="">Select time</option>';
-  for (let m = 7*60; m <= 20*60; m += 30) {
-    const h = Math.floor(m/60), mm = m % 60;
-    const label = `${((h+11)%12)+1}:${String(mm).padStart(2,'0')} ${h>=12?'PM':'AM'}`;
-    html += `<option value="${String(h).padStart(2,'0')}:${String(mm).padStart(2,'0')}">${label}</option>`;
-  }
-  $('time').innerHTML = html; $('returnTime').innerHTML = html;
-})();
-
-const todayStr = (() => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0,10); })();
-$('date').min = todayStr; $('returnDate').min = todayStr;
-$('date').addEventListener('change', () => { $('returnDate').min = val('date') || todayStr; if (!val('returnDate')) $('returnDate').value = val('date'); });
-if (new URLSearchParams(location.search).get('cancelled')) $('cancelBanner').classList.remove('hidden');
-
-const tripType = () => document.querySelector('input[name=tripType]:checked').value;
-document.querySelectorAll('input[name=tripType]').forEach(r => r.addEventListener('change', () => {
-  const round = tripType() === 'round';
-  $('returnBox').classList.toggle('hidden', !round);
-  $('returnDate').required = round; $('returnTime').required = round;
-  if (round && !val('returnDate')) $('returnDate').value = val('date');
-}));
-[['pickupOther','pickupOtherBox',['pickupContact','pickupContactPhone']],['dropOther','dropOtherBox',['dropContact','dropContactPhone']]].forEach(([cb,box,ids]) => {
-  $(cb).addEventListener('change', () => {
-    $(box).classList.toggle('hidden', !$(cb).checked);
-    ids.forEach(i => $(i).required = $(cb).checked);
-  });
-});
-
-function showErr(msg) { const e = $('err'); if (msg) { e.textContent = msg; e.classList.remove('hidden'); } else { e.classList.add('hidden'); } }
-
-function payload() {
-  return {
-    tripType: tripType(), purpose: val('purpose'), pickup: val('pickup'), dropoff: val('dropoff'),
-    date: val('date'), time: val('time'), returnDate: val('returnDate'), returnTime: val('returnTime'),
-    ownerName: val('ownerName'), phone: val('phone'), email: val('email'),
-    petName: val('petName'), petType: val('petType'), breed: val('breed'), weight: val('weight'), pets: val('pets'), petNotes: val('petNotes'),
-    pickupContact: $('pickupOther').checked ? val('pickupContact') : '', pickupContactPhone: $('pickupOther').checked ? val('pickupContactPhone') : '',
-    dropContact: $('dropOther').checked ? val('dropContact') : '', dropContactPhone: $('dropOther').checked ? val('dropContactPhone') : '',
-    driverNotes: val('driverNotes'), website: val('website'), agreed: $('agreed').checked,
-  };
+function initHalo(id, items){
+  const stage=document.getElementById(id); if(!stage) return;
+  const cards=items.map((src,i)=>{const d=document.createElement('div');d.className='halo-card';
+    const img=document.createElement('img');img.src=src;img.alt='';img.loading='lazy';img.draggable=false;d.appendChild(img);stage.appendChild(d);return d;});
+  const n=cards.length,step=2*Math.PI/n;
+  let rot=0,dragging=false,hover=false,startAngle=0,raf=null;
+  function angleAt(clientX,clientY){const r=stage.getBoundingClientRect();
+    return Math.atan2((clientY-r.top-r.height/2)/(r.height*0.34),(clientX-r.left-r.width/2)/(r.width*0.42));}
+  function place(){const r=stage.getBoundingClientRect(),rx=r.width*0.27,ry=r.height*0.32,minS=0.46;
+    cards.forEach((el,i)=>{const th=i*step+rot,c=Math.cos(th),s=Math.sin(th);
+      const scale=minS+(1-minS)*((c+1)/2),w=Math.max(80,r.width*0.24)*scale/((1-minS)*0.6+minS),h=w;
+      el.style.width=w+'px';el.style.height=h+'px';
+      el.style.zIndex=Math.round(scale*100);
+      el.style.transform=`translate(-50%,-50%) translate(${c*rx}px, ${s*ry}px) scale(${scale})`;
+      el.style.opacity=0.35+0.65*scale;});}
+  function animateTo(target,dur){const from=rot,t0=performance.now();
+    if(raf)cancelAnimationFrame(raf);
+    if(rmq||!dur){rot=target;place();return;}
+    function tick(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);rot=from+(target-from)*e;place();if(p<1)raf=requestAnimationFrame(tick);}
+    raf=requestAnimationFrame(tick);}
+  function tickAuto(){setTimeout(()=>{if(!dragging&&!hover&&!document.hidden)animateTo(rot-step,700);tickAuto();},2600);}
+  stage.addEventListener('pointerdown',e=>{dragging=true;startAngle=angleAt(e.clientX,e.clientY);stage.setPointerCapture(e.pointerId);if(raf)cancelAnimationFrame(raf);});
+  stage.addEventListener('pointermove',e=>{if(!dragging)return;const a=angleAt(e.clientX,e.clientY);let d=a-startAngle;
+    d=((d+Math.PI*3)%(2*Math.PI))-Math.PI;startAngle=a;rot+=d;place();});
+  function endDrag(e){if(!dragging)return;dragging=false;try{stage.releasePointerCapture(e.pointerId)}catch(err){}
+    animateTo(Math.round(rot/step)*step,400);}
+  stage.addEventListener('pointerup',endDrag);stage.addEventListener('pointercancel',endDrag);
+  stage.addEventListener('mouseenter',()=>hover=true);stage.addEventListener('mouseleave',()=>hover=false);
+  stage.addEventListener('focus',()=>hover=true);stage.addEventListener('blur',()=>hover=false);
+  stage.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();animateTo(Math.round(rot/step)*step-step,500)}
+    else if(e.key==='ArrowLeft'){e.preventDefault();animateTo(Math.round(rot/step)*step+step,500)}});
+  new ResizeObserver(place).observe(stage);
+  place();
+  if(!rmq) tickAuto();
 }
 
-function go(n) {
-  step = n;
-  document.querySelectorAll('[data-step]').forEach(s => s.classList.toggle('hidden', Number(s.dataset.step) !== n));
-  document.querySelectorAll('[data-dot]').forEach(d => {
-    const i = Number(d.dataset.dot);
-    d.classList.toggle('on', i === n); d.classList.toggle('done', i < n);
-    d.textContent = i < n ? '\u2713' : i;
-  });
-  $('backBtn').classList.toggle('hidden', n === 1);
-  $('nextBtn').classList.toggle('hidden', n === 3);
-  $('payBtn').classList.toggle('hidden', n !== 3);
-  showErr('');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function stepValid(n) {
-  const els = document.querySelectorAll(`[data-step="${n}"] input, [data-step="${n}"] select, [data-step="${n}"] textarea`);
-  for (const el of els) { if (el.offsetParent !== null && !el.checkValidity()) { el.reportValidity(); return false; } }
-  if (n === 1 && tripType() === 'round' && val('returnDate') < val('date')) { showErr('Return date cannot be before the pick-up date.'); return false; }
-  if (n === 2 && val('phone').replace(/\D/g,'').length < 10) { showErr('Please enter a valid phone number.'); $('phone').focus(); return false; }
-  return true;
-}
-
-$('nextBtn').onclick = () => {
-  showErr('');
-  if (!stepValid(step)) return;
-  if (step === 2) { renderSummary(); go(3); loadQuote(); } else go(step + 1);
-};
-$('backBtn').onclick = () => go(step - 1);
-
-function renderSummary() {
-  const p = payload();
-  const t12 = t => { if (!t) return ''; const [h,m] = t.split(':').map(Number); return `${((h+11)%12)+1}:${String(m).padStart(2,'0')} ${h>=12?'PM':'AM'}`; };
-  const row = (k, v) => v ? `<div class="flex gap-3"><span class="text-brand-muted w-32 shrink-0">${esc(k)}</span><span class="font-semibold break-words">${esc(v)}</span></div>` : '';
-  $('summary').innerHTML =
-    row('Trip', (p.tripType === 'round' ? 'Round trip' : 'One way') + ' \u2022 ' + p.purpose) +
-    row('From', p.pickup) + row('To', p.dropoff) +
-    row('Pick-up', `${p.date} at ${t12(p.time)}`) +
-    (p.tripType === 'round' ? row('Return', `${p.returnDate} at ${t12(p.returnTime)}`) : '') +
-    row('Pet', `${p.petName} (${p.petType}${p.breed ? ', ' + p.breed : ''}, ${p.weight} lbs${Number(p.pets) > 1 ? ', ' + p.pets + ' pets' : ''})`) +
-    row('Owner', `${p.ownerName} \u2022 ${p.phone}`) +
-    row('Hand-over', p.pickupContact ? `${p.pickupContact} ${p.pickupContactPhone}` : 'Owner') +
-    row('Receiving', p.dropContact ? `${p.dropContact} ${p.dropContactPhone}` : 'Owner');
-}
-
-async function loadQuote() {
-  const seq = ++quoteSeq; quoteOk = false; $('payBtn').disabled = true;
-  $('quoteBox').innerHTML = '<p class="text-brand-muted">Calculating your price&hellip;</p>';
-  try {
-    const r = await fetch('/api/quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload()) });
-    const j = await r.json();
-    if (seq !== quoteSeq) return;
-    if (!r.ok) throw new Error(j.error || 'Could not calculate the price.');
-    $('quoteBox').innerHTML =
-      `<div class="space-y-1.5">` +
-      j.lines.map(l => `<div class="flex justify-between gap-3"><span class="text-brand-muted">${esc(l.label)}</span><span class="font-semibold">${money(l.amount)}</span></div>`).join('') +
-      `<div class="flex justify-between gap-3 border-t border-brand-border pt-3 mt-2 text-lg"><span class="font-serif font-semibold">Total</span><span class="font-bold text-brand-dark">${money(j.total)}</span></div>` +
-      `<p class="text-xs text-brand-muted pt-1">Driving distance: about ${j.miles} miles one way.</p></div>`;
-    quoteOk = true; $('payBtn').disabled = false;
-  } catch (e) {
-    if (seq !== quoteSeq) return;
-    $('quoteBox').innerHTML = `<p class="text-red-700">${esc(e.message)}</p><p class="text-xs text-brand-muted mt-1">Go back and fix the details, or call us for help.</p>`;
-  }
-}
-
-$('payBtn').onclick = async () => {
-  showErr('');
-  if (!quoteOk) return;
-  if (!$('agreed').checked) { showErr('Please accept the terms to continue.'); return; }
-  const btn = $('payBtn'); btn.disabled = true; btn.textContent = 'Redirecting to secure payment\u2026';
-  try {
-    const r = await fetch('/api/create-checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload()) });
-    const j = await r.json();
-    if (!r.ok || !j.url) throw new Error(j.error || 'Could not start payment.');
-    location.href = j.url;
-  } catch (e) {
-    showErr(e.message); btn.disabled = false; btn.textContent = 'Pay securely';
-  }
-};
+document.querySelectorAll('.sound-btn').forEach(b=>{const v=b.parentElement.querySelector('.hero-video');
+  b.onclick=()=>{v.muted=!v.muted;b.textContent=v.muted?'Sound on':'Sound off';if(!v.muted)v.play().catch(()=>{})}});
+initHalo("halo-transport", ["halo/gallery-1.jpg", "halo/gallery-2.jpg", "halo/gallery-3.jpg", "halo/gallery-4.jpg", "halo/gallery-5.jpg"]);
 </script>
+<script src="gingr-config.js"></script>
 </body>
 </html>

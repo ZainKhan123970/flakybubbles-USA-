@@ -9,9 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
 <script>
 tailwind.config={theme:{extend:{colors:{brand:{peach:'#FDEED9',gold:'#735c00',amber:'#FFC861',cream:'#FAF7F2',warm:'#F5F0E8',sage:'#5F856F',dark:'#456553',light:'#EBF3EE',border:'#D3E2D8',ink:'#212B26',muted:'#627068'}},fontFamily:{serif:['"Playfair Display"','serif'],sans:['"Plus Jakarta Sans"','sans-serif']}}}}
 </script>
+
 <style>
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -40,7 +42,7 @@ html.lock{overflow:hidden}
 #introVideo{transform:scale(1.15);transition:transform 2.6s cubic-bezier(.22,.7,.2,1)}
 #intro.open #introVideo{transform:scale(1)}
 #intro .gate{position:absolute;top:0;bottom:0;width:50.3%;z-index:10;backface-visibility:hidden;transition:transform 1.9s cubic-bezier(.76,0,.24,1);
- background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 48px),linear-gradient(180deg,#4d7360,#35503f);box-shadow:inset 0 0 0 10px rgba(255,255,255,.05),inset 0 0 80px rgba(0,0,0,.25)}
+background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 48px),linear-gradient(180deg,#4d7360,#35503f);box-shadow:inset 0 0 0 10px rgba(255,255,255,.05),inset 0 0 80px rgba(0,0,0,.25)}
 #intro .gate::after{content:"";position:absolute;top:50%;width:6px;height:96px;margin-top:-48px;background:#C8A265;border-radius:3px}
 .gate-l{left:0;transform-origin:0 50%}.gate-l::after{right:18px}
 .gate-r{right:0;transform-origin:100% 50%}.gate-r::after{left:18px}
@@ -50,7 +52,6 @@ html.lock{overflow:hidden}
 #intro.open .gate-logo{opacity:0;transform:scale(.9)}
 #intro.leaving{opacity:0;transform:scale(1.04);pointer-events:none;transition:opacity .8s ease,transform .8s ease}
 @media (prefers-reduced-motion:reduce){.svc{opacity:1;transform:none;transition:none}.svc video{transform:none}}
-/* FOOTER */
 .price-card{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
 .price-card:hover{transform:translateY(-6px);box-shadow:0 16px 30px -16px rgba(69,101,83,.35);border-color:#5F856F}
 .price-card .price-icon{transition:transform .3s ease}
@@ -63,8 +64,6 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
 .flink:hover::after{width:100%}
 .fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
 .fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
-
-/* Decorative daycare pricing cards */
 .price-card{isolation:isolate}
 .price-decoration{position:absolute;z-index:-1;top:-3.2rem;right:-3.2rem;width:8.5rem;height:8.5rem;border-radius:9999px;background:#EBF3EE;transition:transform .45s ease,background-color .35s ease}
 .price-card:hover .price-decoration{transform:scale(1.22);background:#DDEBE2}
@@ -72,17 +71,12 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
 .price-card .price-book-btn{box-shadow:0 5px 12px -8px rgba(33,43,38,.45)}
 .price-card .price-book-btn:hover{transform:translateY(-2px);box-shadow:0 9px 18px -10px rgba(33,43,38,.55)}
 @media (prefers-reduced-motion:reduce){.price-card,.price-decoration,.price-card .price-book-btn{transition:none}.price-card:hover,.price-card .price-book-btn:hover{transform:none}}
-
-/* Subtle hover feedback for daycare pricing and feature cards */
 .price-card,.svc-item{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
 .price-card:hover,.svc-item:hover{transform:translateY(-4px);box-shadow:0 14px 28px -16px rgba(33,43,38,.35);border-color:#AFC9B9}
 .svc-item summary{transition:background-color .25s ease}
 .svc-item:hover summary{background-color:#F8FBF8}
 .svc-item[open]{box-shadow:0 10px 24px -16px rgba(33,43,38,.3)}
 @media (prefers-reduced-motion:reduce){.price-card,.svc-item,.svc-item summary{transition:none}.price-card:hover,.svc-item:hover{transform:none}}
-</style>
-<noscript><style>#intro{display:none}.svc{opacity:1!important;transform:none!important}</style></noscript>
-<style>
 .halo-stage{position:relative;height:340px;touch-action:pan-y;outline:none;cursor:grab;overflow:hidden;border-radius:1.25rem}
 .halo-stage:active{cursor:grabbing}
 .halo-card{position:absolute;top:50%;left:50%;border-radius:1rem;overflow:hidden;box-shadow:0 18px 34px -14px rgba(33,43,38,.4);will-change:transform}
@@ -91,20 +85,33 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
 @media(min-width:640px){.halo-stage{height:400px}}
 @media (prefers-reduced-motion:reduce){.halo-stage{cursor:default}}
 </style>
+
+<noscript><style>#intro{display:none}.svc{opacity:1!important;transform:none!important}</style></noscript>
 </head>
+
 <body class="bg-brand-cream text-brand-ink font-sans antialiased">
+
+<!-- UPDATED HEADER -->
 <header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+
     <a href="index.html" class="flex items-center shrink-0">
       <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain">
     </a>
 
+    <!-- Desktop Navigation -->
     <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
-      <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
-      <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
+
+      <a href="index.html" class="px-2.5 py-2 rounded-md hover:bg-brand-light">Home</a>
+
+      <a href="about.html" class="px-2.5 py-2 rounded-md hover:bg-brand-light">About Us</a>
+
+      <!-- Plans Dropdown -->
       <div class="relative group">
-        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Plans
-          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+        <button class="px-2.5 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">
+          Plans
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+        </button>
         <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="membership.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Membership</a>
@@ -112,56 +119,110 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
           </div>
         </div>
       </div>
-      <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
+
+      <a href="shop.html" class="px-2.5 py-2 rounded-md hover:bg-brand-light">Shop</a>
+
+      <!-- Services Dropdown -->
       <div class="relative group">
-        <button class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold flex items-center gap-1" aria-haspopup="true">Services
-          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
+        <button class="px-2.5 py-2 rounded-md bg-brand-light text-brand-dark font-semibold flex items-center gap-1" aria-haspopup="true">
+          Services
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+        </button>
+        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
-            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
+            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg bg-brand-light text-brand-dark font-semibold">Pet DayCare</a>
             <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
             <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
           </div>
         </div>
       </div>
-      <a href="gallery.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
-      <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
-      <a href="career.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+
+      <a href="events.html" class="px-2.5 py-2 rounded-md hover:bg-brand-light">Events</a>
+
+      <a href="contact.html" class="px-2.5 py-2 rounded-md hover:bg-brand-light">Contact</a>
+
+      <!-- More Dropdown -->
+      <div class="relative group">
+        <button class="px-2.5 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">
+          More
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+        </button>
+        <div class="absolute right-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
+          <div class="w-48 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+            <a href="gallery.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Gallery</a>
+            <a href="career.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Career</a>
+            <a href="fun-fact.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Fun Fact</a>
+          </div>
+        </div>
+      </div>
+
     </nav>
 
-    <div class="flex items-center gap-2">
-      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login|Book Now</a>
-      <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <div class="flex items-center gap-2 shrink-0">
+      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener"
+         class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors whitespace-nowrap">
+        Login|Book Now
+      </a>
+
+      <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center"
+        aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
       </button>
     </div>
   </div>
 
-  <!-- Mobile menu -->
+  <!-- Mobile Navigation -->
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
+
     <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Plans
-      <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+
+    <!-- Mobile Plans -->
+    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">
+      Plans
+      <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+    </button>
     <div id="memSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="membership.html" class="block py-2.5">Membership</a>
       <a href="packages.html" class="block py-2.5">Packages</a>
     </div>
+
     <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
-    <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60 text-brand-dark font-semibold" aria-expanded="false">Services
-      <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+
+    <!-- Mobile Services -->
+    <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60 text-brand-dark font-semibold" aria-expanded="false">
+      Services
+      <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+    </button>
     <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
-      <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
+      <a href="service-daycare.html" class="block py-2.5 text-brand-dark font-semibold">Pet DayCare</a>
       <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
       <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
     </div>
-    <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
+
+    <a href="events.html" class="block py-3 border-b border-brand-border/60">Events</a>
     <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
-    <a href="career.html" class="block py-3">Career</a>
+
+    <!-- Mobile More -->
+    <button id="moreBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">
+      More
+      <svg class="w-4 h-4 transition-transform" id="moreIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+    </button>
+    <div id="moreSub" class="hidden pl-4 text-sm text-brand-muted">
+      <a href="gallery.html" class="block py-2.5">Gallery</a>
+      <a href="career.html" class="block py-2.5">Career</a>
+      <a href="fun-fact.html" class="block py-2.5">Fun Fact</a>
+    </div>
+
     <div class="mt-3 grid grid-cols-1 gap-2">
-      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
+      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener"
+         class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">
+        Login | Book Now
+      </a>
     </div>
   </nav>
 </header>
@@ -176,6 +237,7 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
         <button class="sound-btn absolute bottom-3 right-3 bg-white/90 hover:bg-white text-brand-dark text-xs font-semibold px-3 py-2 rounded-full shadow">Sound on</button>
       </div>
     </div>
+
     <div class="order-1 lg:order-2 text-center lg:text-left">
       <span class="reveal text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Luxury Day Care</span>
       <h1 class="reveal font-serif font-semibold text-4xl sm:text-5xl leading-tight mb-4">FlakyBubbles Pet Daycare</h1>
@@ -292,19 +354,30 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
 </section>
 
 <section class="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
-  <div class="text-center max-w-2xl mx-auto mb-10 reveal"><span class="text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Take a Peek</span><h2 class="font-serif font-semibold text-3xl sm:text-4xl">A Day in Daycare</h2><p class="mt-3 text-brand-muted text-sm">Drag the photos, use the arrow keys, or just let them turn.</p></div>
+  <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+    <span class="text-xs uppercase tracking-[.25em] font-semibold text-brand-gold block mb-3">Take a Peek</span>
+    <h2 class="font-serif font-semibold text-3xl sm:text-4xl">A Day in Daycare</h2>
+    <p class="mt-3 text-brand-muted text-sm">Drag the photos, use the arrow keys, or just let them turn.</p>
+  </div>
   <div id="halo-daycare" class="halo-stage reveal" role="region" aria-label="A Day in Daycare photo gallery" tabindex="0"></div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24"><div class="reveal relative rounded-3xl overflow-hidden bg-brand-dark text-white py-14 px-6 md:px-16 text-center shadow-xl"><div class="max-w-2xl mx-auto space-y-5">
-  <h2 class="font-serif font-semibold text-3xl md:text-[40px] leading-tight">Give your pup a day to remember</h2>
-  <p class="text-white/85">Sign up for daycare and let them play, socialize and nap in good company.</p>
-  <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3"><a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="w-full sm:w-auto bg-brand-cream text-brand-ink rounded-full px-8 py-3.5 text-sm font-semibold hover:bg-white transition-colors">Book Daycare Now</a><a href="index.html#services" class="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/10 hover:bg-white/20 transition-colors">See All Services</a></div>
-</div></div></section>
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+  <div class="reveal relative rounded-3xl overflow-hidden bg-brand-dark text-white py-14 px-6 md:px-16 text-center shadow-xl">
+    <div class="max-w-2xl mx-auto space-y-5">
+      <h2 class="font-serif font-semibold text-3xl md:text-[40px] leading-tight">Give your pup a day to remember</h2>
+      <p class="text-white/85">Sign up for daycare and let them play, socialize and nap in good company.</p>
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="w-full sm:w-auto bg-brand-cream text-brand-ink rounded-full px-8 py-3.5 text-sm font-semibold hover:bg-white transition-colors">Book Daycare Now</a>
+        <a href="index.html#services" class="w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold bg-white/10 hover:bg-white/20 transition-colors">See All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
+
 <!-- FOOTER -->
 <footer class="bg-brand-dark text-white">
-  <!-- Top call-to-action band -->
   <div class="border-b border-white/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
       <div>
@@ -318,7 +391,6 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
     </div>
   </div>
 
-  <!-- Main columns -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
     <div class="sm:col-span-2 lg:col-span-1">
       <div class="floaty inline-block bg-white/95 rounded-2xl shadow-xl px-5 py-3">
@@ -360,7 +432,6 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
         <li><a href="service-hotel.html" class="flink">Pet Hotel</a></li>
         <li><a href="service-transport.html" class="flink">Pet Transport</a></li>
         <li><a href="packages.html" class="flink">Spa Packages</a></li>
-        <!-- Add Bathing / Pool / Outdoor links here once those pages exist -->
       </ul>
     </nav>
 
@@ -383,12 +454,10 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
       <ul class="space-y-3 text-sm">
         <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
         <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
-        <!-- Additional legal / help links will be added here -->
       </ul>
     </nav>
   </div>
 
-  <!-- Bottom bar -->
   <div class="border-t border-white/15 bg-black/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65 text-center sm:text-left">
       <p>© 2026 Flaky Bubbles. All rights reserved.</p>
@@ -404,56 +473,186 @@ details[open] .chev{transform:translateY(-50%) rotate(180deg)}
 
 <script>
 const $=s=>document.querySelector(s);
+
 // Mobile menu
 const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
-menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
-mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
-$('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
-$('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+menuBtn.onclick=()=>{
+  const o=mNav.classList.toggle('hidden');
+  menuBtn.setAttribute('aria-expanded',!o);
+};
+
+mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{
+  mNav.classList.add('hidden');
+  menuBtn.setAttribute('aria-expanded',false);
+});
+
+// Mobile Plans dropdown
+$('#memBtn').onclick=e=>{
+  const h=$('#memSub').classList.toggle('hidden');
+  $('#memIcon').style.transform=h?'':'rotate(180deg)';
+  e.currentTarget.setAttribute('aria-expanded',!h);
+};
+
+// Mobile Services dropdown
+$('#svcBtn').onclick=e=>{
+  const h=$('#svcSub').classList.toggle('hidden');
+  $('#svcIcon').style.transform=h?'':'rotate(180deg)';
+  e.currentTarget.setAttribute('aria-expanded',!h);
+};
+
+// Mobile More dropdown
+$('#moreBtn').onclick=e=>{
+  const h=$('#moreSub').classList.toggle('hidden');
+  $('#moreIcon').style.transform=h?'':'rotate(180deg)';
+  e.currentTarget.setAttribute('aria-expanded',!h);
+};
+
 const rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>{el.style.cssText+=';opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease';new IntersectionObserver((es,ob)=>es.forEach(e=>{if(e.isIntersecting){el.style.opacity=1;el.style.transform='none';ob.disconnect()}}),{threshold:.1}).observe(el)});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    e.target.classList.add('in');
+    io.unobserve(e.target);
+  }
+}),{threshold:.12});
+
+document.querySelectorAll('.reveal').forEach(el=>{
+  el.style.cssText+=';opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease';
+  new IntersectionObserver((es,ob)=>es.forEach(e=>{
+    if(e.isIntersecting){
+      el.style.opacity=1;
+      el.style.transform='none';
+      ob.disconnect();
+    }
+  }),{threshold:.1}).observe(el);
+});
 
 function initHalo(id, items){
-  const stage=document.getElementById(id); if(!stage) return;
-  const cards=items.map((src,i)=>{const d=document.createElement('div');d.className='halo-card';
-    const img=document.createElement('img');img.src=src;img.alt='';img.loading='lazy';img.draggable=false;d.appendChild(img);stage.appendChild(d);return d;});
+  const stage=document.getElementById(id);
+  if(!stage) return;
+
+  const cards=items.map((src,i)=>{
+    const d=document.createElement('div');
+    d.className='halo-card';
+    const img=document.createElement('img');
+    img.src=src;
+    img.alt='';
+    img.loading='lazy';
+    img.draggable=false;
+    d.appendChild(img);
+    stage.appendChild(d);
+    return d;
+  });
+
   const n=cards.length,step=2*Math.PI/n,rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
   let rot=0,dragging=false,hover=false,startAngle=0,raf=null;
-  function angleAt(clientX,clientY){const r=stage.getBoundingClientRect();
-    return Math.atan2((clientY-r.top-r.height/2)/(r.height*0.34),(clientX-r.left-r.width/2)/(r.width*0.42));}
-  function place(){const r=stage.getBoundingClientRect(),rx=r.width*0.27,ry=r.height*0.32,minS=0.46;
-    cards.forEach((el,i)=>{const th=i*step+rot,c=Math.cos(th),s=Math.sin(th);
+
+  function angleAt(clientX,clientY){
+    const r=stage.getBoundingClientRect();
+    return Math.atan2((clientY-r.top-r.height/2)/(r.height*0.34),(clientX-r.left-r.width/2)/(r.width*0.42));
+  }
+
+  function place(){
+    const r=stage.getBoundingClientRect(),rx=r.width*0.27,ry=r.height*0.32,minS=0.46;
+    cards.forEach((el,i)=>{
+      const th=i*step+rot,c=Math.cos(th),s=Math.sin(th);
       const scale=minS+(1-minS)*((c+1)/2),w=Math.max(80,r.width*0.24)*scale/((1-minS)*0.6+minS),h=w;
-      el.style.width=w+'px';el.style.height=h+'px';
+      el.style.width=w+'px';
+      el.style.height=h+'px';
       el.style.zIndex=Math.round(scale*100);
       el.style.transform=`translate(-50%,-50%) translate(${c*rx}px, ${s*ry}px) scale(${scale})`;
-      el.style.opacity=0.35+0.65*scale;});}
-  function animateTo(target,dur){const from=rot,t0=performance.now();
+      el.style.opacity=0.35+0.65*scale;
+    });
+  }
+
+  function animateTo(target,dur){
+    const from=rot,t0=performance.now();
     if(raf)cancelAnimationFrame(raf);
-    if(rmq||!dur){rot=target;place();return;}
-    function tick(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);rot=from+(target-from)*e;place();if(p<1)raf=requestAnimationFrame(tick);}
-    raf=requestAnimationFrame(tick);}
-  function tickAuto(){setTimeout(()=>{if(!dragging&&!hover&&!document.hidden)animateTo(rot-step,700);tickAuto();},2600);}
-  stage.addEventListener('pointerdown',e=>{dragging=true;startAngle=angleAt(e.clientX,e.clientY);stage.setPointerCapture(e.pointerId);if(raf)cancelAnimationFrame(raf);});
-  stage.addEventListener('pointermove',e=>{if(!dragging)return;const a=angleAt(e.clientX,e.clientY);let d=a-startAngle;
-    d=((d+Math.PI*3)%(2*Math.PI))-Math.PI;startAngle=a;rot+=d;place();});
-  function endDrag(e){if(!dragging)return;dragging=false;try{stage.releasePointerCapture(e.pointerId)}catch(err){}
-    animateTo(Math.round(rot/step)*step,400);}
-  stage.addEventListener('pointerup',endDrag);stage.addEventListener('pointercancel',endDrag);
-  stage.addEventListener('mouseenter',()=>hover=true);stage.addEventListener('mouseleave',()=>hover=false);
-  stage.addEventListener('focus',()=>hover=true);stage.addEventListener('blur',()=>hover=false);
-  stage.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();animateTo(Math.round(rot/step)*step-step,500)}
-    else if(e.key==='ArrowLeft'){e.preventDefault();animateTo(Math.round(rot/step)*step+step,500)}});
+    if(rmq||!dur){
+      rot=target;
+      place();
+      return;
+    }
+    function tick(t){
+      const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
+      rot=from+(target-from)*e;
+      place();
+      if(p<1)raf=requestAnimationFrame(tick);
+    }
+    raf=requestAnimationFrame(tick);
+  }
+
+  function tickAuto(){
+    setTimeout(()=>{
+      if(!dragging&&!hover&&!document.hidden)animateTo(rot-step,700);
+      tickAuto();
+    },2600);
+  }
+
+  stage.addEventListener('pointerdown',e=>{
+    dragging=true;
+    startAngle=angleAt(e.clientX,e.clientY);
+    stage.setPointerCapture(e.pointerId);
+    if(raf)cancelAnimationFrame(raf);
+  });
+
+  stage.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    const a=angleAt(e.clientX,e.clientY);
+    let d=a-startAngle;
+    d=((d+Math.PI*3)%(2*Math.PI))-Math.PI;
+    startAngle=a;
+    rot+=d;
+    place();
+  });
+
+  function endDrag(e){
+    if(!dragging)return;
+    dragging=false;
+    try{stage.releasePointerCapture(e.pointerId)}catch(err){}
+    animateTo(Math.round(rot/step)*step,400);
+  }
+
+  stage.addEventListener('pointerup',endDrag);
+  stage.addEventListener('pointercancel',endDrag);
+  stage.addEventListener('mouseenter',()=>hover=true);
+  stage.addEventListener('mouseleave',()=>hover=false);
+  stage.addEventListener('focus',()=>hover=true);
+  stage.addEventListener('blur',()=>hover=false);
+
+  stage.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'){
+      e.preventDefault();
+      animateTo(Math.round(rot/step)*step-step,500);
+    }else if(e.key==='ArrowLeft'){
+      e.preventDefault();
+      animateTo(Math.round(rot/step)*step+step,500);
+    }
+  });
+
   new ResizeObserver(place).observe(stage);
   place();
   if(!rmq) tickAuto();
 }
 
-document.querySelectorAll('.sound-btn').forEach(b=>{const v=b.parentElement.querySelector('.hero-video');
-  b.onclick=()=>{v.muted=!v.muted;b.textContent=v.muted?'Sound on':'Sound off';if(!v.muted)v.play().catch(()=>{})}});
-initHalo("halo-daycare", ["halo/gallery-1.jpg", "halo/gallery-2.jpg", "halo/gallery-3.jpg", "halo/gallery-4.jpg", "halo/gallery-5.jpg"]);
+document.querySelectorAll('.sound-btn').forEach(b=>{
+  const v=b.parentElement.querySelector('.hero-video');
+  b.onclick=()=>{
+    v.muted=!v.muted;
+    b.textContent=v.muted?'Sound on':'Sound off';
+    if(!v.muted)v.play().catch(()=>{});
+  };
+});
+
+initHalo("halo-daycare",[
+  "halo/gallery-1.jpg",
+  "halo/gallery-2.jpg",
+  "halo/gallery-3.jpg",
+  "halo/gallery-4.jpg",
+  "halo/gallery-5.jpg"
+]);
 </script>
+
 <script src="gingr-config.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Events | FlakyBubbles Organic Pet Spa</title>
-<meta name="description" content="Pet events and celebrations at FlakyBubbles Organic Pet Spa: birthday parties, playdates, gotcha days and community pet events.">
+<meta name="description" content="Events at FlakyBubbles Organic Pet Spa: our soft open, pet celebrations and community pet events.">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,12 +14,12 @@ tailwind.config={theme:{extend:{colors:{brand:{peach:'#FDEED9',gold:'#735c00',am
 </script>
 <style>
 html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-size:17px;line-height:1.65}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .floaty{animation:floaty 4s ease-in-out infinite}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.7,.2,1),transform .8s cubic-bezier(.22,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
+
 /* Footer */
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
@@ -27,92 +27,59 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .flink:hover::after{width:100%}
 .fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
 .fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
+
 /* "More" dropdown (click to open) */
 .more-menu{opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s ease,transform .2s ease,visibility 0s linear .2s}
 .more-menu.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s ease,transform .2s ease}
 #moreBtn svg{transition:transform .25s ease}
 #moreBtn[aria-expanded="true"] svg{transform:rotate(180deg)}
 @media (prefers-reduced-motion:reduce){.more-menu,#moreBtn svg{transition:none}}
-/* Hero bubbles */
-@keyframes rise{0%{transform:translateY(0) scale(.8);opacity:0}15%{opacity:.8}100%{transform:translateY(-260px) scale(1.1);opacity:0}}
-.hb{position:absolute;bottom:-20px;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 28%,#fff,rgba(255,255,255,.6) 45%,rgba(180,210,195,.25) 100%);box-shadow:inset -3px -4px 8px rgba(95,133,111,.15),0 0 0 1px rgba(95,133,111,.15);animation:rise linear infinite}
-@media (prefers-reduced-motion:reduce){.hb{animation:none;opacity:.5}}
 
-/* ===== EVENTS PAGE ===== */
-@keyframes floatA{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(2deg)}}
-@keyframes floatB{0%,100%{transform:translateY(0) rotate(4deg)}50%{transform:translateY(-16px) rotate(-3deg)}}
-@keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(95,133,111,.45)}100%{box-shadow:0 0 0 18px rgba(95,133,111,0)}}
-.fa{animation:floatA 5s ease-in-out infinite}
-.fb{animation:floatB 6.5s ease-in-out infinite}
-.pulse{animation:pulseRing 2s ease-out infinite}
-@media (prefers-reduced-motion:reduce){.fa,.fb,.pulse{animation:none}}
+/* ===== EVENTS PAGE (minimal) ===== */
+.ev-img{border-radius:1.25rem;overflow:hidden;border:1px solid #D3E2D8;background:#fff;box-shadow:0 18px 40px -22px rgba(69,101,83,.4)}
+.ev-img img{display:block;width:100%;height:100%;object-fit:cover}
+.ev-card{background:#fff;border:1px solid #D3E2D8;border-radius:1rem;padding:1.4rem 1.6rem}
+.ev-row{display:flex;gap:.85rem;align-items:flex-start}
+.ev-row+.ev-row{margin-top:1rem;padding-top:1rem;border-top:1px solid #EBF3EE}
+.ev-ico{flex:none;width:1.5rem;height:1.5rem;margin-top:.2rem;color:#5F856F}
+.btn-main{display:inline-block;background:#5F856F;color:#fff;font-weight:600;border-radius:999px;padding:.85rem 1.8rem;font-size:1rem;transition:background .25s,transform .25s}
+.btn-main:hover{background:#456553;transform:translateY(-2px)}
+.btn-main:disabled{opacity:.6;cursor:wait;transform:none}
+.btn-line{display:inline-block;border:1px solid rgba(95,133,111,.6);color:#456553;font-weight:600;border-radius:999px;padding:.75rem 1.6rem;font-size:.9rem;background:transparent;transition:background .25s,transform .25s}
+.btn-line:hover{background:#EBF3EE;transform:translateY(-2px)}
 
-.hchip{background:rgba(255,255,255,.85);border:1px solid #D3E2D8;border-radius:999px;padding:.45rem .95rem;font-size:.8rem;font-weight:600;color:#456553;transition:transform .3s,background .3s,box-shadow .3s;cursor:default}
-.hchip:hover{transform:translateY(-4px) rotate(-2deg);background:#fff;box-shadow:0 10px 20px -10px rgba(69,101,83,.5)}
-/* Banner */
-.banner{position:relative;border-radius:1.75rem;overflow:hidden;border:1px solid #D3E2D8;box-shadow:0 24px 60px -20px rgba(69,101,83,.35);transition:transform .6s cubic-bezier(.22,.7,.2,1),box-shadow .6s}
-.banner img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.22,.7,.2,1)}
-.banner:hover{transform:translateY(-6px);box-shadow:0 34px 70px -22px rgba(69,101,83,.45)}
-.banner:hover img{transform:scale(1.05)}
-.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.28) 50%,transparent 60%);transform:translateX(-120%);transition:transform 1s}
-.banner:hover::after{transform:translateX(120%)}
-
-/* Video frame */
-.vframe{position:relative;border-radius:1.75rem;overflow:hidden;background:#212B26;border:6px solid #fff;box-shadow:0 30px 60px -20px rgba(33,43,38,.45);transform:rotate(-1.2deg);transition:transform .5s cubic-bezier(.22,.7,.2,1)}
-.vframe:hover{transform:rotate(0) scale(1.015)}
-.vframe video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
-.vbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.92);color:#456553;display:flex;align-items:center;justify-content:center;transition:transform .3s,opacity .3s,background .3s;cursor:pointer}
-.vbtn:hover{transform:translate(-50%,-50%) scale(1.1);background:#fff}
-.vframe.playing .vbtn{opacity:0}
-.vframe.playing:hover .vbtn{opacity:1}
-
-/* Event type cards */
-.tcard{position:relative;background:#fff;border:1px solid #D3E2D8;border-radius:1.5rem;padding:1.6rem;overflow:hidden;transition:transform .45s cubic-bezier(.22,.7,.2,1),box-shadow .45s,border-color .45s}
-.tcard::before{content:"";position:absolute;right:-40px;top:-40px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#EBF3EE,#FDEED9);transition:transform .6s}
-.tcard:hover{transform:translateY(-10px) rotate(-.6deg);box-shadow:0 26px 50px -22px rgba(69,101,83,.45);border-color:#5F856F}
-.tcard:hover::before{transform:scale(1.8)}
-.tcard .ico{position:relative;display:inline-flex;width:3.4rem;height:3.4rem;align-items:center;justify-content:center;font-size:1.7rem;background:#FDEED9;border-radius:1rem;transition:transform .4s}
-.tcard:hover .ico{transform:scale(1.15) rotate(-8deg)}
 
 /* Filter pills */
-.pill{border:1px solid #D3E2D8;background:#fff;border-radius:999px;padding:.45rem 1rem;font-size:.8rem;font-weight:600;color:#456553;transition:all .25s;cursor:pointer}
-.pill:hover{background:#EBF3EE;transform:translateY(-2px)}
+.pill{border:1px solid #D3E2D8;background:#fff;border-radius:999px;padding:.6rem 1.25rem;font-size:.95rem;font-weight:600;color:#456553;transition:all .25s;cursor:pointer}
+.pill:hover{background:#EBF3EE}
 .pill.on{background:#5F856F;border-color:#5F856F;color:#fff}
-.fsel{border:1px solid #D3E2D8;background:#fff;border-radius:999px;padding:.55rem 2.2rem .55rem 1rem;font-size:.85rem;font-weight:500;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23456553'%3E%3Cpath d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center;background-size:.75rem;transition:border-color .25s}
+.fsel{border:1px solid #D3E2D8;background:#fff;border-radius:999px;padding:.7rem 2.6rem .7rem 1.25rem;font-size:.95rem;font-weight:500;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23456553'%3E%3Cpath d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;background-size:.8rem;transition:border-color .25s}
 .fsel:hover{border-color:#5F856F}
-
 /* Event cards */
-.ecard{display:flex;flex-direction:column;background:#fff;border:1px solid #D3E2D8;border-radius:1.5rem;overflow:hidden;transition:transform .45s cubic-bezier(.22,.7,.2,1),box-shadow .45s;animation:cardIn .6s cubic-bezier(.22,.7,.2,1) both}
-.ecard:hover{transform:translateY(-8px);box-shadow:0 28px 50px -24px rgba(69,101,83,.5)}
-@keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-.ecard .top{position:relative;height:120px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#EBF3EE,#FDEED9);overflow:hidden}
-.ecard .top span.em{display:inline-block;transition:transform .5s}
-.ecard:hover .top span.em{transform:scale(1.25) rotate(8deg)}
-.datebox{position:absolute;left:1rem;top:1rem;background:#fff;border-radius:.9rem;padding:.35rem .7rem;text-align:center;box-shadow:0 6px 16px -6px rgba(0,0,0,.25);line-height:1.1}
-.tag{display:inline-block;font-size:.68rem;font-weight:700;padding:.25rem .65rem;border-radius:999px;background:#EBF3EE;color:#456553}
+.ecard{display:flex;flex-direction:column;background:#fff;border:1px solid #D3E2D8;border-radius:1.5rem;overflow:hidden;transition:transform .35s cubic-bezier(.22,.7,.2,1),box-shadow .35s}
+.ecard:hover{transform:translateY(-6px);box-shadow:0 26px 46px -24px rgba(69,101,83,.5)}
+.ecard .top{position:relative;height:130px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;background:linear-gradient(135deg,#EBF3EE,#FDEED9)}
+.datebox{position:absolute;left:1rem;top:1rem;background:#fff;border-radius:.9rem;padding:.4rem .8rem;text-align:center;box-shadow:0 6px 16px -6px rgba(0,0,0,.25);line-height:1.1}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;padding:.3rem .75rem;border-radius:999px;background:#EBF3EE;color:#456553}
 .tag.gold{background:#FDEED9;color:#735c00}
-@media (prefers-reduced-motion:reduce){.ecard{animation:none}}
 
 /* Modal */
 #evModal{position:fixed;inset:0;z-index:70;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:1.25rem;background:rgba(33,43,38,.55);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s linear .3s}
 #evModal.open{opacity:1;visibility:visible;transition:opacity .3s}
-#evModal .sheet{width:100%;max-width:680px;margin:2rem auto;background:#FAF7F2;border-radius:1.75rem;border:1px solid #D3E2D8;box-shadow:0 40px 80px -20px rgba(0,0,0,.45);transform:translateY(30px) scale(.97);transition:transform .45s cubic-bezier(.22,.7,.2,1)}
+#evModal .sheet{width:100%;max-width:680px;margin:2rem auto;background:#FAF7F2;border-radius:1.5rem;border:1px solid #D3E2D8;box-shadow:0 40px 80px -20px rgba(0,0,0,.45);transform:translateY(24px);transition:transform .35s cubic-bezier(.22,.7,.2,1)}
 #evModal.open .sheet{transform:none}
 .fl{display:block;font-size:.78rem;font-weight:600;color:#212B26;margin-bottom:.35rem}
-.fi{width:100%;background:#fff;border:1px solid #D3E2D8;border-radius:.9rem;padding:.65rem .9rem;font-size:.9rem;transition:border-color .25s,box-shadow .25s,transform .25s}
+.fi{width:100%;background:#fff;border:1px solid #D3E2D8;border-radius:.9rem;padding:.65rem .9rem;font-size:.9rem;transition:border-color .25s,box-shadow .25s}
 .fi:hover{border-color:#5F856F}
 .fi:focus{outline:none;border-color:#5F856F;box-shadow:0 0 0 4px rgba(95,133,111,.18)}
 .opt input{position:absolute;opacity:0;pointer-events:none}
 .opt span{display:inline-block;border:1px solid #D3E2D8;background:#fff;border-radius:999px;padding:.4rem 1.1rem;font-size:.8rem;font-weight:600;color:#456553;cursor:pointer;transition:all .25s}
-.opt span:hover{background:#EBF3EE;transform:translateY(-2px)}
+.opt span:hover{background:#EBF3EE}
 .opt input:checked+span{background:#5F856F;border-color:#5F856F;color:#fff}
 .opt input:focus-visible+span{outline:2px solid #5F856F;outline-offset:2px}
 .errmsg{color:#b3392f;font-size:.75rem;margin-top:.3rem;display:none}
 .fi.bad{border-color:#b3392f}
 .fi.bad+.errmsg{display:block}
-.btn-main{background:#5F856F;color:#fff;font-weight:600;border-radius:999px;padding:.8rem 1.8rem;transition:background .25s,transform .25s,box-shadow .25s}
-.btn-main:hover{background:#456553;transform:translateY(-3px);box-shadow:0 14px 26px -12px rgba(69,101,83,.7)}
-.btn-main:disabled{opacity:.6;cursor:wait;transform:none}
 </style>
 </head>
 <body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
@@ -159,7 +126,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="gallery.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Gallery</a>
             <a href="career.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Career</a>
-            <!-- TODO: add the third "More" tab here -->
+            <a href="fun-fact.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Fun Fact</a>
           </div>
         </div>
       </div>
@@ -199,7 +166,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <div id="moreMSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="gallery.html" class="block py-2.5">Gallery</a>
       <a href="career.html" class="block py-2.5">Career</a>
-      <!-- TODO: add the third "More" tab here -->
+      <a href="fun-fact.html" class="block py-2.5">Fun Fact</a>
     </div>
     <div class="mt-3 grid grid-cols-1 gap-2">
       <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
@@ -209,147 +176,56 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <main>
   <!-- PAGE HERO -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-brand-cream to-brand-warm/60 border-b border-brand-border">
-    <div class="absolute inset-0 pointer-events-none" aria-hidden="true" id="heroBubbles"></div>
-    <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-brand-light blur-3xl opacity-80 pointer-events-none" aria-hidden="true"></div>
-    <div class="absolute -bottom-32 right-0 w-96 h-96 rounded-full bg-brand-peach blur-3xl opacity-80 pointer-events-none" aria-hidden="true"></div>
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20 grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-14 items-center">
-
-      <!-- Text -->
-      <div class="text-center lg:text-left">
-        <nav aria-label="Breadcrumb" class="text-xs text-brand-muted mb-5">
-          <a href="index.html" class="hover:text-brand-dark">Home</a> <span class="mx-1.5">/</span> <span class="text-brand-dark font-semibold">Events</span>
-        </nav>
-        <span class="inline-flex items-center gap-2 bg-white/80 border border-brand-border rounded-full px-4 py-1.5 text-[11px] sm:text-xs uppercase tracking-[.2em] font-semibold text-brand-sage reveal">
-          <span class="w-2 h-2 rounded-full bg-brand-sage pulse"></span> Come play with us
-        </span>
-        <h1 class="reveal mt-5 font-serif font-bold text-4xl sm:text-5xl xl:text-6xl leading-[1.1] tracking-tight">Pet events &amp; <span class="italic font-normal text-brand-sage">celebrations</span></h1>
-        <p class="reveal mt-3 font-serif italic text-xl sm:text-2xl text-brand-dark">We plan. You celebrate.</p>
-        <p class="reveal mt-4 text-brand-muted text-base sm:text-lg max-w-xl mx-auto lg:mx-0">Birthday parties, playdates, gotcha days and community meet-ups. Unforgettable moments for your furry friends, planned by people who adore them.</p>
-
-        <div class="reveal mt-7 flex flex-wrap justify-center lg:justify-start gap-3">
-          <a href="#upcoming" class="btn-main">See upcoming events</a>
-          <button type="button" data-open-form class="border border-brand-sage/60 bg-white/60 text-brand-dark font-semibold px-6 py-3 rounded-full hover:bg-brand-light hover:-translate-y-0.5 transition">Submit an event</button>
-        </div>
-
-        <div class="reveal mt-8 flex flex-wrap justify-center lg:justify-start gap-2.5">
-          <span class="hchip">🎂 Birthday parties</span>
-          <span class="hchip">🐶 Playdates</span>
-          <span class="hchip">🎉 Gotcha days</span>
-          <span class="hchip">🛍️ Treats &amp; favors</span>
-        </div>
-      </div>
-
-      <!-- Visual -->
-      <div class="relative reveal max-w-xl w-full mx-auto lg:max-w-none">
-        <div class="absolute inset-0 -rotate-3 rounded-[2.25rem] bg-brand-sage/15 border border-brand-border" aria-hidden="true"></div>
-        <div class="banner relative aspect-[4/3] rotate-1 !rounded-[2.25rem]">
-          <img src="events-banner.jpg" alt="Pet events and celebrations at FlakyBubbles: a birthday party with balloons, treats and happy dogs on the lawn" style="object-position:72% center" loading="eager">
-        </div>
-
-        <!-- floating cards -->
-        <div class="fa absolute -top-5 -left-2 sm:-left-6 bg-white rounded-2xl shadow-xl border border-brand-border px-3.5 py-2 flex items-center gap-2 text-sm font-semibold text-brand-dark"><span class="text-xl">🎂</span> Happy Birthday!</div>
-        <div class="fb absolute top-10 -right-2 sm:-right-6 w-16 h-16 rounded-full bg-white shadow-xl border border-brand-border flex items-center justify-center text-3xl">🐾</div>
-        <div id="heroNext" class="fb absolute -bottom-6 left-3 sm:left-8 bg-white rounded-2xl shadow-2xl border border-brand-border px-4 py-3 flex items-center gap-3 max-w-[85%]">
-          <div class="bg-brand-peach rounded-xl px-3 py-1.5 text-center leading-tight shrink-0">
-            <div class="text-[10px] font-bold uppercase text-brand-gold" id="hnM">Next</div>
-            <div class="font-serif font-bold text-xl" id="hnD">&#8226;</div>
-          </div>
-          <div class="min-w-0">
-            <div class="text-[11px] font-semibold uppercase tracking-wide text-brand-sage">Next event</div>
-            <div class="text-sm font-bold truncate" id="hnT">Loading...</div>
-          </div>
-        </div>
-      </div>
+  <section class="bg-brand-peach/60 border-b border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+      <h1 class="font-serif font-bold text-5xl sm:text-6xl leading-[1.1] tracking-tight">Pet <span class="italic font-normal text-brand-sage">Events</span></h1>
+      <p class="mt-5 max-w-2xl text-brand-muted text-lg sm:text-xl">Celebrations, meet-ups and community pet events at FlakyBubbles Organic Pet Spa and around town.</p>
     </div>
   </section>
 
-  <!-- EVENTS CONTENT -->
-  <section id="events" class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-20" aria-label="Events">
+  <!-- FEATURED EVENT -->
+  <section id="featured" class="max-w-6xl mx-auto px-4 sm:px-6 pt-14 sm:pt-20" aria-label="Featured event">
+    <div id="evList"></div>
+  </section>
 
-    <!-- Event types -->
-    <div>
-      <div class="text-center max-w-2xl mx-auto reveal">
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl">We plan. <span class="italic font-normal text-brand-sage">You celebrate.</span></h2>
-        <p class="mt-3 text-brand-muted">Pick a celebration and we take care of the setup, treats and the fun, so you can enjoy the moment with your furry friend.</p>
+  <!-- UPCOMING EVENTS -->
+  <section id="upcoming" class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-24" aria-label="Upcoming events">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <h2 class="font-serif font-bold text-4xl sm:text-5xl">Upcoming <span class="italic font-normal text-brand-sage">events</span></h2>
+        <p class="mt-3 text-brand-muted text-lg max-w-xl">Pet-friendly events hosted by us and by our community. Know one we should list? Send it in.</p>
       </div>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <article class="tcard reveal"><span class="ico">🎂</span><h3 class="mt-4 font-serif font-bold text-xl relative">Birthday Parties</h3><p class="mt-2 text-sm text-brand-muted relative">Balloon arches, a pet-safe cake and party hats for the birthday pup.</p></article>
-        <article class="tcard reveal"><span class="ico">🐶</span><h3 class="mt-4 font-serif font-bold text-xl relative">Playdates</h3><p class="mt-2 text-sm text-brand-muted relative">Supervised social time with gentle, well-matched playmates.</p></article>
-        <article class="tcard reveal"><span class="ico">🎉</span><h3 class="mt-4 font-serif font-bold text-xl relative">Gotcha Days</h3><p class="mt-2 text-sm text-brand-muted relative">Celebrate the day your pet joined the family with a special spa day.</p></article>
-        <article class="tcard reveal"><span class="ico">🛍️</span><h3 class="mt-4 font-serif font-bold text-xl relative">Treats &amp; Favors</h3><p class="mt-2 text-sm text-brand-muted relative">Organic treats and party favors for every guest, two and four legged.</p></article>
-      </div>
+      <button type="button" data-open-form class="btn-main shrink-0 self-start sm:self-auto">Submit an event</button>
     </div>
 
-    <!-- Video -->
-    <div class="mt-20 sm:mt-28 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-      <div class="reveal order-2 lg:order-1">
-        <div class="relative">
-          <div class="fb absolute -top-6 -left-4 w-16 h-16 rounded-full bg-gradient-to-br from-white to-brand-light border border-brand-border shadow-lg z-10" aria-hidden="true"></div>
-          <div class="fa absolute -bottom-5 -right-3 w-24 h-24 rounded-full bg-gradient-to-br from-white to-brand-peach border border-brand-border shadow-lg z-10" aria-hidden="true"></div>
-          <div class="vframe" id="vframe">
-            <!-- Put your video file next to this page as events-video.mp4 -->
-            <video id="evVideo" poster="events-banner.jpg" muted loop playsinline preload="metadata" aria-label="FlakyBubbles pet event highlights">
-              <source src="events-video.mp4" type="video/mp4">
-            </video>
-            <button type="button" id="vBtn" class="vbtn pulse" aria-label="Play video">
-              <svg class="w-7 h-7 ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="reveal order-1 lg:order-2">
-        <h2 class="font-serif font-bold text-3xl sm:text-4xl leading-tight">See the fun <span class="italic font-normal text-brand-sage">in action</span></h2>
-        <p class="mt-4 text-brand-muted leading-relaxed">From the first balloon to the last treat, our team handles everything. Watch how a FlakyBubbles event comes together, and imagine your pet at the centre of it.</p>
-        <ul class="mt-6 space-y-3 text-sm">
-          <li class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-light text-brand-dark flex items-center justify-center">✓</span> Setup, decor and clean-up included</li>
-          <li class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-light text-brand-dark flex items-center justify-center">✓</span> Organic, pet-safe treats and cakes</li>
-          <li class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-brand-light text-brand-dark flex items-center justify-center">✓</span> Trained, caring staff with every pet</li>
-        </ul>
-        <a href="contact.html" class="btn-main inline-block mt-8">Book your event</a>
-      </div>
+    <div class="mt-8 flex flex-wrap items-center gap-2.5" id="periodPills" role="group" aria-label="Filter by date">
+      <button class="pill on" data-p="all">All upcoming</button>
+      <button class="pill" data-p="weekend">This weekend</button>
+      <button class="pill" data-p="week">This week</button>
+      <button class="pill" data-p="month">This month</button>
+    </div>
+    <div class="mt-4 flex flex-wrap gap-3">
+      <select id="fCity" class="fsel" aria-label="Filter by city"><option value="">All cities</option></select>
+      <select id="fCat" class="fsel" aria-label="Filter by category"><option value="">All categories</option></select>
+      <select id="fCost" class="fsel" aria-label="Filter by cost"><option value="">Free &amp; paid</option><option>Free</option><option>Paid</option></select>
     </div>
 
-    <!-- Upcoming events -->
-    <div id="upcoming" class="mt-24 sm:mt-32">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 reveal">
-        <div>
-          <h2 class="font-serif font-bold text-3xl sm:text-4xl">Upcoming <span class="italic font-normal text-brand-sage">events</span></h2>
-          <p class="mt-2 text-brand-muted max-w-xl">Pet-friendly events hosted by us and by our community. Know one we should list? Send it in.</p>
-        </div>
-        <button type="button" data-open-form class="btn-main shrink-0 self-start sm:self-auto">Submit an event</button>
-      </div>
-
-      <div class="mt-8 flex flex-wrap items-center gap-2" id="periodPills" role="group" aria-label="Filter by date">
-        <button class="pill on" data-p="all">All upcoming</button>
-        <button class="pill" data-p="weekend">This weekend</button>
-        <button class="pill" data-p="week">This week</button>
-        <button class="pill" data-p="month">This month</button>
-      </div>
-      <div class="mt-4 flex flex-wrap gap-3">
-        <select id="fCity" class="fsel" aria-label="Filter by city"><option value="">All cities</option></select>
-        <select id="fCat" class="fsel" aria-label="Filter by category"><option value="">All categories</option></select>
-        <select id="fCost" class="fsel" aria-label="Filter by cost"><option value="">Free &amp; paid</option><option>Free</option><option>Paid</option></select>
-      </div>
-
-      <div id="evGrid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite"></div>
-      <div id="evEmpty" class="hidden mt-8 text-center bg-white border border-brand-border rounded-3xl px-6 py-14">
-        <div class="floaty text-5xl">🐾</div>
-        <h3 class="mt-4 font-serif font-bold text-2xl">No events match these filters</h3>
-        <p class="mt-2 text-brand-muted">Try another date or category, or submit your own event.</p>
-        <button type="button" data-open-form class="btn-main mt-6">Submit an event</button>
-      </div>
-
-      <p class="mt-8 text-xs text-brand-muted max-w-3xl leading-relaxed">Community events are listed as a convenience to local pet families. Unless stated, they are not hosted, sponsored or operated by FlakyBubbles. Details may change, so please confirm with the organizer before attending.</p>
+    <div id="evGrid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite"></div>
+    <div id="evEmpty" class="hidden mt-8 text-center bg-white border border-brand-border rounded-3xl px-6 py-14">
+      <div class="floaty text-5xl">🐾</div>
+      <h3 class="mt-4 font-serif font-bold text-2xl">No events match these filters</h3>
+      <p class="mt-2 text-brand-muted">Try another date or category, or submit your own event.</p>
+      <button type="button" data-open-form class="btn-main mt-6">Submit an event</button>
     </div>
+
+    <p class="mt-8 text-sm text-brand-muted max-w-3xl leading-relaxed">Community events are listed as a convenience to local pet families. Unless stated, they are not hosted, sponsored or operated by FlakyBubbles. Details may change, so please confirm with the organizer before attending.</p>
   </section>
 </main>
 
 <!-- SUBMIT EVENT MODAL -->
 <div id="evModal" role="dialog" aria-modal="true" aria-labelledby="evTitle">
   <div class="sheet relative">
-    <button type="button" id="evClose" class="absolute right-4 top-4 w-10 h-10 rounded-full bg-white border border-brand-border hover:bg-brand-light hover:rotate-90 transition text-xl leading-none z-10" aria-label="Close form">×</button>
+    <button type="button" id="evClose" class="absolute right-4 top-4 w-10 h-10 rounded-full bg-white border border-brand-border hover:bg-brand-light transition text-xl leading-none z-10" aria-label="Close form">×</button>
 
     <div id="evFormWrap" class="p-6 sm:p-9">
       <h2 id="evTitle" class="font-serif font-bold text-2xl sm:text-3xl pr-10">Submit an <span class="italic font-normal text-brand-sage">event</span></h2>
@@ -484,6 +360,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <li><a href="events.html" class="flink">Events</a></li>
         <li><a href="gallery.html" class="flink">Gallery</a></li>
         <li><a href="career.html" class="flink">Career</a></li>
+        <li><a href="fun-fact.html" class="flink">Fun Fact</a></li>
         <li><a href="contact.html" class="flink">Contact</a></li>
       </ul>
     </nav>
@@ -552,7 +429,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <div class="bg-brand-light rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm text-brand-ink max-w-[92%]">Hi! 👋 Welcome to FlakyBubbles — Organic Pet Spa. How can we help your pet today?</div>
     </div>
     <div class="p-4 flex flex-col gap-2 text-sm">
-      <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, I'd like to know about upcoming events.">🎉 Upcoming events</button>
+      <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, I'd like to know about the Soft Open on January 24.">🎉 Soft Open details</button>
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, I'd like to book a grooming appointment.">🐾 Book a grooming appointment</button>
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, what are your prices and packages?">💲 Pricing &amp; packages</button>
       <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, where are you located and what are your timings?">📍 Location &amp; timings</button>
@@ -566,12 +443,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <script>
 const $=s=>document.querySelector(s);
+
 // Mobile menu
 const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
 menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
 mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
 const acc=(btn,sub,icon)=>$(btn).onclick=e=>{const h=$(sub).classList.toggle('hidden');$(icon).style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 acc('#memBtn','#memSub','#memIcon');acc('#svcBtn','#svcSub','#svcIcon');acc('#moreMBtn','#moreMSub','#moreMIcon');
+
 // Desktop "More" dropdown (click to open, click outside / Esc to close)
 (()=>{
 const btn=$('#moreBtn'),menu=$('#moreMenu'),wrap=$('#moreWrap');
@@ -581,6 +460,7 @@ document.addEventListener('click',e=>{if(!wrap.contains(e.target))setOpen(false)
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){setOpen(false);btn.focus()}});
 menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
 })();
+
 // WhatsApp chat widget
 (()=>{
 const WA_NUMBER='16823518650';
@@ -594,84 +474,109 @@ close.onclick=shut;
 document.querySelectorAll('.wa-q').forEach(b=>b.onclick=()=>window.open(link(b.dataset.msg),'_blank'));
 document.addEventListener('click',e=>{if(!panel.classList.contains('hidden')&&!$('#waWidget').contains(e.target))shut()});
 })();
-// Scroll reveal
-(()=>{
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-})();
-// Hero floating bubbles
-(()=>{
-const box=$('#heroBubbles');if(!box)return;
-for(let i=0;i<12;i++){const s=document.createElement('span');s.className='hb';const d=10+Math.random()*30;
- s.style.cssText=`width:${d}px;height:${d}px;left:${Math.random()*96}%;animation-duration:${7+Math.random()*7}s;animation-delay:${-Math.random()*10}s`;box.appendChild(s)}
-})();
 
-/* ===== EVENTS PAGE LOGIC ===== */
-// Video play / pause
-(()=>{
-const v=$('#evVideo'),b=$('#vBtn'),f=$('#vframe');
-const sync=()=>{f.classList.toggle('playing',!v.paused);b.setAttribute('aria-label',v.paused?'Play video':'Pause video');
- b.innerHTML=v.paused?'<svg class="w-7 h-7 ml-1" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>':'<svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>'};
-b.onclick=()=>{v.paused?v.play().catch(()=>{}):v.pause()};
-v.onclick=b.onclick;
-v.addEventListener('play',sync);v.addEventListener('pause',sync);
-// autoplay (muted) when visible
-if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
- new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){v.play().catch(()=>{})}else{v.pause()}}),{threshold:.5}).observe(f)}
-})();
-
-// Lists
+/* ===== EVENTS ===== */
+// Lists for the submit form
 const CITIES=['Venus','Alvarado','Burleson','Cleburne','Joshua','Midlothian','Mansfield','Fort Worth','Arlington','Dallas','Other'];
 const CATS=['Dog Social','Pet Festival','Adoption','Market','Fundraiser','Training','Walk/Run','Community Event','Pop-Up','Holiday Event','Pet Photography','Educational','Other'];
-const fill=(sel,arr,keep)=>arr.forEach(x=>{const o=document.createElement('option');o.textContent=x;o.value=x;sel.appendChild(o)});
-fill($('#fCity'),CITIES);fill($('#fCat'),CATS);fill($('#f_city'),CITIES);fill($('#f_cat'),CATS);
+const fill=(sel,arr)=>arr.forEach(x=>{const o=document.createElement('option');o.textContent=x;o.value=x;sel.appendChild(o)});
+fill($('#f_city'),CITIES);fill($('#f_cat'),CATS);
 $('#f_cat').value='Community Event';
 
-// Sample events (dates are relative to today; replace with real events any time)
-const day=n=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+n);return d};
+/* ---- ADD YOUR EVENTS HERE ----
+   date: new Date(year, monthIndex, day)  -> monthIndex: January = 0, February = 1 ...
+   Past events hide automatically. Copy the block below to add more events. */
 const EVENTS=[
- {t:'Puppy Birthday Bash',d:day(3),time:'11:00 AM to 2:00 PM',venue:'FlakyBubbles Organic Pet Spa',city:'Venus',cat:'Dog Social',cost:'Paid',em:'🎂',host:true,desc:'Balloon arch, pet-safe cake and party hats for the birthday pup and friends.'},
- {t:'Saturday Playdate in the Park',d:day(6),time:'10:00 AM to 12:00 PM',venue:'Community Park',city:'Mansfield',cat:'Dog Social',cost:'Free',em:'🐶',host:true,desc:'Supervised off-leash fun with well-matched playmates and free treats.'},
- {t:'Gotcha Day Celebration',d:day(9),time:'1:00 PM to 4:00 PM',venue:'FlakyBubbles Organic Pet Spa',city:'Venus',cat:'Holiday Event',cost:'Paid',em:'🎉',host:true,desc:'Celebrate the day your pet joined your family with a mini spa session and photos.'},
- {t:'Adoption Meet & Greet',d:day(13),time:'11:00 AM to 3:00 PM',venue:'Hometown Pet Rescue',city:'Cleburne',cat:'Adoption',cost:'Free',em:'🐾',host:false,desc:'Meet adoptable dogs and cats from local rescues. Bring your own pet for a gentle introduction.'},
- {t:'Pet Photo Day',d:day(18),time:'10:00 AM to 1:00 PM',venue:'FlakyBubbles Organic Pet Spa',city:'Venus',cat:'Pet Photography',cost:'Paid',em:'📸',host:true,desc:'Professional portraits in our styled party set. Fresh from the spa, ready for the camera.'},
- {t:'Fort Worth Pet Market',d:day(24),time:'9:00 AM to 3:00 PM',venue:'Downtown Market Square',city:'Fort Worth',cat:'Market',cost:'Free',em:'🛍️',host:false,desc:'Local makers, treats and pet gear. Leashed, friendly dogs are welcome.'}
+ {
+  label:'Soft Open',
+  title:'Our Soft Open',
+  date:new Date(2027,0,24),            // Sunday, January 24, 2027
+  time:'Time to be announced',          // e.g. '10:00 AM – 2:00 PM'
+  venue:'FlakyBubbles Organic Pet Spa',
+  address:'Venus, TX',
+  city:'Venus',
+  cat:'Community Event',
+  cost:'',                              // 'Free' or 'Paid' (leave empty if not decided)
+  em:'🎉',
+  host:true,                  // replace with the full street address
+  lines:[
+   'Come meet the team and see the spa.',
+   'Ask about grooming, daycare and boarding.',
+   'Bring your pet for a first look around.'
+  ],
+  image:'events-banner.jpg',
+  alt:'FlakyBubbles pet events: a celebration with balloons, treats and happy dogs on the lawn',
+  cta:{text:'Message us on WhatsApp',wa:"Hi, I'd like to know about the Soft Open on January 24."}
+ }
 ];
-const fmt=d=>({m:d.toLocaleString('en-US',{month:'short'}),n:d.getDate(),w:d.toLocaleString('en-US',{weekday:'long'}),full:d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})});
+
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const todayStart=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
+const longDate=d=>d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+
+const calIcon='<svg class="ev-ico" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+const pinIcon='<svg class="ev-ico" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+
+const upcoming=()=>EVENTS.filter(e=>e.date>=todayStart()).sort((a,b)=>a.date-b.date);
+
+// Featured (soonest event)
+(()=>{
+ const e=upcoming()[0];
+ if(!e){$('#featured').classList.add('hidden');return}
+ $('#evList').innerHTML=`
+ <article class="grid md:grid-cols-[1.15fr_1fr] gap-8 md:gap-12 items-center">
+  <div class="ev-img aspect-[16/10] md:aspect-[4/3]">
+   <img src="${esc(e.image)}" alt="${esc(e.alt)}" loading="eager">
+  </div>
+  <div>
+   <p class="text-base font-semibold text-brand-sage">${esc(e.label)}</p>
+   <h2 class="mt-2 font-serif font-bold text-4xl sm:text-5xl leading-tight">${esc(e.title)}</h2>
+   <div class="ev-card mt-6">
+    <div class="ev-row">${calIcon}<div><p class="font-semibold text-lg">${esc(longDate(e.date))}</p><p class="text-base text-brand-muted">${esc(e.time)}</p></div></div>
+    <div class="ev-row">${pinIcon}<div><p class="font-semibold text-lg">${esc(e.venue)}</p><p class="text-base text-brand-muted">${esc(e.address)}</p></div></div>
+   </div>
+   <div class="mt-6 space-y-2 text-lg text-brand-muted">${e.lines.map(l=>`<p>${esc(l)}</p>`).join('')}</div>
+   ${e.cta?`<div class="mt-7"><a class="btn-main" target="_blank" rel="noopener" href="https://wa.me/16823518650?text=${encodeURIComponent(e.cta.wa)}">${esc(e.cta.text)}</a></div>`:''}
+  </div>
+ </article>`;
+})();
+
+// Upcoming grid + filters
+fill($('#fCity'),CITIES);fill($('#fCat'),CATS);
 let period='all';
 const inPeriod=d=>{
- const t=day(0),diff=Math.round((d-t)/864e5);
+ const diff=Math.round((d-todayStart())/864e5);
  if(period==='all')return diff>=0;
  if(period==='week')return diff>=0&&diff<=7;
  if(period==='month')return diff>=0&&diff<=31;
- if(period==='weekend'){const dow=d.getDay();return diff>=0&&diff<=7&&(dow===0||dow===6||dow===5)}
+ if(period==='weekend'){const w=d.getDay();return diff>=0&&diff<=7&&(w===0||w===6||w===5)}
  return true};
 function render(){
  const c=$('#fCity').value,k=$('#fCat').value,p=$('#fCost').value;
- const list=EVENTS.filter(e=>inPeriod(e.d)&&(!c||e.city===c)&&(!k||e.cat===k)&&(!p||e.cost===p)).sort((a,b)=>a.d-b.d);
- $('#evGrid').innerHTML=list.map((e,i)=>{const f=fmt(e.d);return `
- <article class="ecard" style="animation-delay:${i*70}ms">
-  <div class="top"><span class="em">${e.em}</span>
-   <div class="datebox"><div class="text-[10px] font-bold uppercase tracking-wide text-brand-sage">${f.m}</div><div class="font-serif font-bold text-xl text-brand-ink">${f.n}</div></div>
+ const list=EVENTS.filter(e=>inPeriod(e.date)&&(!c||e.city===c)&&(!k||e.cat===k)&&(!p||e.cost===p)).sort((a,b)=>a.date-b.date);
+ $('#evGrid').innerHTML=list.map(e=>{
+  const m=e.date.toLocaleString('en-US',{month:'short'}),n=e.date.getDate(),full=e.date.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  return `
+ <article class="ecard">
+  <div class="top"><span>${e.em}</span>
+   <div class="datebox"><div class="text-xs font-bold uppercase text-brand-sage">${m}</div><div class="font-serif font-bold text-2xl text-brand-ink">${n}</div></div>
    ${e.host?'<span class="tag gold absolute right-4 top-4">Hosted by FlakyBubbles</span>':''}
   </div>
-  <div class="p-5 flex flex-col flex-1">
-   <div class="flex flex-wrap gap-1.5"><span class="tag">${esc(e.cat)}</span><span class="tag">${esc(e.cost)}</span><span class="tag">🐕 Pet-friendly</span></div>
-   <h3 class="mt-3 font-serif font-bold text-xl leading-snug">${esc(e.t)}</h3>
-   <p class="mt-1 text-xs font-semibold text-brand-sage">${f.full} · ${esc(e.time)}</p>
-   <p class="mt-1 text-xs text-brand-muted">${esc(e.venue)}, ${esc(e.city)}</p>
-   <p class="mt-3 text-sm text-brand-muted leading-relaxed flex-1">${esc(e.desc)}</p>
+  <div class="p-6 flex flex-col flex-1">
+   <div class="flex flex-wrap gap-2"><span class="tag">${esc(e.cat)}</span>${e.cost?`<span class="tag">${esc(e.cost)}</span>`:''}</div>
+   <h3 class="mt-4 font-serif font-bold text-2xl leading-snug">${esc(e.title)}</h3>
+   <p class="mt-2 text-base font-semibold text-brand-sage">${full} · ${esc(e.time)}</p>
+   <p class="mt-1 text-base text-brand-muted">${esc(e.venue)}, ${esc(e.city)}</p>
+   <p class="mt-3 text-base text-brand-muted leading-relaxed flex-1">${esc(e.lines[0])}</p>
   </div>
  </article>`}).join('');
  $('#evEmpty').classList.toggle('hidden',list.length>0);
 }
 $('#periodPills').addEventListener('click',e=>{const b=e.target.closest('.pill');if(!b)return;period=b.dataset.p;document.querySelectorAll('#periodPills .pill').forEach(x=>x.classList.toggle('on',x===b));render()});
-['#fCity','#fCat','#fCost'].forEach(s=>$(s).addEventListener('change',render));
+['#fCity','#fCat','#fCost'].forEach(x=>$(x).addEventListener('change',render));
 render();
-(()=>{const n=EVENTS.slice().sort((a,b)=>a.d-b.d)[0];if(!n)return;const f=fmt(n.d);$('#hnM').textContent=f.m;$('#hnD').textContent=f.n;$('#hnT').textContent=n.t})();
 
-// Modal
+// Submit-an-event modal
 (()=>{
 const modal=$('#evModal'),form=$('#evForm'),wrap=$('#evFormWrap'),thanks=$('#evThanks'),fail=$('#evFail');
 let lastFocus=null;

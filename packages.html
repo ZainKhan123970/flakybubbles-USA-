@@ -97,48 +97,40 @@ html.lock{overflow:hidden}
 .fhead{font-family:"Playfair Display",serif;font-weight:700;font-size:1.125rem;color:#fff;margin-bottom:1.1rem;padding-bottom:.7rem;position:relative}
 .fhead::after{content:"";position:absolute;left:0;bottom:0;width:2rem;height:2px;border-radius:2px;background:#C8A265}
 
-/* Boarding cards: equal-height layout and clear price breakdown */
-#boarding-packages .boarding-card { min-height: 100%; }
-#boarding-packages .boarding-card .boarding-price {
-  display:block;
-  white-space:nowrap;
-  font-size:clamp(1.55rem,2vw,2rem) !important;
-}
-#boarding-packages .boarding-card .boarding-tier {
-  min-height:48px;
-  cursor:pointer;
-}
-#boarding-packages .boarding-card .pk-cta { margin-top:auto; }
-#boarding-packages .boarding-card .boarding-normal,
-#boarding-packages .boarding-card .boarding-saving-amount { font-variant-numeric:tabular-nums; }
-@media(max-width:639px){
-  #boarding-packages .boarding-card { padding:1.25rem; }
-}
+/* ===== Boarding: 4 separate day boxes ===== */
+#boarding-packages .boarding-card{min-height:100%;scroll-margin-top:96px}
+#boarding-packages .boarding-card h3{font-size:clamp(1.15rem,1.5vw,1.4rem)!important;line-height:1.3!important}
+#boarding-packages .boarding-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+#boarding-packages .boarding-table th{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#627068;text-align:right;padding:.55rem .4rem;border-bottom:1px solid #D3E2D8}
+#boarding-packages .boarding-table th:first-child,
+#boarding-packages .boarding-table td:first-child{text-align:left}
+#boarding-packages .boarding-table td{font-size:.9rem;text-align:right;padding:.8rem .4rem;border-bottom:1px solid rgba(211,226,216,.8);color:#212B26}
+#boarding-packages .boarding-table tr:last-child td{border-bottom:0}
+#boarding-packages .boarding-table td:first-child{font-weight:600;color:#456553}
+#boarding-packages .boarding-table td.pays{font-weight:700;color:#456553}
+#boarding-packages .boarding-table td.save{font-weight:600;color:#735c00}
+#boarding-packages .boarding-table tbody tr{transition:background-color .3s ease}
+#boarding-packages .boarding-table tbody tr:hover{background:#F7FAF8}
 
+#boarding-packages .bp-pill{display:inline-block;border-radius:9999px;background:#fff;border:1px solid #D3E2D8;padding:.625rem 1.25rem;font-size:.875rem;color:#212B26;transition:background-color .3s ease,color .3s ease,border-color .3s ease,transform .3s ease}
+#boarding-packages .bp-pill b{color:#456553;transition:color .3s ease}
+#boarding-packages .bp-pill:hover,#boarding-packages .bp-pill:focus-visible,#boarding-packages .bp-pill.active{background:#5F856F;border-color:#5F856F;color:#fff;transform:translateY(-2px)}
+#boarding-packages .bp-pill:hover b,#boarding-packages .bp-pill:focus-visible b,#boarding-packages .bp-pill.active b{color:#fff}
+
+@keyframes bpFlash{0%{box-shadow:0 0 0 0 rgba(95,133,111,.55)}100%{box-shadow:0 0 0 18px rgba(95,133,111,0)}}
+#boarding-packages .boarding-card.flash{border-color:#5F856F;animation:bpFlash 1.1s ease-out 1}
+
+@media(max-width:639px){
+  #boarding-packages .boarding-card{padding:1.25rem}
+  #boarding-packages .boarding-table th{font-size:10px;padding:.5rem .25rem}
+  #boarding-packages .boarding-table td{font-size:.78rem;padding:.7rem .25rem}
+}
+@media (prefers-reduced-motion:reduce){#boarding-packages .boarding-card.flash{animation:none}#boarding-packages .bp-pill{transition:none}}
+
+/* Header "More" dropdown arrow */
+#moreIcon{transition:transform .3s ease}
 </style>
 <noscript><style>.pk-reveal{opacity:1!important;transform:none!important}.hp{opacity:1!important;transform:none!important}</style></noscript>
-
-<style>
-/* Boarding package typography: compact, balanced and consistent with the reference cards */
-#boarding-packages .boarding-price {
-  display: block;
-  font-size: clamp(1.45rem, 2.1vw, 2rem) !important;
-  line-height: 1.15 !important;
-  letter-spacing: -0.025em;
-  overflow-wrap: anywhere;
-}
-#boarding-packages .boarding-card h3 {
-  font-size: clamp(1.05rem, 1.3vw, 1.25rem) !important;
-  line-height: 1.3 !important;
-}
-#boarding-packages .boarding-card .boarding-saving,
-#boarding-packages .boarding-card > p {
-  font-size: .875rem;
-}
-#boarding-packages .boarding-card .pk-cta {
-  font-size: .9rem;
-}
-</style>
 
 </head>
 <body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
@@ -175,9 +167,19 @@ html.lock{overflow:hidden}
           </div>
         </div>
       </div>
-      <a href="gallery.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
+      <a href="events.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Events</a>
       <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
-      <a href="career.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+      <div class="relative" id="moreWrap">
+        <button id="moreBtn" type="button" class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true" aria-expanded="false" aria-controls="moreMenu">More
+          <svg id="moreIcon" class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+        <div id="moreMenu" class="absolute left-0 top-full pt-2 hidden z-50">
+          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+            <a href="gallery.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Gallery</a>
+            <a href="career.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Career</a>
+            <a href="fun-fact.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Fun Fact</a>
+          </div>
+        </div>
+      </div>
     </nav>
 
     <div class="flex items-center gap-2">
@@ -209,7 +211,8 @@ html.lock{overflow:hidden}
     </div>
     <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
     <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
-    <a href="career.html" class="block py-3">Career</a>
+    <a href="career.html" class="block py-3 border-b border-brand-border/60">Career</a>
+    <a href="fun-fact.html" class="block py-3">Fun Fact</a>
     <div class="mt-3 grid grid-cols-1 gap-2">
       <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="block text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
     </div>
@@ -274,7 +277,7 @@ html.lock{overflow:hidden}
         </article>
       </div>
       <div class="pk-reveal" style="--d:330ms">
-        <article class="pk-card" data-prices="175,325,530" data-cur="175">
+        <article class="pk-card" data-prices="325,325,530" data-cur="325">
           <span class="pk-badge off" data-badge aria-hidden="true">5% off</span>
           <div class="pk-ico" aria-hidden="true">🎉</div>
           <h3 class="mt-5 font-serif font-semibold text-[22px] leading-snug text-brand-ink xl:min-h-[3.75rem]">After Pawty Evening Play</h3>
@@ -297,136 +300,117 @@ html.lock{overflow:hidden}
 </section>
 
 
-<!-- ===== SEPARATE BOARDING PACKAGES ===== -->
+<!-- ===== SEPARATE BOARDING PACKAGES (4 boxes: 5 / 10 / 15 / 30 days) ===== -->
 <section id="boarding-packages" class="relative overflow-hidden bg-brand-cream border-t border-brand-border/60" aria-labelledby="boardingTitle">
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
     <div class="pk-reveal text-center max-w-2xl mx-auto">
       <span class="text-[11px] sm:text-xs uppercase tracking-[.25em] font-semibold text-brand-sage block mb-4">Stay a little longer</span>
       <h2 id="boardingTitle" class="font-serif font-bold text-4xl md:text-5xl leading-[1.15] shine">Boarding <span class="italic font-normal">Packages</span></h2>
-      <p class="mt-4 text-brand-muted text-base sm:text-lg">Choose 5, 10, 15 or 30 days on any accommodation card to see the normal price, discounted amount and your savings.</p>
+      <p class="mt-4 text-brand-muted text-base sm:text-lg">See the normal price, discounted amount and your savings for 5, 10, 15 and 30 day stays on every accommodation.</p>
     </div>
 
-    <div class="pk-reveal mt-9 flex flex-wrap justify-center gap-3" aria-label="Boarding package discounts">
-      <span class="rounded-full bg-white border border-brand-border px-5 py-2.5 text-sm text-brand-ink"><b class="text-brand-dark">5 days</b> · 5% off</span>
-      <span class="rounded-full bg-white border border-brand-border px-5 py-2.5 text-sm text-brand-ink"><b class="text-brand-dark">10 days</b> · 7% off</span>
-      <span class="rounded-full bg-white border border-brand-border px-5 py-2.5 text-sm text-brand-ink"><b class="text-brand-dark">15 days</b> · 10% off</span>
-      <span class="rounded-full bg-white border border-brand-border px-5 py-2.5 text-sm text-brand-ink"><b class="text-brand-dark">30 days</b> · 12% off</span>
-    </div>
+    <!-- Clickable pills: click karo to related box par scroll hoga -->
+    <nav class="pk-reveal mt-9 flex flex-wrap justify-center gap-3" aria-label="Jump to boarding package">
+      <a href="#boarding-5"  class="bp-pill" data-target="boarding-5"><b>5 days</b> · 5% off</a>
+      <a href="#boarding-10" class="bp-pill" data-target="boarding-10"><b>10 days</b> · 7% off</a>
+      <a href="#boarding-15" class="bp-pill" data-target="boarding-15"><b>15 days</b> · 10% off</a>
+      <a href="#boarding-30" class="bp-pill" data-target="boarding-30"><b>30 days</b> · 12% off</a>
+    </nav>
 
-    <div class="pk-reveal mt-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-stretch gap-6">
-      <!-- Add the six accommodation names and base prices from the boarding pricing table below.
-           Discounted totals are calculated automatically once each base price is entered. -->
-      <article class="pk-card boarding-card" data-base-price="125">
-        <span class="pk-badge">5–30 day savings</span>
+    <!--
+      Price change karni ho to sirf row ka data-price (per day price) badlo — baaki sab auto calculate hota hai.
+      Discount % box ke data-discount mein hai.
+    -->
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 items-stretch gap-6 max-w-5xl mx-auto">
+
+      <!-- ===== 5 DAYS ===== -->
+      <div class="pk-reveal">
+      <article class="pk-card boarding-card" id="boarding-5" data-days="5" data-discount="5">
+        <span class="pk-badge">5% off</span>
         <div class="pk-ico" aria-hidden="true">🛏️</div>
-        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">V.I.D. Suite 1</h3>
-        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation</p>
-        <div class="mt-5 rounded-2xl border border-brand-border bg-brand-light/70 p-4">
-          <p class="text-xs font-semibold uppercase tracking-wider text-brand-muted">Customer pays</p>
-          <span class="pk-price boarding-price !text-2xl sm:!text-3xl leading-tight">$593.75</span>
-          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-brand-border pt-3 text-sm">
-            <div><span class="block text-xs text-brand-muted">Normal price</span><strong class="boarding-normal text-brand-ink">$625.00</strong></div>
-            <div><span class="block text-xs text-brand-muted">You save</span><strong class="boarding-saving-amount text-brand-dark">$31.25</strong></div>
-          </div>
+        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">5 Days Package</h3>
+        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation · 5% off</p>
+        <div class="mt-5">
+          <table class="boarding-table">
+            <thead><tr><th scope="col">Accommodation</th><th scope="col">Normal price</th><th scope="col">Customer pays</th><th scope="col">Savings</th></tr></thead>
+            <tbody>
+              <tr data-price="125"><td>V.I.D. Suite 1</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Royal 1</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Royal 2</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Accommodation Option 4</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+            </tbody>
+          </table>
         </div>
-        <p class="mt-2 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
-        <label class="mt-5 mb-2 text-sm font-semibold text-brand-ink" for="boarding-tier-1">Stay length</label>
-        <select id="boarding-tier-1" class="boarding-tier w-full rounded-xl border border-brand-border bg-brand-light px-4 py-3 text-sm text-brand-ink">
-          <option value="5">5 days · 5% off</option><option value="10">10 days · 7% off</option><option value="15">15 days · 10% off</option><option value="30">30 days · 12% off</option>
-        </select>
-        <p class="mt-3 text-sm text-brand-muted boarding-saving" aria-live="polite">Contact us for the package price.</p>
-        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="pk-cta mt-6">Request Pricing <span class="arr" aria-hidden="true">↗</span></a>
+        <p class="mt-4 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
       </article>
-      <article class="pk-card boarding-card" data-base-price="125">
-        <span class="pk-badge">5–30 day savings</span><div class="pk-ico" aria-hidden="true">🐾</div>
-        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">Royal 1</h3>
-        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation</p>
-        <div class="mt-5 rounded-2xl border border-brand-border bg-brand-light/70 p-4">
-          <p class="text-xs font-semibold uppercase tracking-wider text-brand-muted">Customer pays</p>
-          <span class="pk-price boarding-price !text-2xl sm:!text-3xl leading-tight">$593.75</span>
-          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-brand-border pt-3 text-sm">
-            <div><span class="block text-xs text-brand-muted">Normal price</span><strong class="boarding-normal text-brand-ink">$625.00</strong></div>
-            <div><span class="block text-xs text-brand-muted">You save</span><strong class="boarding-saving-amount text-brand-dark">$31.25</strong></div>
-          </div>
+      </div>
+
+      <!-- ===== 10 DAYS ===== -->
+      <div class="pk-reveal" style="--d:110ms">
+      <article class="pk-card boarding-card" id="boarding-10" data-days="10" data-discount="7">
+        <span class="pk-badge">7% off</span>
+        <div class="pk-ico" aria-hidden="true">🐾</div>
+        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">10 Days Package</h3>
+        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation · 7% off</p>
+        <div class="mt-5">
+          <table class="boarding-table">
+            <thead><tr><th scope="col">Accommodation</th><th scope="col">Normal price</th><th scope="col">Customer pays</th><th scope="col">Savings</th></tr></thead>
+            <tbody>
+              <tr data-price="125"><td>V.I.D. Suite 1</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Royal 1</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Royal 2</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Accommodation Option 4</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+            </tbody>
+          </table>
         </div>
-        <p class="mt-2 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
-        <label class="mt-5 mb-2 text-sm font-semibold text-brand-ink" for="boarding-tier-2">Stay length</label>
-        <select id="boarding-tier-2" class="boarding-tier w-full rounded-xl border border-brand-border bg-brand-light px-4 py-3 text-sm text-brand-ink"><option value="5">5 days · 5% off</option><option value="10">10 days · 7% off</option><option value="15">15 days · 10% off</option><option value="30">30 days · 12% off</option></select>
-        <p class="mt-3 text-sm text-brand-muted boarding-saving" aria-live="polite">Contact us for the package price.</p>
-        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="pk-cta mt-6">Request Pricing <span class="arr" aria-hidden="true">↗</span></a>
+        <p class="mt-4 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
       </article>
-      <article class="pk-card boarding-card" data-base-price="125">
-        <span class="pk-badge">5–30 day savings</span><div class="pk-ico" aria-hidden="true">🌿</div>
-        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">Royal 2</h3>
-        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation</p>
-        <div class="mt-5 rounded-2xl border border-brand-border bg-brand-light/70 p-4">
-          <p class="text-xs font-semibold uppercase tracking-wider text-brand-muted">Customer pays</p>
-          <span class="pk-price boarding-price !text-2xl sm:!text-3xl leading-tight">$593.75</span>
-          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-brand-border pt-3 text-sm">
-            <div><span class="block text-xs text-brand-muted">Normal price</span><strong class="boarding-normal text-brand-ink">$625.00</strong></div>
-            <div><span class="block text-xs text-brand-muted">You save</span><strong class="boarding-saving-amount text-brand-dark">$31.25</strong></div>
-          </div>
+      </div>
+
+      <!-- ===== 15 DAYS ===== -->
+      <div class="pk-reveal">
+      <article class="pk-card boarding-card" id="boarding-15" data-days="15" data-discount="10">
+        <span class="pk-badge">10% off</span>
+        <div class="pk-ico" aria-hidden="true">🌿</div>
+        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">15 Days Package</h3>
+        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation · 10% off</p>
+        <div class="mt-5">
+          <table class="boarding-table">
+            <thead><tr><th scope="col">Accommodation</th><th scope="col">Normal price</th><th scope="col">Customer pays</th><th scope="col">Savings</th></tr></thead>
+            <tbody>
+              <tr data-price="125"><td>V.I.D. Suite 1</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Royal 1</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Royal 2</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Accommodation Option 4</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+            </tbody>
+          </table>
         </div>
-        <p class="mt-2 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
-        <label class="mt-5 mb-2 text-sm font-semibold text-brand-ink" for="boarding-tier-3">Stay length</label>
-        <select id="boarding-tier-3" class="boarding-tier w-full rounded-xl border border-brand-border bg-brand-light px-4 py-3 text-sm text-brand-ink"><option value="5">5 days · 5% off</option><option value="10">10 days · 7% off</option><option value="15">15 days · 10% off</option><option value="30">30 days · 12% off</option></select>
-        <p class="mt-3 text-sm text-brand-muted boarding-saving" aria-live="polite">Contact us for the package price.</p>
-        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="pk-cta mt-6">Request Pricing <span class="arr" aria-hidden="true">↗</span></a>
+        <p class="mt-4 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
       </article>
-      <article class="pk-card boarding-card" data-base-price="125">
-        <span class="pk-badge">5–30 day savings</span><div class="pk-ico" aria-hidden="true">✨</div>
-        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">Accommodation Option 4</h3>
-        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation</p>
-        <div class="mt-5 rounded-2xl border border-brand-border bg-brand-light/70 p-4">
-          <p class="text-xs font-semibold uppercase tracking-wider text-brand-muted">Customer pays</p>
-          <span class="pk-price boarding-price !text-2xl sm:!text-3xl leading-tight">$593.75</span>
-          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-brand-border pt-3 text-sm">
-            <div><span class="block text-xs text-brand-muted">Normal price</span><strong class="boarding-normal text-brand-ink">$625.00</strong></div>
-            <div><span class="block text-xs text-brand-muted">You save</span><strong class="boarding-saving-amount text-brand-dark">$31.25</strong></div>
-          </div>
+      </div>
+
+      <!-- ===== 30 DAYS ===== -->
+      <div class="pk-reveal" style="--d:110ms">
+      <article class="pk-card boarding-card" id="boarding-30" data-days="30" data-discount="12">
+        <span class="pk-badge">12% off</span>
+        <div class="pk-ico" aria-hidden="true">✨</div>
+        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">30 Days Package</h3>
+        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation · 12% off</p>
+        <div class="mt-5">
+          <table class="boarding-table">
+            <thead><tr><th scope="col">Accommodation</th><th scope="col">Normal price</th><th scope="col">Customer pays</th><th scope="col">Savings</th></tr></thead>
+            <tbody>
+              <tr data-price="125"><td>V.I.D. Suite 1</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Royal 1</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Royal 2</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+              <tr data-price="125"><td>Accommodation Option 4</td><td class="normal"></td><td class="pays"></td><td class="save"></td></tr>
+            </tbody>
+          </table>
         </div>
-        <p class="mt-2 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
-        <label class="mt-5 mb-2 text-sm font-semibold text-brand-ink" for="boarding-tier-4">Stay length</label>
-        <select id="boarding-tier-4" class="boarding-tier w-full rounded-xl border border-brand-border bg-brand-light px-4 py-3 text-sm text-brand-ink"><option value="5">5 days · 5% off</option><option value="10">10 days · 7% off</option><option value="15">15 days · 10% off</option><option value="30">30 days · 12% off</option></select>
-        <p class="mt-3 text-sm text-brand-muted boarding-saving" aria-live="polite">Contact us for the package price.</p>
-        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="pk-cta mt-6">Request Pricing <span class="arr" aria-hidden="true">↗</span></a>
+        <p class="mt-4 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
       </article>
-      <article class="pk-card boarding-card" data-base-price="125">
-        <span class="pk-badge">5–30 day savings</span><div class="pk-ico" aria-hidden="true">💚</div>
-        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">Accommodation Option 5</h3>
-        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation</p>
-        <div class="mt-5 rounded-2xl border border-brand-border bg-brand-light/70 p-4">
-          <p class="text-xs font-semibold uppercase tracking-wider text-brand-muted">Customer pays</p>
-          <span class="pk-price boarding-price !text-2xl sm:!text-3xl leading-tight">$593.75</span>
-          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-brand-border pt-3 text-sm">
-            <div><span class="block text-xs text-brand-muted">Normal price</span><strong class="boarding-normal text-brand-ink">$625.00</strong></div>
-            <div><span class="block text-xs text-brand-muted">You save</span><strong class="boarding-saving-amount text-brand-dark">$31.25</strong></div>
-          </div>
-        </div>
-        <p class="mt-2 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
-        <label class="mt-5 mb-2 text-sm font-semibold text-brand-ink" for="boarding-tier-5">Stay length</label>
-        <select id="boarding-tier-5" class="boarding-tier w-full rounded-xl border border-brand-border bg-brand-light px-4 py-3 text-sm text-brand-ink"><option value="5">5 days · 5% off</option><option value="10">10 days · 7% off</option><option value="15">15 days · 10% off</option><option value="30">30 days · 12% off</option></select>
-        <p class="mt-3 text-sm text-brand-muted boarding-saving" aria-live="polite">Contact us for the package price.</p>
-        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="pk-cta mt-6">Request Pricing <span class="arr" aria-hidden="true">↗</span></a>
-      </article>
-      <article class="pk-card boarding-card" data-base-price="125">
-        <span class="pk-badge">5–30 day savings</span><div class="pk-ico" aria-hidden="true">🏡</div>
-        <h3 class="mt-5 font-serif font-semibold text-lg sm:text-xl leading-snug text-brand-ink">Accommodation Option 6</h3>
-        <p class="mt-2 text-sm text-brand-muted">Boarding accommodation</p>
-        <div class="mt-5 rounded-2xl border border-brand-border bg-brand-light/70 p-4">
-          <p class="text-xs font-semibold uppercase tracking-wider text-brand-muted">Customer pays</p>
-          <span class="pk-price boarding-price !text-2xl sm:!text-3xl leading-tight">$593.75</span>
-          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-brand-border pt-3 text-sm">
-            <div><span class="block text-xs text-brand-muted">Normal price</span><strong class="boarding-normal text-brand-ink">$625.00</strong></div>
-            <div><span class="block text-xs text-brand-muted">You save</span><strong class="boarding-saving-amount text-brand-dark">$31.25</strong></div>
-          </div>
-        </div>
-        <p class="mt-2 text-xs text-brand-muted">Discount applies to accommodation charges only.</p>
-        <label class="mt-5 mb-2 text-sm font-semibold text-brand-ink" for="boarding-tier-6">Stay length</label>
-        <select id="boarding-tier-6" class="boarding-tier w-full rounded-xl border border-brand-border bg-brand-light px-4 py-3 text-sm text-brand-ink"><option value="5">5 days · 5% off</option><option value="10">10 days · 7% off</option><option value="15">15 days · 10% off</option><option value="30">30 days · 12% off</option></select>
-        <p class="mt-3 text-sm text-brand-muted boarding-saving" aria-live="polite">Contact us for the package price.</p>
-        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="pk-cta mt-6">Request Pricing <span class="arr" aria-hidden="true">↗</span></a>
-      </article>
+      </div>
+
     </div>
     <p class="pk-reveal mt-7 text-center text-sm text-brand-muted">Boarding package pricing depends on the selected accommodation and length of stay.</p>
   </div>
@@ -617,6 +601,16 @@ menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribut
 mNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)}));
 $('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 $('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+
+/* ---- Desktop "More" dropdown (opens on click) ---- */
+(()=>{
+ const wrap=$('#moreWrap'),btn=$('#moreBtn'),menu=$('#moreMenu'),icon=$('#moreIcon');
+ if(!wrap||!btn||!menu)return;
+ const setOpen=o=>{menu.classList.toggle('hidden',!o);btn.setAttribute('aria-expanded',o);icon.style.transform=o?'rotate(180deg)':''};
+ btn.addEventListener('click',e=>{e.stopPropagation();setOpen(menu.classList.contains('hidden'))});
+ document.addEventListener('click',e=>{if(!wrap.contains(e.target))setOpen(false)});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')setOpen(false)});
+})();
 </script>
 <script>
 // Reveal-on-scroll + package switch + FAQ
@@ -638,7 +632,7 @@ function tween(el,from,to){
 const sw=document.getElementById('pkSwitch');
 if(sw){
 const opts=[...sw.querySelectorAll('[role=radio]')],pill=document.getElementById('pkPill'),sum=document.getElementById('pkSummary');
-const cards=[...document.querySelectorAll('.pk-card')];
+const cards=[...document.querySelectorAll('#pkGrid .pk-card')];
 const tiers=[{v:10,off:0,m:2},{v:20,off:5,m:3},{v:30,off:10,m:4}];
 const per=(p,v)=>'$'+(p/v).toFixed(2);
 let cur=0;
@@ -675,43 +669,40 @@ addEventListener('load',place);
 }
 
 
-/* ---- Boarding package discount calculator ---- */
-document.querySelectorAll('.boarding-card').forEach(card=>{
-  const selector=card.querySelector('.boarding-tier');
-  const priceEl=card.querySelector('.boarding-price');
-  const normalEl=card.querySelector('.boarding-normal');
-  const savingAmountEl=card.querySelector('.boarding-saving-amount');
-  const base=Number(card.dataset.basePrice);
-  const discounts={5:.05,10:.07,15:.10,30:.12};
+/* ---- Boarding packages: 4 separate boxes + clickable pills ---- */
+(()=>{
   const money=n=>'$'+n.toLocaleString('en-US',{
-    minimumFractionDigits:2,
+    minimumFractionDigits:Number.isInteger(n)?0:2,
     maximumFractionDigits:2
   });
 
-  function updateBoardingPrice(){
-    const days=Number(selector.value);
-    const discount=discounts[days];
-    const normal=base*days;
-    const saving=normal*discount;
-    const customerPays=normal-saving;
+  // Prices fill karo (per-day price x days, minus discount)
+  document.querySelectorAll('.boarding-card').forEach(card=>{
+    const days=Number(card.dataset.days);
+    const disc=Number(card.dataset.discount)/100;
+    card.querySelectorAll('tr[data-price]').forEach(row=>{
+      const base=Number(row.dataset.price);
+      const normal=base*days;
+      const saving=Math.round(normal*disc*100)/100;
+      const pays=Math.round((normal-saving)*100)/100;
+      row.querySelector('.normal').textContent=money(normal);
+      row.querySelector('.pays').textContent=money(pays);
+      row.querySelector('.save').textContent=money(saving);
+    });
+  });
 
-    normalEl.textContent=money(normal);
-    priceEl.textContent=money(customerPays);
-    savingAmountEl.textContent=money(saving);
-
-    const savingText=card.querySelector('.boarding-saving');
-    if(savingText){
-      savingText.textContent=days+' days · '+(discount*100)+'% discount';
-    }
-
-    priceEl.classList.remove('pop');
-    void priceEl.offsetWidth;
-    priceEl.classList.add('pop');
-  }
-
-  selector.addEventListener('change',updateBoardingPrice);
-  updateBoardingPrice();
-});
+  // Pills click -> related box par smooth scroll + highlight
+  const pills=[...document.querySelectorAll('.bp-pill')];
+  pills.forEach(p=>p.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.getElementById(p.dataset.target);
+    if(!t)return;
+    t.scrollIntoView({behavior:rmq?'auto':'smooth',block:'center'});
+    pills.forEach(x=>x.classList.toggle('active',x===p));
+    t.classList.remove('flash');void t.offsetWidth;t.classList.add('flash');
+    history.replaceState(null,'','#'+p.dataset.target);
+  }));
+})();
 
 /* ---- FAQ accordion (one open at a time, click again to close) ---- */
 (()=>{

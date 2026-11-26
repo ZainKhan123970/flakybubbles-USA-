@@ -48,12 +48,15 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
     <a href="index.html" class="flex items-center shrink-0">
       <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain">
     </a>
+
     <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
       <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
       <a href="about.html" aria-current="page" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">About Us</a>
+
       <div class="relative group">
         <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Plans
-          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+        </button>
         <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="membership.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Membership</a>
@@ -61,10 +64,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
           </div>
         </div>
       </div>
+
       <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
+
       <div class="relative group">
         <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
-          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+        </button>
         <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
           <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
             <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
@@ -74,10 +80,24 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
           </div>
         </div>
       </div>
-      <a href="gallery.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
+
+      <a href="events.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Events</a>
       <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
-      <a href="career.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+
+      <div class="relative group">
+        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">More
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+        </button>
+        <div class="absolute right-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
+          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
+            <a href="gallery.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Gallery</a>
+            <a href="career.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Career</a>
+            <a href="fun-fact.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Fun Fact</a>
+          </div>
+        </div>
+      </div>
     </nav>
+
     <div class="flex items-center gap-2">
       <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="hidden sm:inline-block border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login|Book Now</a>
       <button id="menuBtn" class="lg:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
@@ -85,29 +105,45 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
       </button>
     </div>
   </div>
+
   <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
     <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
     <a href="about.html" aria-current="page" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">About Us</a>
+
     <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Plans
-      <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+      <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+    </button>
     <div id="memSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="membership.html" class="block py-2.5">Membership</a>
       <a href="packages.html" class="block py-2.5">Packages</a>
     </div>
+
     <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
+
     <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
-      <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+      <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+    </button>
     <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
       <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
       <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
       <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
     </div>
-    <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
+
+    <a href="events.html" class="block py-3 border-b border-brand-border/60">Events</a>
     <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
-    <a href="career.html" class="block py-3">Career</a>
+
+    <button id="moreBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">More
+      <svg class="w-4 h-4 transition-transform" id="moreIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg>
+    </button>
+    <div id="moreSub" class="hidden pl-4 text-sm text-brand-muted">
+      <a href="gallery.html" class="block py-2.5">Gallery</a>
+      <a href="career.html" class="block py-2.5">Career</a>
+      <a href="fun-facts.html" class="block py-2.5">Fun Facts</a>
+    </div>
+
     <div class="mt-3 grid grid-cols-1 gap-2">
-      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
+      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login|Book Now</a>
     </div>
   </nav>
 </header>
@@ -305,6 +341,7 @@ menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribut
 mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
 $('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 $('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+$('#moreBtn').onclick=e=>{const h=$('#moreSub').classList.toggle('hidden');$('#moreIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
 
 // Hero: read more / read less
 (()=>{const b=$('#heroToggle'),m=$('#heroMore'),d=$('#heroDots');if(!b)return;

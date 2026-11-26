@@ -16,13 +16,11 @@ tailwind.config={theme:{extend:{colors:{brand:{cream:'#FAF7F2',warm:'#F5F0E8',sa
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .floaty{animation:floaty 4s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
 a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,.7,.2,1),transform .8s cubic-bezier(.22,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
-
-/* Hanging form */
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 .hang-wrap{position:relative;padding-top:38px}
 .hang-string{position:absolute;top:0;left:0;width:100%;height:44px;pointer-events:none;overflow:visible}
 .hang-pin{position:absolute;top:28px;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#C8A265,#8a6a34 70%);box-shadow:0 3px 5px rgba(0,0,0,.35);z-index:3}
@@ -31,8 +29,7 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
 .flip-inner.flipped{transform:rotateY(180deg)}
 .flip-front{position:relative;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .flip-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg)}
-@media (prefers-reduced-motion:reduce){.flip-inner{transition:none}}
-/* FOOTER */
+@media(prefers-reduced-motion:reduce){.flip-inner{transition:none}}
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
 .flink::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:0;background:#fff;transition:width .3s}
@@ -42,494 +39,156 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
 </style>
 </head>
 <body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
-
-<!-- HEADER -->
 <header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
-    <a href="index.html" class="flex items-center shrink-0">
-      <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain">
-    </a>
-
-    <nav class="hidden xl:flex items-center gap-0.5 text-[13px] font-medium whitespace-nowrap" aria-label="Main">
-      <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
-      <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
-      <div class="relative group">
-        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Plans
-          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
-          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
-            <a href="membership.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Membership</a>
-            <a href="packages.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Packages</a>
-          </div>
-        </div>
-      </div>
-      <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
-      <div class="relative group">
-        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services
-          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block">
-          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
-            <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
-            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
-            <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
-            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
-          </div>
-        </div>
-      </div>
-      <a href="gallery.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
-      <a href="contact.html" aria-current="page" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Contact</a>
-      <a href="career.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
-    </nav>
-
-    <div class="flex items-center gap-2 shrink-0">
-      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="hidden sm:inline-block whitespace-nowrap shrink-0 border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login|Book Now</a>
-      <button id="menuBtn" class="xl:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile menu -->
-  <nav id="mobileNav" class="hidden xl:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
-    <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
-    <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
-    <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Plans
-      <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-    <div id="memSub" class="hidden pl-4 text-sm text-brand-muted">
-      <a href="membership.html" class="block py-2.5">Membership</a>
-      <a href="packages.html" class="block py-2.5">Packages</a>
-    </div>
-    <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
-    <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services
-      <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-    <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
-      <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
-      <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
-      <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
-      <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
-    </div>
-    <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
-    <a href="contact.html" aria-current="page" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Contact</a>
-    <a href="career.html" class="block py-3">Career</a>
-    <div class="mt-3 grid grid-cols-1 gap-2">
-      <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
-    </div>
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+  <a href="index.html" class="flex items-center shrink-0"><img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain"></a>
+  <nav class="hidden xl:flex items-center gap-0.5 text-[13px] font-medium whitespace-nowrap" aria-label="Main">
+   <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
+   <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
+   <div class="relative group"><button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Plans <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50"><div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5"><a href="membership.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Membership</a><a href="packages.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Packages</a></div></div></div>
+   <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
+   <div class="relative group"><button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Services <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50"><div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5"><a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a><a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a><a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a><a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a></div></div></div>
+   <a href="events.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Events</a>
+   <a href="contact.html" aria-current="page" class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold">Contact</a>
+   <div class="relative group"><button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">More <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button><div class="absolute right-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50"><div class="w-48 bg-white border border-brand-border rounded-xl shadow-lg p-1.5"><a href="gallery.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Gallery</a><a href="career.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Career</a><a href="fun-fact.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Fun Fact</a></div></div></div>
   </nav>
+  <div class="flex items-center gap-2 shrink-0"><a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="hidden sm:inline-block whitespace-nowrap shrink-0 border border-brand-sage/60 hover:bg-brand-light text-brand-dark text-sm font-semibold px-4 py-2 rounded-full transition-colors">Login|Book Now</a><button id="menuBtn" class="xl:hidden w-10 h-10 rounded-lg border border-brand-border bg-white flex items-center justify-center shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
+ </div>
+ <nav id="mobileNav" class="hidden xl:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
+  <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a><a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
+  <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Plans <svg class="w-4 h-4 transition-transform" id="memIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+  <div id="memSub" class="hidden pl-4 text-sm text-brand-muted"><a href="membership.html" class="block py-2.5">Membership</a><a href="packages.html" class="block py-2.5">Packages</a></div>
+  <a href="shop.html" class="block py-3 border-b border-brand-border/60">Shop</a>
+  <button id="svcBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Services <svg class="w-4 h-4 transition-transform" id="svcIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+  <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted"><a href="service-grooming.html" class="block py-2.5">Pet Grooming</a><a href="service-daycare.html" class="block py-2.5">Pet DayCare</a><a href="service-hotel.html" class="block py-2.5">Pet Hotel</a><a href="service-transport.html" class="block py-2.5">Pet Transport</a></div>
+  <a href="events.html" class="block py-3 border-b border-brand-border/60">Events</a><a href="contact.html" aria-current="page" class="block py-3 border-b border-brand-border/60 text-brand-dark font-semibold">Contact</a>
+  <button id="moreBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">More <svg class="w-4 h-4 transition-transform" id="moreIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+  <div id="moreSub" class="hidden pl-4 text-sm text-brand-muted"><a href="gallery.html" class="block py-2.5">Gallery</a><a href="career.html" class="block py-2.5">Career</a><a href="fun-fact.html" class="block py-2.5">Fun Fact</a></div>
+  <div class="mt-3 grid grid-cols-1 gap-2"><a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login|Book Now</a></div>
+ </nav>
 </header>
 
 <main>
-<!-- CONTACT -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-16 sm:pb-24 grid lg:grid-cols-2 gap-14 lg:gap-16">
-
-  <!-- LEFT: Visit / Contact info -->
-  <div class="reveal">
-    <p class="flex items-center gap-2 text-xs font-bold tracking-widest text-brand-sage uppercase"><span class="w-5 h-px bg-brand-sage"></span>Visit / Contact</p>
-    <h1 class="mt-3 font-serif font-bold text-4xl sm:text-5xl leading-tight">Come see <span class="italic text-brand-sage">the spa.</span></h1>
-
-    <dl class="mt-8 divide-y divide-brand-border border-t border-b border-brand-border text-sm">
-      <div class="py-4 grid grid-cols-[92px_1fr] gap-4">
-        <dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Address</dt>
-        <dd>Suite 401, White Oak Plaza<br>2840 Hardy Venus, TX 76084</dd>
-      </div>
-      <div class="py-4 grid grid-cols-[92px_1fr] gap-4">
-        <dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Phone</dt>
-        <dd><a href="tel:+16823518650" class="hover:text-brand-sage transition-colors">+1 (682) 351 8650</a></dd>
-      </div>
-      <div class="py-4 grid grid-cols-[92px_1fr] gap-4">
-        <dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Email</dt>
-        <dd><a href="mailto:info@flakybubbles.com" class="hover:text-brand-sage transition-colors">info@flakybubbles.com</a></dd>
-      </div>
-      <div class="py-4 grid grid-cols-[92px_1fr] gap-4">
-        <dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Hours</dt>
-        <dd>
-          <span class="inline-flex items-center gap-1.5 text-emerald-700 font-semibold text-xs mb-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>Open now</span><br>
-          Mon – Sat: 9:00 AM – 7:00 PM<br>
-          Sunday: 11:00 AM – 5:00 PM
-        </dd>
-      </div>
-    </dl>
-
-    <div class="mt-6 flex flex-wrap items-center gap-3">
-      <span class="text-xs uppercase tracking-wide text-brand-muted mr-1">Follow</span>
-      <a href="instagram.com/flaky.bubbles" class="inline-flex items-center gap-1.5 border border-brand-border rounded-full pl-3 pr-4 py-2 text-xs font-semibold hover:bg-brand-light transition-colors">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
-        Instagram
-      </a>
-      <a href="https://www.facebook.com/flakybubbles/" class="inline-flex items-center gap-1.5 border border-brand-border rounded-full pl-3 pr-4 py-2 text-xs font-semibold hover:bg-brand-light transition-colors">
-        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        Facebook
-      </a>
-    </div>
-
-    <div class="mt-6 relative rounded-2xl overflow-hidden border border-brand-border shadow-sm">
-      <a href="https://www.google.com/maps/search/?api=1&query=Suite+401+White+Oak+Plaza+2840+Hardy+Venus+TX+76084" target="_blank" rel="noopener" class="absolute top-3 left-3 z-10 bg-white/95 backdrop-blur text-brand-ink text-xs font-semibold px-3 py-2 rounded-full shadow flex items-center gap-1.5 hover:bg-white transition-colors">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-        Open in Maps
-      </a>
-      <iframe title="Flaky Bubbles location map" class="w-full h-72 sm:h-80" style="border:0" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin-when-cross-origin" src="https://www.google.com/maps?q=Suite+401+White+Oak+Plaza+2840+Hardy+Venus+TX+76084&output=embed"></iframe>
-    </div>
+ <div class="reveal">
+  <p class="flex items-center gap-2 text-xs font-bold tracking-widest text-brand-sage uppercase"><span class="w-5 h-px bg-brand-sage"></span>Visit / Contact</p>
+  <h1 class="mt-3 font-serif font-bold text-4xl sm:text-5xl leading-tight">Come see <span class="italic text-brand-sage">the spa.</span></h1>
+  <dl class="mt-8 divide-y divide-brand-border border-t border-b border-brand-border text-sm">
+   <div class="py-4 grid grid-cols-[92px_1fr] gap-4"><dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Address</dt><dd>Suite 401, White Oak Plaza<br>2840 Hardy Venus, TX 76084</dd></div>
+   <div class="py-4 grid grid-cols-[92px_1fr] gap-4"><dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Phone</dt><dd><a href="tel:+16823518650" class="hover:text-brand-sage transition-colors">+1 (682) 351 8650</a></dd></div>
+   <div class="py-4 grid grid-cols-[92px_1fr] gap-4"><dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Email</dt><dd><a href="mailto:info@flakybubbles.com" class="hover:text-brand-sage transition-colors">info@flakybubbles.com</a></dd></div>
+   <div class="py-4 grid grid-cols-[92px_1fr] gap-4"><dt class="text-brand-muted uppercase tracking-wide text-xs pt-0.5">Hours</dt><dd><span class="inline-flex items-center gap-1.5 text-emerald-700 font-semibold text-xs mb-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>Open now</span><br>Mon – Sat: 9:00 AM – 7:00 PM<br>Sunday: 11:00 AM – 5:00 PM</dd></div>
+  </dl>
+  <div class="mt-6 flex flex-wrap items-center gap-3"><span class="text-xs uppercase tracking-wide text-brand-muted mr-1">Follow</span>
+   <a href="https://instagram.com/flaky.bubbles" class="inline-flex items-center gap-1.5 border border-brand-border rounded-full pl-3 pr-4 py-2 text-xs font-semibold hover:bg-brand-light transition-colors">◎ Instagram</a>
+   <a href="https://www.facebook.com/flakybubbles/" class="inline-flex items-center gap-1.5 border border-brand-border rounded-full pl-3 pr-4 py-2 text-xs font-semibold hover:bg-brand-light transition-colors">f Facebook</a>
   </div>
-
-  <!-- RIGHT: hanging contact form (sends to email) -->
-  <div class="reveal flex flex-col items-center">
-    <p class="flex items-center gap-2 text-xs font-bold tracking-widest text-brand-sage uppercase self-start lg:self-center"><span class="w-5 h-px bg-brand-sage"></span>Send a Message</p>
-    <h2 class="mt-3 font-serif font-bold text-3xl sm:text-4xl text-left lg:text-center self-start lg:self-auto">We'll get back <span class="italic text-brand-sage">to you.</span></h2>
-
-    <div class="hang-wrap floaty mt-4 w-full max-w-sm">
-      <svg class="hang-string" viewBox="0 0 320 44" preserveAspectRatio="none" aria-hidden="true"><path d="M22 6 C 120 60, 200 60, 298 6" stroke="#C8A265" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
-      <span class="hang-pin" style="left:16px"></span>
-      <span class="hang-pin" style="right:16px"></span>
-
-      <div class="flip-card">
-        <div id="flipInner" class="flip-inner">
-
-          <!-- FRONT: the form -->
-          <form id="contactForm" novalidate autocomplete="on" class="flip-front bg-white rounded-[26px] shadow-xl border border-brand-border p-6 sm:p-7">
-            <label class="block mb-4">
-              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Name</span>
-              <input id="cName" name="name" type="text" required minlength="2" maxlength="60" autocomplete="name" placeholder="Your full name" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
-            </label>
-            <label class="block mb-4">
-              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Email</span>
-              <input id="cEmail" name="email" type="email" required maxlength="80" autocomplete="email" placeholder="you@example.com" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
-            </label>
-            <label class="block mb-4">
-              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Phone</span>
-              <input id="cPhone" name="phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="+1 (xxx)xxx xxxxx" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
-            </label>
-            <label class="block mb-4">
-              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Interested in</span>
-              <select id="cInterest" name="interest" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-sage focus:bg-white transition-colors">
-                <option>Pet Grooming</option>
-                <option>Pet DayCare &amp; Play Area</option>
-                <option>Pet Hotel (Overnight Stay)</option>
-                <option>Pet Transport</option>
-                <option>General Inquiry</option>
-                <option>Careers</option>
-              </select>
-            </label>
-            <label class="block mb-5">
-              <span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Message</span>
-              <textarea id="cMessage" name="message" rows="3" maxlength="500" autocomplete="off" placeholder="Tell us what you're looking for..." class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors resize-none"></textarea>
-            </label>
-            <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
-              <label>Leave this field empty<input id="hpField" type="text" name="hp_confirm" tabindex="-1" autocomplete="off"></label>
-            </div>
-            <p id="formErr" role="alert" aria-live="assertive" class="hidden mb-3 text-[12px] leading-snug text-red-700 bg-red-50 border border-red-200 rounded-xl px-3 py-2"></p>
-            <button id="submitBtn" type="submit" class="w-full bg-gradient-to-r from-brand-sage to-brand-dark hover:opacity-90 text-white font-semibold text-sm tracking-wide py-3 rounded-full transition-opacity disabled:opacity-60 disabled:cursor-not-allowed">Submit</button>
-            <p class="mt-3 text-[11px] text-brand-muted text-center leading-relaxed">Your message goes straight to our front desk by email.</p>
-          </form>
-
-          <!-- BACK: thank you -->
-          <div class="flip-back bg-brand-dark text-white rounded-[26px] shadow-xl p-6 sm:p-7 flex flex-col items-center justify-center text-center">
-            <div class="text-5xl">🐾💌</div>
-            <h3 class="mt-4 font-serif font-bold text-2xl">Thanks for reaching out! 🎉</h3>
-            <p class="mt-2 text-white/80 text-sm leading-relaxed">We've received your message and our team will get back to you shortly. Happy tails ahead! 🐶✨</p>
-            <button id="flipBack" type="button" class="mt-6 border border-white/40 hover:bg-white/10 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">Send another message</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
+  <div class="mt-6 relative rounded-2xl overflow-hidden border border-brand-border shadow-sm">
+   <a href="https://www.google.com/maps/search/?api=1&query=Suite+401+White+Oak+Plaza+2840+Hardy+Venus+TX+76084" target="_blank" rel="noopener" class="absolute top-3 left-3 z-10 bg-white/95 backdrop-blur text-brand-ink text-xs font-semibold px-3 py-2 rounded-full shadow">Open in Maps ↗</a>
+   <iframe title="Flaky Bubbles location map" class="w-full h-72 sm:h-80" style="border:0" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin-when-cross-origin" src="https://www.google.com/maps?q=Suite+401+White+Oak+Plaza+2840+Hardy+Venus+TX+76084&output=embed"></iframe>
   </div>
-
+ </div>
+ <div class="reveal flex flex-col items-center">
+  <p class="flex items-center gap-2 text-xs font-bold tracking-widest text-brand-sage uppercase self-start lg:self-center"><span class="w-5 h-px bg-brand-sage"></span>Send a Message</p>
+  <h2 class="mt-3 font-serif font-bold text-3xl sm:text-4xl text-left lg:text-center self-start lg:self-auto">We'll get back <span class="italic text-brand-sage">to you.</span></h2>
+  <div class="hang-wrap floaty mt-4 w-full max-w-sm">
+   <svg class="hang-string" viewBox="0 0 320 44" preserveAspectRatio="none" aria-hidden="true"><path d="M22 6 C 120 60, 200 60, 298 6" stroke="#C8A265" stroke-width="3" fill="none" stroke-linecap="round"/></svg><span class="hang-pin" style="left:16px"></span><span class="hang-pin" style="right:16px"></span>
+   <div class="flip-card"><div id="flipInner" class="flip-inner">
+    <form id="contactForm" novalidate autocomplete="on" class="flip-front bg-white rounded-[26px] shadow-xl border border-brand-border p-6 sm:p-7">
+     <label class="block mb-4"><span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Name</span><input id="cName" name="name" type="text" required minlength="2" maxlength="60" autocomplete="name" placeholder="Your full name" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors"></label>
+     <label class="block mb-4"><span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Email</span><input id="cEmail" name="email" type="email" required maxlength="80" autocomplete="email" placeholder="you@example.com" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors"></label>
+     <label class="block mb-4"><span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Phone</span><input id="cPhone" name="phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="+1 (xxx)xxx xxxxx" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors"></label>
+     <label class="block mb-4"><span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Interested in</span><select id="cInterest" name="interest" class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-sage focus:bg-white transition-colors"><option>Pet Grooming</option><option>Pet DayCare &amp; Play Area</option><option>Pet Hotel (Overnight Stay)</option><option>Pet Transport</option><option>General Inquiry</option><option>Careers</option></select></label>
+     <label class="block mb-5"><span class="block text-[11px] font-bold tracking-wide text-brand-muted uppercase mb-1.5">Message</span><textarea id="cMessage" name="message" rows="3" maxlength="500" autocomplete="off" placeholder="Tell us what you're looking for..." class="w-full rounded-xl border border-brand-border bg-brand-cream/60 px-3.5 py-2.5 text-sm placeholder-brand-muted/70 focus:outline-none focus:border-brand-sage focus:bg-white transition-colors resize-none"></textarea></label>
+     <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"><label>Leave this field empty<input id="hpField" type="text" name="hp_confirm" tabindex="-1" autocomplete="off"></label></div>
+     <p id="formErr" role="alert" aria-live="assertive" class="hidden mb-3 text-[12px] leading-snug text-red-700 bg-red-50 border border-red-200 rounded-xl px-3 py-2"></p>
+     <button id="submitBtn" type="submit" class="w-full bg-gradient-to-r from-brand-sage to-brand-dark hover:opacity-90 text-white font-semibold text-sm tracking-wide py-3 rounded-full transition-opacity disabled:opacity-60 disabled:cursor-not-allowed">Submit</button>
+     <p class="mt-3 text-[11px] text-brand-muted text-center leading-relaxed">Your message goes straight to our front desk by email.</p>
+    </form>
+    <div class="flip-back bg-brand-dark text-white rounded-[26px] shadow-xl p-6 sm:p-7 flex flex-col items-center justify-center text-center"><div class="text-5xl">🐾💌</div><h3 class="mt-4 font-serif font-bold text-2xl">Thanks for reaching out! 🎉</h3><p class="mt-2 text-white/80 text-sm leading-relaxed">We've received your message and our team will get back to you shortly. Happy tails ahead! 🐶✨</p><button id="flipBack" type="button" class="mt-6 border border-white/40 hover:bg-white/10 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">Send another message</button></div>
+   </div></div>
+  </div>
+ </div>
 </section>
 </main>
 
-<!-- FOOTER -->
 <footer class="bg-brand-dark text-white">
-  <!-- Top call-to-action band -->
-  <div class="border-b border-white/15">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left">
-      <div>
-        <h2 class="font-serif font-bold text-2xl sm:text-3xl">Ready for a spa day?</h2>
-        <p class="mt-2 text-white/75 max-w-xl">Book an organic grooming, daycare, hotel stay or ride in a few taps. We'll take care of the rest.</p>
-      </div>
-      <div class="flex flex-wrap justify-center md:justify-end gap-3 shrink-0">
-        <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="bg-white text-brand-dark font-semibold px-6 py-3 rounded-full hover:bg-brand-light transition-colors">Book an Appointment</a>
-        <a href="contact.html" class="border border-white/60 font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors">Contact us</a>
-      </div>
-    </div>
+ <div class="border-b border-white/15"><div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-center md:text-left"><div><h2 class="font-serif font-bold text-2xl sm:text-3xl">Ready for a spa day?</h2><p class="mt-2 text-white/75 max-w-xl">Book an organic grooming, daycare, hotel stay or ride in a few taps. We'll take care of the rest.</p></div><div class="flex flex-wrap justify-center md:justify-end gap-3 shrink-0"><a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="bg-white text-brand-dark font-semibold px-6 py-3 rounded-full hover:bg-brand-light transition-colors">Book an Appointment</a><a href="contact.html" class="border border-white/60 font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-colors">Contact us</a></div></div></div>
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
+  <div class="sm:col-span-2 lg:col-span-1"><div class="floaty inline-block bg-white/95 rounded-2xl shadow-xl px-5 py-3"><img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-36 sm:w-44 h-auto object-contain"></div><p class="mt-5 text-sm leading-relaxed text-white/75 max-w-sm">An organic pet spa for grooming, daycare, boarding and door-to-door transport. Gentle, clean blends and calm, caring hands for every pet we welcome.</p>
+   <div class="mt-6 flex gap-3"><a href="https://www.facebook.com/flakybubbles/" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark transition duration-300">f</a><a href="https://instagram.com/flaky.bubbles" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark transition duration-300">◎</a><a href="https://www.linkedin.com/company/flakybubbles/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark transition duration-300">in</a></div>
+   <form class="mt-6 w-full max-w-sm flex gap-2" onsubmit="event.preventDefault()"><label for="fEmail" class="sr-only">Email</label><input id="fEmail" type="email" required placeholder="Enter your email" class="flex-1 min-w-0 rounded-full bg-white/10 border border-white/25 placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-white"><button type="submit" class="rounded-full bg-white text-brand-dark font-semibold text-sm px-5 py-2.5 hover:bg-brand-light transition-colors">Subscribe</button></form>
   </div>
-
-  <!-- Main columns -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-[1.7fr_1fr_1fr_1.4fr_1fr]">
-    <div class="sm:col-span-2 lg:col-span-1">
-      <div class="floaty inline-block bg-white/95 rounded-2xl shadow-xl px-5 py-3">
-        <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="w-36 sm:w-44 h-auto object-contain">
-      </div>
-      <p class="mt-5 text-sm leading-relaxed text-white/75 max-w-sm">An organic pet spa for grooming, daycare, boarding and door-to-door transport. Gentle, clean blends and calm, caring hands for every pet we welcome.</p>
-      <div class="mt-6 flex gap-3">
-        <a href="https://www.facebook.com/flakybubbles/" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="instagram.com/flaky.bubbles" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
-        <a href="https://www.linkedin.com/company/flakybubbles/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-      </div>
-      <form class="mt-6 w-full max-w-sm flex gap-2" onsubmit="event.preventDefault()">
-        <label for="fEmail" class="sr-only">Email</label>
-        <input id="fEmail" type="email" required placeholder="Enter your email" class="flex-1 min-w-0 rounded-full bg-white/10 border border-white/25 placeholder-white/60 px-4 py-2.5 text-sm focus:outline-none focus:border-white">
-        <button type="submit" class="rounded-full bg-white text-brand-dark font-semibold text-sm px-5 py-2.5 hover:bg-brand-light transition-colors">Subscribe</button>
-      </form>
-    </div>
-
-    <nav aria-label="Quick links">
-      <h3 class="fhead">Quick Links</h3>
-      <ul class="space-y-3 text-sm">
-        <li><a href="index.html" class="flink">Home</a></li>
-        <li><a href="about.html" class="flink">About Us</a></li>
-        <li><a href="index.html#services" class="flink">Services</a></li>
-        <li><a href="membership.html" class="flink">Membership</a></li>
-        <li><a href="packages.html" class="flink">Packages</a></li>
-        <li><a href="shop.html" class="flink">Shop</a></li>
-        <li><a href="gallery.html" class="flink">Gallery</a></li>
-        <li><a href="career.html" class="flink">Career</a></li>
-        <li><a href="contact.html" class="flink">Contact</a></li>
-      </ul>
-    </nav>
-
-    <nav aria-label="Services">
-      <h3 class="fhead">Services</h3>
-      <ul class="space-y-3 text-sm">
-        <li><a href="service-grooming.html" class="flink">Pet Grooming</a></li>
-        <li><a href="service-daycare.html" class="flink">Pet DayCare</a></li>
-        <li><a href="service-hotel.html" class="flink">Pet Hotel</a></li>
-        <li><a href="service-transport.html" class="flink">Pet Transport</a></li>
-        <li><a href="packages.html" class="flink">Spa Packages</a></li>
-      </ul>
-    </nav>
-
-    <div>
-      <h3 class="fhead">Contact &amp; Information</h3>
-      <ul class="space-y-4 text-sm text-white/80">
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><a href="tel:+16823518650" class="flink">+1 (682) 351 8650</a></li>
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:info@flakybubbles.com" class="flink break-all">info@flakybubbles.com</a></li>
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Suite 401, White Oak Plaza, 2840 Hardy Venus, TX 76084</span></li>
-        <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
-      </ul>
-      <div class="mt-6 flex flex-wrap gap-2">
-        <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40 transition-colors">Get it on <b class="block text-sm">Google Play</b></a>
-        <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40 transition-colors">Download on the <b class="block text-sm">App Store</b></a>
-      </div>
-    </div>
-
-    <nav aria-label="Legal">
-      <h3 class="fhead">Legal</h3>
-      <ul class="space-y-3 text-sm">
-        <li><a href="privacy.html" class="flink">Privacy Policy</a></li>
-        <li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- Bottom bar -->
-  <div class="border-t border-white/15 bg-black/15">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65 text-center sm:text-left">
-      <p>© 2026 Flaky Bubbles. All rights reserved.</p>
-      <p class="hidden md:block">Organic Pet Spa · Grooming · Daycare · Hotel · Transport</p>
-      <div class="flex items-center gap-5">
-        <a href="privacy.html" class="flink">Privacy</a>
-        <a href="terms.html" class="flink">Terms</a>
-        <a href="#top" class="flink">Back to top ↑</a>
-      </div>
-    </div>
-  </div>
+  <nav aria-label="Quick links"><h3 class="fhead">Quick Links</h3><ul class="space-y-3 text-sm"><li><a href="index.html" class="flink">Home</a></li><li><a href="about.html" class="flink">About Us</a></li><li><a href="index.html#services" class="flink">Services</a></li><li><a href="membership.html" class="flink">Membership</a></li><li><a href="packages.html" class="flink">Packages</a></li><li><a href="shop.html" class="flink">Shop</a></li><li><a href="events.html" class="flink">Events</a></li><li><a href="gallery.html" class="flink">Gallery</a></li><li><a href="career.html" class="flink">Career</a></li><li><a href="fun-fact.html" class="flink">Fun Fact</a></li><li><a href="contact.html" class="flink">Contact</a></li></ul></nav>
+  <nav aria-label="Services"><h3 class="fhead">Services</h3><ul class="space-y-3 text-sm"><li><a href="service-grooming.html" class="flink">Pet Grooming</a></li><li><a href="service-daycare.html" class="flink">Pet DayCare</a></li><li><a href="service-hotel.html" class="flink">Pet Hotel</a></li><li><a href="service-transport.html" class="flink">Pet Transport</a></li><li><a href="packages.html" class="flink">Spa Packages</a></li></ul></nav>
+  <div><h3 class="fhead">Contact &amp; Information</h3><ul class="space-y-4 text-sm text-white/80"><li><a href="tel:+16823518650" class="flink">+1 (682) 351 8650</a></li><li><a href="mailto:info@flakybubbles.com" class="flink break-all">info@flakybubbles.com</a></li><li>Flaky Bubbles Organic Pet Spa<br>Suite 401, White Oak Plaza, 2840 Hardy Venus, TX 76084</li><li>Mon to Sun: 9am to 6pm</li></ul><div class="mt-6 flex flex-wrap gap-2"><a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40">Get it on <b class="block text-sm">Google Play</b></a><a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40">Download on the <b class="block text-sm">App Store</b></a></div></div>
+  <nav aria-label="Legal"><h3 class="fhead">Legal</h3><ul class="space-y-3 text-sm"><li><a href="privacy.html" class="flink">Privacy Policy</a></li><li><a href="terms.html" class="flink">Terms &amp; Conditions</a></li></ul></nav>
+ </div>
+ <div class="border-t border-white/15 bg-black/15"><div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/65 text-center sm:text-left"><p>© 2026 Flaky Bubbles. All rights reserved.</p><p class="hidden md:block">Organic Pet Spa · Grooming · Daycare · Hotel · Transport</p><div class="flex items-center gap-5"><a href="privacy.html" class="flink">Privacy</a><a href="terms.html" class="flink">Terms</a><a href="#top" class="flink">Back to top ↑</a></div></div></div>
 </footer>
 
-<!-- Floating WhatsApp chat bubble -->
 <div id="waWidget" class="fixed bottom-[88px] sm:bottom-24 right-4 z-40 flex flex-col items-end">
-  <div id="waPanel" class="hidden mb-3 w-[86vw] max-w-[300px] sm:w-80 bg-white rounded-2xl shadow-2xl border border-brand-border overflow-hidden origin-bottom-right">
-    <div class="bg-[#25D366] text-white px-4 py-3 flex items-center gap-3">
-      <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm5.83 14.26c-.24.68-1.4 1.3-1.93 1.38-.52.08-1.05.15-1.78-.11-.41-.14-.94-.32-1.62-.62-2.86-1.24-4.72-4.12-4.86-4.31-.14-.19-1.16-1.55-1.16-2.95 0-1.4.73-2.08.99-2.36.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.65.5.24.53.8 1.83.87 1.96.07.13.11.29.02.47-.09.18-.13.29-.26.44-.13.15-.28.34-.4.46-.13.13-.27.27-.11.53.15.26.68 1.12 1.47 1.81 1.01.9 1.86 1.18 2.12 1.31.26.13.42.11.57-.07.15-.18.65-.75.83-1.01.18-.26.35-.21.58-.13.24.09 1.5.71 1.76.84.26.13.43.19.5.31.06.11.06.66-.18 1.34z"/></svg>
-      </div>
-      <div class="flex-1 min-w-0">
-        <p class="font-semibold text-sm leading-tight">Flaky Bubbles</p>
-        <p class="text-[11px] text-white/85 leading-tight">Usually replies within minutes</p>
-      </div>
-      <button id="waClose" class="text-white/85 hover:text-white text-xl leading-none px-1" aria-label="Close chat">×</button>
-    </div>
-    <div class="px-4 pt-4">
-      <div class="bg-brand-light rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm text-brand-ink max-w-[92%]">Hi! 👋 Welcome to Flaky Bubbles — Organic Pet Spa. How can we help your pet today?</div>
-    </div>
-    <div class="p-4 flex flex-col gap-2 text-sm">
-      <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, I'd like to book a grooming appointment.">🐾 Book a grooming appointment</button>
-      <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, can you tell me about Pet DayCare & Play Area?">🏡 Pet DayCare &amp; Play Area</button>
-      <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, I want details about the Pet Hotel / overnight stays.">🛏️ Pet Hotel (overnight stays)</button>
-      <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, do you offer pet pick-up & drop-off transport?">🚗 Pet Transport</button>
-      <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, what are your prices and packages?">💲 Pricing &amp; packages</button>
-      <button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5 transition-colors" data-msg="Hi, where are you located and what are your timings?">📍 Location &amp; timings</button>
-      <a id="waDirect" href="#" target="_blank" rel="noopener" class="mt-1 text-center bg-[#25D366] hover:bg-[#1fb959] text-white font-semibold py-2.5 rounded-xl transition-colors">Chat on WhatsApp</a>
-    </div>
-  </div>
-  <button id="waToggle" aria-label="Chat with us on WhatsApp" aria-expanded="false" class="floaty w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1fb959] border-2 border-white shadow-xl flex items-center justify-center transition-colors">
-    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm5.83 14.26c-.24.68-1.4 1.3-1.93 1.38-.52.08-1.05.15-1.78-.11-.41-.14-.94-.32-1.62-.62-2.86-1.24-4.72-4.12-4.86-4.31-.14-.19-1.16-1.55-1.16-2.95 0-1.4.73-2.08.99-2.36.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.65.5.24.53.8 1.83.87 1.96.07.13.11.29.02.47-.09.18-.13.29-.26.44-.13.15-.28.34-.4.46-.13.13-.27.27-.11.53.15.26.68 1.12 1.47 1.81 1.01.9 1.86 1.18 2.12 1.31.26.13.42.11.57-.07.15-.18.65-.75.83-1.01.18-.26.35-.21.58-.13.24.09 1.5.71 1.76.84.26.13.43.19.5.31.06.11.06.66-.18 1.34z"/></svg>
-  </button>
+ <div id="waPanel" class="hidden mb-3 w-[86vw] max-w-[300px] sm:w-80 bg-white rounded-2xl shadow-2xl border border-brand-border overflow-hidden origin-bottom-right">
+  <div class="bg-[#25D366] text-white px-4 py-3 flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">☏</div><div class="flex-1 min-w-0"><p class="font-semibold text-sm leading-tight">Flaky Bubbles</p><p class="text-[11px] text-white/85 leading-tight">Usually replies within minutes</p></div><button id="waClose" class="text-white/85 hover:text-white text-xl leading-none px-1" aria-label="Close chat">×</button></div>
+  <div class="px-4 pt-4"><div class="bg-brand-light rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm text-brand-ink max-w-[92%]">Hi! 👋 Welcome to Flaky Bubbles — Organic Pet Spa. How can we help your pet today?</div></div>
+  <div class="p-4 flex flex-col gap-2 text-sm"><button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5" data-msg="Hi, I'd like to book a grooming appointment.">🐾 Book a grooming appointment</button><button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5" data-msg="Hi, can you tell me about Pet DayCare & Play Area?">🏡 Pet DayCare &amp; Play Area</button><button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5" data-msg="Hi, I want details about the Pet Hotel / overnight stays.">🛏️ Pet Hotel (overnight stays)</button><button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5" data-msg="Hi, do you offer pet pick-up & drop-off transport?">🚗 Pet Transport</button><button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5" data-msg="Hi, what are your prices and packages?">💲 Pricing &amp; packages</button><button class="wa-q text-left bg-white hover:bg-brand-light border border-brand-border rounded-xl px-3.5 py-2.5" data-msg="Hi, where are you located and what are your timings?">📍 Location &amp; timings</button><a id="waDirect" href="#" target="_blank" rel="noopener" class="mt-1 text-center bg-[#25D366] hover:bg-[#1fb959] text-white font-semibold py-2.5 rounded-xl">Chat on WhatsApp</a></div>
+ </div>
+ <button id="waToggle" aria-label="Chat with us on WhatsApp" aria-expanded="false" class="floaty w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1fb959] border-2 border-white shadow-xl flex items-center justify-center text-white text-2xl">☏</button>
 </div>
-
-<!-- Floating VR tour bubble -->
-<a href="index.html#home" class="fixed bottom-4 right-4 z-40 flex items-center gap-2" aria-label="Virtual walkthrough">
-  <span class="hidden sm:block bg-brand-ink/95 text-white text-xs px-3 py-2 rounded-xl">Virtual walkthrough</span>
-  <span class="floaty w-12 h-12 rounded-full bg-gradient-to-tr from-white via-emerald-100 to-brand-sage border-2 border-white shadow-xl flex items-center justify-center">
-    <svg class="w-6 h-6 text-brand-dark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-  </span>
-</a>
+<a href="index.html#home" class="fixed bottom-4 right-4 z-40 flex items-center gap-2" aria-label="Virtual walkthrough"><span class="hidden sm:block bg-brand-ink/95 text-white text-xs px-3 py-2 rounded-xl">Virtual walkthrough</span><span class="floaty w-12 h-12 rounded-full bg-gradient-to-tr from-white via-emerald-100 to-brand-sage border-2 border-white shadow-xl flex items-center justify-center text-brand-dark">▣</span></a>
 
 <script>
 const $=s=>document.querySelector(s);
-// Mobile menu
 const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
-menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
-mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
-$('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
-$('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
-
-// Reveal on scroll
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+menuBtn.onclick=()=>{const hidden=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',String(!hidden));};
+mNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded','false');}));
+function accordion(buttonId,subId,iconId){$('#'+buttonId).onclick=e=>{const hidden=$('#'+subId).classList.toggle('hidden');$('#'+iconId).style.transform=hidden?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',String(!hidden));};}
+accordion('memBtn','memSub','memIcon');accordion('svcBtn','svcSub','svcIcon');accordion('moreBtn','moreSub','moreIcon');
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// ---- Input safety helpers (no links, no markup, no control/hidden characters) ----
-const TLD='com|net|org|info|biz|io|co|me|app|dev|xyz|top|site|online|store|shop|click|link|live|club|vip|icu|cc|tk|ml|ga|cf|gq|ly|gl|gd|to|tv|us|uk|pk|in|ru|cn|de|fr|ae|sa|ca|au|ws|su|zip|mov|page|cloud|tech|work|support|help|ngrok|ai|sh|rs|fm|am|im|is|it|nl|es|br|jp|kr|id|ir|tr|ua|pw|buzz|rest|monster|cyou|sbs|cfd|lol|wtf|one|pro|name|mobi|asia|eu|gg|ink|run|art|fun|bio|life|world|today|email|space|website|digital|network|agency|center|company|services|solutions|win|bid|loan|download|review|stream|date|racing|party|trade|webcam|science|gdn';
-const BAD=[
-  /[a-z][a-z0-9+.\-]*:\/\//i,                                                 // any scheme://
-  /\b(?:https?|ftp|file|data|javascript|vbscript|blob|intent|mailto)\s*:/i,   // dangerous schemes
-  /\bhxxps?\b/i,                                                              // hxxp obfuscation
-  /\bwww\d*\./i,                                                              // www.
-  new RegExp('[a-z0-9-]{1,63}(?:\\.[a-z0-9-]{1,63})*\\.(?:'+TLD+')(?![a-z0-9])','i'), // domain.tld (also catches emails, wa.me, t.me, bit.ly)
-  /\b\d{1,3}(?:\.\d{1,3}){3}\b/,                                              // IP address
-  /%[0-9a-f]{2}/i,                                                            // percent-encoded tricks
-  /[<>`\\]/                                                                   // markup / script / escape characters
-];
-const clean=s=>String(s==null?'':s).normalize('NFKC')
-  .replace(/[\u0000-\u001F\u007F-\u009F\u00AD\u200B-\u200F\u202A-\u202E\u2060-\u2064\u2066-\u2069\uFEFF]/g,' ')
-  .replace(/\s+/g,' ').trim();
-const deobf=s=>s.replace(/\s*[\[\(\{]\s*(?:\.|dot)\s*[\]\)\}]\s*/gi,'.').replace(/\s+(?:dot|d0t)\s+(?=[a-z]{2,})/gi,'.').replace(/\s*\[\s*at\s*\]\s*/gi,'@');
-const hasLink=s=>{const t=deobf(s);return BAD.some(r=>r.test(s)||r.test(t))};
-// Email is validated on its own (it is deliberately NOT run through hasLink, which blocks domains/emails)
-const EMAIL_RE=/^[A-Za-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/;
-const validate=(v,allowed)=>{
-  if(!v.name||v.name.length<2)return{f:'name',m:'Please enter your name.'};
-  if(v.name.length>60)return{f:'name',m:'Name is too long (max 60 characters).'};
-  if(!/^[\p{L}\p{M}][\p{L}\p{M} .'’-]*$/u.test(v.name))return{f:'name',m:'Name can only contain letters, spaces and . \' -'};
-  if(hasLink(v.name))return{f:'name',m:'Links are not allowed in the name.'};
-  if(!v.email)return{f:'email',m:'Please enter your email address so we can reply to you.'};
-  if(v.email.length>80||!EMAIL_RE.test(v.email))return{f:'email',m:'Please enter a valid email address.'};
-  if(v.phone){
-    if(!/^\+?[0-9 ()\-.]{7,20}$/.test(v.phone)||(v.phone.match(/\d/g)||[]).length<7||(v.phone.match(/\d/g)||[]).length>15)
-      return{f:'phone',m:'Please enter a valid phone number (digits, +, spaces, brackets only).'};
-  }
-  if(!allowed.includes(v.interest))return{f:'interest',m:'Please choose one of the listed options.'};
-  if(v.message.length>500)return{f:'message',m:'Message is too long (max 500 characters).'};
-  if(hasLink(v.message))return{f:'message',m:'Links, web addresses and email addresses are not allowed in the message. Please share your phone number in the Phone field instead.'};
-  return null;
+const EMAIL_RE=/^[A-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?(?:\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)*\.[A-Z]{2,}$/i;
+const clean=s=>String(s||'').normalize('NFKC').replace(/[\u0000-\u001F\u007F-\u009F\u00AD\u200B-\u200F\u202A-\u202E\u2060-\u2064\u2066-\u2069\uFEFF]/g,' ').replace(/\s+/g,' ').trim();
+const validate=v=>{
+ if(v.name.length<2||v.name.length>60||!/^[\p{L}\p{M}][\p{L}\p{M} .'’-]*$/u.test(v.name))return{f:'name',m:'Please enter a valid name.'};
+ if(!v.email||v.email.length>80||!EMAIL_RE.test(v.email))return{f:'email',m:'Please enter a valid email address.'};
+ if(v.phone&&(!/^\+?[0-9 ()\-.]{7,20}$/.test(v.phone)||(v.phone.match(/\d/g)||[]).length<7||(v.phone.match(/\d/g)||[]).length>15))return{f:'phone',m:'Please enter a valid phone number.'};
+ if(v.message.length>500)return{f:'message',m:'Message is too long (max 500 characters).'};
+ return null;
 };
-
-// ---- Contact form: validate -> send to email (Web3Forms or FormSubmit) -> flip card to thank-you ----
 (()=>{
-/* ===== EMAIL SETTINGS (edit only these two lines) =====
-   OPTION A (recommended): Web3Forms. Go to https://web3forms.com, type the email that should
-            RECEIVE the messages, copy the Access Key they email you, and paste it below.
-   OPTION B: leave WEB3FORMS_KEY empty to use FormSubmit instead (needs a one-time
-            "Activate Form" click in the inbox of FORMSUBMIT_EMAIL).                          */
-const WEB3FORMS_KEY='';                         // e.g. 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
-const FORMSUBMIT_EMAIL='info@flakybubbles.com'; // used only when WEB3FORMS_KEY is empty
-const ENDPOINT='https://formsubmit.co/ajax/'+FORMSUBMIT_EMAIL;
-const form=$('#contactForm'),inner=$('#flipInner'),back=$('#flipBack'),err=$('#formErr'),btn=$('#submitBtn');
-const ids={name:'#cName',email:'#cEmail',phone:'#cPhone',interest:'#cInterest',message:'#cMessage'};
-const ALLOWED=[...$('#cInterest').options].map(o=>o.value);
-let last=0;
-const showErr=(m,f)=>{err.textContent=m;err.classList.remove('hidden');
-  Object.values(ids).forEach(i=>$(i).removeAttribute('aria-invalid'));
-  if(f&&ids[f]){const el=$(ids[f]);el.setAttribute('aria-invalid','true');el.focus()}};
-const hideErr=()=>{err.classList.add('hidden');err.textContent='';Object.values(ids).forEach(i=>$(i).removeAttribute('aria-invalid'))};
-form.addEventListener('input',hideErr);
-form.addEventListener('submit',async e=>{
-  e.preventDefault();
-  if($('#hpField').value){inner.classList.add('flipped');return} // bot filled the hidden field: pretend success, send nothing
-  const now=Date.now();
-  if(now-last<30000){showErr('Please wait a few seconds before sending another message.');return}
-  const v={
-    name:clean($('#cName').value),
-    email:clean($('#cEmail').value).toLowerCase(),
-    phone:clean($('#cPhone').value),
-    interest:$('#cInterest').value,
-    message:clean($('#cMessage').value)
-  };
-  const bad=validate(v,ALLOWED);
-  if(bad){showErr(bad.m,bad.f);return}
-  hideErr();
-  // FormSubmit cannot work when the page is opened straight from disk (file://)
-  if(location.protocol==='file:'){
-    showErr('This page is opened from your computer (file://). Please open it from your live website or a local server (e.g. VS Code Live Server) to send messages.');
-    return;
-  }
+ const form=$('#contactForm'),inner=$('#flipInner'),back=$('#flipBack'),err=$('#formErr'),btn=$('#submitBtn');
+ const WEB3FORMS_KEY='';const FORMSUBMIT_EMAIL='info@flakybubbles.com';const ENDPOINT='https://formsubmit.co/ajax/'+FORMSUBMIT_EMAIL;
+ let last=0;
+ const showErr=(m,f)=>{err.textContent=m;err.classList.remove('hidden');if(f)$('#c'+f[0].toUpperCase()+f.slice(1)).focus();};
+ const hideErr=()=>{err.classList.add('hidden');err.textContent='';};
+ form.addEventListener('input',hideErr);
+ form.addEventListener('submit',async e=>{
+  e.preventDefault();if($('#hpField').value){inner.classList.add('flipped');return;}
+  const now=Date.now();if(now-last<30000){showErr('Please wait a few seconds before sending another message.');return;}
+  const v={name:clean($('#cName').value),email:clean($('#cEmail').value).toLowerCase(),phone:clean($('#cPhone').value),interest:$('#cInterest').value,message:clean($('#cMessage').value)};
+  const bad=validate(v);if(bad){showErr(bad.m,bad.f);return;}hideErr();
+  if(location.protocol==='file:'){showErr('Please open this page from your live website or a local server to send messages.');return;}
   btn.disabled=true;btn.textContent='Sending...';
   try{
-    let res,json;
-    if(WEB3FORMS_KEY){
-      res=await fetch('https://api.web3forms.com/submit',{
-        method:'POST',
-        headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({
-          access_key:WEB3FORMS_KEY,
-          subject:'New Contact Message - '+v.interest,
-          from_name:'Flaky Bubbles Website',
-          name:v.name,
-          email:v.email,
-          phone:v.phone||'-',
-          interested_in:v.interest,
-          message:v.message||'-',
-          botcheck:''
-        })
-      });
-      json=await res.json().catch(()=>({}));
-      if(!(res.ok&&json.success===true))throw new Error(json.message||('HTTP '+res.status));
-    }else{
-      res=await fetch(ENDPOINT,{
-        method:'POST',
-        headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({
-          Name:v.name,
-          Email:v.email,
-          _replyto:v.email,
-          Phone:v.phone||'-',
-          'Interested in':v.interest,
-          Message:v.message||'-',
-          _subject:'New Contact Message - '+v.interest,
-          _template:'table',
-          _captcha:'false'
-        })
-      });
-      json=await res.json().catch(()=>({}));
-      if(!(res.ok&&(json.success===true||json.success==='true')))throw new Error(json.message||('HTTP '+res.status));
-    }
-    last=now;
-    inner.classList.add('flipped');
-  }catch(ex){
-    console.error('Contact form send failed:',ex);
-    const msg=String(ex&&ex.message||'');
-    if(/activat/i.test(msg)){
-      showErr('Almost there: the form still needs to be activated. Please open the activation email sent to '+FORMSUBMIT_EMAIL+' and click "Activate Form", then try again.');
-    }else{
-      showErr('Sorry, your message could not be sent. Please email us at info@flakybubbles.com.');
-    }
-  }finally{
-    btn.disabled=false;btn.textContent='Submit';
-  }
-});
-back.onclick=()=>{inner.classList.remove('flipped');form.reset();hideErr()};
+   let res,json;
+   if(WEB3FORMS_KEY){res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:'New Contact Message - '+v.interest,from_name:'Flaky Bubbles Website',...v,botcheck:''})});json=await res.json().catch(()=>({}));if(!(res.ok&&json.success===true))throw new Error(json.message||('HTTP '+res.status));}
+   else{res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({Name:v.name,Email:v.email,_replyto:v.email,Phone:v.phone||'-','Interested in':v.interest,Message:v.message||'-',_subject:'New Contact Message - '+v.interest,_template:'table',_captcha:'false'})});json=await res.json().catch(()=>({}));if(!(res.ok&&(json.success===true||json.success==='true')))throw new Error(json.message||('HTTP '+res.status));}
+   last=now;inner.classList.add('flipped');
+  }catch(ex){console.error('Contact form send failed:',ex);showErr(/activat/i.test(String(ex.message))?'Please activate the form using the activation email sent to info@flakybubbles.com, then try again.':'Sorry, your message could not be sent. Please email us at info@flakybubbles.com.');}
+  finally{btn.disabled=false;btn.textContent='Submit';}
+ });
+ back.onclick=()=>{inner.classList.remove('flipped');form.reset();hideErr();};
 })();
-
-// WhatsApp chat widget
 (()=>{
-const WA_NUMBER='923218633268'; // TODO: replace with the business's real WhatsApp number (country code, no + or spaces)
-const toggle=$('#waToggle'),panel=$('#waPanel'),close=$('#waClose'),direct=$('#waDirect');
-const link=msg=>`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-direct.href=link("Hi! I'd like to know more about Flaky Bubbles.");
-const open=()=>{panel.classList.remove('hidden');toggle.setAttribute('aria-expanded','true')};
-const shut=()=>{panel.classList.add('hidden');toggle.setAttribute('aria-expanded','false')};
-toggle.onclick=()=>panel.classList.contains('hidden')?open():shut();
-close.onclick=shut;
-document.querySelectorAll('.wa-q').forEach(b=>b.onclick=()=>window.open(link(b.dataset.msg),'_blank','noopener,noreferrer'));
-document.addEventListener('click',e=>{if(!panel.classList.contains('hidden')&&!$('#waWidget').contains(e.target))shut()});
+ const WA_NUMBER='923218633268',toggle=$('#waToggle'),panel=$('#waPanel'),close=$('#waClose'),direct=$('#waDirect');
+ const link=msg=>`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+ direct.href=link("Hi! I'd like to know more about Flaky Bubbles.");
+ const open=()=>{panel.classList.remove('hidden');toggle.setAttribute('aria-expanded','true');};
+ const shut=()=>{panel.classList.add('hidden');toggle.setAttribute('aria-expanded','false');};
+ toggle.onclick=()=>panel.classList.contains('hidden')?open():shut();close.onclick=shut;
+ document.querySelectorAll('.wa-q').forEach(b=>b.onclick=()=>window.open(link(b.dataset.msg),'_blank','noopener,noreferrer'));
+ document.addEventListener('click',e=>{if(!panel.classList.contains('hidden')&&!$('#waWidget').contains(e.target))shut();});
 })();
 </script>
 <script src="gingr-config.js"></script>

@@ -17,6 +17,22 @@ html{scroll-behavior:smooth;scroll-padding-top:80px}
 .floaty{animation:floaty 4s ease-in-out infinite}
 a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.floaty{animation:none}html{scroll-behavior:auto}}
+/* HEADER NAV */
+.nav-link{display:flex;align-items:center;gap:.4rem;padding:.6rem .7rem;border-radius:.65rem;color:#212B26;transition:background .2s,color .2s}
+@media(min-width:1280px){.nav-link{padding:.6rem 1rem}}
+.nav-link:hover{background:#EBF3EE}
+.nav-link.active{background:#EBF3EE;color:#456553;font-weight:600}
+.nav-caret{width:.6rem;height:.6rem}
+.nav-drop{min-width:15rem;background:#fff;border:1px solid #D3E2D8;border-radius:1rem;box-shadow:0 18px 40px -20px rgba(33,43,38,.35);padding:.5rem}
+.nav-drop a{display:block;padding:.7rem 1.1rem;border-radius:.65rem;color:#212B26;transition:background .2s}
+.nav-drop a:hover{background:#EBF3EE}
+.nav-drop a.active{background:#EBF3EE;color:#456553;font-weight:600}
+/* STORE BUTTONS */
+.store-btn{display:inline-flex;align-items:center;gap:.6rem;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2);border-radius:.8rem;padding:.5rem .9rem;transition:background .25s,transform .25s}
+.store-btn:hover{background:rgba(0,0,0,.45);transform:translateY(-2px)}
+.store-btn svg{width:1.5rem;height:1.5rem;flex:none}
+.store-btn small{display:block;font-size:10px;line-height:1.1;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.05em}
+.store-btn b{display:block;font-size:.9rem;line-height:1.2}
 /* FOOTER */
 .flink{position:relative;display:inline-block;color:rgba(255,255,255,.78);transition:color .25s}
 .flink:hover{color:#fff}
@@ -74,40 +90,50 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
 </head>
 <body id="top" class="bg-brand-cream text-brand-ink font-sans antialiased">
 <header class="sticky top-0 z-50 bg-brand-cream/95 backdrop-blur border-b border-brand-border">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-[72px] flex items-center justify-between gap-3">
     <a href="index.html" class="flex items-center shrink-0">
       <img src="logo.png" alt="Flaky Bubbles - Organic Pet Spa" class="h-11 sm:h-12 w-auto object-contain">
     </a>
 
-    <nav class="hidden lg:flex items-center gap-0.5 text-[13px] font-medium" aria-label="Main">
-      <a href="index.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Home</a>
-      <a href="about.html" class="px-3 py-2 rounded-md hover:bg-brand-light">About Us</a>
+    <nav class="hidden lg:flex items-center gap-1 text-[14px] xl:text-[15px] font-medium" aria-label="Main">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About Us</a>
       <div class="relative group">
-        <button class="px-3 py-2 rounded-md hover:bg-brand-light flex items-center gap-1" aria-haspopup="true">Plans
-          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
-          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
-            <a href="membership.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Membership</a>
-            <a href="packages.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Packages</a>
+        <button class="nav-link" aria-haspopup="true">Plans
+          <svg class="nav-caret" viewBox="0 0 20 20" fill="currentColor"><path d="M4 7h12l-6 7z"/></svg></button>
+        <div class="absolute left-0 top-full pt-3 hidden group-hover:block group-focus-within:block z-50">
+          <div class="nav-drop">
+            <a href="membership.html">Membership</a>
+            <a href="packages.html">Packages</a>
           </div>
         </div>
       </div>
-      <a href="shop.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Shop</a>
+      <a href="shop.html" class="nav-link">Shop</a>
       <div class="relative group">
-        <button class="px-3 py-2 rounded-md bg-brand-light text-brand-dark font-semibold flex items-center gap-1" aria-haspopup="true">Services
-          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
-        <div class="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
-          <div class="w-52 bg-white border border-brand-border rounded-xl shadow-lg p-1.5">
-            <a href="service-grooming.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Grooming</a>
-            <a href="service-daycare.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet DayCare</a>
-            <a href="service-hotel.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Hotel</a>
-            <a href="service-transport.html" class="block px-3 py-2 rounded-lg hover:bg-brand-light">Pet Transport</a>
+        <button class="nav-link active" aria-haspopup="true">Services
+          <svg class="nav-caret" viewBox="0 0 20 20" fill="currentColor"><path d="M4 7h12l-6 7z"/></svg></button>
+        <div class="absolute left-0 top-full pt-3 hidden group-hover:block group-focus-within:block z-50">
+          <div class="nav-drop">
+            <a href="service-grooming.html">Pet Grooming</a>
+            <a href="service-daycare.html">Pet DayCare</a>
+            <a href="service-hotel.html" class="active" aria-current="page">Pet Hotel</a>
+            <a href="service-transport.html">Pet Transport</a>
           </div>
         </div>
       </div>
-      <a href="gallery.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Gallery</a>
-      <a href="contact.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Contact</a>
-      <a href="career.html" class="px-3 py-2 rounded-md hover:bg-brand-light">Career</a>
+      <a href="events.html" class="nav-link">Events</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <div class="relative group">
+        <button class="nav-link" aria-haspopup="true">More
+          <svg class="nav-caret" viewBox="0 0 20 20" fill="currentColor"><path d="M4 7h12l-6 7z"/></svg></button>
+        <div class="absolute right-0 top-full pt-3 hidden group-hover:block group-focus-within:block z-50">
+          <div class="nav-drop">
+            <a href="gallery.html">Gallery</a>
+            <a href="career.html">Career</a>
+            <a href="fun-fact.html">Fun Fact</a>
+          </div>
+        </div>
+      </div>
     </nav>
 
     <div class="flex items-center gap-2">
@@ -119,7 +145,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
   </div>
 
   <!-- Mobile menu -->
-  <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Mobile">
+  <nav id="mobileNav" class="hidden lg:hidden border-t border-brand-border bg-brand-cream px-4 pb-4 pt-2 text-base font-medium max-h-[calc(100vh-4.5rem)] overflow-y-auto" aria-label="Mobile">
     <a href="index.html" class="block py-3 border-b border-brand-border/60">Home</a>
     <a href="about.html" class="block py-3 border-b border-brand-border/60">About Us</a>
     <button id="memBtn" class="w-full flex items-center justify-between py-3 border-b border-brand-border/60" aria-expanded="false">Plans
@@ -134,12 +160,18 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
     <div id="svcSub" class="hidden pl-4 text-sm text-brand-muted">
       <a href="service-grooming.html" class="block py-2.5">Pet Grooming</a>
       <a href="service-daycare.html" class="block py-2.5">Pet DayCare</a>
-      <a href="service-hotel.html" class="block py-2.5">Pet Hotel</a>
+      <a href="service-hotel.html" class="block py-2.5 text-brand-dark font-semibold">Pet Hotel</a>
       <a href="service-transport.html" class="block py-2.5">Pet Transport</a>
     </div>
-    <a href="gallery.html" class="block py-3 border-b border-brand-border/60">Gallery</a>
+    <a href="events.html" class="block py-3 border-b border-brand-border/60">Events</a>
     <a href="contact.html" class="block py-3 border-b border-brand-border/60">Contact</a>
-    <a href="career.html" class="block py-3">Career</a>
+    <button id="moreBtn" class="w-full flex items-center justify-between py-3" aria-expanded="false">More
+      <svg class="w-4 h-4 transition-transform" id="moreIcon" viewBox="0 0 20 20" fill="currentColor"><path d="M5 7l5 6 5-6z"/></svg></button>
+    <div id="moreSub" class="hidden pl-4 text-sm text-brand-muted">
+      <a href="gallery.html" class="block py-2.5">Gallery</a>
+      <a href="career.html" class="block py-2.5">Career</a>
+      <a href="fun-fact.html" class="block py-2.5">Fun Fact</a>
+    </div>
     <div class="mt-3 grid grid-cols-1 gap-2">
       <a href="https://flakybubbles.portal.gingrapp.com" target="_blank" rel="noopener" class="text-center border border-brand-sage/60 text-brand-dark font-semibold py-3 rounded-full">Login</a>
     </div>
@@ -285,7 +317,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
       <p class="mt-5 text-sm leading-relaxed text-white/75 max-w-sm">An organic pet spa for grooming, daycare, boarding and door-to-door transport. Gentle, clean blends and calm, caring hands for every pet we welcome.</p>
       <div class="mt-6 flex gap-3">
         <a href="https://www.facebook.com/flakybubbles/" aria-label="Facebook" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="instagram.com/flaky.bubbles" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+        <a href="https://www.instagram.com/flaky.bubbles" aria-label="Instagram" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
         <a href="https://www.linkedin.com/company/flakybubbles/" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-brand-dark hover:-translate-y-1 transition duration-300"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
       </div>
       <form class="mt-6 w-full max-w-sm flex gap-2" onsubmit="event.preventDefault()">
@@ -329,9 +361,16 @@ a:focus-visible,button:focus-visible{outline:2px solid #5F856F;outline-offset:2p
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Flaky Bubbles Organic Pet Spa<br>Street address, City, Country</span></li>
         <li class="flex gap-3"><span class="mt-0.5 text-[#C8A265] shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span>Mon to Sun: 9am to 6pm</span></li>
       </ul>
+      <!-- App store buttons: href="#" ki jagah apne app ke links daal do -->
       <div class="mt-6 flex flex-wrap gap-2">
-        <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40 transition-colors">Get it on <b class="block text-sm">Google Play</b></a>
-        <a href="#" class="bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-xs hover:bg-black/40 transition-colors">Download on the <b class="block text-sm">App Store</b></a>
+        <a href="#" class="store-btn" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 1.6 13.4 12l-9.8 10.4c-.4-.2-.6-.7-.6-1.2V2.8c0-.5.2-1 .6-1.2Z"/><path fill="#FBBC04" d="m17 8.4 3.5 2c1 .6 1 2.6 0 3.2l-3.5 2L13.4 12 17 8.4Z"/><path fill="#EA4335" d="M3.6 22.4 13.4 12l3.6 3.6L5.2 22.3c-.6.3-1.2.4-1.6.1Z"/><path fill="#4285F4" d="M3.6 1.6c.4-.3 1-.2 1.6.1L17 8.4 13.4 12 3.6 1.6Z"/></svg>
+          <span class="text-left"><small>Get it on</small><b>Google Play</b></span>
+        </a>
+        <a href="#" class="store-btn" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 1.4c0 1.1-.4 2.2-1.2 3-.9.9-2 1.5-3.2 1.4-.2-1.1.4-2.3 1.2-3.1.9-.9 2.2-1.5 3.2-1.3Zm4.1 15.7c-.6 1.3-.8 1.8-1.5 3-1 1.6-2.4 3.5-4.1 3.5-1.5 0-1.9-1-4-1s-2.5 1-4.1 1c-1.7 0-3-1.8-4-3.3C0 16-.4 10.8 1.4 8.1c1.2-1.9 3.2-3 5-3 1.9 0 3.1 1 4.6 1s2.4-1 4.6-1c1.6 0 3.4.9 4.6 2.4-4 2.3-3.4 8 .3 9.6Z"/></svg>
+          <span class="text-left"><small>Download on the</small><b>App Store</b></span>
+        </a>
       </div>
     </div>
 
@@ -363,8 +402,8 @@ const $=s=>document.querySelector(s);
 const menuBtn=$('#menuBtn'),mNav=$('#mobileNav');
 menuBtn.onclick=()=>{const o=mNav.classList.toggle('hidden');menuBtn.setAttribute('aria-expanded',!o)};
 mNav.querySelectorAll('a').forEach(a=>a.onclick=()=>{mNav.classList.add('hidden');menuBtn.setAttribute('aria-expanded',false)});
-$('#svcBtn').onclick=e=>{const h=$('#svcSub').classList.toggle('hidden');$('#svcIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
-$('#memBtn').onclick=e=>{const h=$('#memSub').classList.toggle('hidden');$('#memIcon').style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)};
+const acc=(b,s,i)=>{$(b).onclick=e=>{const h=$(s).classList.toggle('hidden');$(i).style.transform=h?'':'rotate(180deg)';e.currentTarget.setAttribute('aria-expanded',!h)}};
+acc('#memBtn','#memSub','#memIcon');acc('#svcBtn','#svcSub','#svcIcon');acc('#moreBtn','#moreSub','#moreIcon');
 const rmq=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 // Scroll reveal
